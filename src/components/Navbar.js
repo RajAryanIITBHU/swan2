@@ -1,0 +1,24 @@
+import React from 'react'
+import { Separator } from './ui/separator';
+import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from './ui/breadcrumb';
+import CustomSidebarTrigger from './ui/custom-sidebar-trigger';
+
+
+const Navbar =() => {
+  return (
+    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 py-2">
+      <CustomSidebarTrigger/>
+      <Separator orientation="vertical" className="mr-2 h-4" />
+      <Breadcrumb>
+        <BreadcrumbList>
+          <BreadcrumbItem className="hidden md:block">
+            <BreadcrumbPage >Building Your Application</BreadcrumbPage>
+          </BreadcrumbItem>
+          
+        </BreadcrumbList>
+      </Breadcrumb>
+    </header>
+  );
+}
+
+export default Navbar

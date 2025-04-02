@@ -81,5 +81,5 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     error:"/"
   },
   secret: process.env.AUTH_SECRET, 
-  debug: true,
+//   debug: true,
 });

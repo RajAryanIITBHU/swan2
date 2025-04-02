@@ -1,12 +1,11 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
+import { SidebarInset, SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
-import Login from "@/components/Login";
-import { auth } from "@/auth";
 import { Toaster } from "@/components/ui/sonner";
-import { SessionProvider } from "next-auth/react";
-
+import { auth } from "@/auth";
+import Login from "@/components/Login";
+import Navbar from "@/components/Navbar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,30 +23,29 @@ export const metadata = {
 };
 
 export default async function RootLayout({ children }) {
-  const session = await auth();
-  console.log(session)
- 
+  const session = await auth(); // Ensure auth() is awaited before usage
+
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <SessionProvider>
-
         {!session ? (
           <Login />
         ) : (
           <SidebarProvider>
             <AppSidebar />
+            <SidebarInset>
 
+            <Navbar/>
             <main>
-              <SidebarTrigger />
+              
               {children}
             </main>
+            </SidebarInset>
           </SidebarProvider>
         )}
         <Toaster />
-        </SessionProvider>
       </body>
     </html>
   );

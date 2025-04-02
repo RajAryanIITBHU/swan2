@@ -14,7 +14,11 @@ import {
 } from "@/components/ui/sidebar";
 import Image from "next/image";
 import { NavUser } from "./nav-user";
+import { auth } from "@/auth";
+import Link from "next/link";
+import SidebarContents from "./sidebar-contents";
 
+// Menu items.
 const items = [
   {
     title: "Test",
@@ -39,7 +43,8 @@ const items = [
   },
 ];
 
-export function AppSidebar() {
+export async function AppSidebar() {
+  const session = await auth()
   return (
     <Sidebar>
       <SidebarContent className={"bg-white"}>
@@ -48,25 +53,9 @@ export function AppSidebar() {
                 <Image src={"/logo/logo.png"} height={52} width={52} alt="logo"/>
             </div>
         </SidebarHeader>
-        <SidebarGroup className={"h-full"}>
-          <SidebarGroupLabel>Dashboard</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
-                      <span>{item.title}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+        <SidebarContents/>
         <SidebarFooter>
-              <NavUser/>
+              <NavUser session = {session}/>
         </SidebarFooter>
       </SidebarContent>
     </Sidebar>
