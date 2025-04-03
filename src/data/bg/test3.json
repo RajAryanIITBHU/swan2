@@ -1,0 +1,181 @@
+{
+  "batchName": "bg",
+  "startDate": "2025-04-10T20:54",
+  "endDate": "2025-04-18T20:54",
+  "sections": [
+    {
+      "id": 1743685297466,
+      "name": "Section 1",
+      "subject": "mathematics",
+      "questions": [
+        {
+          "id": "q_1743686569185_9rm21httq",
+          "sectionId": 1743685297466,
+          "type": "single-mcq",
+          "content": "esfsesef",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "esfe",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "fse",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "fes",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "fes",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1",
+          "marks": 4
+        },
+        {
+          "id": "q_1743686569185_tb4icsack",
+          "sectionId": 1743685297466,
+          "type": "multi-mcq",
+          "content": "fse",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "fes",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "fse",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "fs",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "fes",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1,2",
+          "marks": 4
+        },
+        {
+          "id": "q_1743686569185_7hko63i3l",
+          "sectionId": 1743685297466,
+          "type": "integer",
+          "content": "r3ww3rw3",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "333",
+          "marks": 4
+        },
+        {
+          "id": "q_1743686569185_jtzd4o8gp",
+          "sectionId": 1743685297466,
+          "type": "decimal",
+          "content": "w3rrw3",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "33.343",
+          "marks": 4
+        }
+      ]
+    },
+    {
+      "id": 1743686541042,
+      "name": "Section 2",
+      "subject": "mathematics",
+      "questions": [
+        {
+          "id": "q_1743686569185_0qm8nm60d",
+          "sectionId": 1743686541042,
+          "type": "single-mcq",
+          "content": "dse",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "des",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "des",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "dse",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "dse",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1",
+          "marks": 4
+        }
+      ]
+    }
+  ]
+}

@@ -3,9 +3,9 @@
 import React from 'react'
 import { Separator } from './ui/separator';
 import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from './ui/breadcrumb';
-import CustomSidebarTrigger from './ui/custom-sidebar-trigger';
 import { usePathname } from 'next/navigation';
-import { Calendar, Home, Inbox, Settings } from 'lucide-react';
+import { Calendar, Home, Inbox, Menu, Settings } from 'lucide-react';
+import { useSidebar } from './ui/sidebar';
 
  const items = [
    { title: "Test", url: "/", icon: Home },
@@ -17,16 +17,18 @@ import { Calendar, Home, Inbox, Settings } from 'lucide-react';
 const Navbar =() => {
     const path = usePathname()
     const currentItem = items.find((item) => item.url === path);
+    const { toggleSidebar } = useSidebar();
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 py-4">
-      <CustomSidebarTrigger/>
+    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 py-4 sticky top-0 bg-white z-20">
+      <div className="cursor-pointer mr-1" onClick={toggleSidebar}>
+        <Menu size={20} />
+      </div>
       <Separator orientation="vertical" className="mr-2 h-3" />
       <Breadcrumb>
         <BreadcrumbList>
           <BreadcrumbItem className="hidden md:block">
-            <BreadcrumbPage >{currentItem?.title || ""}</BreadcrumbPage>
+            <BreadcrumbPage>{currentItem?.title || ""}</BreadcrumbPage>
           </BreadcrumbItem>
-          
         </BreadcrumbList>
       </Breadcrumb>
     </header>

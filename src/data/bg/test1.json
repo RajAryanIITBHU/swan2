@@ -1,0 +1,46 @@
+{
+  "batchName": "bg",
+  "startDate": "2025-04-11T08:11",
+  "endDate": "2025-04-16T07:10",
+  "sections": [
+    {
+      "id": 1743683950136,
+      "name": "Section 1",
+      "subject": "mathematics",
+      "questions": [
+        {
+          "id": "q_1743684251817_6gywx6el0",
+          "sectionId": 1743683950136,
+          "type": "single-mcq",
+          "content": "dwa",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "awd",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "adw",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "da",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "daw",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1",
+          "marks": 4
+        }
+      ]
+    }
+  ]
+}

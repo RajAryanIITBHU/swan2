@@ -47,15 +47,17 @@ export async function AppSidebar() {
   const session = await auth()
   return (
     <Sidebar>
-      <SidebarContent className={"bg-white"}>
+      <SidebarContent className={"bg-white px-4"}>
         <SidebarHeader>
-            <div className="flex px-2 pt-2">
-                <Image src={"/logo/logo.png"} height={52} width={52} alt="logo"/>
-            </div>
+          <div className="flex px-2 pt-2">
+            <Link href={"/"}>
+              <Image src={"/logo/logo.png"} height={52} width={52} alt="logo" />
+            </Link>
+          </div>
         </SidebarHeader>
-        <SidebarContents/>
+        <SidebarContents />
         <SidebarFooter>
-              <NavUser session = {session}/>
+          <NavUser session={session} />
         </SidebarFooter>
       </SidebarContent>
     </Sidebar>

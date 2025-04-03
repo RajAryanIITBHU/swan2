@@ -21,11 +21,16 @@ const SidebarContents = () => {
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton asChild>
-                <Link
-                  href={item.url}
-                  className={`${path === item.url ? "bg-accent" : ""}`}
-                >
+              <SidebarMenuButton
+                asChild
+                size='md'
+                className={`${
+                  path === item.url
+                    ? "bg-primary/30 text-primary-foreground hover:bg-primary/30 hover:text-primary-foreground"
+                    : "hover:bg-primary/10"
+                }  text-base px-4`}
+              >
+                <Link href={item.url}>
                   <item.icon />
                   <span>{item.title}</span>
                 </Link>

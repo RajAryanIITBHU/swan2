@@ -1,0 +1,46 @@
+{
+  "batchName": "bg",
+  "startDate": "2025-04-17T08:16",
+  "endDate": "2025-04-19T07:15",
+  "sections": [
+    {
+      "id": 1743684303803,
+      "name": "Section 1",
+      "subject": "mathematics",
+      "questions": [
+        {
+          "id": "q_1743684334375_zbwt6vnoj",
+          "sectionId": 1743684303803,
+          "type": "single-mcq",
+          "content": "",
+          "imageUrl": "blob:http://localhost:3000/84bb1f03-c7fb-41c9-b36b-858afeb0650f",
+          "imageUpload": {},
+          "options": [
+            {
+              "text": "des",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "seds",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "ds",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "des",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1",
+          "marks": 4
+        }
+      ]
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import {
   ChevronsUpDown,
   CreditCard,
   LogOut,
+  LogOutIcon,
   Sparkles,
 } from "lucide-react"
 
@@ -14,23 +15,17 @@ import {
   AvatarFallback,
   AvatarImage,
 } from "@/components/ui/avatar"
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
+
 import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  SidebarSeparator,
   useSidebar,
 } from "@/components/ui/sidebar"
 import { signOut } from "next-auth/react"
 import { useEffect, useState } from "react"
+import { toast } from "sonner"
 
 
 export function NavUser({
@@ -47,100 +42,38 @@ export function NavUser({
 
   return (
     <SidebarMenu>
-      <SidebarMenuItem>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <Avatar className="h-8 w-8 rounded-lg">
-                <AvatarImage
-                  src={
-                    session?.user?.avatar ||
-                    `https://ui-avatars.com/api/?name=${session?.user?.name}`
-                  }
-                  alt={session?.user?.name}
-                />
-                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-              </Avatar>
-              <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-semibold">
-                  {session?.user?.name}
-                </span>
-                <span className="truncate text-xs">{session?.user?.email}</span>
-              </div>
-              <ChevronsUpDown className="ml-auto size-4" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent
-            className="w-[--radix-dropdown-menu-trigger-width] min-w-56 rounded-lg"
-            side={isMobile ? "bottom" : "right"}
-            align="end"
-            sideOffset={4}
-          >
-            <DropdownMenuLabel className="p-0 font-normal">
-              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                <Avatar className="h-8 w-8 rounded-lg ">
-                  <AvatarImage
-                    className={"bg-primary"}
-                    src={
-                      session?.user?.avatar ||
-                      `https://ui-avatars.com/api/?name=${session?.user?.name}`
-                    }
-                    alt={session?.user?.name}
-                  />
-                  <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                </Avatar>
-                <div className="grid flex-1 text-left text-sm leading-tight">
-                  <span className="truncate font-semibold">
-                    {session?.user?.name}
-                  </span>
-                  <span className="truncate text-xs">
-                    {session?.user?.email}
-                  </span>
-                </div>
-              </div>
-            </DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <Sparkles />
-                Upgrade to Pro
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <BadgeCheck />
-                Account
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Billing
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Bell />
-                Notifications
-              </DropdownMenuItem>
-            </DropdownMenuGroup>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem
-              className={
-                "text-red-700 font-medium focus:text-red-500 focus:bg-red-50 cursor-pointer"
+      <SidebarMenuItem className={"flex gap-3 items-center"}>
+        
+          <Avatar className="h-8 w-8 rounded-lg">
+            <AvatarImage
+              src={
+                session?.user?.avatar ||
+                `https://ui-avatars.com/api/?name=${session?.user?.name}&background=random&bold=true`
               }
-              onClick={() => signOut()}
-            >
-              <LogOut
-                className={
-                  "text-red-700 font-medium focus:text-red-500 focus:bg-red-50"
-                }
-              />
-              Log out
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
+              alt={session?.user?.name}
+            />
+            <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+          </Avatar>
+          <div className="grid flex-1 text-left text-sm leading-tight">
+            <span className="truncate font-semibold">
+              {session?.user?.name}
+            </span>
+            <span className="truncate text-xs">{session?.user?.email}</span>
+          </div>
+          
+        
       </SidebarMenuItem>
+      <SidebarSeparator className={"my-2"}/>
+              <SidebarMenuButton onClick={async ()=>
+                {
+                  try{
+                    await signOut()
+                    toast.success("Logged Out Successfully!")
+                  }catch(err){
+                    console.error("Logout ", err)
+                  }
+                }
+              } variant="outline" size="md" className={"!text-red-400 hover:!bg-red-50 cursor-pointer flex items-center hover:!text-red-500 font-medium gap-2 focus:!bg-red-100 focus:!text-red-600"}><LogOutIcon/>Logout</SidebarMenuButton>
     </SidebarMenu>
   );
 }
