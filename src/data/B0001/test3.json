@@ -1,0 +1,47 @@
+{
+  "batchName": "B0001",
+  "startDate": "2025-04-30T23:32",
+  "endDate": "2025-04-16T23:32",
+  "sections": [
+    {
+      "id": 1743703350657,
+      "name": "Section 1",
+      "subject": "mathematics",
+      "type": "single-mcq",
+      "questions": [
+        {
+          "id": "q_1743703397622_sd2et41iu",
+          "sectionId": 1743703350657,
+          "type": "integer",
+          "content": "nigga",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "0",
+          "marks": 4
+        }
+      ]
+    }
+  ]
+}

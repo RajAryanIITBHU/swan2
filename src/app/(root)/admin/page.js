@@ -26,6 +26,191 @@ import {
 
 
 export default function NewTestPage() {
+  const [data, setData] = useState({
+    batchName: "",
+    startDate: "",
+    endDate: "",
+    mathematics:[
+
+    ],
+    sections: [
+      {
+        id: 1743685297466,
+        name: "Section 1",
+        subject: "mathematics",
+        type:"single-mcq",
+        questions: [
+          {
+            id: "q_1743686569185_9rm21httq",
+            sectionId: 1743685297466,
+            type: "single-mcq",
+            content: "esfsesef",
+            imageUrl: "",
+            imageUpload: null,
+            options: [
+              {
+                text: "esfe",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "fse",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "fes",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "fes",
+                imageUrl: "",
+                imageUpload: null,
+              },
+            ],
+            correctAnswer: "1",
+            marks: 4,
+          },
+          {
+            id: "q_1743686569185_tb4icsack",
+            sectionId: 1743685297466,
+            type: "multi-mcq",
+            content: "fse",
+            imageUrl: "",
+            imageUpload: null,
+            options: [
+              {
+                text: "fes",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "fse",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "fs",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "fes",
+                imageUrl: "",
+                imageUpload: null,
+              },
+            ],
+            correctAnswer: "1,2",
+            marks: 4,
+          },
+          {
+            id: "q_1743686569185_7hko63i3l",
+            sectionId: 1743685297466,
+            type: "integer",
+            content: "r3ww3rw3",
+            imageUrl: "",
+            imageUpload: null,
+            options: [
+              {
+                text: "",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "",
+                imageUrl: "",
+                imageUpload: null,
+              },
+            ],
+            correctAnswer: "333",
+            marks: 4,
+          },
+          {
+            id: "q_1743686569185_jtzd4o8gp",
+            sectionId: 1743685297466,
+            type: "decimal",
+            content: "w3rrw3",
+            imageUrl: "",
+            imageUpload: null,
+            options: [
+              {
+                text: "",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "",
+                imageUrl: "",
+                imageUpload: null,
+              },
+            ],
+            correctAnswer: "33.343",
+            marks: 4,
+          },
+        ],
+      },
+      {
+        id: 1743686541042,
+        name: "Section 2",
+        subject: "mathematics",
+        questions: [
+          {
+            id: "q_1743686569185_0qm8nm60d",
+            sectionId: 1743686541042,
+            type: "single-mcq",
+            content: "dse",
+            imageUrl: "",
+            imageUpload: null,
+            options: [
+              {
+                text: "des",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "des",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "dse",
+                imageUrl: "",
+                imageUpload: null,
+              },
+              {
+                text: "dse",
+                imageUrl: "",
+                imageUpload: null,
+              },
+            ],
+            correctAnswer: "1",
+            marks: 4,
+          },
+        ],
+      },
+    ],
+  });
   const [batchName, setBatchName] = useState("");
   const [testName, setTestName] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -253,7 +438,6 @@ export default function NewTestPage() {
     console.log("currentQuestion: ", currentQuestion)
   },[currentQuestion])
 
-
   return (
     <div className="container mx-auto p-6 max-w-[860px]">
       <h1 className="text-3xl font-bold mb-6">Create New Test Batch</h1>
@@ -261,23 +445,27 @@ export default function NewTestPage() {
       <div className="grid gap-6">
         <Card className="p-6">
           <div className="grid gap-4">
-            <div>
-              <Label htmlFor="batchName">Batch Name</Label>
-              <Input
-                id="batchName"
-                placeholder="Enter batch name"
-                value={batchName}
-                onChange={(e) => setBatchName(e.target.value)}
-              />
-            </div>
-            <div>
-              <Label htmlFor="testName">Test Name</Label>
-              <Input
-                id="testName"
-                placeholder="Enter batch name"
-                value={testName}
-                onChange={(e) => setTestName(e.target.value)}
-              />
+            <div className="flex gap-4">
+              <div className="flex-1 flex gap-2">
+                <Label htmlFor="batchName">Batch Name: </Label>
+                <Input
+                  className={"flex-1"}
+                  id="batchName"
+                  placeholder="Enter batch name"
+                  value={batchName}
+                  onChange={(e) => setBatchName(e.target.value)}
+                />
+              </div>
+              <div className="flex-1 flex gap-2">
+                <Label htmlFor="testName">Test Name: </Label>
+                <Input
+                  className={"flex-1"}
+                  id="testName"
+                  placeholder="Enter batch name"
+                  value={testName}
+                  onChange={(e) => setTestName(e.target.value)}
+                />
+              </div>
             </div>
             <div className="grid grid-cols-2 gap-4">
               <div>
@@ -649,7 +837,10 @@ export default function NewTestPage() {
                                   className="mt-4 p-4 border rounded-lg relative"
                                 >
                                   <div className="absolute top-4 right-4 h-fit">
-                                    <Trash2 size={16} className="hover:text-red-700 cursor-pointer"/>
+                                    <Trash2
+                                      size={16}
+                                      className="hover:text-red-700 cursor-pointer"
+                                    />
                                   </div>
                                   <h4 className="font-medium">
                                     Question {index + 1} ({question.type})

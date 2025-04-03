@@ -1,0 +1,114 @@
+{
+  "batchName": "bg",
+  "startDate": "2025-04-10T23:31",
+  "endDate": "2025-04-07T13:31",
+  "sections": [
+    {
+      "id": 1743702995052,
+      "name": "Section 1",
+      "subject": "mathematics",
+      "type": "single-mcq",
+      "questions": []
+    },
+    {
+      "id": 1743702995915,
+      "name": "Section 2",
+      "subject": "mathematics",
+      "type": "single-mcq",
+      "questions": [
+        {
+          "id": "q_1743703316122_3zdkm3jlr",
+          "sectionId": 1743702995915,
+          "type": "integer",
+          "content": "drdgd",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "5454",
+          "marks": 4
+        },
+        {
+          "id": "q_1743703316122_jbyktaxmk",
+          "sectionId": 1743702995915,
+          "type": "integer",
+          "content": "vdxv",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "vd",
+          "marks": 4
+        }
+      ]
+    },
+    {
+      "id": 1743703291498,
+      "name": "Section 3",
+      "subject": "chemistry",
+      "type": "single-mcq",
+      "questions": []
+    },
+    {
+      "id": 1743703291829,
+      "name": "Section 4",
+      "subject": "chemistry",
+      "type": "single-mcq",
+      "questions": []
+    },
+    {
+      "id": 1743703292902,
+      "name": "Section 5",
+      "subject": "physics",
+      "type": "single-mcq",
+      "questions": []
+    },
+    {
+      "id": 1743703293126,
+      "name": "Section 6",
+      "subject": "physics",
+      "type": "single-mcq",
+      "questions": []
+    }
+  ]
+}
