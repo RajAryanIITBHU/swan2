@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import React, { useState, useEffect, useCallback } from "react";
 import { Timer } from "@/components/Timer";
 import { QuestionGrid } from "@/components/QuestionGrid";
 import { Question } from "@/components/Question";
-import { PDFReport } from "@/components/PDFReport"; 
+import { PDFReport } from "@/components/PDFReport";
 import { questions } from "@/data/test1/question";
 import { calculateScore } from "@/utils/scoring";
 import { AlertTriangle, Mail, Phone } from "lucide-react";
@@ -256,7 +256,7 @@ function App() {
   if (!state.isTestStarted) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <div className="bg-background p-8 rounded-lg shadow-lg max-w-md w-full">
           <div className="flex justify-center mb-6">
             <img
               src="/images/logo/logo.png"
@@ -334,7 +334,7 @@ function App() {
     const score = calculateScore(questions, state.questions);
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+        <div className="bg-background p-8 rounded-lg shadow-lg max-w-md w-full">
           <h2 className="text-2xl font-bold mb-4">Test Results</h2>
           <p className="text-lg mb-4">
             Total Score: {score.total}/{score.maxTotal}
@@ -388,7 +388,7 @@ function App() {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white shadow-md">
+      <div className="bg-background shadow-md">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
             <img
@@ -467,7 +467,7 @@ function App() {
       <div className="container mx-auto px-4 py-8">
         <div className="grid grid-cols-12 gap-8">
           {/* Question Display */}
-          <div className="col-span-8 bg-white rounded-lg shadow-md p-6">
+          <div className="col-span-8 bg-background rounded-lg shadow-md p-6">
             {currentQuestion ? (
               <>
                 <Question
@@ -533,7 +533,7 @@ function App() {
           </div>
 
           {/* Question Grid */}
-          <div className="col-span-4 bg-white rounded-lg shadow-md">
+          <div className="col-span-4 bg-background rounded-lg shadow-md">
             <h3 className="p-4 border-b font-semibold">Question Navigation</h3>
             <QuestionGrid
               questions={state.questions}

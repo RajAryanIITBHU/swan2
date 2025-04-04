@@ -14,7 +14,15 @@ import {
 } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import { Delete, DeleteIcon, ImagePlus, Link as LinkIcon, Plus, Trash2 } from "lucide-react";
+import {
+  Delete,
+  DeleteIcon,
+  ImagePlus,
+  Link as LinkIcon,
+  Pencil,
+  Plus,
+  Trash2,
+} from "lucide-react";
 import { toast } from "sonner";
 import { Separator } from "@/components/ui/separator";
 import {
@@ -23,194 +31,308 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Switch } from "@/components/ui/switch";
 
+let initialData = {
+  batchName: "",
+  testName: "",
+  startDate: "",
+  endDate: "",
+  syllabus: {
+    isSyllabus: false,
+    mathematics: [""],
+    physics: [""],
+    chemistry: [""],
+  },
+  mathematics: [
+    {
+      id: null,
+      name: "Section 1",
+      subject: "mathematics",
+      type: "single-mcq",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+    {
+      id: null,
+      name: "Section 2",
+      subject: "mathematics",
+      type: "multi-mcq",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+    {
+      id: null,
+      name: "Section 3",
+      subject: "mathematics",
+      type: "integer",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+    {
+      id: null,
+      name: "Section 4",
+      subject: "mathematics",
+      type: "decimal",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+  ],
+  physics: [
+    {
+      id: null,
+      name: "Section 1",
+      subject: "physics",
+      type: "single-mcq",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+    {
+      id: null,
+      name: "Section 2",
+      subject: "physics",
+      type: "multi-mcq",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+    {
+      id: null,
+      name: "Section 3",
+      subject: "physics",
+      type: "integer",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+    {
+      id: null,
+      name: "Section 4",
+      subject: "physics",
+      type: "decimal",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+  ],
+  chemistry: [
+    {
+      id: null,
+      name: "Section 1",
+      subject: "chemistry",
+      type: "single-mcq",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+    {
+      id: null,
+      name: "Section 2",
+      subject: "chemistry",
+      type: "multi-mcq",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+    {
+      id: null,
+      name: "Section 3",
+      subject: "chemistry",
+      type: "integer",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+    {
+      id: null,
+      name: "Section 4",
+      subject: "chemistry",
+      type: "decimal",
+      marks: 4,
+      negative: 1,
+      questions: [
+        {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        },
+      ],
+    },
+  ],
+};
 
 export default function NewTestPage() {
-  const [data, setData] = useState({
-    batchName: "",
-    startDate: "",
-    endDate: "",
-    mathematics:[
-
-    ],
-    sections: [
-      {
-        id: 1743685297466,
-        name: "Section 1",
-        subject: "mathematics",
-        type:"single-mcq",
-        questions: [
-          {
-            id: "q_1743686569185_9rm21httq",
-            sectionId: 1743685297466,
-            type: "single-mcq",
-            content: "esfsesef",
-            imageUrl: "",
-            imageUpload: null,
-            options: [
-              {
-                text: "esfe",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "fse",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "fes",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "fes",
-                imageUrl: "",
-                imageUpload: null,
-              },
-            ],
-            correctAnswer: "1",
-            marks: 4,
-          },
-          {
-            id: "q_1743686569185_tb4icsack",
-            sectionId: 1743685297466,
-            type: "multi-mcq",
-            content: "fse",
-            imageUrl: "",
-            imageUpload: null,
-            options: [
-              {
-                text: "fes",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "fse",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "fs",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "fes",
-                imageUrl: "",
-                imageUpload: null,
-              },
-            ],
-            correctAnswer: "1,2",
-            marks: 4,
-          },
-          {
-            id: "q_1743686569185_7hko63i3l",
-            sectionId: 1743685297466,
-            type: "integer",
-            content: "r3ww3rw3",
-            imageUrl: "",
-            imageUpload: null,
-            options: [
-              {
-                text: "",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "",
-                imageUrl: "",
-                imageUpload: null,
-              },
-            ],
-            correctAnswer: "333",
-            marks: 4,
-          },
-          {
-            id: "q_1743686569185_jtzd4o8gp",
-            sectionId: 1743685297466,
-            type: "decimal",
-            content: "w3rrw3",
-            imageUrl: "",
-            imageUpload: null,
-            options: [
-              {
-                text: "",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "",
-                imageUrl: "",
-                imageUpload: null,
-              },
-            ],
-            correctAnswer: "33.343",
-            marks: 4,
-          },
-        ],
-      },
-      {
-        id: 1743686541042,
-        name: "Section 2",
-        subject: "mathematics",
-        questions: [
-          {
-            id: "q_1743686569185_0qm8nm60d",
-            sectionId: 1743686541042,
-            type: "single-mcq",
-            content: "dse",
-            imageUrl: "",
-            imageUpload: null,
-            options: [
-              {
-                text: "des",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "des",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "dse",
-                imageUrl: "",
-                imageUpload: null,
-              },
-              {
-                text: "dse",
-                imageUrl: "",
-                imageUpload: null,
-              },
-            ],
-            correctAnswer: "1",
-            marks: 4,
-          },
-        ],
-      },
-    ],
-  });
+  const [data, setData] = useState(initialData);
   const [batchName, setBatchName] = useState("");
   const [testName, setTestName] = useState("");
   const [startDate, setStartDate] = useState("");
@@ -230,172 +352,191 @@ export default function NewTestPage() {
       { text: "", imageUrl: "", imageUpload: null },
     ],
     correctAnswer: "",
-    marks: 4,
   });
 
-  const addSection = (subject) => {
-    const newSection = {
-      id: Date.now(),
-      name: `Section ${sections.length + 1}`,
-      subject,
-      type:"single-mcq",
-      questions: [],
-    };
-    setSections([...sections, newSection]);
-    setCurrentSection(newSection);
-  };
+  const generateUniqueId = () =>
+    `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
-  const addQuestion = () => {
-    if (!currentSection) return;
+  const addQuestion = (e, subject, sectionIndex) => {
+    e.preventDefault();
+    setData((prevData) => {
+      const updatedSubjectSections = prevData[subject].map((section, i) => {
+        if (i !== sectionIndex) return section;
 
-    const newQuestion = {
-      id: Date.now(),
-      sectionId: currentSection.id,
-      ...currentQuestion,
-    };
+        const updatedQuestions = section.questions.map((q) =>
+          !q.added ? { ...q, added: true } : q
+        );
 
-    setQuestions([...questions, newQuestion]);
+        const currentQuestion = section.questions.find((q) => !q.added);
+        if (!currentQuestion) return section;
 
-    // Also add the question to the section
-    const updatedSections = sections.map((section) => {
-      if (section.id === currentSection.id) {
+        const hasValidContent =
+          currentQuestion.content.trim() !== "" ||
+          currentQuestion.imageUrl.trim() !== "";
+
+        const optionsValid = section.type.includes("mcq")
+          ? currentQuestion.options.every(
+              (opt) => opt.text.trim() !== "" || opt.imageUrl.trim() !== ""
+            )
+          : true;
+
+        const hasCorrectAnswer = currentQuestion.correctAnswer.trim() !== "";
+
+        const isValid = hasValidContent && optionsValid && hasCorrectAnswer;
+
+        if (!isValid) {
+          toast.error(
+            "Please fill in question content/image, all options (text/image), and correct answer."
+          );
+          return section;
+        }
+
+        const newQuestion = {
+          added: false,
+          content: "",
+          imageUrl: "",
+          imageUpload: null,
+          options: [
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+            { text: "", imageUrl: "", imageUpload: null },
+          ],
+          correctAnswer: "",
+        };
+
         return {
           ...section,
-          questions: [...section.questions, newQuestion],
+          questions: [...updatedQuestions, newQuestion],
         };
-      }
-      return section;
-    });
-    setSections(updatedSections);
+      });
 
-    const emptyQuestionTemp = {
-      "single-mcq": {
-        type: "single-mcq",
-        content: "",
-        imageUrl: "",
-        imageUpload: null,
-        options: [
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-        ],
-        correctAnswer: "",
-        marks: 4,
-      },
-      "multi-mcq": {
-        type: "multi-mcq",
-        content: "",
-        imageUrl: "",
-        imageUpload: null,
-        options: [
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-        ],
-        correctAnswer: "",
-        marks: 4,
-      },
-      integer: {
-        type: "integer",
-        content: "",
-        imageUrl: "",
-        imageUpload: null,
-        options: [
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-        ],
-        correctAnswer: "",
-        marks: 4,
-      },
-      "decimal": {
-        type: "decimal",
-        content: "",
-        imageUrl: "",
-        imageUpload: null,
-        options: [
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-          { text: "", imageUrl: "", imageUpload: null },
-        ],
-        correctAnswer: "",
-        marks: 4,
-      },
-    };
-
-    setCurrentQuestion({
-      type: currentQuestion.type,
-      content: "",
-      imageUrl: "",
-      imageUpload: null,
-      options: [
-        { text: "", imageUrl: "", imageUpload: null },
-        { text: "", imageUrl: "", imageUpload: null },
-        { text: "", imageUrl: "", imageUpload: null },
-        { text: "", imageUrl: "", imageUpload: null },
-      ],
-      correctAnswer: "",
-      marks: 4,
+      return {
+        ...prevData,
+        [subject]: updatedSubjectSections,
+      };
     });
   };
 
-  const handleImageUpload = (e) => {
+  const handleImageUpload = (e, subject, index) => {
     const file = e.target.files[0];
     if (file) {
-      setCurrentQuestion({
-        ...currentQuestion,
-        imageUpload: file,
-        imageUrl: URL.createObjectURL(file),
-      });
+      setData((prev) => ({
+        ...prev,
+        [subject]: prev[subject].map((s, i) =>
+          i === index
+            ? {
+                ...s,
+                questions: s.questions.map((q, qIndex) =>
+                  !q.added
+                    ? {
+                        ...q,
+                        imageUpload: file,
+                        imageUrl: URL.createObjectURL(file),
+                      }
+                    : q
+                ),
+              }
+            : s
+        ),
+      }));
     }
   };
 
-  const handleOptionImageUpload = (e, index) => {
+  const handleOptionImageUpload = (e, subject, index, optionIndex) => {
     const file = e.target.files[0];
     if (file) {
-      const newOptions = [...currentQuestion.options];
-      newOptions[index] = {
-        ...newOptions[index],
-        imageUpload: file,
-        imageUrl: URL.createObjectURL(file),
-      };
-      setCurrentQuestion({
-        ...currentQuestion,
-        options: newOptions,
-      });
+      setData((prev) => ({
+        ...prev,
+        [subject]: prev[subject].map((s, i) =>
+          i === index
+            ? {
+                ...s,
+                questions: s.questions.map((q, qIndex) =>
+                  !q.added
+                    ? {
+                        ...q,
+                        options: q.options.map((opt, optIndex) =>
+                          optIndex === optionIndex
+                            ? {
+                                ...opt,
+                                imageUpload: file,
+                                imageUrl: URL.createObjectURL(file),
+                              }
+                            : opt
+                        ),
+                      }
+                    : q
+                ),
+              }
+            : s
+        ),
+      }));
     }
   };
 
   const handleSave = async () => {
-    if (!batchName) {
+    if (!data.batchName) {
       toast.error("Please enter a batch name");
       return;
     }
-
-    if (!startDate || !endDate) {
-        toast.error("Please select both start and end dates");
-     
+    if (!data.testName) {
+      toast.error("Please enter a test name");
       return;
     }
 
-    if (sections.length === 0) {
-        toast.error("Please add at least one section");
+    if (!data.startDate || !data.endDate) {
+      toast.error("Please select both start and end dates");
+      return;
+    }
+    if (
+      data.syllabus.isSyllabus &&
+      data.syllabus.chemistry.length === 0 &&
+      data.syllabus.mathematics.length === 0 &&
+      data.syllabus.physics.length === 0
+    ) {
+      toast.error("Please add the syllabus");
       return;
     }
 
+    if (
+      data.mathematics.every(
+        (section) => section.questions.filter((q) => q.added).length === 0
+      ) &&
+      data.chemistry.every(
+        (section) => section.questions.filter((q) => q.added).length === 0
+      ) &&
+      data.physics.every(
+        (section) => section.questions.filter((q) => q.added).length === 0
+      )
+    ) {
+      toast.error("Please add the Questions");
+      return;
+    }
+
+    const filterAndPrepareSections = (sections) =>
+      sections
+        .map((section) => {
+          const filteredQuestions = section.questions.filter((q) => q.added);
+          if (filteredQuestions.length === 0) return null;
+
+          return {
+            ...section,
+            id: section.id ?? generateUniqueId(),
+            questions: filteredQuestions,
+          };
+        })
+        .filter(Boolean);
+        const testId = `test-${generateUniqueId()}`
     const testData = {
-      batchName,
-      startDate,
-      endDate,
-      sections: sections.map((section) => ({
-        ...section,
-        questions: questions.filter((q) => q.sectionId === section.id),
-      })),
+      ...data,
+      id:testId,
+      createdAt: `${new Date()}`,
+      mathematics: filterAndPrepareSections(data.mathematics),
+      physics: filterAndPrepareSections(data.physics),
+      chemistry: filterAndPrepareSections(data.chemistry),
     };
+
 
     try {
       const response = await fetch("/api/saveTest", {
@@ -403,7 +544,7 @@ export default function NewTestPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ batchName, testData }),
+        body: JSON.stringify({ batchName: data.batchName,testId, testData }),
       });
 
       if (!response.ok) {
@@ -411,49 +552,32 @@ export default function NewTestPage() {
       }
 
       const { fileName } = await response.json();
-
       toast.success(`Test batch saved successfully as ${fileName}`);
-
-      setBatchName("");
-      setStartDate("");
-      setEndDate("");
-      setSections([]);
-      setQuestions([]);
-      setCurrentSection(null);
+      setData(initialData);
     } catch (error) {
       toast.error("Failed to save test batch");
     }
   };
-
-  useEffect(()=>{
-    console.log("sections: ", sections)
-  },[sections])
-  useEffect(()=>{
-    console.log("questions: ", questions)
-  },[questions])
-  useEffect(()=>{
-    console.log("currentSection: ", currentSection)
-  },[currentSection])
-  useEffect(()=>{
-    console.log("currentQuestion: ", currentQuestion)
-  },[currentQuestion])
 
   return (
     <div className="container mx-auto p-6 max-w-[860px]">
       <h1 className="text-3xl font-bold mb-6">Create New Test Batch</h1>
 
       <div className="grid gap-6">
+        {/* BASIC INFO */}
         <Card className="p-6">
           <div className="grid gap-4">
-            <div className="flex gap-4">
+            <div className="flex gap-6">
               <div className="flex-1 flex gap-2">
                 <Label htmlFor="batchName">Batch Name: </Label>
                 <Input
                   className={"flex-1"}
                   id="batchName"
                   placeholder="Enter batch name"
-                  value={batchName}
-                  onChange={(e) => setBatchName(e.target.value)}
+                  value={data.batchName}
+                  onChange={(e) =>
+                    setData((prev) => ({ ...prev, batchName: e.target.value }))
+                  }
                 />
               </div>
               <div className="flex-1 flex gap-2">
@@ -461,32 +585,271 @@ export default function NewTestPage() {
                 <Input
                   className={"flex-1"}
                   id="testName"
-                  placeholder="Enter batch name"
-                  value={testName}
-                  onChange={(e) => setTestName(e.target.value)}
+                  placeholder="Enter test name"
+                  value={data.testName}
+                  onChange={(e) =>
+                    setData((prev) => ({ ...prev, testName: e.target.value }))
+                  }
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
+            <div className="grid grid-cols-2 gap-6">
+              <div className="flex justify-between gap-2">
                 <Label htmlFor="startDate">Start Date</Label>
                 <Input
+                  className={" w-fit"}
                   id="startDate"
                   type="datetime-local"
-                  value={startDate}
-                  onChange={(e) => setStartDate(e.target.value)}
+                  value={data.startDate}
+                  onChange={(e) =>
+                    setData((prev) => ({ ...prev, startDate: e.target.value }))
+                  }
                 />
               </div>
-              <div>
+              <div className="flex justify-between gap-2">
                 <Label htmlFor="endDate">End Date</Label>
                 <Input
+                  className={" w-fit"}
                   id="endDate"
                   type="datetime-local"
-                  value={endDate}
-                  onChange={(e) => setEndDate(e.target.value)}
+                  value={data.endDate}
+                  onChange={(e) =>
+                    setData((prev) => ({ ...prev, endDate: e.target.value }))
+                  }
                 />
               </div>
             </div>
+          </div>
+        </Card>
+        {/* SYLLABUS */}
+        <Card className={"p-6"}>
+          <div className="grid gap-4">
+            <div className="w-full flex justify-between">
+              <h1>Syllabus</h1>
+              <Switch
+                onCheckedChange={(e) => {
+                  const elem = document.getElementById("SYLLABUS_ACCORDIAN");
+                  if (e) {
+                    elem.classList.remove("hidden");
+                    setData((prev) => ({
+                      ...prev,
+                      syllabus: { ...prev.syllabus, isSyllabus: true },
+                    }));
+                  } else {
+                    elem.classList.add("hidden");
+                    setData((prev) => ({
+                      ...prev,
+                      syllabus: {
+                        isSyllabus: false,
+                        mathematics: [""],
+                        physics: [""],
+                        chemistry: [""],
+                      },
+                    }));
+                  }
+                }}
+              />
+            </div>
+            <Accordion
+              type="multiple"
+              collapsible="true"
+              className={`hidden`}
+              id="SYLLABUS_ACCORDIAN"
+            >
+              <AccordionItem value="mathematics">
+                <AccordionTrigger>Mathematics</AccordionTrigger>
+
+                <AccordionContent className={"space-y-3"}>
+                  {data.syllabus.mathematics.map((topic, index) => (
+                    <div
+                      className="flex gap-2 items-center"
+                      key={`mathematics_${index}`}
+                    >
+                      <span className="w-4">{index + 1}.</span>
+
+                      <Input
+                        className="text-sm"
+                        value={topic}
+                        placeholder="New Topic"
+                        onChange={(e) => {
+                          const newTopics = [...data.syllabus.mathematics];
+                          newTopics[index] = e.target.value;
+                          setData((prev) => ({
+                            ...prev,
+                            syllabus: {
+                              ...prev.syllabus,
+                              mathematics: newTopics,
+                            },
+                          }));
+                        }}
+                      />
+
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setData((prev) => ({
+                            ...prev,
+                            syllabus: {
+                              ...prev.syllabus,
+                              mathematics: prev.syllabus.mathematics.filter(
+                                (_, idx) => idx !== index
+                              ),
+                            },
+                          }));
+                        }}
+                      >
+                        <Trash2 size={14} />
+                      </Button>
+                    </div>
+                  ))}
+
+                  <Button
+                    className={"ml-6 px-10"}
+                    variant={"outline"}
+                    size="sm"
+                    onClick={() => {
+                      setData((prev) => ({
+                        ...prev,
+                        syllabus: {
+                          ...prev.syllabus,
+                          mathematics: [...prev.syllabus.mathematics, ""],
+                        },
+                      }));
+                    }}
+                  >
+                    Add Topic
+                  </Button>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="physics">
+                <AccordionTrigger>Physics</AccordionTrigger>
+                <AccordionContent className={"space-y-3"}>
+                  {data.syllabus.physics.map((topic, index) => (
+                    <div
+                      className="flex gap-2 items-center"
+                      key={`physics_${index}`}
+                    >
+                      <span className="w-4">{index + 1}.</span>
+
+                      <Input
+                        className="text-sm"
+                        value={topic}
+                        placeholder="New Topic"
+                        onChange={(e) => {
+                          const newTopics = [...data.syllabus.physics];
+                          newTopics[index] = e.target.value;
+                          setData((prev) => ({
+                            ...prev,
+                            syllabus: {
+                              ...prev.syllabus,
+                              physics: newTopics,
+                            },
+                          }));
+                        }}
+                      />
+
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setData((prev) => ({
+                            ...prev,
+                            syllabus: {
+                              ...prev.syllabus,
+                              physics: prev.syllabus.physics.filter(
+                                (_, idx) => idx !== index
+                              ),
+                            },
+                          }));
+                        }}
+                      >
+                        <Trash2 size={14} />
+                      </Button>
+                    </div>
+                  ))}
+
+                  <Button
+                    className={"ml-6 px-10"}
+                    variant={"outline"}
+                    size="sm"
+                    onClick={() => {
+                      setData((prev) => ({
+                        ...prev,
+                        syllabus: {
+                          ...prev.syllabus,
+                          physics: [...prev.syllabus.physics, ""],
+                        },
+                      }));
+                    }}
+                  >
+                    Add Topic
+                  </Button>
+                </AccordionContent>
+              </AccordionItem>
+              <AccordionItem value="chemistry">
+                <AccordionTrigger>Chemistry</AccordionTrigger>
+                <AccordionContent className={"space-y-3"}>
+                  {data.syllabus.chemistry.map((topic, index) => (
+                    <div
+                      className="flex gap-2 items-center"
+                      key={`chemistry_${index}`}
+                    >
+                      <span className="w-4">{index + 1}.</span>
+
+                      <Input
+                        className="text-sm"
+                        value={topic}
+                        placeholder="New Topic"
+                        onChange={(e) => {
+                          const newTopics = [...data.syllabus.chemistry];
+                          newTopics[index] = e.target.value;
+                          setData((prev) => ({
+                            ...prev,
+                            syllabus: {
+                              ...prev.syllabus,
+                              chemistry: newTopics,
+                            },
+                          }));
+                        }}
+                      />
+
+                      <Button
+                        variant="outline"
+                        onClick={() => {
+                          setData((prev) => ({
+                            ...prev,
+                            syllabus: {
+                              ...prev.syllabus,
+                              chemistry: prev.syllabus.chemistry.filter(
+                                (_, idx) => idx !== index
+                              ),
+                            },
+                          }));
+                        }}
+                      >
+                        <Trash2 size={14} />
+                      </Button>
+                    </div>
+                  ))}
+
+                  <Button
+                    className={"ml-6 px-10"}
+                    variant={"outline"}
+                    size="sm"
+                    onClick={() => {
+                      setData((prev) => ({
+                        ...prev,
+                        syllabus: {
+                          ...prev.syllabus,
+                          chemistry: [...prev.syllabus.chemistry, ""],
+                        },
+                      }));
+                    }}
+                  >
+                    Add Topic
+                  </Button>
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </Card>
 
@@ -499,396 +862,803 @@ export default function NewTestPage() {
 
           {["mathematics", "physics", "chemistry"].map((subject) => (
             <TabsContent key={subject} value={subject}>
-              <Card className="p-4">
-                <div className="flex justify-between items-center mb-4 ">
-                  <h2 className="text-2xl font-semibold capitalize">
-                    {subject}
-                  </h2>
-                  <Button onClick={() => addSection(subject)}>
+              <Card className="px-4 pt-4 pb-0">
+                <Tabs defaultValue="Section 1">
+                  <div className="flex flex-col gap-4 mb-4 ">
+                    <div className="flex justify-between items-center gap-6">
+                      <h2 className="text-xl font-bold capitalize ">
+                        {subject}
+                      </h2>
+                      {/* <Button onClick={() => addSection(subject)}>
                     <Plus className="mr-2 h-4 w-4" />
                     Add Section
-                  </Button>
-                </div>
-                <Accordion type="single" collapsible className="">
-                  {sections
-                    .filter((section) => section.subject === subject)
-                    .map((section) => (
-                      <AccordionItem
-                        value={section.name}
-                        key={section.id}
-                        className="mt-6 border rounded-lg px-4 py-2"
-                      >
-                        <AccordionTrigger>
-                          <h3 className="text-xl font-medium">
+                  </Button> */}
+                      <TabsList className="grid w-fit grid-cols-4 gap-2">
+                        {data[subject]?.map((section, index) => (
+                          <TabsTrigger
+                            className={"px-4 "}
+                            value={section.name}
+                            key={subject + "_" + section + "_" + index}
+                          >
                             {section.name}
-                          </h3>
-                        </AccordionTrigger>
-                        <AccordionContent>
-                          <Separator className={"mb-4"} />
+                          </TabsTrigger>
+                        ))}
+                      </TabsList>
+                    </div>
+                    {data[subject]?.map((section, index) => (
+                      <TabsContent
+                        key={subject + "_" + section + "_" + index + "_Content"}
+                        value={section.name}
+                      >
+                        <h1 className="font-semibold text-lg mb-4 mt-2">
+                          {section.name}
+                        </h1>
+                        <div className="grid gap-4">
                           <div className="grid gap-4">
-                            <div className="grid gap-4">
-                              <div className="flex gap-2">
-                                <Label>Question Type</Label>
-                                <Select
-                                  value={currentQuestion.type}
-                                  onValueChange={(value) =>
-                                    setCurrentQuestion({
-                                      ...currentQuestion,
-                                      type: value,
-                                    })
-                                  }
-                                >
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select question type" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    <SelectItem value="single-mcq">
-                                      Single Correct MCQ
-                                    </SelectItem>
-                                    <SelectItem value="multi-mcq">
-                                      Multiple Correct MCQ
-                                    </SelectItem>
-                                    <SelectItem value="integer">
-                                      Integer Type
-                                    </SelectItem>
-                                    <SelectItem value="decimal">
-                                      Decimal Type
-                                    </SelectItem>
-                                  </SelectContent>
-                                </Select>
-                              </div>
+                            <div className="flex gap-2">
+                              <Label>Section Type</Label>
+                              <Select
+                                value={section.type}
+                                onValueChange={(value) =>
+                                  setData((prev) => ({
+                                    ...prev,
+                                    [subject]: prev[subject].map((s, i) =>
+                                      i === index ? { ...s, type: value } : s
+                                    ),
+                                  }))
+                                }
+                              >
+                                <SelectTrigger>
+                                  <SelectValue placeholder="Select question type" />
+                                </SelectTrigger>
+                                <SelectContent>
+                                  <SelectItem value="single-mcq">
+                                    Single Correct MCQ
+                                  </SelectItem>
+                                  <SelectItem value="multi-mcq">
+                                    Multiple Correct MCQ
+                                  </SelectItem>
+                                  <SelectItem value="integer">
+                                    Integer Type
+                                  </SelectItem>
+                                  <SelectItem value="decimal">
+                                    Decimal Type
+                                  </SelectItem>
+                                </SelectContent>
+                              </Select>
+                            </div>
 
-                              <div className="space-y-2">
-                                <Label>Question Content</Label>
-                                <Textarea
-                                  value={currentQuestion.content}
-                                  onChange={(e) =>
-                                    setCurrentQuestion({
-                                      ...currentQuestion,
-                                      content: e.target.value,
-                                    })
-                                  }
-                                  placeholder="Type your question here..."
-                                  className="min-h-[100px]"
-                                />
-                              </div>
+                            <div className="space-y-2">
+                              <Label>Question Content</Label>
+                              <Textarea
+                                value={
+                                  section.questions.filter(
+                                    (q, i) => !q.added
+                                  )[0].content
+                                }
+                                onChange={(e) =>
+                                  setData((prev) => ({
+                                    ...prev,
+                                    [subject]: prev[subject].map((s, i) =>
+                                      i === index
+                                        ? {
+                                            ...s,
+                                            questions: s.questions.map(
+                                              (q, qIndex) =>
+                                                !q.added
+                                                  ? {
+                                                      ...q,
+                                                      content: e.target.value,
+                                                    }
+                                                  : q
+                                            ),
+                                          }
+                                        : s
+                                    ),
+                                  }))
+                                }
+                                placeholder="Type your question here..."
+                                className="min-h-[100px]"
+                              />
+                            </div>
 
-                              <div className="flex  gap-4">
-                                <div className="col-span-2 flex gap-2 items-center flex-1">
-                                  <Label>Question Image URL</Label>
-                                  <div className="flex gap-2 flex-1">
-                                    <Input
-                                      value={currentQuestion.imageUrl}
-                                      onChange={(e) =>
-                                        setCurrentQuestion({
-                                          ...currentQuestion,
-                                          imageUrl: e.target.value,
-                                        })
-                                      }
-                                      className={"w-full"}
-                                      placeholder="Enter image URL"
-                                    />
-                                  </div>
+                            <div className="flex  gap-4">
+                              <div className="col-span-2 flex gap-2 items-center flex-1">
+                                <Label>Question Image URL</Label>
+                                <div className="flex gap-2 flex-1">
+                                  <Input
+                                    value={
+                                      section.questions.filter(
+                                        (q, i) => !q.added
+                                      )[0].imageUrl
+                                    }
+                                    onChange={(e) =>
+                                      setData((prev) => ({
+                                        ...prev,
+                                        [subject]: prev[subject].map((s, i) =>
+                                          i === index
+                                            ? {
+                                                ...s,
+                                                questions: s.questions.map(
+                                                  (q, qIndex) =>
+                                                    !q.added
+                                                      ? {
+                                                          ...q,
+                                                          imageUrl:
+                                                            e.target.value,
+                                                        }
+                                                      : q
+                                                ),
+                                              }
+                                            : s
+                                        ),
+                                      }))
+                                    }
+                                    className={"w-full"}
+                                    placeholder="Enter image URL"
+                                  />
                                 </div>
-                                <Separator orientation="vertical" />
-                                <div className=" space-y-2">
-                                  <div className="flex gap-2">
-                                    <Input
-                                      type="file"
-                                      accept="image/*"
-                                      onChange={handleImageUpload}
-                                      className="hidden"
-                                      id="imageUpload"
-                                    />
-                                    <Button
-                                      variant="outline"
-                                      className="w-full"
-                                      onClick={() =>
-                                        document
-                                          .getElementById("imageUpload")
-                                          .click()
-                                      }
-                                    >
-                                      <ImagePlus className="mr-2 h-4 w-4" />
-                                      Choose Image
-                                    </Button>
-                                  </div>
-                                </div>
                               </div>
-
-                              {currentQuestion.type.includes("mcq") && (
-                                <div className="grid gap-4">
-                                  <Label>Options</Label>
-                                  {currentQuestion.options.map(
-                                    (option, index) => (
-                                      <div
-                                        key={index}
-                                        className="grid gap-4 p-4 border rounded-lg"
-                                      >
-                                        <div className="flex gap-2">
-                                          <Input
-                                            value={option.text}
-                                            onChange={(e) => {
-                                              const newOptions = [
-                                                ...currentQuestion.options,
-                                              ];
-                                              newOptions[index] = {
-                                                ...newOptions[index],
-                                                text: e.target.value,
-                                              };
-                                              setCurrentQuestion({
-                                                ...currentQuestion,
-                                                options: newOptions,
-                                              });
-                                            }}
-                                            placeholder={`Option ${index + 1}`}
-                                          />
-                                          <Button
-                                            variant="outline"
-                                            size="icon"
-                                            onClick={() => {
-                                              const newOptions =
-                                                currentQuestion.options.filter(
-                                                  (_, i) => i !== index
-                                                );
-                                              setCurrentQuestion({
-                                                ...currentQuestion,
-                                                options: newOptions,
-                                              });
-                                            }}
-                                          >
-                                            <Trash2 className="h-4 w-4" />
-                                          </Button>
-                                        </div>
-                                        <div className="flex gap-4">
-                                          <div className="flex flex-1 gap-2 flex-row">
-                                            <Label>Option Image URL</Label>
-                                            <div className="flex gap-2 flex-1">
-                                              <Input
-                                                className={"w-full"}
-                                                value={option.imageUrl}
-                                                onChange={(e) => {
-                                                  const newOptions = [
-                                                    ...currentQuestion.options,
-                                                  ];
-                                                  newOptions[index] = {
-                                                    ...newOptions[index],
-                                                    imageUrl: e.target.value,
-                                                  };
-                                                  setCurrentQuestion({
-                                                    ...currentQuestion,
-                                                    options: newOptions,
-                                                  });
-                                                }}
-                                                placeholder="Enter image URL"
-                                              />
-                                              {/* <Button variant="outline" size="icon">
-                                          <LinkIcon className="h-4 w-4" />
-                                        </Button> */}
-                                            </div>
-                                          </div>
-                                          <Separator orientation="vertical" />
-
-                                          <div className="">
-                                            <div className="flex gap-2">
-                                              <Input
-                                                type="file"
-                                                accept="image/*"
-                                                onChange={(e) =>
-                                                  handleOptionImageUpload(
-                                                    e,
-                                                    index
-                                                  )
-                                                }
-                                                className="hidden"
-                                                id={`optionImageUpload${index}`}
-                                              />
-                                              <Button
-                                                variant="outline"
-                                                className="w-full"
-                                                onClick={() =>
-                                                  document
-                                                    .getElementById(
-                                                      `optionImageUpload${index}`
-                                                    )
-                                                    .click()
-                                                }
-                                              >
-                                                <ImagePlus className="mr-2 h-4 w-4" />
-                                                Choose Image
-                                              </Button>
-                                            </div>
-                                          </div>
-                                        </div>
-                                        {option.imageUrl && (
-                                          <img
-                                            src={option.imageUrl}
-                                            alt={`Option ${index + 1}`}
-                                            className="mt-2 max-w-xs rounded"
-                                          />
-                                        )}
-                                      </div>
-                                    )
-                                  )}
-                                  {currentQuestion.options.length < 6 && (
-                                    <Button
-                                      variant="outline"
-                                      onClick={() =>
-                                        setCurrentQuestion({
-                                          ...currentQuestion,
-                                          options: [
-                                            ...currentQuestion.options,
-                                            {
-                                              text: "",
-                                              imageUrl: "",
-                                              imageUpload: null,
-                                            },
-                                          ],
-                                        })
-                                      }
-                                    >
-                                      <Plus className="mr-2 h-4 w-4" />
-                                      Add Option
-                                    </Button>
-                                  )}
-                                </div>
-                              )}
-
-                              <Separator />
-
-                              <div className="flex gap-4">
-                                <Label>
-                                  {currentQuestion.type.includes("mcq")
-                                    ? "Correct Option(s)"
-                                    : "Correct Answer"}
-                                </Label>
-                                {currentQuestion.type === "single-mcq" ? (
-                                  <Select
-                                    value={currentQuestion.correctAnswer}
-                                    onValueChange={(value) =>
-                                      setCurrentQuestion({
-                                        ...currentQuestion,
-                                        correctAnswer: value,
-                                      })
+                              <Separator orientation="vertical" />
+                              <div className=" space-y-2">
+                                <div className="flex gap-2">
+                                  <Input
+                                    type="file"
+                                    accept="image/*"
+                                    onChange={(e) =>
+                                      handleImageUpload(e, subject, index)
+                                    }
+                                    className="hidden"
+                                    id={`${subject}_${section}_imageupload`}
+                                  />
+                                  <Button
+                                    variant="outline"
+                                    className="w-full"
+                                    onClick={() =>
+                                      document
+                                        .getElementById(
+                                          `${subject}_${section}_imageupload`
+                                        )
+                                        .click()
                                     }
                                   >
-                                    <SelectTrigger>
-                                      <SelectValue placeholder="Select correct option" />
-                                    </SelectTrigger>
-                                    <SelectContent>
-                                      {currentQuestion.options.map(
-                                        (option, index) => (
-                                          <SelectItem
-                                            key={index}
-                                            value={String(index)}
-                                          >
-                                            Option {index + 1}
-                                          </SelectItem>
-                                        )
+                                    <ImagePlus className="mr-2 h-4 w-4" />
+                                    Choose Image
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                            {section.questions.filter((q, i) => !q.added)[0]
+                              .imageUrl && (
+                              <img
+                                src={
+                                  section.questions.filter(
+                                    (q, i) => !q.added
+                                  )[0].imageUrl
+                                }
+                                alt={`Question`}
+                                className="mt-2 max-w-[180px] rounded"
+                              />
+                            )}
+                            <Separator />
+                            {section.type.includes("mcq") && (
+                              <div className="grid gap-4">
+                                <Label>Options</Label>
+                                {section.questions
+                                  .filter((q) => !q.added)[0]
+                                  .options.map((option, optionIndex) => (
+                                    <div
+                                      key={optionIndex}
+                                      className="grid gap-4 p-4 border rounded-lg"
+                                    >
+                                      {/* Option Text Input */}
+                                      <div className="flex gap-2">
+                                        <Input
+                                          value={option.text}
+                                          onChange={(e) => {
+                                            setData((prev) => ({
+                                              ...prev,
+                                              [subject]: prev[subject].map(
+                                                (s, i) =>
+                                                  i === index
+                                                    ? {
+                                                        ...s,
+                                                        questions:
+                                                          s.questions.map(
+                                                            (q, qIndex) =>
+                                                              !q.added
+                                                                ? {
+                                                                    ...q,
+                                                                    options:
+                                                                      q.options.map(
+                                                                        (
+                                                                          opt,
+                                                                          optIndex
+                                                                        ) =>
+                                                                          optIndex ===
+                                                                          optionIndex
+                                                                            ? {
+                                                                                ...opt,
+                                                                                text: e
+                                                                                  .target
+                                                                                  .value,
+                                                                              }
+                                                                            : opt
+                                                                      ),
+                                                                  }
+                                                                : q
+                                                          ),
+                                                      }
+                                                    : s
+                                              ),
+                                            }));
+                                          }}
+                                          placeholder={`Option ${
+                                            optionIndex + 1
+                                          }`}
+                                        />
+                                        {/* Delete Option Button */}
+
+                                        <Button
+                                          variant="outline"
+                                          size="icon"
+                                          onClick={() => {
+                                            if (
+                                              section.questions.filter(
+                                                (q) => !q.added
+                                              )[0].options.length > 4
+                                            ) {
+                                              setData((prev) => ({
+                                                ...prev,
+                                                [subject]: prev[subject].map(
+                                                  (s, i) =>
+                                                    i === index
+                                                      ? {
+                                                          ...s,
+                                                          questions:
+                                                            s.questions.map(
+                                                              (q, qIndex) =>
+                                                                !q.added
+                                                                  ? {
+                                                                      ...q,
+                                                                      options:
+                                                                        q.options.filter(
+                                                                          (
+                                                                            _,
+                                                                            optIndex
+                                                                          ) =>
+                                                                            optIndex !==
+                                                                            optionIndex
+                                                                        ),
+                                                                    }
+                                                                  : q
+                                                            ),
+                                                        }
+                                                      : s
+                                                ),
+                                              }));
+                                            } else {
+                                              toast.error(
+                                                "Can't Delete more options."
+                                              );
+                                            }
+                                          }}
+                                        >
+                                          <Trash2 className="h-4 w-4" />
+                                        </Button>
+                                      </div>
+
+                                      {/* Image URL Input */}
+                                      <div className="flex gap-4">
+                                        <div className="flex flex-1 gap-2 flex-row">
+                                          <Label>Option Image URL</Label>
+                                          <div className="flex gap-2 flex-1">
+                                            <Input
+                                              className={"w-full"}
+                                              value={option.imageUrl}
+                                              onChange={(e) => {
+                                                setData((prev) => ({
+                                                  ...prev,
+                                                  [subject]: prev[subject].map(
+                                                    (s, i) =>
+                                                      i === index
+                                                        ? {
+                                                            ...s,
+                                                            questions:
+                                                              s.questions.map(
+                                                                (q, qIndex) =>
+                                                                  !q.added
+                                                                    ? {
+                                                                        ...q,
+                                                                        options:
+                                                                          q.options.map(
+                                                                            (
+                                                                              opt,
+                                                                              optIndex
+                                                                            ) =>
+                                                                              optIndex ===
+                                                                              optionIndex
+                                                                                ? {
+                                                                                    ...opt,
+                                                                                    imageUrl:
+                                                                                      e
+                                                                                        .target
+                                                                                        .value,
+                                                                                  }
+                                                                                : opt
+                                                                          ),
+                                                                      }
+                                                                    : q
+                                                              ),
+                                                          }
+                                                        : s
+                                                  ),
+                                                }));
+                                              }}
+                                              placeholder="Enter image URL"
+                                            />
+                                          </div>
+                                        </div>
+                                        <Separator orientation="vertical" />
+
+                                        {/* Image Upload Button */}
+                                        <div className="">
+                                          <div className="flex gap-2">
+                                            <Input
+                                              type="file"
+                                              accept="image/*"
+                                              onChange={(e) =>
+                                                handleOptionImageUpload(
+                                                  e,
+                                                  subject,
+                                                  index,
+                                                  optionIndex
+                                                )
+                                              }
+                                              className="hidden"
+                                              id={`optionImageUpload${optionIndex}`}
+                                            />
+                                            <Button
+                                              variant="outline"
+                                              className="w-full"
+                                              onClick={() =>
+                                                document
+                                                  .getElementById(
+                                                    `optionImageUpload${optionIndex}`
+                                                  )
+                                                  .click()
+                                              }
+                                            >
+                                              <ImagePlus className="mr-2 h-4 w-4" />
+                                              Choose Image
+                                            </Button>
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      {option.imageUrl && (
+                                        <img
+                                          src={option.imageUrl}
+                                          alt={`Option ${optionIndex + 1}`}
+                                          className="mt-2 max-w-[180px] rounded"
+                                        />
                                       )}
-                                    </SelectContent>
-                                  </Select>
-                                ) : (
-                                  <Input
-                                    value={currentQuestion.correctAnswer}
-                                    onChange={(e) =>
-                                      setCurrentQuestion({
-                                        ...currentQuestion,
-                                        correctAnswer: e.target.value,
-                                      })
-                                    }
-                                    className={"flex-1"}
-                                    placeholder={
-                                      currentQuestion.type === "multi-mcq"
-                                        ? "Enter comma-separated option numbers"
-                                        : "Enter the correct answer"
-                                    }
-                                  />
+                                    </div>
+                                  ))}
+
+                                {section.questions.filter((q) => !q.added)[0]
+                                  .options.length < 6 && (
+                                  <Button
+                                    variant="outline"
+                                    onClick={() => {
+                                      setData((prev) => ({
+                                        ...prev,
+                                        [subject]: prev[subject].map((s, i) =>
+                                          i === index
+                                            ? {
+                                                ...s,
+                                                questions: s.questions.map(
+                                                  (q, qIndex) =>
+                                                    !q.added
+                                                      ? {
+                                                          ...q,
+                                                          options: [
+                                                            ...q.options,
+                                                            {
+                                                              text: "",
+                                                              imageUrl: "",
+                                                              imageUpload: null,
+                                                            },
+                                                          ],
+                                                        }
+                                                      : q
+                                                ),
+                                              }
+                                            : s
+                                        ),
+                                      }));
+                                    }}
+                                  >
+                                    <Plus className="mr-2 h-4 w-4" />
+                                    Add Option
+                                  </Button>
                                 )}
                               </div>
+                            )}
 
+                            <Separator />
+
+                            <div className="flex gap-4">
+                              <Label>
+                                {section.type.includes("mcq")
+                                  ? "Correct Option(s)"
+                                  : "Correct Answer"}
+                              </Label>
+
+                              {section.type === "single-mcq" ? (
+                                <Select
+                                  value={
+                                    section.questions.filter((q) => !q.added)[0]
+                                      ?.correctAnswer || ""
+                                  }
+                                  onValueChange={(value) => {
+                                    setData((prev) => ({
+                                      ...prev,
+                                      [subject]: prev[subject].map((s, i) =>
+                                        i === index
+                                          ? {
+                                              ...s,
+                                              questions: s.questions.map(
+                                                (q, qIndex) =>
+                                                  !q.added
+                                                    ? {
+                                                        ...q,
+                                                        correctAnswer: value,
+                                                      } // ✅ Update correctAnswer
+                                                    : q
+                                              ),
+                                            }
+                                          : s
+                                      ),
+                                    }));
+                                  }}
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select correct option" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    {section.questions
+                                      .filter((q) => !q.added)[0]
+                                      ?.options.map((option, index) => (
+                                        <SelectItem
+                                          key={index}
+                                          value={String(index)}
+                                        >
+                                          Option {index + 1}
+                                        </SelectItem>
+                                      ))}
+                                  </SelectContent>
+                                </Select>
+                              ) : (
+                                <Input
+                                  value={
+                                    section.questions.filter((q) => !q.added)[0]
+                                      ?.correctAnswer || ""
+                                  }
+                                  onChange={(e) => {
+                                    setData((prev) => ({
+                                      ...prev,
+                                      [subject]: prev[subject].map((s, i) =>
+                                        i === index
+                                          ? {
+                                              ...s,
+                                              questions: s.questions.map(
+                                                (q, qIndex) =>
+                                                  !q.added
+                                                    ? {
+                                                        ...q,
+                                                        correctAnswer:
+                                                          e.target.value,
+                                                      } // ✅ Update correctAnswer for non-MCQ
+                                                    : q
+                                              ),
+                                            }
+                                          : s
+                                      ),
+                                    }));
+                                  }}
+                                  className={"flex-1"}
+                                  placeholder={
+                                    section.type === "multi-mcq"
+                                      ? "Enter comma-separated option numbers"
+                                      : "Enter the correct answer"
+                                  }
+                                />
+                              )}
+                            </div>
+
+                            <div className="flex gap-6">
                               <div className="flex gap-4">
                                 <Label>Marks</Label>
                                 <Input
                                   type="number"
-                                  value={currentQuestion.marks}
+                                  value={section.marks}
                                   onChange={(e) =>
-                                    setCurrentQuestion({
-                                      ...currentQuestion,
-                                      marks: parseInt(e.target.value),
-                                    })
+                                    setData((prev) => ({
+                                      ...prev,
+                                      [subject]: prev[subject].map((s, i) =>
+                                        i === index
+                                          ? {
+                                              ...s,
+                                              marks: e.target.value,
+                                            }
+                                          : s
+                                      ),
+                                    }))
                                   }
                                   className={"w-fit"}
                                   min="1"
                                 />
                               </div>
+                              <div className="flex gap-4">
+                                <Label>Negative</Label>
+                                <Input
+                                  type="number"
+                                  value={section.negative}
+                                  onChange={(e) =>
+                                    setData((prev) => ({
+                                      ...prev,
+                                      [subject]: prev[subject].map((s, i) =>
+                                        i === index
+                                          ? {
+                                              ...s,
+                                              negative: e.target.value,
+                                            }
+                                          : s
+                                      ),
+                                    }))
+                                  }
+                                  className={"w-fit"}
+                                  min="0"
+                                />
+                              </div>
                             </div>
-
-                            <Button onClick={addQuestion} className="mt-4">
-                              Add Question
-                            </Button>
                           </div>
-                          <div className="">
-                            {questions
-                              .filter((q) => q.sectionId === section.id)
-                              .map((question, index) => (
-                                <div
-                                  key={question.id}
-                                  className="mt-4 p-4 border rounded-lg relative"
+
+                          <Button
+                            onClick={(e) =>
+                              addQuestion(e, subject, index, section)
+                            }
+                            className="mt-4"
+                          >
+                            Add Question
+                          </Button>
+                        </div>
+
+                        {section.questions.filter((q) => q.added).length >
+                          0 && (
+                          <Accordion type="multiple" collapsible="true">
+                            <AccordionItem value="question" className={"py-0"}>
+                              <AccordionTrigger className={"px-4 mt-4"}>
+                                Added Questions {" ( "}Total:{" "}
+                                {
+                                  section.questions.filter((q) => q.added)
+                                    .length
+                                }
+                                {" )"}
+                              </AccordionTrigger>
+                              <AccordionContent className={"px-4"}>
+                                <Accordion
+                                  type="multiple"
+                                  collapsible="true"
+                                  className=""
                                 >
-                                  <div className="absolute top-4 right-4 h-fit">
-                                    <Trash2
-                                      size={16}
-                                      className="hover:text-red-700 cursor-pointer"
-                                    />
-                                  </div>
-                                  <h4 className="font-medium">
-                                    Question {index + 1} ({question.type})
-                                  </h4>
-                                  <p className="mt-2">{question.content}</p>
-                                  {question.imageUrl && (
-                                    <img
-                                      src={question.imageUrl}
-                                      alt="Question"
-                                      className="mt-2 max-w-md rounded"
-                                    />
-                                  )}
-                                  {question.type.includes("mcq") && (
-                                    <div className="mt-4 grid gap-4 relative">
-                                      {question.options.map(
-                                        (option, optIndex) => (
-                                          <div
-                                            key={optIndex}
-                                            className="flex items-start gap-4"
-                                          >
-                                            <span>
-                                              {String.fromCharCode(
-                                                65 + optIndex
+                                  {section.questions
+                                    .filter((q) => q.added)
+                                    .map((question, qindex) => (
+                                      <AccordionItem
+                                        value={`${question.content}_${qindex}`}
+                                        key={
+                                          subject +
+                                          "_" +
+                                          section.name +
+                                          "_" +
+                                          question.content +
+                                          "_" +
+                                          qindex
+                                        }
+                                        className="mt-4 p-4 border rounded-lg relative"
+                                      >
+                                        <AccordionTrigger className={"py-0"}>
+                                          <h4 className="font-medium">
+                                            Question {qindex + 1} ( +
+                                            {section.marks} /{" "}
+                                            {section.negative !== "0"
+                                              ? "-" + section.negative
+                                              : section.negative}{" "}
+                                            )
+                                          </h4>
+                                        </AccordionTrigger>
+                                        <AccordionContent
+                                          className={"relative"}
+                                        >
+                                          <div className="flex gap-2">
+                                            <div className="flex gap-2 flex-col flex-1">
+                                              <p className="mt-2 flex-1">
+                                                {question.content}
+                                              </p>
+                                              {question.imageUrl && (
+                                                <div className="relative max-h-[180px] overflow-hidden max-w-[240px]">
+                                                  <img
+                                                    src={question.imageUrl}
+                                                    alt="Question"
+                                                    className="mt-2 rounded"
+                                                  />
+                                                </div>
                                               )}
-                                              .
-                                            </span>
-                                            <div>
-                                              <p>{option.text}</p>
-                                              {option.imageUrl && (
-                                                <img
-                                                  src={option.imageUrl}
-                                                  alt={`Option ${optIndex + 1}`}
-                                                  className="mt-2 max-w-xs rounded"
-                                                />
-                                              )}
+                                              {section.type.includes("mcq") ? (
+                                                <div className="mt-4 grid gap-1 relative">
+                                                  {question.options.map(
+                                                    (option, optIndex) => (
+                                                      <div
+                                                        key={optIndex}
+                                                        className={`flex items-start gap-4 px-3 py-1.5 rounded-xl ${
+                                                          question.correctAnswer
+                                                            .split(",")
+                                                            .includes(
+                                                              `${optIndex + 1}`
+                                                            )
+                                                            ? "bg-green-100"
+                                                            : ""
+                                                        }`}
+                                                      >
+                                                        <span>
+                                                          {String.fromCharCode(
+                                                            65 + optIndex
+                                                          )}
+                                                          .
+                                                        </span>
+                                                        <div>
+                                                          <p className={``}>
+                                                            {option.text}
+                                                          </p>
+                                                          {option.imageUrl && (
+                                                            <img
+                                                              src={
+                                                                option.imageUrl
+                                                              }
+                                                              alt={`Option ${
+                                                                optIndex + 1
+                                                              }`}
+                                                              className="mt-2 max-w-[180px] rounded"
+                                                            />
+                                                          )}
+                                                        </div>
+                                                      </div>
+                                                    )
+                                                  )}
+                                                </div>
+                                              ) : (
+                                                <div className="w-[calc(100%-1.75rem)] mr-4 bg-green-100 px-3 py-1 rounded-xl font-semibold">
+                                                  Correct Answer:{" "}
+                                                  {question.correctAnswer}
+                                                </div>
+                                              )}{" "}
+                                            </div>
+
+                                            <div className="flex flex-col pt-4 gap-4">
+                                              <Pencil
+                                                size={16}
+                                                className="hover:text-blue-700 cursor-pointer opacity-70"
+                                                onClick={() => {
+                                                  setData((prev) => {
+                                                    const updatedSections =
+                                                      prev[subject].map(
+                                                        (s, i) => {
+                                                          if (i === index) {
+                                                            // Step 1: Remove the temporary 'added: false' question
+                                                            const filteredQuestions =
+                                                              s.questions.filter(
+                                                                (q) => q.added
+                                                              );
+
+                                                            // Step 2: Pull the target question to edit (from previous list)
+                                                            const questionToEdit =
+                                                              {
+                                                                ...filteredQuestions[
+                                                                  qindex
+                                                                ],
+                                                                added: false,
+                                                              };
+
+                                                            // Step 3: Remove the original version of that question (it was at qindex before filtering)
+                                                            const updatedQuestions =
+                                                              filteredQuestions.filter(
+                                                                (_, i) =>
+                                                                  i !== qindex
+                                                              );
+
+                                                            // Step 4: Return updated section
+                                                            return {
+                                                              ...s,
+                                                              questions: [
+                                                                ...updatedQuestions,
+                                                                questionToEdit,
+                                                              ], // Add editable question at the end
+                                                            };
+                                                          }
+
+                                                          return s;
+                                                        }
+                                                      );
+
+                                                    return {
+                                                      ...prev,
+                                                      [subject]:
+                                                        updatedSections,
+                                                    };
+                                                  });
+                                                }}
+                                              />
+
+                                              <Trash2
+                                                onClick={() => {
+                                                  setData((prev) => {
+                                                    const updatedSections =
+                                                      prev[subject].map(
+                                                        (s, i) => {
+                                                          if (i === index) {
+                                                            const updatedAdded =
+                                                              s.questions
+                                                                .filter(
+                                                                  (q) => q.added
+                                                                )
+                                                                .filter(
+                                                                  (_, i) =>
+                                                                    i !== qindex
+                                                                ); // remove the clicked added question
+
+                                                            const updatedNonAdded =
+                                                              s.questions.filter(
+                                                                (q) => !q.added
+                                                              );
+
+                                                            return {
+                                                              ...s,
+                                                              questions: [
+                                                                ...updatedAdded,
+                                                                ...updatedNonAdded,
+                                                              ],
+                                                            };
+                                                          }
+                                                          return s;
+                                                        }
+                                                      );
+
+                                                    return {
+                                                      ...prev,
+                                                      [subject]:
+                                                        updatedSections,
+                                                    };
+                                                  });
+                                                }}
+                                                size={16}
+                                                className="hover:text-red-700 cursor-pointer opacity-70"
+                                              />
                                             </div>
                                           </div>
-                                        )
-                                      )}
-                                    </div>
-                                  )}
-                                </div>
-                              ))}
-                          </div>
-                        </AccordionContent>
-                      </AccordionItem>
+                                        </AccordionContent>
+                                      </AccordionItem>
+                                    ))}
+                                </Accordion>
+                              </AccordionContent>
+                            </AccordionItem>
+                          </Accordion>
+                        )}
+                      </TabsContent>
                     ))}
-                </Accordion>
+                  </div>
+                </Tabs>
               </Card>
             </TabsContent>
           ))}
@@ -903,4 +1673,4 @@ export default function NewTestPage() {
     </div>
   );
 }
-``
+``;

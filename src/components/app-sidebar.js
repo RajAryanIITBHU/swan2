@@ -18,7 +18,6 @@ import { auth } from "@/auth";
 import Link from "next/link";
 import SidebarContents from "./sidebar-contents";
 
-// Menu items.
 const items = [
   {
     title: "Test",
@@ -47,7 +46,7 @@ export async function AppSidebar() {
   const session = await auth()
   return (
     <Sidebar>
-      <SidebarContent className={"bg-white px-4"}>
+      <SidebarContent className={"px-4"}>
         <SidebarHeader>
           <div className="flex px-2 pt-2">
             <Link href={"/"}>

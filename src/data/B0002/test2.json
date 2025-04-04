@@ -1,0 +1,927 @@
+{
+  "batchName": "B0001",
+  "testName": "First Demo Test",
+  "startDate": "2025-04-04T20:00",
+  "endDate": "2025-04-04T22:00",
+  "syllabus": {
+    "isSyllabus": true,
+    "mathematics": [
+      "Maths"
+    ],
+    "physics": [
+      "Physics"
+    ],
+    "chemistry": [
+      "Chem"
+    ]
+  },
+  "mathematics": [
+    {
+      "id": null,
+      "name": "Section 1",
+      "subject": "mathematics",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "In the expansion of (1+x)60, the sum of coefficients of odd powers of x is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "261",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "260",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "259",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "none of these.",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "0"
+        },
+        {
+          "added": true,
+          "content": "",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327507beefb6.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "a negative integer",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": " an irrational number",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "a rational number",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": " none of these",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": true,
+          "content": "The circumcentre of the triangle with vertices (0, 0), (3, 0) and (0, 4) is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "(1, 1)",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": " (2, 3/2)",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "(3/2, 2)",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "None of these",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "added": true,
+          "content": "The mid points of the sides of a triangle are (5, 0), (5, 12) and (0, 12), then orthocentre of this triangle is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "(0, 0)",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "(0, 24)",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "(10, 0)",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327513506ad9.png",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "added": true,
+          "content": "If the tangents drawn to the hyperbola 4y2 = x2 + 1 intersect the co-ordinate axes at distinct points A and B, then the locus of the midpoint of AB is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " 4x2 - y2 + 16x2y2 = 0",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "x2 - 4y2 - 16x2y2 = 0",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "x2 - 4y2 - 16x2y2 = 0",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "4x2 - y2 - 16x2y2 = 0",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "name": "Section 2",
+      "subject": "mathematics",
+      "type": "multi-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "name": "Section 3",
+      "subject": "mathematics",
+      "type": "integer",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "name": "Section 4",
+      "subject": "mathematics",
+      "type": "decimal",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    }
+  ],
+  "physics": [
+    {
+      "id": null,
+      "name": "Section 1",
+      "subject": "physics",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "A long infinite current-carrying wire is bent in the shape as shown in the figure. The magnetic induction at point O is:",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327226429be8.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272279f2aa1.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272291cc1ea.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272285a0659.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327230985fa1.png",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": true,
+          "content": "Two gases A and B have equal pressure P, temperature T, and volume V. The two gases are mixed together and the resulting mixture has the same temperature T and volume V as before. The ratio of pressure exerted by the mixture to either of the two gases is:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "1 : 1",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "2 : 1",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "3 : 1",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "1 : 2",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": true,
+          "content": "A current of 1.6 A is passed through CuSO4 solution. The number of Cu++ ions liberated per minute are:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " 3 × 1017",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": " 3 × 1018",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "6 × 1019",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "3 × 1020",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": true,
+          "content": "A book with many printing errors contains four different formulae for the displacement of a particle undergoing a certain periodic motion x. Which one is the wrong formula on dimensional grounds (A = amplitude, ω = angular velocity, T = time period of motion)?",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327235f3807a.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272367aeedc.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327237be2a49.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327238eda4b2.png",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": true,
+          "content": "The figure below shows four plates each of area A and separated from one another by a distance d.\n\nWhat is the capacitance between P and Q?",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272423ba5f7.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/32724328cea4.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/32724476fec9.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327245664390.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327246461451.png",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "name": "Section 2",
+      "subject": "physics",
+      "type": "multi-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "name": "Section 3",
+      "subject": "physics",
+      "type": "integer",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "name": "Section 4",
+      "subject": "physics",
+      "type": "decimal",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    }
+  ],
+  "chemistry": [
+    {
+      "id": null,
+      "name": "Section 1",
+      "subject": "chemistry",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "Based on the above thermochemical equations, find out which one of the following algebraic relationship is correct?",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272825d6cb6.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "z = x+y",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": " x = y-z",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "x = y+z",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "y= 2z-x",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "added": true,
+          "content": "The maximum possible denticities of a ligand given below towards a common transition and inner-transition metal ion respectively are:",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272848abc46.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " 6 and 8",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "8 and 6",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "8 and 8",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "6 and 6",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": true,
+          "content": "The equivalent mass of metal is 9 and vapour density of its chloride is 59.25. The atomic mass of metal is:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "23.9",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "27.3",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "36.3",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "48.3",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": true,
+          "content": "The variation of molar conductivity with concentration of an electrolyte (X) in aqueous solution is shown in the given figure.\n\nThe electrolyte X is",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327286797c60.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "NaCl",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "HCl",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "CH3COOH",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "KNO3",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": true,
+          "content": "The numbers of stereo centres present in linear and cyclic structures of glucose are respectively:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "4 and 4",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "4 and 5",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "5 and 4",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "5 and 5",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        },
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "name": "Section 2",
+      "subject": "chemistry",
+      "type": "multi-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "name": "Section 3",
+      "subject": "chemistry",
+      "type": "integer",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    },
+    {
+      "id": null,
+      "name": "Section 4",
+      "subject": "chemistry",
+      "type": "decimal",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": false,
+          "content": "",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": ""
+        }
+      ]
+    }
+  ]
+}

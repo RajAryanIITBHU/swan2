@@ -20,7 +20,7 @@ export const Timer = ({ timeRemaining, onTimeEnd, isTestStarted }) => {
   }, [timeRemaining, onTimeEnd, isTestStarted]);
 
   return (
-    <div className="flex items-center gap-2 text-2xl font-bold p-4 bg-white rounded-lg shadow-md">
+    <div className="flex items-center gap-2 text-2xl font-bold p-4 bg-background rounded-lg shadow-md">
       <Clock className="w-6 h-6" />
       <span>{formatTime(timeRemaining)}</span>
     </div>

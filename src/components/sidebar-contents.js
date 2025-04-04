@@ -26,7 +26,7 @@ const SidebarContents = () => {
                 size='md'
                 className={`${
                   path === item.url
-                    ? "bg-primary/30 text-primary-foreground hover:bg-primary/30 hover:text-primary-foreground"
+                    ? "bg-primary/70 hover:bg-primary/70"
                     : "hover:bg-primary/10"
                 }  text-base px-4`}
               >

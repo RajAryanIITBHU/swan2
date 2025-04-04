@@ -4,7 +4,7 @@ import path from "path";
 
 export async function POST(req) {
   try {
-    const { batchName, testData } = await req.json();
+    const { batchName, testId,testData } = await req.json();
     const sanitizedBatchName = batchName
       .toLowerCase()
       .replace(/[^a-z0-9]/g, "-");
@@ -20,21 +20,11 @@ export async function POST(req) {
     }
     const files = fs.readdirSync(batchDir);
     const testNumber = files.length + 1;
-    const fileName = `test${testNumber}.json`;
+    const fileName = `${testId}.json`;
 
-    const dataWithIds = {
-      ...testData,
-      sections: testData.sections.map((section) => ({
-        ...section,
-        questions: section.questions.map((question) => ({
-          ...question,
-          id: `q_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`,
-        })),
-      })),
-    };
 
     const filePath = path.join(batchDir, fileName);
-    fs.writeFileSync(filePath, JSON.stringify(dataWithIds, null, 2));
+    fs.writeFileSync(filePath, JSON.stringify(testData, null, 2));
 
     return NextResponse.json({ success: true, fileName, filePath });
   } catch (error) {

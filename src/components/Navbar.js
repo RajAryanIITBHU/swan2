@@ -19,7 +19,7 @@ const Navbar =() => {
     const currentItem = items.find((item) => item.url === path);
     const { toggleSidebar } = useSidebar();
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 py-4 sticky top-0 bg-white z-20">
+    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 py-4 sticky top-0 bg-sidebar z-20">
       <div className="cursor-pointer mr-1" onClick={toggleSidebar}>
         <Menu size={20} />
       </div>

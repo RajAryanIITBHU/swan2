@@ -1,0 +1,61 @@
+{
+  "batchName": "B0001",
+  "testName": "heue dw  wad",
+  "startDate": "2025-04-11T16:47",
+  "endDate": "2025-04-04T16:46",
+  "syllabus": {
+    "isSyllabus": false,
+    "mathematics": [
+      ""
+    ],
+    "physics": [
+      ""
+    ],
+    "chemistry": [
+      ""
+    ]
+  },
+  "mathematics": [
+    {
+      "id": "1743765485155-ddzbb3h4i",
+      "name": "Section 1",
+      "subject": "mathematics",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "dawdghgnfn",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "dawd",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "daw",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "frf",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "hft",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    }
+  ],
+  "physics": [],
+  "chemistry": []
+}

@@ -76,9 +76,16 @@ export default function LoginForm() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <Image src={"/logo/logo.png"} height={90} width={90} priority alt="" className="mx-auto"/>
+    <div className="min-h-screen flex items-center justify-center bg-accent">
+      <div className="bg-background p-8 rounded-lg shadow-lg max-w-md w-full">
+        <Image
+          src={"/logo/logo.png"}
+          height={90}
+          width={90}
+          priority
+          alt=""
+          className="mx-auto"
+        />
         <h1 className="text-3xl font-bold mb-4 text-center">Amplify JEE CBT</h1>
         <p className="mb-6 text-gray-600 text-center">Access your dashboard</p>
 
