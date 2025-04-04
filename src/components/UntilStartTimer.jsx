@@ -46,15 +46,7 @@ export default function UntilStartTimer({ className, start, end }) {
             : ""
         }`}
       >
-        <div
-          className={`w-2 h-2 rounded-full mt-[1px] ${
-            status === "Ongoing"
-              ? "bg-green-500"
-              : status === "Ended"
-              ? "bg-red-500 "
-              : "bg-secondary"
-          }}`}
-        ></div>
+       
         <span>{""}</span>
       </div>
     );
@@ -75,8 +67,8 @@ export default function UntilStartTimer({ className, start, end }) {
             ? "bg-green-500"
             : status === "Ended"
             ? "bg-red-500 "
-            : "bg-secondary"
-        }}`}
+            : "bg-secondary-foreground"
+        }`}
       ></div>
       <span>{status}</span>
     </div>

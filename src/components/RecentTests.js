@@ -93,10 +93,11 @@ const RecentTests = async ({ files }) => {
             </div>
             <div className="flex gap-4 ">
               <div className="flex gap-1 text-sm font items-center text-accent-foreground opacity-80 justify-end">
-                
-                  <UntilStartTimer start={test.startDate} end={test.endDate} />
-                
-               
+                <UntilStartTimer
+                  className={"test-xs px-2 py-1 font-medium rounded-lg"}
+                  start={test.startDate}
+                  end={test.endDate}
+                />
               </div>
               <Button asChild className="text-white cursor-pointer">
                 <Link href={test.url}>View Test</Link>

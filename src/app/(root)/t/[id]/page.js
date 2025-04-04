@@ -43,7 +43,7 @@ export default async function TestDetailsPage({ params }) {
 
   if (!data) return (
     <section className="w-full bg-accent relative min-h-[calc(100dvh-4rem)] flex justify-center items-center">
-      <Card className="p-6 rounded-xl bg-background gap-4 min-w-sm">
+      <Card className="p-6 rounded-xl bg-background gap-4 min-w-sm -mt-10">
         <span className="flex gap-3 items-center text-lg font-medium">
           <CircleAlert size={22} />
           No Test Found
@@ -62,7 +62,7 @@ export default async function TestDetailsPage({ params }) {
   if (!session?.user?.batches.includes(data.batch)){
     return (
       <section className="w-full bg-accent relative min-h-[calc(100dvh-4rem)] flex justify-center items-center">
-        <Card className="p-6 rounded-xl bg-background gap-4 min-w-sm">
+        <Card className="p-6 rounded-xl bg-background gap-4 min-w-sm -mt-10">
           <span className="flex gap-3 items-center text-lg font-medium"><CircleAlert size={22}/>Unautherised User</span>
           <p>You are not allowed to give this test.</p>
           <Link href={"/"} className="text-primary-foreground hover:text-primary-foreground/80 underline underline-offset-4">Home</Link>
