@@ -19,18 +19,20 @@ const Navbar =() => {
     const currentItem = items.find((item) => item.url === path);
     const { toggleSidebar } = useSidebar();
   return (
-    <header className="flex h-16 shrink-0 items-center gap-2 border-b px-4 py-4 sticky top-0 bg-sidebar z-20">
-      <div className="cursor-pointer mr-1" onClick={toggleSidebar}>
-        <Menu size={20} />
+    <header className="flex justify-between h-16 shrink-0 items-center gap-2 border-b px-4 py-4 sticky top-0 bg-sidebar z-20">
+      <div className="flex gap-2 items-center">
+        <div className="cursor-pointer mr-1" onClick={toggleSidebar}>
+          <Menu size={20} />
+        </div>
+        <Separator orientation="vertical" className="mr-2 h-3" />
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem className="hidden md:block">
+              <BreadcrumbPage>{currentItem?.title || ""}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
       </div>
-      <Separator orientation="vertical" className="mr-2 h-3" />
-      <Breadcrumb>
-        <BreadcrumbList>
-          <BreadcrumbItem className="hidden md:block">
-            <BreadcrumbPage>{currentItem?.title || ""}</BreadcrumbPage>
-          </BreadcrumbItem>
-        </BreadcrumbList>
-      </Breadcrumb>
     </header>
   );
 }

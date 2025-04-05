@@ -1,0 +1,173 @@
+{
+  "batchName": "B0001",
+  "testName": "TEST 2",
+  "startDate": "2025-04-04T23:00",
+  "endDate": "2025-04-05T01:48",
+  "syllabus": {
+    "isSyllabus": false,
+    "mathematics": [
+      "MATH 1",
+      "MATHS 2"
+    ],
+    "physics": [
+      "PHY 1"
+    ],
+    "chemistry": [
+      "CHEM 1"
+    ]
+  },
+  "mathematics": [
+    {
+      "id": "1743787297280-d295340g7",
+      "name": "Section 1",
+      "subject": "mathematics",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "A long infinite current-carrying wire is bent in the shape as shown in the figure. The magnetic induction at point O is:",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327226429be8.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272279f2aa1.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272285a0659.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272291cc1ea.png",
+              "imageUpload": null
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327230985fa1.png",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1"
+        },
+        {
+          "added": true,
+          "content": "Two gases A and B have equal pressure P, temperature T, and volume V. The two gases are mixed together and the resulting mixture has the same temperature T and volume V as before. The ratio of pressure exerted by the mixture to either of the two gases is:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " 1 : 1",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": " 2 : 1",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "3 : 1",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": " 1 : 2",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    }
+  ],
+  "physics": [
+    {
+      "id": "1743787297280-j0rdnej2z",
+      "name": "Section 1",
+      "subject": "physics",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "In the expansion of (1+x)60, the sum of coefficients of odd powers of x is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "261",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": " 260",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "259",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "none of these.",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "0"
+        }
+      ]
+    }
+  ],
+  "chemistry": [
+    {
+      "id": "1743787297280-iyt1jtxk6",
+      "name": "Section 1",
+      "subject": "chemistry",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272825d6cb6.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "z = x+y",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "x = y-z",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "x = y+z",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "y= 2z-x",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "1"
+        }
+      ]
+    }
+  ],
+  "id": "test-1743787297279-b4dz10sbg",
+  "createdAt": "Fri Apr 04 2025 22:51:37 GMT+0530 (India Standard Time)"
+}

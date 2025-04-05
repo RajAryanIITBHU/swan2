@@ -6,9 +6,10 @@ import { Question } from "@/components/Question";
 import { PDFReport } from "@/components/PDFReport";
 import { questions } from "@/data/test1/question";
 import { calculateScore } from "@/utils/scoring";
-import { AlertTriangle, Mail, Phone } from "lucide-react";
+import { AlertTriangle, Keyboard, LockKeyhole, Mail, Phone, UserRound } from "lucide-react";
+import Link from "next/link";
 
-const INITIAL_TIME = 10800; // 3 hours in seconds
+const INITIAL_TIME = 10800;
 const MAX_WARNINGS = 3;
 
 function App() {
@@ -253,78 +254,87 @@ function App() {
     }
   }, [state.isTestEnded]);
 
+
+
   if (!state.isTestStarted) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="bg-background p-8 rounded-lg shadow-lg max-w-md w-full">
-          <div className="flex justify-center mb-6">
-            <img
-              src="/images/logo/logo.png"
-              alt="JEE Advanced Logo"
-              className="h-16 w-auto"
-            />
+      <div className="min-h-screen bg-white flex items-center  flex-col">
+        <div className="w-full p-1 flex justify-between bg-gray-600 ">
+          <div className="flex gap-2 flex-col pl-4 py-4">
+            <div>System Name:</div>
+            <div className="text-4xl">C001</div>
           </div>
-          <h1 className="text-3xl font-bold mb-4 text-center">
-            JEE Advanced CBT
-          </h1>
-          <p className="mb-6 text-gray-600 text-center">
-            Please enter your details to start the test
-          </p>
+          <div className="flex">
+            <div className="flex flex-col pt-4 items-end pr-4">
+              <div className="">Candidate Name:</div>
+              <div className="text-4xl mt-2">Name Name</div>
+            </div>
+            <div className="relative w-32 aspect-[15/16] bg-white"></div>
+          </div>
+        </div>
 
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                <div className="flex items-center gap-2">
-                  <Mail className="w-4 h-4" />
-                  <span>Email Address</span>
-                </div>
-              </label>
-              <input
-                type="email"
-                name="email"
-                value={userData.email}
-                onChange={handleInputChange}
-                className={`w-full px-3 py-2 border rounded-md ${
-                  errors.email ? "border-red-500" : "border-gray-300"
-                } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                placeholder="Enter your email"
-              />
-              {errors.email && (
-                <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-              )}
+        <div className="flex-1">
+          <div className="bg-neutral-100 mt-8 rounded max-w-md w-full border-l border-r border-b pb-4 ">
+            <div className="w-full px-6 py-2 bg-neutral-300 text-neutral-800 text-lg font-medium">
+              Login
             </div>
 
-            <div>
-              <label className="block text-sm font-medium text-gray-700 mb-1">
-                <div className="flex items-center gap-2">
-                  <Phone className="w-4 h-4" />
-                  <span>Phone Number</span>
+            <div className="space-y-6 bg-neutral-100 p-6  border-neutral-300 ">
+              <div className="flex gap-2 items-center border border-neutral-300">
+                <label className="block px-3 text-sm font-medium items-center justify-center border-r border-r-neutral-300">
+                  <div className="flex items-center">
+                    <UserRound size={30} className=" text-neutral-700 " />
+                  </div>
+                </label>
+                <input
+                  type="text"
+                  name="email"
+                  value={userData.email}
+                  onChange={handleInputChange}
+                  className={`w-full px-3 py-2 border rounded-md  text-neutral-900 focus:border-none outline-none focus:outline-none border-none`}
+                  placeholder="Enter your roll no"
+                />
+                <div className="text-neutral-700 px-3 border-l border-l-neutral-300 hover:bg-neutral-200 h-full py-1.5">
+                  <Keyboard size={28} />
                 </div>
-              </label>
-              <input
-                type="tel"
-                name="phone"
-                value={userData.phone}
-                onChange={handleInputChange}
-                className={`w-full px-3 py-2 border rounded-md ${
-                  errors.phone ? "border-red-500" : "border-gray-300"
-                } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-                placeholder="Enter 10-digit phone number"
-                maxLength={10}
-              />
-              {errors.phone && (
-                <p className="mt-1 text-sm text-red-500">{errors.phone}</p>
-              )}
-            </div>
-          </div>
+              </div>
 
-          <button
-            onClick={handleStartTest}
-            disabled={!!(errors.email || errors.phone)}
-            className="w-full mt-6 bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            Start Test
-          </button>
+              <div className="flex gap-2 items-center border border-neutral-300">
+                <label className="block text-sm font-medium px-3 border-r border-r-neutral-300">
+                  <div className="flex items-center gap-2">
+                    <LockKeyhole size={30} className=" text-neutral-700 " />
+                  </div>
+                </label>
+                <input
+                  type="text"
+                  name="phone"
+                  value={userData.phone}
+                  onChange={handleInputChange}
+                  className={`w-full px-3 py-2 border rounded-md text-neutral-900 focus:border-none outline-none focus:outline-none border-none`}
+                  placeholder="Enter your DOB (DD-MM-YYYY)"
+                  maxLength={10}
+                />
+                <div className="text-neutral-700 px-3 border-l border-l-neutral-300 hover:bg-neutral-200 h-full py-1.5">
+                  <Keyboard size={28} />
+                </div>
+              </div>
+            </div>
+
+            <button
+              onClick={handleStartTest}
+              disabled={!!(errors.email || errors.phone)}
+              className=" mt-8 bg-blue-500 text-white px-16 py-2 w-[calc(100%-3rem)] mx-6 rounded hover:bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              Continue
+            </button>
+          </div>
+        </div>
+
+        <div className="w-full bg-neutral-500 text-white">
+          <div className="max-w-lg mx-auto text-center font-mono text-sm py-1">
+            {" "}
+            Version 1.0, &copy; <Link href={"/"} className="hover:underline">AmplifyJEE.in</Link>
+          </div>
         </div>
       </div>
     );
@@ -333,7 +343,7 @@ function App() {
   if (state.isTestEnded) {
     const score = calculateScore(questions, state.questions);
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+      <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="bg-background p-8 rounded-lg shadow-lg max-w-md w-full">
           <h2 className="text-2xl font-bold mb-4">Test Results</h2>
           <p className="text-lg mb-4">

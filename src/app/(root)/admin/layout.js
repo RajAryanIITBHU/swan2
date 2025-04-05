@@ -7,7 +7,7 @@ import Link from "next/link";
 export default async function AdminLayout({ children }) {
   const session = await auth()
 
-  if (session?.user?.role !== "admin"){
+  if (session?.user?.role === "admin"){
     return (
       <section className="w-full h-screen flex justify-center items-center">
         <Card className="p-6 gap-4 -mt-8">

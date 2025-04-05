@@ -19,7 +19,18 @@ import { auth } from "@/auth";
 import { CircleAlert } from "lucide-react";
 import Link from "next/link";
 import UntilStartTimer from "@/components/UntilStartTimer";
-import { Badge } from "@/components/ui/badge";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+
 
 const questionTypes = {
   "single-mcq": " Single Choice",
@@ -117,8 +128,8 @@ export default async function TestDetailsPage({ params }) {
   console.log(data)
 
   return (
-    <section className="w-full bg-accent relative">
-      <div className="max-w-4xl mx-auto p-6">
+    <section className="w-full flex flex-col bg-accent relative min-h-[calc(100dvh-4rem)] items-center">
+      <div className="max-w-4xl w-full h-full flex-1 p-6">
         {/* Test Overview Card */}
         <Card className="mb-6">
           <CardHeader>
@@ -248,17 +259,42 @@ export default async function TestDetailsPage({ params }) {
           </Card>
         )}
       </div>
-      <div className="flex mt-4 px-4 sticky bottom-0 left-0 justify-center w-full bg-sidebar py-4">
-        <div className="max-w-4xl w-full flex justify-end px-10 gap-6 items-center">
-          
-            
+      <div className="flex mt-4 px-0 sticky bottom-0 left-0 justify-center w-full bg-sidebar py-4">
+        <div className="max-w-4xl w-full flex justify-between px-10 gap-6 items-center ">
+          <div className="">
+            Attempts: 0/2
+          </div>
+          <div className="flex gap-4 items-center">
             <UntilStartTimer
               className={"test-xs px-2 py-1 font-medium rounded-lg"}
               start={data.startDate}
               end={data.endDate}
             />
-          
-          <Button className={"text-white cursor-pointer"}>Start Test</Button>
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <Button className={"text-white cursor-pointer"}>
+                  Start Test
+                </Button>
+              </AlertDialogTrigger>
+              <AlertDialogContent>
+                <AlertDialogHeader>
+                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
+                  <AlertDialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </AlertDialogDescription>
+                </AlertDialogHeader>
+                <AlertDialogFooter>
+                  <AlertDialogCancel>Cancel</AlertDialogCancel>
+                  <AlertDialogAction asChild>
+                    <Link href={`/test/${id}`}>
+                      Continue
+                    </Link>
+                  </AlertDialogAction>
+                </AlertDialogFooter>
+              </AlertDialogContent>
+            </AlertDialog>
+          </div>
         </div>
       </div>
     </section>
