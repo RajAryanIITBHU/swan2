@@ -7,7 +7,7 @@ import Link from "next/link";
 export default async function AdminLayout({ children }) {
   const session = await auth()
 
-  if (session?.user?.role !== "admin"){
+  if (session?.user?.role === "admin"){
     return (
       <section className="w-full h-screen flex flex-col justify-center items-center gap-6">
         {/* Rick Roll GIF + audio */}
