@@ -10,7 +10,7 @@ export async function GET(
   const { batch, test } = params;
 
   try {
-    const filePath = path.join(process.cwd(), "src/data", batch, `${test}.json`);
+    const filePath = path.join(process.cwd(), "src/data", batch, `${test}${process.env.NEXT_PUBLIC_DEV === "Development" ? ".json": ""}`);
     const fileContent = fs.readFileSync(filePath, "utf-8");
     const json = JSON.parse(fileContent);
 
