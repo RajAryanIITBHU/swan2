@@ -1,27 +1,45 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { useCallback } from "react";
 
-export function SecurePopupLink({ url }) {
-  
-    const handleClick = () => {
-      const win = window.open(
-        url,
-        "_blank",
-        "noopener,noreferrer,width=800,height=600"
-      );
+const FullscreenPopup = ({ url }) => {
+  const openPopup = useCallback(() => {
+    const features = `
+      toolbar=no,
+      location=no,
+      status=no,
+      menubar=no,
+      scrollbars=yes,
+      resizable=no,
+      width=${window.screen.availWidth},
+      height=${window.screen.availHeight},
+      top=0,
+      left=0
+    `.replace(/\s+/g, "");
 
-      if (!win) {
-        alert("Popup blocked. Please allow popups.");
-        return;
-      }
+    const newWindow = window.open("", "_blank", features);
 
-      // Tell the child window to try full screen when ready
-      win.onload = () => {
-        win.document.body.setAttribute("data-trigger-fullscreen", "true");
-      };
-    };
+    if (!newWindow) {
+      alert("Popup blocked! Please allow popups for this site.");
+      return;
+    }
 
+    newWindow.moveTo(0, 0);
+    newWindow.resizeTo(window.screen.availWidth, window.screen.availHeight);
+    newWindow.focus();
 
-  return <Button onClick={handleClick}>Continue</Button>;
-}
+    // Navigate to the secure page
+    newWindow.location.href = url;
+  }, [url]);
+
+  return (
+    <button
+      onClick={openPopup}
+      className="bg-blue-600 text-white px-4 py-2 rounded shadow"
+    >
+      Continue
+    </button>
+  );
+};
+
+export default FullscreenPopup;

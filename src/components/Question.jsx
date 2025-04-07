@@ -7,6 +7,7 @@ export const Question = ({ question, selectedAnswer, onAnswer }) => {
     }
   }, [question]);
 
+
   const renderOption = (option, index) => {
     const isMultipleChoice = question.type === "mcq-multiple";
     const type = isMultipleChoice ? "checkbox" : "radio";

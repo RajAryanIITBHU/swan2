@@ -30,6 +30,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import OpenBankingWindow from "@/components/SecurePopUp";
 
 
 const questionTypes = {
@@ -162,60 +163,71 @@ export default async function TestDetailsPage({ params }) {
                 </TableRow>
               </TableHeader>
               <TableBody>
-                <TableRow key={"mathematics"}>
-                  <TableCell>Mathematics</TableCell>
+                {data.raw.mathematics.length > 0 && (
+                  <TableRow key={"mathematics"}>
+                    <TableCell>Mathematics</TableCell>
 
-                  <TableCell>
-                    {data.raw.mathematics.length > 1
-                      ? [
-                          data.raw.mathematics.map(
-                            (sec) => questionTypes[sec.type]
-                          ),
-                        ].join(", ")
-                      : questionTypes[data.raw.mathematics[0].type]}
-                  </TableCell>
-                  <TableCell className={"pl-4"}>
-                    {data.raw.mathematics.map(
-                      (sec, sec_i) => parseInt(sec.marks) * sec.questions.length
-                    )}
-                  </TableCell>
-                </TableRow>
-                <TableRow key={"physics"}>
-                  <TableCell>Physics</TableCell>
+                    <TableCell>
+                      {data.raw.mathematics.length > 1
+                        ? [
+                            data.raw.mathematics.map(
+                              (sec) => questionTypes[sec.type]
+                            ),
+                          ].join(", ")
+                        : questionTypes[data.raw.mathematics[0].type]}
+                    </TableCell>
+                    <TableCell className={"pl-4"}>
+                      {data.raw.mathematics.map(
+                        (sec, sec_i) =>
+                          parseInt(sec.marks) * sec.questions.length
+                      )}
+                    </TableCell>
+                  </TableRow>
+                )}
 
-                  <TableCell>
-                    {data.raw.physics.length > 1
-                      ? [
-                          data.raw.physics.map(
-                            (sec) => questionTypes[sec.type]
-                          ),
-                        ].join(", ")
-                      : questionTypes[data.raw.physics[0].type]}
-                  </TableCell>
-                  <TableCell className={"pl-4"}>
-                    {data.raw.physics.map(
-                      (sec, sec_i) => parseInt(sec.marks) * sec.questions.length
-                    )}
-                  </TableCell>
-                </TableRow>
-                <TableRow key={"chemistry"}>
-                  <TableCell>Chemistry</TableCell>
+                {data.raw.physics.length > 0 && (
+                  <TableRow key={"physics"}>
+                    <TableCell>Physics</TableCell>
 
-                  <TableCell>
-                    {data.raw.chemistry.length > 1
-                      ? [
-                          data.raw.chemistry.map(
-                            (sec) => questionTypes[sec.type]
-                          ),
-                        ].join(", ")
-                      : questionTypes[data.raw.chemistry[0].type]}
-                  </TableCell>
-                  <TableCell className={"pl-4"}>
-                    {data.raw.chemistry.map(
-                      (sec, sec_i) => parseInt(sec.marks) * sec.questions.length
-                    )}
-                  </TableCell>
-                </TableRow>
+                    <TableCell>
+                      {data.raw.physics.length > 1
+                        ? [
+                            data.raw.physics.map(
+                              (sec) => questionTypes[sec.type]
+                            ),
+                          ].join(", ")
+                        : questionTypes[data.raw.physics[0].type]}
+                    </TableCell>
+                    <TableCell className={"pl-4"}>
+                      {data.raw.physics.map(
+                        (sec, sec_i) =>
+                          parseInt(sec.marks) * sec.questions.length
+                      )}
+                    </TableCell>
+                  </TableRow>
+                )}
+
+                {data.raw.chemistry.length > 0 && (
+                  <TableRow key={"chemistry"}>
+                    <TableCell>Chemistry</TableCell>
+
+                    <TableCell>
+                      {data.raw.chemistry.length > 1
+                        ? [
+                            data.raw.chemistry.map(
+                              (sec) => questionTypes[sec.type]
+                            ),
+                          ].join(", ")
+                        : questionTypes[data.raw.chemistry[0].type]}
+                    </TableCell>
+                    <TableCell className={"pl-4"}>
+                      {data.raw.chemistry.map(
+                        (sec, sec_i) =>
+                          parseInt(sec.marks) * sec.questions.length
+                      )}
+                    </TableCell>
+                  </TableRow>
+                )}
                 <TableRow>
                   <TableCell></TableCell>
                   <TableCell className={"font-medium"}>Total</TableCell>
@@ -239,20 +251,27 @@ export default async function TestDetailsPage({ params }) {
                 defaultValue={["mathematics", "physics", "chemistry"]}
               >
                 {["mathematics", "physics", "chemistry"].map(
-                  (subject, subindex) => (
-                    <AccordionItem key={subindex} value={subject}>
-                      <AccordionTrigger className={"text-lg"}>
-                        {subject.charAt(0).toUpperCase() + subject.slice(1)}
-                      </AccordionTrigger>
-                      <AccordionContent>
-                        <ul className="list-disc pl-4">
-                          {data.raw.syllabus[subject].map((topic, idx) => (
-                            <li key={idx}>{topic}</li>
-                          ))}
-                        </ul>
-                      </AccordionContent>
-                    </AccordionItem>
-                  )
+                  (subject, subindex) => {
+                    if (
+                      data.raw.syllabus[subject].length >= 1 &&
+                      data.raw.syllabus[subject][0] !== ""
+                    ) {
+                      return (
+                        <AccordionItem key={subindex} value={subject}>
+                          <AccordionTrigger className={"text-lg"}>
+                            {subject.charAt(0).toUpperCase() + subject.slice(1)}
+                          </AccordionTrigger>
+                          <AccordionContent>
+                            <ul className="list-disc pl-4">
+                              {data.raw.syllabus[subject].map((topic, idx) => (
+                                <li key={idx}>{topic}</li>
+                              ))}
+                            </ul>
+                          </AccordionContent>
+                        </AccordionItem>
+                      );
+                    }
+                  }
                 )}
               </Accordion>
             </CardContent>
@@ -261,9 +280,7 @@ export default async function TestDetailsPage({ params }) {
       </div>
       <div className="flex mt-4 px-0 sticky bottom-0 left-0 justify-center w-full bg-sidebar py-4">
         <div className="max-w-4xl w-full flex justify-between px-10 gap-6 items-center ">
-          <div className="">
-            Attempts: 0/2
-          </div>
+          <div className="">Attempts: 0/2</div>
           <div className="flex gap-4 items-center">
             <UntilStartTimer
               className={"test-xs px-2 py-1 font-medium rounded-lg"}
@@ -287,9 +304,13 @@ export default async function TestDetailsPage({ params }) {
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction asChild>
-                    <Link href={`/test/${id}`}>
-                      Continue
-                    </Link>
+                    {/* <Link href={`/test/${id}`}>Continue</Link> */}
+
+                    {process.env.NEXT_PUBLIC_DEV === "Development" ? (
+                      <Link href={`/test/${id}`}>Continue</Link>
+                    ) : (
+                      <OpenBankingWindow url={`/test/${id}`} />
+                    )}
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>

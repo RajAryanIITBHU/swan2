@@ -6,7 +6,7 @@ import { cookies } from "next/headers";
 
 export default async function GlobalLayout({ children }) {
   const session = await auth();
-    const theme = cookies().get("theme")?.value || "light";
+    const theme =await cookies().get("theme")?.value || "light";
   return (
     <html lang="en" className={theme === "dark" ? "dark" : ""} id="HTML">
       <body className="bg-accent">

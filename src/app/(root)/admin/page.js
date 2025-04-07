@@ -686,6 +686,9 @@ export default function NewTestPage() {
 
                       <Button
                         variant="outline"
+                        className={
+                          data.syllabus.mathematics.length > 1 ? "" : "hidden"
+                        }
                         onClick={() => {
                           setData((prev) => ({
                             ...prev,
@@ -749,6 +752,9 @@ export default function NewTestPage() {
                       />
 
                       <Button
+                        className={
+                          data.syllabus.physics.length > 1 ? "" : "hidden"
+                        }
                         variant="outline"
                         onClick={() => {
                           setData((prev) => ({
@@ -813,6 +819,9 @@ export default function NewTestPage() {
                       />
 
                       <Button
+                        className={
+                          data.syllabus.chemistry.length > 1 ? "" : "hidden"
+                        }
                         variant="outline"
                         onClick={() => {
                           setData((prev) => ({

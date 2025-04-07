@@ -121,3 +121,25 @@
     @apply bg-background text-foreground;
   }
 }
+
+@layer utilities{
+  
+.not_visited {
+  @apply float-left font-[bold] h-[38px] leading-[42px] text-center w-[34px] bg-[-105px_-49px] text-[#474747];
+ 
+}
+.not_answered {
+  @apply text-white float-left font-[bold] h-[38px] leading-[42px] text-center w-[34px] bg-[-39px_-48px];
+}
+.answered {
+  @apply text-white float-left font-[bold] h-[38px] leading-[42px] text-center w-[34px] bg-[-5px_-48px];
+}
+.review {
+  @apply text-white float-left font-[bold] h-[38px] leading-[42px] text-center w-[34px] bg-[-72px_-48px];
+}
+.instruction_area span.review_marked_considered {
+  @apply text-white float-left font-[bold] h-[38px] text-center w-[34px] leading-[42px] bg-[-6px_-81px];
+ 
+}
+
+}

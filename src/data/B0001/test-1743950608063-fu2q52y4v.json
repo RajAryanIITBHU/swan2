@@ -1,0 +1,94 @@
+{
+  "batchName": "bg",
+  "testName": "heue",
+  "startDate": "2025-04-11T22:12",
+  "endDate": "2025-04-01T20:12",
+  "syllabus": {
+    "isSyllabus": true,
+    "mathematics": [
+      "dawdw",
+      "dawd",
+      "dvsv"
+    ],
+    "physics": [
+      ""
+    ],
+    "chemistry": [
+      ""
+    ]
+  },
+  "mathematics": [
+    {
+      "id": "1743950608064-t5djontsa",
+      "name": "Section 1",
+      "subject": "mathematics",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "dwede",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "dede",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "desd",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "de",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "de",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "3"
+        },
+        {
+          "added": true,
+          "content": "grdg",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "ded",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "sda",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "vd",
+              "imageUrl": "",
+              "imageUpload": null
+            },
+            {
+              "text": "csd",
+              "imageUrl": "",
+              "imageUpload": null
+            }
+          ],
+          "correctAnswer": "2"
+        }
+      ]
+    }
+  ],
+  "physics": [],
+  "chemistry": [],
+  "id": "test-1743950608063-fu2q52y4v",
+  "createdAt": "Sun Apr 06 2025 20:13:28 GMT+0530 (India Standard Time)"
+}
