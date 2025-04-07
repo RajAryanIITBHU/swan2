@@ -126,7 +126,11 @@ export default async function TestDetailsPage({ params }) {
     },
   };
 
-  console.log(data)
+  console.log(
+    data.raw.chemistry.map(
+      (sec, sec_i) => parseInt(sec.marks) * sec.questions.length
+    ).reduce((acc, curr) => acc + curr, 0)
+  );
 
   return (
     <section className="w-full flex flex-col bg-accent relative min-h-[calc(100dvh-4rem)] items-center">
@@ -177,10 +181,12 @@ export default async function TestDetailsPage({ params }) {
                         : questionTypes[data.raw.mathematics[0].type]}
                     </TableCell>
                     <TableCell className={"pl-4"}>
-                      {data.raw.mathematics.map(
-                        (sec, sec_i) =>
-                          parseInt(sec.marks) * sec.questions.length
-                      )}
+                      {data.raw.mathematics
+                        .map(
+                          (sec, sec_i) =>
+                            parseInt(sec.marks) * sec.questions.length
+                        )
+                        .reduce((acc, curr) => acc + curr, 0)}
                     </TableCell>
                   </TableRow>
                 )}
@@ -199,10 +205,12 @@ export default async function TestDetailsPage({ params }) {
                         : questionTypes[data.raw.physics[0].type]}
                     </TableCell>
                     <TableCell className={"pl-4"}>
-                      {data.raw.physics.map(
-                        (sec, sec_i) =>
-                          parseInt(sec.marks) * sec.questions.length
-                      )}
+                      {data.raw.physics
+                        .map(
+                          (sec, sec_i) =>
+                            parseInt(sec.marks) * sec.questions.length
+                        )
+                        .reduce((acc, curr) => acc + curr, 0)}
                     </TableCell>
                   </TableRow>
                 )}
@@ -221,10 +229,12 @@ export default async function TestDetailsPage({ params }) {
                         : questionTypes[data.raw.chemistry[0].type]}
                     </TableCell>
                     <TableCell className={"pl-4"}>
-                      {data.raw.chemistry.map(
-                        (sec, sec_i) =>
-                          parseInt(sec.marks) * sec.questions.length
-                      )}
+                      {data.raw.chemistry
+                        .map(
+                          (sec, sec_i) =>
+                            parseInt(sec.marks) * sec.questions.length
+                        )
+                        .reduce((acc, curr) => acc + curr, 0)}
                     </TableCell>
                   </TableRow>
                 )}
