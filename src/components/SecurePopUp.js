@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback } from "react";
+import { Button } from "./ui/button";
 
 const FullscreenPopup = ({ url }) => {
   const openPopup = useCallback(() => {
@@ -33,12 +34,11 @@ const FullscreenPopup = ({ url }) => {
   }, [url]);
 
   return (
-    <button
+    <Button
       onClick={openPopup}
-      className="bg-blue-600 text-white px-4 py-2 rounded shadow"
     >
       Continue
-    </button>
+    </Button>
   );
 };
 
