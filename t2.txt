@@ -1,0 +1,967 @@
+COMPLETE QUESTION DATA 
+
+{
+    "batchName": "B0003",
+    "testName": "Real Test",
+    "startDate": "2025-04-09T15:30",
+    "endDate": "2025-04-09T19:45",
+    "syllabus": {
+        "isSyllabus": true,
+        "mathematics": [
+            "Topic 1",
+            "Topic 2"
+        ],
+        "physics": [
+            "Topic 1",
+            "Topic 2"
+        ],
+        "chemistry": [
+            "Topic 1",
+            "Topic 2"
+        ]
+    },
+    "mathematics": [
+        {
+            "id": "1744036118462-m2uztffq9",
+            "name": "Section 1",
+            "subject": "mathematics",
+            "type": "single-mcq",
+            "marks": 4,
+            "negative": 1,
+            "questions": [
+                {
+                    "added": true,
+                    "content": "In the expansion of (1+x)60, the sum of coefficients of odd powers of x is\n\n",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "261",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035457584-xmxiqedog_1"
+                        },
+                        {
+                            "text": "260",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035457584-xmxiqedog_2"
+                        },
+                        {
+                            "text": "259",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035457584-xmxiqedog_3"
+                        },
+                        {
+                            "text": "none of these.",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035457584-xmxiqedog_4"
+                        }
+                    ],
+                    "correctAnswer": "2",
+                    "id": "q-1744035457584-xmxiqedog"
+                },
+                {
+                    "added": true,
+                    "content": "",
+                    "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327507beefb6.png",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": " a negative integer",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035503405-y7tcq0sp0_1"
+                        },
+                        {
+                            "text": "an irrational number",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035503405-y7tcq0sp0_2"
+                        },
+                        {
+                            "text": "a rational number",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035503405-y7tcq0sp0_3"
+                        },
+                        {
+                            "text": " none of these",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035503405-y7tcq0sp0_4"
+                        }
+                    ],
+                    "correctAnswer": "1",
+                    "id": "q-1744035503405-y7tcq0sp0"
+                }
+            ]
+        },
+        {
+            "id": "1744036118462-665pif59q",
+            "name": "Section 2",
+            "subject": "mathematics",
+            "type": "multi-mcq",
+            "marks": 4,
+            "negative": 1,
+            "questions": [
+                {
+                    "added": true,
+                    "content": "The circumcentre of the triangle with vertices (0, 0), (3, 0) and (0, 4) is",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "(1, 1)",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035536437-v3523zwzi_1"
+                        },
+                        {
+                            "text": "(2, 3/2)",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035536437-v3523zwzi_2"
+                        },
+                        {
+                            "text": "(3/2, 2)",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035536437-v3523zwzi_3"
+                        },
+                        {
+                            "text": "None of these",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035536437-v3523zwzi_4"
+                        }
+                    ],
+                    "correctAnswer": "1,3",
+                    "id": "q-1744035536437-v3523zwzi"
+                },
+                {
+                    "added": true,
+                    "content": "The mid points of the sides of a triangle are (5, 0), (5, 12) and (0, 12), then orthocentre of this triangle is",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "(0, 0)",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035568381-7chlsu0wu_1"
+                        },
+                        {
+                            "text": "(0, 24)",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035568381-7chlsu0wu_2"
+                        },
+                        {
+                            "text": "(10, 0)",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035568381-7chlsu0wu_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327513506ad9.png",
+                            "imageUpload": null,
+                            "id": "q-1744035568381-7chlsu0wu_4"
+                        }
+                    ],
+                    "correctAnswer": "3",
+                    "id": "q-1744035568381-7chlsu0wu"
+                }
+            ]
+        },
+        {
+            "id": "1744036118462-wnmv4styb",
+            "name": "Section 3",
+            "subject": "mathematics",
+            "type": "integer",
+            "marks": 4,
+            "negative": "0",
+            "questions": [
+                {
+                    "added": true,
+                    "content": "",
+                    "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327522039bb0.png",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035596643-wx979m12b_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035596643-wx979m12b_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035596643-wx979m12b_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035596643-wx979m12b_4"
+                        }
+                    ],
+                    "correctAnswer": "0",
+                    "id": "q-1744035596643-wx979m12b"
+                },
+                {
+                    "added": true,
+                    "content": "If λ ∈ R is such that the sum of the cubes of the roots of the equation x2 + (2 - λ) x + (10 - λ) = 0 is minimum, then the magnitude of the difference between the roots of this equation is",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035607384-8zrvyhity_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035607384-8zrvyhity_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035607384-8zrvyhity_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035607384-8zrvyhity_4"
+                        }
+                    ],
+                    "correctAnswer": "20",
+                    "id": "q-1744035607384-8zrvyhity"
+                }
+            ]
+        },
+        {
+            "id": "1744036118462-o1ckl5opc",
+            "name": "Section 4",
+            "subject": "mathematics",
+            "type": "decimal",
+            "marks": 4,
+            "negative": "0",
+            "questions": [
+                {
+                    "added": true,
+                    "content": "If tan A and tan B are the roots of the quadratic equation 3x2 - 10x - 25 = 0, then the value of 3 sin2 (A + B) - 10 sin (A + B) × cos (A + B) - 25 cos2 (A + B) is",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035860095-fmf8p88jd_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035860095-fmf8p88jd_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035860095-fmf8p88jd_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035860095-fmf8p88jd_4"
+                        }
+                    ],
+                    "correctAnswer": "1.00",
+                    "id": "q-1744035860095-fmf8p88jd"
+                },
+                {
+                    "added": true,
+                    "content": "If the system of linear equations\n\nx + ky + 3z = 0\n\n3x + ky - 2z = 0\n\n2x + 4y - 3z = 0\n\nhas a non-zero solution (x, y, z), then xz/y2 is equal to",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035871035-c0fq81duj_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035871035-c0fq81duj_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035871035-c0fq81duj_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035871035-c0fq81duj_4"
+                        }
+                    ],
+                    "correctAnswer": "10.10",
+                    "id": "q-1744035871035-c0fq81duj"
+                }
+            ]
+        }
+    ],
+    "physics": [
+        {
+            "id": "1744036118462-sj7qeyipt",
+            "name": "Section 1",
+            "subject": "physics",
+            "type": "single-mcq",
+            "marks": 4,
+            "negative": 1,
+            "questions": [
+                {
+                    "added": true,
+                    "content": "A long infinite current-carrying wire is bent in the shape as shown in the figure. The magnetic induction at point O is:",
+                    "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327226429be8.png",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272279f2aa1.png",
+                            "imageUpload": null,
+                            "id": "q-1744035673782-a6324qpmi_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272285a0659.png",
+                            "imageUpload": null,
+                            "id": "q-1744035673782-a6324qpmi_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272291cc1ea.png",
+                            "imageUpload": null,
+                            "id": "q-1744035673782-a6324qpmi_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327230985fa1.png",
+                            "imageUpload": null,
+                            "id": "q-1744035673782-a6324qpmi_4"
+                        }
+                    ],
+                    "correctAnswer": "2",
+                    "id": "q-1744035673782-a6324qpmi"
+                },
+                {
+                    "added": true,
+                    "content": "Two gases A and B have equal pressure P, temperature T, and volume V. The two gases are mixed together and the resulting mixture has the same temperature T and volume V as before. The ratio of pressure exerted by the mixture to either of the two gases is:",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "1 : 1",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035697296-7cl53hihy_1"
+                        },
+                        {
+                            "text": " 2 : 1",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035697296-7cl53hihy_2"
+                        },
+                        {
+                            "text": " 3 : 1",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035697296-7cl53hihy_3"
+                        },
+                        {
+                            "text": "1 : 2",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035697296-7cl53hihy_4"
+                        }
+                    ],
+                    "correctAnswer": "2",
+                    "id": "q-1744035697296-7cl53hihy"
+                }
+            ]
+        },
+        {
+            "id": "1744036118462-boybrcidz",
+            "name": "Section 2",
+            "subject": "physics",
+            "type": "multi-mcq",
+            "marks": 4,
+            "negative": 1,
+            "questions": [
+                {
+                    "added": true,
+                    "content": "A current of 1.6 A is passed through CuSO4 solution. The number of Cu++ ions liberated per minute are:",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "3 × 1017",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035725421-1tqson1vw_1"
+                        },
+                        {
+                            "text": " 3 × 1018",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035725421-1tqson1vw_2"
+                        },
+                        {
+                            "text": "6 × 1019",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035725421-1tqson1vw_3"
+                        },
+                        {
+                            "text": "3 × 1020",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035725421-1tqson1vw_4"
+                        }
+                    ],
+                    "correctAnswer": "3,4",
+                    "id": "q-1744035725421-1tqson1vw"
+                },
+                {
+                    "added": true,
+                    "content": "A book with many printing errors contains four different formulae for the displacement of a particle undergoing a certain periodic motion x. Which one is the wrong formula on dimensional grounds (A = amplitude, ω = angular velocity, T = time period of motion)?",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327235f3807a.png",
+                            "imageUpload": null,
+                            "id": "q-1744035754874-jedszbthp_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272367aeedc.png",
+                            "imageUpload": null,
+                            "id": "q-1744035754874-jedszbthp_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327237be2a49.png",
+                            "imageUpload": null,
+                            "id": "q-1744035754874-jedszbthp_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/327238eda4b2.png",
+                            "imageUpload": null,
+                            "id": "q-1744035754874-jedszbthp_4"
+                        }
+                    ],
+                    "correctAnswer": "1,2,3",
+                    "id": "q-1744035754874-jedszbthp"
+                }
+            ]
+        },
+        {
+            "id": "1744036118462-yyh788i8s",
+            "name": "Section 3",
+            "subject": "physics",
+            "type": "integer",
+            "marks": 4,
+            "negative": "0",
+            "questions": [
+                {
+                    "added": true,
+                    "content": "A spring of spring constant 5 × 103 is stretched initially by 5 cm from the unstretched position. The work required to stretch it further by another 5 cm is",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035776017-zqvdwyh2t_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035776017-zqvdwyh2t_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035776017-zqvdwyh2t_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035776017-zqvdwyh2t_4"
+                        }
+                    ],
+                    "correctAnswer": "18.75",
+                    "id": "q-1744035776017-zqvdwyh2t"
+                },
+                {
+                    "added": true,
+                    "content": "A planet of radius R = 1/10 × ( radius of Earth) has the same mass density as Earth. Scientists dig a well of depth R/5 on it and lower a wire of the same length and of linear mass density 10-3 kg m-1 into it. If the wire is not touching anywhere, the force applied at the top of the wire by a person holding it in place is: (take the radius of Earth = 6 × 106 m and the acceleration due to gravity on Earth is 10 ms-2)",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035788647-frptgdrmh_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035788647-frptgdrmh_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035788647-frptgdrmh_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035788647-frptgdrmh_4"
+                        }
+                    ],
+                    "correctAnswer": "108",
+                    "id": "q-1744035788647-frptgdrmh"
+                }
+            ]
+        },
+        {
+            "id": "1744036118462-qzvdl3hs0",
+            "name": "Section 4",
+            "subject": "physics",
+            "type": "decimal",
+            "marks": 4,
+            "negative": "0",
+            "questions": [
+                {
+                    "added": true,
+                    "content": "When the temperature of a metal wire is increased from 0°C to 10°C, its length increases by 0.02%. The percentage change in its mass density will be closest to:",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035809686-8h6x2y6i0_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035809686-8h6x2y6i0_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035809686-8h6x2y6i0_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035809686-8h6x2y6i0_4"
+                        }
+                    ],
+                    "correctAnswer": "0.06",
+                    "id": "q-1744035809686-8h6x2y6i0"
+                },
+                {
+                    "added": true,
+                    "content": "A leak proof cylinder of length 1 m, made of a metal which has very low coefficient of expansion, is floating vertically in water at 0°C such that its height above the water surface is 20 cm. When the temperature of water is increased to 4°C, the height of the cylinder above the water surface becomes 21 cm. The density of water at T = 4°C relative to the density at T = 0°C is close to: (Answer up to 2 decimal places)",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035829566-j5vviqyob_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035829566-j5vviqyob_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035829566-j5vviqyob_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035829566-j5vviqyob_4"
+                        }
+                    ],
+                    "correctAnswer": "1.26",
+                    "id": "q-1744035829566-j5vviqyob"
+                }
+            ]
+        }
+    ],
+    "chemistry": [
+        {
+            "id": "1744036118462-dk2ztenvv",
+            "name": "Section 1",
+            "subject": "chemistry",
+            "type": "single-mcq",
+            "marks": 4,
+            "negative": 1,
+            "questions": [
+                {
+                    "added": true,
+                    "content": "",
+                    "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272825d6cb6.png",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": " z = x+y",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035906637-1umemxjmy_1"
+                        },
+                        {
+                            "text": "x = y-z",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035906637-1umemxjmy_2"
+                        },
+                        {
+                            "text": "x = y+z",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035906637-1umemxjmy_3"
+                        },
+                        {
+                            "text": "y= 2z-x",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035906637-1umemxjmy_4"
+                        }
+                    ],
+                    "correctAnswer": "1",
+                    "id": "q-1744035906637-1umemxjmy"
+                },
+                {
+                    "added": true,
+                    "content": "The maximum possible denticities of a ligand given below towards a common transition and inner-transition metal ion respectively are:",
+                    "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3272848abc46.png",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": " 6 and 8",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035931245-bebvybcni_1"
+                        },
+                        {
+                            "text": "8 and 6",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035931245-bebvybcni_2"
+                        },
+                        {
+                            "text": "8 and 8",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035931245-bebvybcni_3"
+                        },
+                        {
+                            "text": "6 and 6",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035931245-bebvybcni_4"
+                        }
+                    ],
+                    "correctAnswer": "3",
+                    "id": "q-1744035931245-bebvybcni"
+                }
+            ]
+        },
+        {
+            "id": "1744036118462-7qwo2gxfm",
+            "name": "Section 2",
+            "subject": "chemistry",
+            "type": "multi-mcq",
+            "marks": 4,
+            "negative": "0",
+            "questions": [
+                {
+                    "added": true,
+                    "content": "The numbers of stereo centres present in linear and cyclic structures of glucose are respectively:",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "4 and 4",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035982070-ozw3v1xoc_1"
+                        },
+                        {
+                            "text": "4 and 5",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035982070-ozw3v1xoc_2"
+                        },
+                        {
+                            "text": "5 and 4",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035982070-ozw3v1xoc_3"
+                        },
+                        {
+                            "text": "5 and 5",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035982070-ozw3v1xoc_4"
+                        }
+                    ],
+                    "correctAnswer": "1,2,4",
+                    "id": "q-1744035982070-ozw3v1xoc"
+                },
+                {
+                    "added": true,
+                    "content": "Which of following is not correct for noblegas?",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "Ar is used in electric bulbs",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036043116-fylfr0k6s_1"
+                        },
+                        {
+                            "text": " Kr is obtained during radioactive disintegration",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036043116-fylfr0k6s_2"
+                        },
+                        {
+                            "text": " Half life of Rn is 3.8 days",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036043116-fylfr0k6s_3"
+                        },
+                        {
+                            "text": "He is used to produce Low temp",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036043116-fylfr0k6s_4"
+                        }
+                    ],
+                    "correctAnswer": "3,4",
+                    "id": "q-1744036043116-fylfr0k6s"
+                }
+            ]
+        },
+        {
+            "id": "1744036118462-98hvu5tqd",
+            "name": "Section 3",
+            "subject": "chemistry",
+            "type": "integer",
+            "marks": 4,
+            "negative": "0",
+            "questions": [
+                {
+                    "added": true,
+                    "content": "The percentage of p-character in the orbitals forming P - P bonds in P4 is:",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036061270-v3nt1rmh7_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036061270-v3nt1rmh7_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036061270-v3nt1rmh7_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036061270-v3nt1rmh7_4"
+                        }
+                    ],
+                    "correctAnswer": "25",
+                    "id": "q-1744036061270-v3nt1rmh7"
+                },
+                {
+                    "added": true,
+                    "content": "In the following skew conformation of ethane, H'-C-C-H'' dihedral angle is",
+                    "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/3273205a9a4d.png",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036078487-v9ux85d90_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036078487-v9ux85d90_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036078487-v9ux85d90_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036078487-v9ux85d90_4"
+                        }
+                    ],
+                    "correctAnswer": "151",
+                    "id": "q-1744036078487-v9ux85d90"
+                }
+            ]
+        },
+        {
+            "id": "1744036118462-a5ar7sk3y",
+            "name": "Section 4",
+            "subject": "chemistry",
+            "type": "decimal",
+            "marks": 4,
+            "negative": "0",
+            "questions": [
+                {
+                    "added": true,
+                    "content": "The equivalent mass of metal is 9 and vapour density of its chloride is 59.25. The atomic mass of metal is:",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035950505-1ih79eyhc_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035950505-1ih79eyhc_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035950505-1ih79eyhc_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744035950505-1ih79eyhc_4"
+                        }
+                    ],
+                    "correctAnswer": "27.30",
+                    "id": "q-1744035950505-1ih79eyhc"
+                },
+                {
+                    "added": true,
+                    "content": "At constant volume, 4 mole of an ideal gas when heated from 300 K to 500 K changes its internal energy by 5000 J. The molar heat capacity at constant volume is ________. (Answer up to 2 decimal places)",
+                    "imageUrl": "",
+                    "imageUpload": null,
+                    "options": [
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036094987-8tqnjj09m_1"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036094987-8tqnjj09m_2"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036094987-8tqnjj09m_3"
+                        },
+                        {
+                            "text": "",
+                            "imageUrl": "",
+                            "imageUpload": null,
+                            "id": "q-1744036094987-8tqnjj09m_4"
+                        }
+                    ],
+                    "correctAnswer": "7.24",
+                    "id": "q-1744036094987-8tqnjj09m"
+                }
+            ]
+        }
+    ],
+    "id": "test-1744036118462-cagns28hi",
+    "createdAt": "Mon Apr 07 2025 19:58:38 GMT+0530 (India Standard Time)"
+}

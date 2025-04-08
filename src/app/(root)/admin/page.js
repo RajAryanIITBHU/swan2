@@ -363,9 +363,22 @@ export default function NewTestPage() {
       const updatedSubjectSections = prevData[subject].map((section, i) => {
         if (i !== sectionIndex) return section;
 
-        const updatedQuestions = section.questions.map((q) =>
-          !q.added ? { ...q, added: true } : q
-        );
+        const updatedQuestions = section.questions.map((q) => {
+          if (!q.added) {
+            const questionId = "q-"+generateUniqueId();
+
+            return {
+              ...q,
+              id: questionId,
+              added: true,
+              options: q.options.map((option, index) => ({
+                ...option,
+                id: `${questionId}_${index + 1}`,
+              })),
+            };
+          }
+          return q;
+        });
 
         const currentQuestion = section.questions.find((q) => !q.added);
         if (!currentQuestion) return section;

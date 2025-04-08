@@ -20,6 +20,19 @@ import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
 import { useParams } from "next/navigation";
+import useSessionStorage from "@/hooks/useSessionStorage";
+import {
+  addUniqueQuestionToLocalStorage,
+  calculateScoreFromLocalStorage,
+  clearAnswerInLocalStorage,
+  getQuestionFromLocalStorage,
+  initializeLocalStorageWithQuestionsBySections,
+  markForReviewInLocalStorage,
+  markQuestionVisitedInLocalStorage,
+  unmarkReviewInLocalStorage,
+  updateAnswerInLocalStorage,
+} from "@/utils/localStorageHelper";
+import ScoreSummary from "@/components/ScoreSummary";
 
 const INITIAL_TIME = 10800;
 const MAX_WARNINGS = 3;
@@ -33,14 +46,18 @@ export default function TestPage() {
     currentSubSection: "Section 1",
     currentSubSectionType: "",
     currentQuestionIndex: 0,
+    currAnswer: null,
     timeRemaining: INITIAL_TIME,
     warnings: 0,
     isTestStarted: false,
     isTestEnded: false,
     currentQuestion: null,
     questions: {},
+    currAnswers: {},
   });
   const [qData, setQDtata] = useState(null);
+
+  const [score, setScore] = useState(null);
 
   const [isInstruction, setIsIntruction] = useState({
     next: false,
@@ -57,27 +74,6 @@ export default function TestPage() {
     password: "",
   });
 
-  const validateEmail = (email) => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!email) {
-      return "Email is required";
-    }
-    if (!emailRegex.test(email)) {
-      return "Please enter a valid email address";
-    }
-    return "";
-  };
-
-  const validatePhone = (phone) => {
-    const phoneRegex = /^\d{10}$/;
-    if (!phone) {
-      return "Phone number is required";
-    }
-    if (!phoneRegex.test(phone)) {
-      return "Please enter a valid 10-digit phone number";
-    }
-    return "";
-  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -109,6 +105,11 @@ export default function TestPage() {
     // setState((prev) => ({ ...prev, isTestStarted: true }));
   };
 
+  const handleTestStart = () => {
+    setIsIntruction({ next: true, previous: true });
+    setState((p)=>({...p, isTestStarted: true}))
+  };
+
   const currentSectionQuestions = questions.filter(
     (q) =>
       q.mainSection === state.currentMainSection &&
@@ -127,6 +128,14 @@ export default function TestPage() {
       const data = await res.json();
       setQDtata(data);
       console.log(data);
+
+      initializeLocalStorageWithQuestionsBySections({
+        physics: data?.physics,
+        mathematics: data?.mathematics,
+        chemistry: data?.chemistry,
+      });
+
+
       if (data?.physics.length > 0) {
         setState((p) => ({
           ...p,
@@ -135,6 +144,11 @@ export default function TestPage() {
           currentQuestion: data.physics[0].questions[0],
           currentSubSectionType: data.physics[0].type,
         }));
+
+        markQuestionVisitedInLocalStorage(
+          "physics",
+          data.physics[0].questions[0].id
+        );
       } else if (data?.chemistry.length > 0) {
         setState((p) => ({
           ...p,
@@ -143,6 +157,11 @@ export default function TestPage() {
           currentQuestion: data.chemistry[0].questions[0],
           currentSubSectionType: data.chemistry[0].type,
         }));
+
+        markQuestionVisitedInLocalStorage(
+          "chemistry",
+          data.chemistry[0].questions[0].id
+        );
       } else {
         setState((p) => ({
           ...p,
@@ -151,9 +170,13 @@ export default function TestPage() {
           currentQuestion: data.mathematics[0].questions[0],
           currentSubSectionType: data.mathematics[0].type,
         }));
-      }
 
-     
+        markQuestionVisitedInLocalStorage(
+          "mathematics",
+          data.mathematics[0].questions[0].id
+        );
+      }
+      
     } catch (err) {
       console.error("Failed to load JSON", err);
       toast.error("Error while fetching the Questions");
@@ -161,30 +184,12 @@ export default function TestPage() {
   };
 
   useEffect(() => {
-    console.log(state.currentQuestion)
-  }, [state.currentQuestion]);
+    console.log(state.currentSubSectionType);
+  }, [state.currentSubSectionType]);
 
 
   useEffect(() => {
-    if (currentQuestion && state.isTestStarted && !state.isTestEnded) {
-      setState((prev) => ({
-        ...prev,
-        questions: {
-          ...prev.questions,
-          [currentQuestion.id]: {
-            visited: true,
-            answered: prev.questions[currentQuestion.id]?.answered || false,
-            markedForReview:
-              prev.questions[currentQuestion.id]?.markedForReview || false,
-            selectedAnswer: prev.questions[currentQuestion.id]?.selectedAnswer,
-          },
-        },
-      }));
-    }
-  }, [currentQuestion, state.isTestStarted, state.isTestEnded]);
-
-  useEffect(() => {
-    if (!state.isTestStarted || state.isTestEnded) return;
+    if (!isInstruction.next || !isInstruction.previous) return;
 
     const timer = setInterval(() => {
       setState((prev) => ({
@@ -194,10 +199,12 @@ export default function TestPage() {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [state.isTestStarted, state.isTestEnded]);
+  }, [isInstruction]);
 
+
+  // WARNING
   const handleWarning = useCallback(() => {
-    if (!state.isTestStarted || state.isTestEnded) return;
+  if (!isInstruction.next || !isInstruction.previous) return;
 
     setState((prev) => {
       const newWarnings = prev.warnings + 1;
@@ -211,89 +218,103 @@ export default function TestPage() {
         return { ...prev, warnings: newWarnings };
       }
     });
-  }, [state.isTestStarted, state.isTestEnded]);
+  }, [isInstruction]);
 
-  useEffect(() => {
-    if (!state.isTestStarted || state.isTestEnded) return;
+  // useEffect(() => {
+  //   if (!isInstruction.next || !isInstruction.previous) return;
 
-    let isWarningHandled = false;
-    let warningTimeout;
+  //   let isWarningHandled = false;
+  //   let warningTimeout;
 
-    const handleVisibilityChange = () => {
-      if (document.hidden && !isWarningHandled) {
-        isWarningHandled = true;
-        handleWarning();
-        warningTimeout = setTimeout(() => {
-          isWarningHandled = false;
-        }, 1000);
-      }
-    };
+  //   const handleVisibilityChange = () => {
+  //     if (document.hidden && !isWarningHandled) {
+  //       isWarningHandled = true;
+  //       handleWarning();
+  //       warningTimeout = setTimeout(() => {
+  //         isWarningHandled = false;
+  //       }, 1000);
+  //     }
+  //   };
 
-    const handleBlur = () => {
-      if (!isWarningHandled) {
-        isWarningHandled = true;
-        handleWarning();
-        warningTimeout = setTimeout(() => {
-          isWarningHandled = false;
-        }, 1000);
-      }
-    };
+  //   const handleBlur = () => {
+  //     if (!isWarningHandled) {
+  //       isWarningHandled = true;
+  //       handleWarning();
+  //       warningTimeout = setTimeout(() => {
+  //         isWarningHandled = false;
+  //       }, 1000);
+  //     }
+  //   };
 
-    const handleFullscreenChange = () => {
-      if (!document.fullscreenElement && !isWarningHandled) {
-        isWarningHandled = true;
-        handleWarning();
-        warningTimeout = setTimeout(() => {
-          isWarningHandled = false;
-        }, 1000);
-      }
-    };
+  //   const handleFullscreenChange = () => {
+  //     if (!document.fullscreenElement && !isWarningHandled) {
+  //       isWarningHandled = true;
+  //       handleWarning();
+  //       warningTimeout = setTimeout(() => {
+  //         isWarningHandled = false;
+  //       }, 1000);
+  //     }
+  //   };
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("blur", handleBlur);
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
+  //   document.addEventListener("visibilitychange", handleVisibilityChange);
+  //   window.addEventListener("blur", handleBlur);
+  //   document.addEventListener("fullscreenchange", handleFullscreenChange);
 
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("blur", handleBlur);
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-      clearTimeout(warningTimeout);
-    };
-  }, [state.isTestStarted, state.isTestEnded, handleWarning]);
+  //   return () => {
+  //     document.removeEventListener("visibilitychange", handleVisibilityChange);
+  //     window.removeEventListener("blur", handleBlur);
+  //     document.removeEventListener("fullscreenchange", handleFullscreenChange);
+  //     clearTimeout(warningTimeout);
+  //   };
+  // }, [isInstruction, handleWarning]);
 
-  const handleAnswer = (answer) => {
-    if (!currentQuestion) return;
+  const handleAnswer = (qid, answer) => {
+    let ans = Array.isArray(answer) && answer.length == 0 ? null : answer
+    setState((prev) => ({
+      ...prev,
+      currAnswers: {
+        ...prev.currAnswers,
+        [qid]: ans,
+      },
+    }));
+
+    const subject = state.currentMainSection.toLowerCase();
+
+    updateAnswerInLocalStorage(subject, qid, ans, {
+      isVisited: true,
+      status: "answered",
+    });
+
+    console.log("📝 Answer Updated", { qid, answer });
+  };
+
+  const handleClear = (qid) => {
+    clearAnswerInLocalStorage(state.currentMainSection.toLowerCase(), qid);
 
     setState((prev) => ({
       ...prev,
-      questions: {
-        ...prev.questions,
-        [currentQuestion.id]: {
-          visited: true,
-          answered: true,
-          markedForReview:
-            prev.questions[currentQuestion.id]?.markedForReview || false,
-          selectedAnswer: answer,
-        },
+      currAnswers: {
+        ...prev.currAnswers,
+        [qid]: null,
       },
     }));
   };
 
   const handleMarkForReview = () => {
-    if (!currentQuestion) return;
+    const subjectKey = state.currentMainSection.toLowerCase();
+    const currentQid = state.currentQuestion?.id;
 
-    setState((prev) => ({
-      ...prev,
-      questions: {
-        ...prev.questions,
-        [currentQuestion.id]: {
-          visited: true,
-          answered: prev.questions[currentQuestion.id]?.answered || false,
-          markedForReview: !prev.questions[currentQuestion.id]?.markedForReview,
-          selectedAnswer: prev.questions[currentQuestion.id]?.selectedAnswer,
-        },
-      },
-    }));
+    if (!subjectKey || !currentQid) return;
+
+    markForReviewInLocalStorage(subjectKey, currentQid);
+  };
+
+  const handleUnmarkReview = () => {
+    const subjectKey = state.currentMainSection.toLowerCase();
+    const currentQid = state.currentQuestion?.id;
+    if (!subjectKey || !currentQid) return;
+
+    unmarkReviewInLocalStorage(subjectKey, currentQid);
   };
 
   const handleClearResponse = () => {
@@ -329,7 +350,14 @@ export default function TestPage() {
   }, [state.isTestEnded]);
 
 
-   useEffect(() => {
+  useEffect(() => {
+    const data = localStorage.getItem("finalScore");
+    if (data) {
+      setScore(JSON.parse(data));
+    }
+  }, []);
+
+  useEffect(() => {
     if (process.env.NEXT_PUBLIC_DEV !== "Development") {
       const blockContextMenu = (e) => e.preventDefault();
       const blockKeyDown = (e) => {
@@ -353,13 +381,91 @@ export default function TestPage() {
         document.removeEventListener("keydown", blockKeyDown);
       };
     }
-   }, []);
+  }, []);
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  if (!isInstruction.next && !isInstruction.previous) {
+  const handleSaveAndNext = () => {
+    const currentSubject = state.currentMainSection.toLowerCase();
+    const currentSections = qData?.[currentSubject] || [];
+    const currentSectionIndex = currentSections.findIndex(
+      (section) => section.name === state.currentSubSection
+    );
+
+    if (currentSectionIndex === -1) return;
+
+    const currentSection = currentSections[currentSectionIndex];
+    const currentQuestions = currentSection.questions || [];
+    const nextQuestionIndex = state.currentQuestionIndex + 1;
+
+    // If next question exists in the current section
+    if (nextQuestionIndex < currentQuestions.length) {
+      const nextQuestion = currentQuestions[nextQuestionIndex];
+
+      setState((prev) => ({
+        ...prev,
+        currentQuestionIndex: nextQuestionIndex,
+        currentQuestion: nextQuestion,
+        currAnswer: state.currAnswers[nextQuestion.id] || null,
+      }));
+
+      markQuestionVisitedInLocalStorage(currentSubject, nextQuestion.id);
+      return;
+    }
+
+    // Else move to next section in the same subject
+    const nextSectionIndex = currentSectionIndex + 1;
+    if (nextSectionIndex < currentSections.length) {
+      const nextSection = currentSections[nextSectionIndex];
+      const nextQuestion = nextSection.questions[0];
+
+      setState((prev) => ({
+        ...prev,
+        currentSubSection: nextSection.name,
+        currentSubSectionType: nextSection.type,
+        currentQuestionIndex: 0,
+        currentQuestion: nextQuestion,
+        currAnswer: state.currAnswers[nextQuestion.id] || null,
+      }));
+
+      markQuestionVisitedInLocalStorage(currentSubject, nextQuestion.id);
+      return;
+    }
+
+    // Else move to next subject
+    const subjectOrder = ["physics", "chemistry", "mathematics"];
+    const currentSubjectIndex = subjectOrder.indexOf(currentSubject);
+
+    for (let i = currentSubjectIndex + 1; i < subjectOrder.length; i++) {
+      const nextSubject = subjectOrder[i];
+      if ((qData?.[nextSubject] || []).length > 0) {
+        const nextSection = qData[nextSubject][0];
+        const nextQuestion = nextSection.questions[0];
+
+        setState((prev) => ({
+          ...prev,
+          currentMainSection:
+            nextSubject[0].toUpperCase() + nextSubject.slice(1),
+          currentSubSection: nextSection.name,
+          currentSubSectionType: nextSection.type,
+          currentQuestionIndex: 0,
+          currentQuestion: nextQuestion,
+          currAnswer: state.currAnswers[nextQuestion.id] || null,
+        }));
+
+        markQuestionVisitedInLocalStorage(nextSubject, nextQuestion.id);
+        return;
+      }
+    }
+
+    // No more questions left
+    toast.info("🎉 You've reached the end of the test!");
+  };
+
+
+  if (!isInstruction.next && !isInstruction.previous && false) {
     return (
       <div className="min-h-screen bg-white flex items-center  flex-col">
         <div className="w-full p-1 flex justify-between bg-gray-600 ">
@@ -459,7 +565,7 @@ export default function TestPage() {
     );
   }
 
-  if (!isInstruction.previous && isInstruction.next) {
+  if (!isInstruction.previous && isInstruction.next && false) {
     return (
       <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
         <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">
@@ -779,7 +885,7 @@ export default function TestPage() {
     );
   }
 
-  if (isInstruction.previous && !isInstruction.next) {
+  if (isInstruction.previous && !isInstruction.next && false) {
     return (
       <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
         <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">
@@ -1097,9 +1203,7 @@ export default function TestPage() {
               Previous
             </button>
             <button
-              onClick={() => {
-                setIsIntruction({ next: true, previous: true });
-              }}
+              onClick={handleTestStart}
               className="px-4 py-2 bg-blue-400 text-white rounded border border-blue-600"
             >
               I am Ready to Begin
@@ -1110,59 +1214,9 @@ export default function TestPage() {
     );
   }
 
-  if (state.isTestEnded) {
-    const score = calculateScore(questions, state.questions);
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="bg-background p-8 rounded-lg shadow-lg max-w-md w-full">
-          <h2 className="text-2xl font-bold mb-4">Test Results</h2>
-          <p className="text-lg mb-4">
-            Total Score: {score.total}/{score.maxTotal}
-          </p>
-          <div className="space-y-4">
-            {["Physics", "Chemistry", "Mathematics"].map((section) => (
-              <div key={section}>
-                <h3 className="font-semibold text-lg">{section}</h3>
-                <div className="ml-4 space-y-2">
-                  {["Section 1", "Section 2", "Section 3"].map((subSection) => (
-                    <div
-                      key={`${section}-${subSection}`}
-                      className="flex justify-between items-center"
-                    >
-                      <span>{subSection}:</span>
-                      <span>
-                        {
-                          score.sectionWise[section].sectionWise[subSection]
-                            .score
-                        }
-                        /
-                        {
-                          score.sectionWise[section].sectionWise[subSection]
-                            .maxScore
-                        }
-                      </span>
-                    </div>
-                  ))}
-                  <div className="flex justify-between items-center font-semibold pt-2 border-t">
-                    <span>Total:</span>
-                    <span>
-                      {score.sectionWise[section].total}/
-                      {score.sectionWise[section].maxTotal}
-                    </span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <PDFReport
-            score={score}
-            questions={questions}
-            responses={state.questions}
-            userData={userData}
-          />
-        </div>
-      </div>
-    );
+   
+  if (state.isTestEnded ) {
+     return <ScoreSummary questionData={qData} />;
   }
 
   return (
@@ -1218,7 +1272,7 @@ export default function TestPage() {
                                     ? "bg-blue-500 text-white"
                                     : "bg-gray-200"
                                 }`}
-                                onClick={() =>
+                                onClick={() => {
                                   setState((p) => ({
                                     ...p,
                                     currentMainSection:
@@ -1227,8 +1281,13 @@ export default function TestPage() {
                                     currentSubSection: section.name,
                                     currentQuestion: section.questions[0],
                                     currentSubSectionType: section.type,
-                                  }))
-                                }
+                                  }));
+
+                                  markQuestionVisitedInLocalStorage(
+                                    subject,
+                                    section.questions[0].id
+                                  );
+                                }}
                               >
                                 <span className="font-semibold">
                                   {section.name}
@@ -1301,14 +1360,17 @@ export default function TestPage() {
         <div className="grid grid-cols-12 gap-8">
           {/* Question Display */}
           <div className="col-span-8 bg-gray-100 rounded-lg shadow-md p-6">
-            {currentQuestion ? (
+            {state.currentQuestion ? (
               <>
                 <Question
-                  question={currentQuestion}
+                  question={state.currentQuestion}
                   selectedAnswer={
-                    state.questions[currentQuestion.id]?.selectedAnswer
+                    state.currAnswers?.[state.currentQuestion?.id] || null
                   }
-                  onAnswer={handleAnswer}
+                  type={state.currentSubSectionType}
+                  onAnswer={(answer) =>
+                    handleAnswer(state.currentQuestion.id, answer)
+                  }
                 />
                 <div className="mt-6 flex justify-between">
                   <button
@@ -1328,7 +1390,7 @@ export default function TestPage() {
                   </button>
                   <div className="space-x-2">
                     <button
-                      onClick={handleClearResponse}
+                      onClick={() => handleClear(state.currentQuestion.id)}
                       className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200"
                     >
                       Clear Response
@@ -1340,17 +1402,7 @@ export default function TestPage() {
                       Mark for Review
                     </button>
                     <button
-                      onClick={() => {
-                        if (
-                          state.currentQuestionIndex <
-                          currentSectionQuestions.length - 1
-                        ) {
-                          setState((prev) => ({
-                            ...prev,
-                            currentQuestionIndex: prev.currentQuestionIndex + 1,
-                          }));
-                        }
-                      }}
+                      onClick={handleSaveAndNext}
                       className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
                     >
                       Save & Next
@@ -1385,22 +1437,39 @@ export default function TestPage() {
                 qData[state.currentMainSection.toLowerCase()]?.[
                   parseInt(state.currentSubSection.replace(/\D/g, ""), 10) - 1
                 ]?.questions?.map((ques, qIndex) => {
+                  const g = getQuestionFromLocalStorage(
+                    state.currentMainSection.toLowerCase(),
+                    ques.id
+                  );
                   return (
                     <div
-                    onClick={()=>{
-                      setState((p)=>({
-                        ...p,
-                        currentQuestion: ques,
-                      }))
-                    }}
-                      className={`w-12 h-12 font-semibold text-lg flex justify-center items-center aspect-square rounded  border border-neutral-500 ${
-                        state.currentQuestion.id === ques.id
-                          ? "bg-blue-500 text-white"
-                          : "bg-gray-200"
+                      onClick={() => {
+                        setState((p) => ({
+                          ...p,
+                          currentQuestion: ques,
+                        }));
+                        markQuestionVisitedInLocalStorage(
+                          state.currentMainSection.toLowerCase(),
+                          ques.id
+                        );
+                      }}
+                      className={`relative w-12 h-12 font-semibold text-lg flex justify-center items-center aspect-square rounded  border border-neutral-500 ${
+                        state.currentQuestion.id === ques.id && "rounded-full"
+                      } ${
+                        g.status === "markForReview"
+                          ? "bg-purple-700 text-white"
+                          : g.answer && g.answer !== ""
+                          ? "bg-green-500 text-white"
+                          : g.isVisited
+                          ? "bg-red-500 text-white"
+                          : "bg-gray-100"
                       }`}
                       key={qIndex}
                     >
                       {qIndex + 1}
+                      {g.status === "markForReview" && g.answer && (
+                        <span className="w-4 h-4 rounded-full bg-green-500 top-7 right-0.5 absolute"></span>
+                      )}
                     </div>
                   );
                 })}

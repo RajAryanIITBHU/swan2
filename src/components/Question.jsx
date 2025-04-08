@@ -1,54 +1,66 @@
+"use client";
 import React, { useEffect } from "react";
+import { Input } from "./ui/input";
+import { updateAnswerInLocalStorage } from "@/utils/localStorageHelper"; 
 
-export const Question = ({ question, selectedAnswer, onAnswer }) => {
+export const Question = ({
+  question,
+  type,
+  onAnswer,
+  selectedAnswer,
+  subject,
+}) => {
   useEffect(() => {
     if (window.MathJax) {
       window.MathJax.typesetPromise?.();
     }
   }, [question]);
 
+  const isMultipleChoice = type === "multi-mcq";
 
-  const renderOption = (option, index) => {
-    const isMultipleChoice = question.type === "mcq-multiple";
-    const type = isMultipleChoice ? "checkbox" : "radio";
-    const selected = isMultipleChoice
-      ? (selectedAnswer || []).includes(option.value)
-      : selectedAnswer === option.value;
+  const handleOptionChange = (optionId, checked) => {
+    if (isMultipleChoice) {
+      const current = selectedAnswer || [];
+      const updated = checked
+        ? [...current, optionId]
+        : current.filter((id) => id !== optionId);
+      updateAnswerInLocalStorage(subject, question.id, updated);
+      onAnswer(updated);
+    } else {
+      updateAnswerInLocalStorage(subject, question.id, optionId);
+      onAnswer(optionId);
+    }
+  };
 
-    const handleChange = () => {
-      if (isMultipleChoice) {
-        const currentSelected = selectedAnswer || [];
-        const newSelected = selected
-          ? currentSelected.filter((value) => value !== option.value)
-          : [...currentSelected, option.value];
-        onAnswer(newSelected);
-      } else {
-        onAnswer(option.value);
-      }
-    };
+  const renderOption = (option) => {
+    const isChecked = isMultipleChoice
+      ? (selectedAnswer || []).includes(option.id)
+      : selectedAnswer === option.id;
 
     return (
       <label
-        key={index}
+        key={option.id}
         className="flex items-start space-x-2 p-4 hover:bg-gray-50 rounded-md cursor-pointer border border-gray-200 mb-2"
       >
         <input
-          type={type}
-          checked={selected}
-          onChange={handleChange}
+          type={isMultipleChoice ? "checkbox" : "radio"}
+          checked={isChecked}
+          onChange={(e) => handleOptionChange(option.id, e.target.checked)}
           className="mt-1"
           name={isMultipleChoice ? undefined : `question-${question.id}`}
         />
         <div className="flex-1">
-          <div
-            className="text-gray-700"
-            dangerouslySetInnerHTML={{ __html: option.text }}
-          />
-          {option.image && (
+          {option.text && (
+            <div
+              className="text-gray-700"
+              dangerouslySetInnerHTML={{ __html: option.text }}
+            />
+          )}
+          {option.imageUrl && (
             <div className="mt-2">
               <img
-                src={option.image}
-                alt={option.text}
+                src={option.imageUrl}
+                alt={option.text || "Option image"}
                 className="max-w-[200px] rounded-lg shadow-sm"
               />
             </div>
@@ -58,13 +70,21 @@ export const Question = ({ question, selectedAnswer, onAnswer }) => {
     );
   };
 
-  if (question.type === "integer") {
+  if (type === "integer" || type === "decimal") {
+    const handleInputChange = (e) => {
+      const val =
+        type === "integer" ? parseInt(e.target.value, 10) : e.target.value;
+
+      updateAnswerInLocalStorage(subject, question.id, val);
+      onAnswer(val);
+    };
+
     return (
       <div className="space-y-4">
-        {question.image && (
-          <div className="flex justify-center mb-6">
+        {question?.imageUrl && (
+          <div className="flex mb-6">
             <img
-              src={question.image}
+              src={question?.imageUrl}
               alt="Question illustration"
               className="max-w-[400px] rounded-lg shadow-md"
             />
@@ -72,17 +92,23 @@ export const Question = ({ question, selectedAnswer, onAnswer }) => {
         )}
         <p
           className="text-lg font-medium"
-          dangerouslySetInnerHTML={{ __html: question.text }}
+          dangerouslySetInnerHTML={{ __html: question?.content }}
         />
-        <input
-          type="number"
-          step="1"
-          min="0"
-          max="9"
+        {type === "decimal" && (
+          <p className="text-lg pl-2 font-semibold opacity-75">
+            {"("}Answer up to decimal places{")"}
+          </p>
+        )}
+        <Input
+          type="text"
           value={selectedAnswer || ""}
-          onChange={(e) => onAnswer(parseInt(e.target.value, 10))}
-          className="w-full p-2 border rounded-md"
-          placeholder="Enter your answer (0-9)"
+          onChange={(e) => {
+            const val = e.target.value;
+            onAnswer(val); // Always update answer as raw string
+            updateAnswerInLocalStorage(subject, question.id, val);
+          }}
+          className="w-full p-2 border rounded-md outline-none"
+          placeholder="Enter your answer"
         />
       </div>
     );
@@ -90,25 +116,23 @@ export const Question = ({ question, selectedAnswer, onAnswer }) => {
 
   return (
     <div className="space-y-4">
-      {question.image && (
-        <div className="flex justify-center mb-6">
+      <p
+        className="text-lg font-medium"
+        dangerouslySetInnerHTML={{ __html: question?.content }}
+      />
+      {question?.imageUrl && (
+        <div className="flex mb-6">
           <img
-            src={question.image}
+            src={question?.imageUrl}
             alt="Question illustration"
-            className="max-w-[400px] rounded-lg shadow-md"
+            className="max-w-[600px] rounded-lg shadow-md"
           />
         </div>
       )}
-      <p
-        className="text-lg font-medium"
-        dangerouslySetInnerHTML={{ __html: question.text }}
-      />
-      {question.type === "mcq-multiple" && (
+      {type === "multi-mcq" && (
         <p className="text-sm text-gray-500 italic">Select all that apply</p>
       )}
-      <div className="space-y-2">
-        {question.options?.map((option, index) => renderOption(option, index))}
-      </div>
+      <div className="space-y-2">{question?.options?.map(renderOption)}</div>
     </div>
   );
 };
