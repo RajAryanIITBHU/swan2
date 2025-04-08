@@ -223,49 +223,51 @@ export default function TestPage() {
   useEffect(() => {
     if (!isInstruction.next || !isInstruction.previous) return;
 
-    let isWarningHandled = false;
-    let warningTimeout;
+   if (process.env.NEXT_PUBLIC_DEV !== "Development"){
+     let isWarningHandled = false;
+     let warningTimeout;
 
-    const handleVisibilityChange = () => {
-      if (document.hidden && !isWarningHandled) {
-        isWarningHandled = true;
-        handleWarning();
-        warningTimeout = setTimeout(() => {
-          isWarningHandled = false;
-        }, 1000);
-      }
-    };
+     const handleVisibilityChange = () => {
+       if (document.hidden && !isWarningHandled) {
+         isWarningHandled = true;
+         handleWarning();
+         warningTimeout = setTimeout(() => {
+           isWarningHandled = false;
+         }, 1000);
+       }
+     };
 
-    const handleBlur = () => {
-      if (!isWarningHandled) {
-        isWarningHandled = true;
-        handleWarning();
-        warningTimeout = setTimeout(() => {
-          isWarningHandled = false;
-        }, 1000);
-      }
-    };
+     const handleBlur = () => {
+       if (!isWarningHandled) {
+         isWarningHandled = true;
+         handleWarning();
+         warningTimeout = setTimeout(() => {
+           isWarningHandled = false;
+         }, 1000);
+       }
+     };
 
-    const handleFullscreenChange = () => {
-      if (!document.fullscreenElement && !isWarningHandled) {
-        isWarningHandled = true;
-        handleWarning();
-        warningTimeout = setTimeout(() => {
-          isWarningHandled = false;
-        }, 1000);
-      }
-    };
+     const handleFullscreenChange = () => {
+       if (!document.fullscreenElement && !isWarningHandled) {
+         isWarningHandled = true;
+         handleWarning();
+         warningTimeout = setTimeout(() => {
+           isWarningHandled = false;
+         }, 1000);
+       }
+     };
 
-    document.addEventListener("visibilitychange", handleVisibilityChange);
-    window.addEventListener("blur", handleBlur);
-    document.addEventListener("fullscreenchange", handleFullscreenChange);
+     document.addEventListener("visibilitychange", handleVisibilityChange);
+     window.addEventListener("blur", handleBlur);
+     document.addEventListener("fullscreenchange", handleFullscreenChange);
 
-    return () => {
-      document.removeEventListener("visibilitychange", handleVisibilityChange);
-      window.removeEventListener("blur", handleBlur);
-      document.removeEventListener("fullscreenchange", handleFullscreenChange);
-      clearTimeout(warningTimeout);
-    };
+     return () => {
+       document.removeEventListener("visibilitychange", handleVisibilityChange);
+       window.removeEventListener("blur", handleBlur);
+       document.removeEventListener("fullscreenchange", handleFullscreenChange);
+       clearTimeout(warningTimeout);
+     };
+   }
   }, [isInstruction, handleWarning]);
 
   const handleAnswer = (qid, answer) => {
@@ -465,7 +467,7 @@ export default function TestPage() {
   };
 
 
-  if (!isInstruction.next && !isInstruction.previous && false) {
+  if (!isInstruction.next && !isInstruction.previous && process.env.NEXT_PUBLIC_DEV === "Devlopment" ? false : true) {
     return (
       <div className="min-h-screen bg-white flex items-center  flex-col">
         <div className="w-full p-1 flex justify-between bg-gray-600 ">
@@ -565,7 +567,7 @@ export default function TestPage() {
     );
   }
 
-  if (!isInstruction.previous && isInstruction.next && false) {
+  if (!isInstruction.previous && isInstruction.next && process.env.NEXT_PUBLIC_DEV === "Devlopment" ? false : true) {
     return (
       <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
         <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">
@@ -885,7 +887,7 @@ export default function TestPage() {
     );
   }
 
-  if (isInstruction.previous && !isInstruction.next && false) {
+  if (isInstruction.previous && !isInstruction.next && process.env.NEXT_PUBLIC_DEV === "Devlopment" ? false : true) {
     return (
       <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
         <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">
