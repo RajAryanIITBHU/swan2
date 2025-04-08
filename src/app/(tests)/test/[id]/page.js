@@ -465,7 +465,7 @@ export default function TestPage() {
   };
 
 
-  if (!isInstruction.next && !isInstruction.previous && false) {
+  if (!isInstruction.next && !isInstruction.previous) {
     return (
       <div className="min-h-screen bg-white flex items-center  flex-col">
         <div className="w-full p-1 flex justify-between bg-gray-600 ">
@@ -565,7 +565,7 @@ export default function TestPage() {
     );
   }
 
-  if (!isInstruction.previous && isInstruction.next && false) {
+  if (!isInstruction.previous && isInstruction.next) {
     return (
       <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
         <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">
@@ -885,7 +885,7 @@ export default function TestPage() {
     );
   }
 
-  if (isInstruction.previous && !isInstruction.next && false) {
+  if (isInstruction.previous && !isInstruction.next) {
     return (
       <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
         <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">

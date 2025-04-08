@@ -1,4 +1,5 @@
 export function calculateResults(questionData, userAnswers) {
+  const responseObj = JSON.parse(localStorage.getItem("data"))?.test;
   const result = {};
 
   for (const subject of ["physics", "mathematics", "chemistry"]) {
@@ -20,86 +21,118 @@ export function calculateResults(questionData, userAnswers) {
       for (const q of questions) {
         const userEntry = userAnswerMap.get(q.id);
         const userAnswer = userEntry?.answer;
-
-        const correctIndex = q.correctAnswer;
         const options = q.options || [];
 
-        const correctIds = (
-          type === "multi-mcq" ? correctIndex.split(",") : [correctIndex]
-        )
-          .map((idx) => options[parseInt(idx) - 1]?.id)
-          .filter(Boolean);
+        if (
+          userAnswer === null ||
+          userAnswer === undefined ||
+          userAnswer === ""
+        ) {
+          continue; // not attempted
+        }
 
-        const correctSet = new Set(correctIds);
+        attempted++;
 
-        if (userAnswer !== null && userAnswer !== undefined) {
-          attempted++;
+        if (type === "multi-mcq") {
+          const correctIndex = q.correctAnswer;
+          const correctIds = correctIndex
+            .split(",")
+            .map((idx) => options[parseInt(idx) - 1]?.id)
+            .filter(Boolean);
 
-          if (type === "multi-mcq") {
-            if (!Array.isArray(userAnswer) || userAnswer.length === 0) {
-              // Unanswered case is already handled by attempted check
-              continue;
-            }
+          const correctSet = new Set(correctIds);
 
-            const userSet = new Set(userAnswer);
-            const hasWrong = [...userSet].some((ans) => !correctSet.has(ans));
-            const correctSelected = [...userSet].filter((ans) =>
-              correctSet.has(ans)
-            );
+          if (!Array.isArray(userAnswer) || userAnswer.length === 0) {
+            continue; // unanswered
+          }
 
-            const totalCorrect = correctSet.size;
-            const totalSelected = userSet.size;
+          const userSet = new Set(userAnswer);
+          const hasWrong = [...userSet].some((ans) => !correctSet.has(ans));
+          const correctSelected = [...userSet].filter((ans) =>
+            correctSet.has(ans)
+          );
 
-            if (
-              totalSelected === totalCorrect &&
-              correctSelected.length === totalCorrect
-            ) {
-              // Full correct
-              correct++;
-              sectionMarks += parseFloat(marks); // usually +4
-            } else if (hasWrong) {
-              // Any wrong option selected → -2
-              incorrect++;
-              sectionMarks -= parseFloat(negative);
-            } else {
-              // No wrongs, only some corrects
-              if (
-                totalCorrect === 4 &&
-                correctSelected.length === 3 &&
-                totalSelected === 3
-              ) {
-                correct++;
-                sectionMarks += 3;
-              } else if (
-                totalCorrect >= 3 &&
-                correctSelected.length === 2 &&
-                totalSelected === 2
-              ) {
-                correct++;
-                sectionMarks += 2;
-              } else if (
-                totalCorrect >= 2 &&
-                correctSelected.length === 1 &&
-                totalSelected === 1
-              ) {
-                correct++;
-                sectionMarks += 1;
-              } else {
-                // All other valid but insufficient corrects
-                incorrect++;
-                sectionMarks -= parseFloat(negative);
-              }
-            }
+          const totalCorrect = correctSet.size;
+          const totalSelected = userSet.size;
+
+          if (
+            totalSelected === totalCorrect &&
+            correctSelected.length === totalCorrect
+          ) {
+            correct++;
+            sectionMarks += parseFloat(marks); // full marks
+          } else if (hasWrong) {
+            incorrect++;
+            sectionMarks -= parseFloat(negative);
           } else {
-            // single-mcq, integer, decimal
-            const isCorrect = correctIds[0] === userAnswer;
-            if (isCorrect) {
+            // Partial marking
+            if (
+              totalCorrect === 4 &&
+              correctSelected.length === 3 &&
+              totalSelected === 3
+            ) {
               correct++;
-              sectionMarks += parseFloat(marks);
+              sectionMarks += 3;
+            } else if (
+              totalCorrect >= 3 &&
+              correctSelected.length === 2 &&
+              totalSelected === 2
+            ) {
+              correct++;
+              sectionMarks += 2;
+            } else if (
+              totalCorrect >= 2 &&
+              correctSelected.length === 1 &&
+              totalSelected === 1
+            ) {
+              correct++;
+              sectionMarks += 1;
             } else {
               incorrect++;
               sectionMarks -= parseFloat(negative);
             }
+          }
+        } else if (type === "single-mcq") {
+          const correctIdx = parseInt(q.correctAnswer);
+          const correctId = options[correctIdx - 1]?.id;
+          const isCorrect = correctId === userAnswer;
+
+          if (isCorrect) {
+            correct++;
+            sectionMarks += parseFloat(marks);
+          } else {
+            incorrect++;
+            sectionMarks -= parseFloat(negative);
+          }
+        } else if (type === "integer") {
+          const correctValue = parseInt(q.correctAnswer);
+          const userValue = parseInt(userAnswer);
+
+          if (userValue === correctValue) {
+            correct++;
+            sectionMarks += parseFloat(marks);
+          } else {
+            incorrect++;
+            sectionMarks -= parseFloat(negative);
+          }
+        } else if (type === "decimal") {
+          const correctValue = parseFloat(q.correctAnswer).toFixed(2);
+          const userValue = parseFloat(userAnswer).toFixed(2);
+
+          // Accept '18' as '18.00', but not '18' for '18.06'
+          const correctRaw = parseFloat(q.correctAnswer);
+          const userRaw = parseFloat(userAnswer);
+
+          const isAcceptable =
+            correctValue === userValue ||
+            (correctRaw === Math.floor(correctRaw) && userRaw === correctRaw);
+
+          if (isAcceptable) {
+            correct++;
+            sectionMarks += parseFloat(marks);
+          } else {
+            incorrect++;
+            sectionMarks -= parseFloat(negative);
           }
         }
       }
