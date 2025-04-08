@@ -467,7 +467,7 @@ export default function TestPage() {
   };
 
 
-  if (!isInstruction.next && !isInstruction.previous && process.env.NEXT_PUBLIC_DEV === "Devlopment" ? false : true) {
+  if (!isInstruction.next && !isInstruction.previous && process.env.NEXT_PUBLIC_DEV === "Development" ? false : true) {
     return (
       <div className="min-h-screen bg-white flex items-center  flex-col">
         <div className="w-full p-1 flex justify-between bg-gray-600 ">
@@ -567,7 +567,7 @@ export default function TestPage() {
     );
   }
 
-  if (!isInstruction.previous && isInstruction.next && process.env.NEXT_PUBLIC_DEV === "Devlopment" ? false : true) {
+  if (!isInstruction.previous && isInstruction.next && process.env.NEXT_PUBLIC_DEV === "Development" ? false : true) {
     return (
       <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
         <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">
@@ -887,7 +887,7 @@ export default function TestPage() {
     );
   }
 
-  if (isInstruction.previous && !isInstruction.next && process.env.NEXT_PUBLIC_DEV === "Devlopment" ? false : true) {
+  if (isInstruction.previous && !isInstruction.next && process.env.NEXT_PUBLIC_DEV === "Development" ? false : true) {
     return (
       <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
         <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">
