@@ -9,7 +9,7 @@ import UntilStartTimer from "./UntilStartTimer";
 import { Badge } from "@/components/ui/badge";
 
 
-const RecentTests = async ({ files }) => {
+const RecentTests = async ({ files,query,filter }) => {
   const loaded = await Promise.all(
     files.map(async (file) => {
       const parts = file.replace(/\\/g, "/").split("/");
@@ -62,7 +62,53 @@ const RecentTests = async ({ files }) => {
     })
   );
 
-  const testData = loaded.filter(Boolean);
+  let testData = loaded.filter(Boolean);
+  
+
+  if (query) {
+    testData = testData.filter((test) =>
+      test.name.toLowerCase().includes(query.toLowerCase())
+    );
+  }
+
+  if (filter) {
+    const now = new Date();
+
+    testData = testData.filter((test) => {
+      const start = new Date(test.startDate);
+      const end = new Date(test.endDate);
+
+      if (filter === "ongoing") {
+        return now >= start && now <= end;
+      }
+
+      if (filter === "yet-to-start") {
+        return now < start;
+      }
+
+      if (filter === "ended") {
+        return now > end;
+      }
+
+      return true;
+    });
+  }
+
+  
+
+  testData.sort(
+    (a, b) => new Date(b.startDate).getTime() - new Date(a.startDate).getTime()
+  );
+
+  
+
+  if (testData.length === 0 ){
+    return (
+      <div className="w-full px-4 py-12 text-center text-foreground/70 font-lg rounded-xl bg-background overflow-hidden">
+        No Available Test -  {query}
+      </div>
+    );
+  }
 
   return (
     <div className="w-full bg-background rounded-xl">

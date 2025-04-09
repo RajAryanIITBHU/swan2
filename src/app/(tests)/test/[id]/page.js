@@ -19,7 +19,7 @@ import {
 import Link from "next/link";
 import { useSession } from "next-auth/react";
 import { toast } from "sonner";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import useSessionStorage from "@/hooks/useSessionStorage";
 import {
   addUniqueQuestionToLocalStorage,
@@ -33,14 +33,20 @@ import {
   updateAnswerInLocalStorage,
 } from "@/utils/localStorageHelper";
 import ScoreSummary from "@/components/ScoreSummary";
+import { calculateResults } from "@/utils/calculateResult";
+import { doc, setDoc, getDoc, updateDoc, increment } from "firebase/firestore";
+import { db } from "@/firebase";
+import { updateSessionTestResults } from "@/utils/updateSessionResult";
 
 const INITIAL_TIME = 10800;
 const MAX_WARNINGS = 3;
 
 export default function TestPage() {
-  const { data: session, status } = useSession();
+  const { data: session, status,update } = useSession();
   const params = useParams();
+  const router = useRouter()
 
+  const [result, setResult] = useState(null);
   const [state, setState] = useState({
     currentMainSection: "Physics",
     currentSubSection: "Section 1",
@@ -74,7 +80,6 @@ export default function TestPage() {
     password: "",
   });
 
-
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     console.log(name, value);
@@ -107,7 +112,7 @@ export default function TestPage() {
 
   const handleTestStart = () => {
     setIsIntruction({ next: true, previous: true });
-    setState((p)=>({...p, isTestStarted: true}))
+    setState((p) => ({ ...p, isTestStarted: true }));
   };
 
   const currentSectionQuestions = questions.filter(
@@ -134,7 +139,6 @@ export default function TestPage() {
         mathematics: data?.mathematics,
         chemistry: data?.chemistry,
       });
-
 
       if (data?.physics.length > 0) {
         setState((p) => ({
@@ -176,7 +180,6 @@ export default function TestPage() {
           data.mathematics[0].questions[0].id
         );
       }
-      
     } catch (err) {
       console.error("Failed to load JSON", err);
       toast.error("Error while fetching the Questions");
@@ -186,7 +189,6 @@ export default function TestPage() {
   useEffect(() => {
     console.log(state.currentSubSectionType);
   }, [state.currentSubSectionType]);
-
 
   useEffect(() => {
     if (!isInstruction.next || !isInstruction.previous) return;
@@ -201,10 +203,9 @@ export default function TestPage() {
     return () => clearInterval(timer);
   }, [isInstruction]);
 
-
   // WARNING
   const handleWarning = useCallback(() => {
-  if (!isInstruction.next || !isInstruction.previous) return;
+    if (!isInstruction.next || !isInstruction.previous) return;
 
     setState((prev) => {
       const newWarnings = prev.warnings + 1;
@@ -223,7 +224,6 @@ export default function TestPage() {
   useEffect(() => {
     if (!isInstruction.next || !isInstruction.previous) return;
 
- 
      let isWarningHandled = false;
      let warningTimeout;
 
@@ -267,11 +267,11 @@ export default function TestPage() {
        document.removeEventListener("fullscreenchange", handleFullscreenChange);
        clearTimeout(warningTimeout);
      };
-   
+
   }, [isInstruction, handleWarning]);
 
   const handleAnswer = (qid, answer) => {
-    let ans = Array.isArray(answer) && answer.length == 0 ? null : answer
+    let ans = Array.isArray(answer) && answer.length == 0 ? null : answer;
     setState((prev) => ({
       ...prev,
       currAnswers: {
@@ -349,8 +349,103 @@ export default function TestPage() {
     if (document.fullscreenElement) {
       document.exitFullscreen();
     }
-  }, [state.isTestEnded]);
 
+    if (status !== "authenticated" || !session?.user?.email) return;
+
+    const local = localStorage.getItem("data");
+    if (!local) return;
+
+    const responseObj = JSON.parse(local)?.test;
+    if (!responseObj) return;
+
+    const computed = calculateResults(qData, responseObj);
+    setResult(computed);
+
+    (async () => {
+      const testId = qData.id;
+      const batch = qData.batchName;
+      const docId = `${batch}-${testId}`;
+      const testDocRef = doc(db, "users", session.user.id, "tests", docId);
+      let at = 1
+
+      try {
+        const testSnap = await getDoc(testDocRef);
+
+        let existingData = testSnap.exists() ? testSnap.data() : {};
+        const previousUserAnswers = existingData.userAnswers || [];
+        const previousResults = existingData.results || [];
+        const attemptCount = (existingData.attempts || 0) + 1;
+        at = attemptCount
+
+        const paperTotal =
+          qData.physics
+            .map((sec, sec_i) => parseInt(sec.marks) * sec.questions.length)
+            .reduce((acc, curr) => acc + curr, 0) +
+          qData.chemistry
+            .map((sec, sec_i) => parseInt(sec.marks) * sec.questions.length)
+            .reduce((acc, curr) => acc + curr, 0) +
+          qData.mathematics
+            .map((sec, sec_i) => parseInt(sec.marks) * sec.questions.length)
+            .reduce((acc, curr) => acc + curr, 0);
+
+        const testData = {
+          testId,
+          batch,
+          testName: qData.testName,
+          attempts: `${attemptCount}`,
+          paperTotal: paperTotal,
+          userAnswers: [
+            ...previousUserAnswers,
+            {
+              attempt: `${attemptCount}`,
+              data: responseObj,
+              timestamp: new Date().toISOString(),
+            },
+          ],
+          results: [
+            ...previousResults,
+            {
+              attempt: `${attemptCount}`,
+              data: computed,
+              timestamp: new Date().toISOString(),
+            },
+          ],
+        };
+
+        await setDoc(testDocRef, testData);
+
+       
+
+        console.log(
+          "✅ Test result and attempts saved under test doc (array-based)"
+        );
+
+        // Session Update
+        // const updatedAnswers = [
+        //   ...(session?.user?.tests?.[docId] || []),
+        //   {
+        //     data: responseObj,
+        //     timestamp: new Date().toISOString(),
+        //   },
+        // ];
+
+        // update({
+        //   tests: {
+        //     ...(session?.user?.tests || {}),
+        //     [docId]: updatedAnswers,
+        //   },
+        // })
+        //   .then((res) => console.log("✅ Session updated:", res))
+        //   .catch((err) => console.error("❌ Update failed:", err));
+
+        localStorage.removeItem("data");
+         router.push(`/results/${docId}-${at}`);
+
+      } catch (error) {
+        console.error("❌ Error saving result to Firestore:", error);
+      }
+    })();
+  }, [state.isTestEnded, status, session, qData, calculateResults, setResult]);
 
   useEffect(() => {
     const data = localStorage.getItem("finalScore");
@@ -360,7 +455,7 @@ export default function TestPage() {
   }, []);
 
   useEffect(() => {
-    if (process.env.NEXT_PUBLIC_DEV !== "Development") {
+    
       const blockContextMenu = (e) => e.preventDefault();
       const blockKeyDown = (e) => {
         if (
@@ -382,7 +477,7 @@ export default function TestPage() {
         document.removeEventListener("contextmenu", blockContextMenu);
         document.removeEventListener("keydown", blockKeyDown);
       };
-    }
+    
   }, []);
 
   useEffect(() => {
@@ -436,7 +531,7 @@ export default function TestPage() {
       return;
     }
 
-    // Else move to next subject
+
     const subjectOrder = ["physics", "chemistry", "mathematics"];
     const currentSubjectIndex = subjectOrder.indexOf(currentSubject);
 
@@ -466,7 +561,6 @@ export default function TestPage() {
     toast.info("🎉 You've reached the end of the test!");
   };
 
-
   if (!isInstruction.next && !isInstruction.previous) {
     return (
       <div className="min-h-screen bg-white flex items-center  flex-col">
@@ -478,7 +572,7 @@ export default function TestPage() {
           <div className="flex">
             <div className="flex flex-col pt-4 items-end pr-4">
               <div className="">Candidate Name:</div>
-              <div className="text-4xl mt-2">Name Name</div>
+              <div className="text-4xl mt-2">{session?.user?.name}</div>
             </div>
             <div className="relative w-32 aspect-[15/16] bg-white"></div>
           </div>
@@ -1216,9 +1310,10 @@ export default function TestPage() {
     );
   }
 
-   
   if (state.isTestEnded ) {
-     return <ScoreSummary scoreData={qData} />;
+    return <div className="w-full h-screen flex justify-center items-center">
+      <p className="text-xl font-medium">Loading Result ...</p>
+    </div>;
   }
 
   return (
@@ -1397,12 +1492,12 @@ export default function TestPage() {
                     >
                       Clear Response
                     </button>
-                    <button
+                    {/* <button
                       onClick={handleMarkForReview}
                       className="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200"
                     >
                       Mark for Review
-                    </button>
+                    </button> */}
                     <button
                       onClick={handleSaveAndNext}
                       className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
@@ -1420,7 +1515,7 @@ export default function TestPage() {
           </div>
 
           {/* Question Grid */}
-          <div className="col-span-4 bg-gray-100 rounded-lg shadow-md">
+          <div className="col-span-4 bg-gray-100 rounded-lg shadow-md relative flex flex-col">
             <h3 className="p-4 border-b font-semibold text-neutral-700">
               Question Navigation
             </h3>

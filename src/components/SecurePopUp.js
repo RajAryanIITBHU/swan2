@@ -3,8 +3,10 @@
 import { useCallback } from "react";
 import { Button } from "./ui/button";
 
-const FullscreenPopup = ({ url }) => {
+const FullscreenPopup = ({ url, isUserAutherised }) => {
   const openPopup = useCallback(() => {
+
+
     const features = `
       toolbar=no,
       location=no,
@@ -34,9 +36,11 @@ const FullscreenPopup = ({ url }) => {
   }, [url]);
 
   return (
-    <Button
-      onClick={openPopup}
-    >
+    <Button disabled={!isUserAutherised} onClick={()=>{
+      if (isUserAutherised){
+        openPopup()
+      }
+    }}>
       Continue
     </Button>
   );

@@ -52,6 +52,10 @@ export default async function TestDetailsPage({ params }) {
   const { id } =await params;
   const data = await getTestDataFromId(id);
   const session = await auth()
+  console.log(data)
+
+  const userGivenNoOfTests = session?.user?.tests?.[id] ? session?.user?.tests?.[id].length : 0
+
 
   if (!data) return (
     <section className="w-full bg-accent relative min-h-[calc(100dvh-4rem)] flex justify-center items-center">
@@ -125,13 +129,6 @@ export default async function TestDetailsPage({ params }) {
       ],
     },
   };
-
-  console.log(
-    data.raw.chemistry.map(
-      (sec, sec_i) => parseInt(sec.marks) * sec.questions.length
-    ).reduce((acc, curr) => acc + curr, 0)
-  );
-
   return (
     <section className="w-full flex flex-col bg-accent relative min-h-[calc(100dvh-4rem)] items-center">
       <div className="max-w-4xl w-full h-full flex-1 p-6">
@@ -142,12 +139,15 @@ export default async function TestDetailsPage({ params }) {
               {data.raw.testName}
             </CardTitle>
           </CardHeader>
-          <CardContent className="text-lg">
+          <CardContent className="text-lg space-y-1">
             <p>
               <strong>Duration:</strong> {data.duration}
             </p>
             <p>
               <strong>Format:</strong> {testDetails.format}
+            </p>
+            <p>
+              <strong>Schedule:</strong> {data.date}
             </p>
           </CardContent>
         </Card>
@@ -290,7 +290,9 @@ export default async function TestDetailsPage({ params }) {
       </div>
       <div className="flex mt-4 px-0 sticky bottom-0 left-0 justify-center w-full bg-sidebar py-4">
         <div className="max-w-4xl w-full flex justify-between px-10 gap-6 items-center ">
-          <div className="">Attempts: 0/2</div>
+          <div className="">
+            Attempts: {userGivenNoOfTests}/{data?.raw?.attempts}
+          </div>
           <div className="flex gap-4 items-center">
             <UntilStartTimer
               className={"test-xs px-2 py-1 font-medium rounded-lg"}
@@ -299,7 +301,12 @@ export default async function TestDetailsPage({ params }) {
             />
             <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button className={"text-white cursor-pointer"}>
+                <Button
+                  disabled={
+                    data?.raw?.attempts <= userGivenNoOfTests
+                  }
+                  className={"text-white cursor-pointer"}
+                >
                   Start Test
                 </Button>
               </AlertDialogTrigger>
@@ -314,13 +321,16 @@ export default async function TestDetailsPage({ params }) {
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
                   <AlertDialogAction asChild>
-                    {/* <Link href={`/test/${id}`}>Continue</Link> */}
 
-                    {process.env.NEXT_PUBLIC_DEV === "Development" ? (
-                      <Link href={`/test/${id}`}>Continue</Link>
-                    ) : (
-                      <OpenBankingWindow url={`/test/${id}`} />
-                    )}
+                    
+                      <OpenBankingWindow
+                        url={`/test/${id}`}
+                        isUserAutherised={
+                          data?.raw?.attempts >
+                          userGivenNoOfTests
+                        }
+                      />
+                   
                   </AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>

@@ -1,7 +1,14 @@
 import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import { db } from "./firebase";
-import { collection, query, where, getDocs } from "firebase/firestore"; 
+import {
+  collection,
+  query,
+  where,
+  getDocs,
+  getDoc,
+  doc,
+} from "firebase/firestore";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -42,7 +49,16 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             throw new Error("PHONE_MISMATCH");
           }
 
-          return { id: userDoc.id, email: userData.email, phone:userData.phone,name: userData.name, dob:userData.DOB, batches:userData.batches, role:userData.role,rollNo: userData.rollNo };
+          return {
+            id: userDoc.id,
+            email: userData.email,
+            phone: userData.phone,
+            name: userData.name,
+            dob: userData.DOB,
+            batches: userData.batches,
+            role: userData.role,
+            rollNo: userData.rollNo,
+          };
         } catch (error) {
           console.error("Auth error:", error.message);
           throw new Error(error.message || "AUTH_FAILED");
@@ -51,8 +67,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
-      if (user){ 
+    async jwt({ token, user, trigger, session }) {
+      if (user) {
+        token.id = user.id;
         token.email = user.email;
         token.phone = user.phone;
         token.name = user.name;
@@ -60,11 +77,32 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         token.batches = user.batches;
         token.role = user.role;
         token.rollNo = user.rollNo;
-    }
+
+        const testDocRef = collection(db, "users", user.id, "tests");
+        const testsSnapshot = await getDocs(testDocRef);
+        const tests = {};
+
+        testsSnapshot.forEach((doc) => {
+          const data = doc.data();
+          if (data.testId && data.batch && Array.isArray(data.userAnswers)) {
+            const key = `${data.batch}-${data.testId}`;
+            tests[key] = data.userAnswers;
+          }
+        });
+
+        token.tests = tests;
+      }
+
+      if (trigger === "update" && session?.tests) {
+        token.tests = session.tests;
+      }
+
       return token;
     },
+
     async session({ session, token }) {
       if (session.user) {
+        session.user.id = token.id;
         session.user.email = token.email;
         session.user.phone = token.phone;
         session.user.name = token.name;
@@ -72,14 +110,14 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         session.user.batches = token.batches;
         session.user.role = token.role;
         session.user.rollNo = token.rollNo;
-    }
+        session.user.tests = token.tests || {};
+      }
       return session;
     },
   },
   pages: {
     signIn: "/",
-    error:"/"
+    error: "/",
   },
-  secret: process.env.AUTH_SECRET, 
-//   debug: true,
+  secret: process.env.AUTH_SECRET,
 });

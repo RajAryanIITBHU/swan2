@@ -3,6 +3,7 @@
   "testName": "Real Test",
   "startDate": "2025-04-09T15:30",
   "endDate": "2025-04-09T19:45",
+  "attempts": "2",
   "syllabus": {
     "isSyllabus": true,
     "mathematics": [

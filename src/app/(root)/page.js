@@ -6,10 +6,20 @@ import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import RecentTests from "@/components/RecentTests";
+import SearchInput from "@/components/SearchInput";
+import FilterInput from "../../../FilterInput";
+import { getUpcomingTestCount } from "@/utils/getUpcomingTestCount";
 
-export default async function Home() {
-  const session = await auth();
-  const files = getFilesFromSelectedFolders([...session?.user?.batches, "FREE"] || []);
+export default async function Home({ searchParams }) {
+ const session = await auth();
+ const query = searchParams.q?.toLowerCase() || "";
+ const filter = searchParams.filter?.toLowerCase() || "";
+
+ const files = getFilesFromSelectedFolders(
+   [...session?.user?.batches, "FREE"] || []
+ );
+
+  const upcomingTestCount = await getUpcomingTestCount(files);
 
   return (
     <section className="space-y-6 max-sm:px-4 max-sm:py-3 p-6 pb-16 min-h-[calc(100dvh-4rem)]">
@@ -64,11 +74,11 @@ export default async function Home() {
               Upcoming Tests
             </span>
             <span className="sm:text-[1.1rem] md:text-[1.4rem] font-bold">
-              8
+              {upcomingTestCount}
             </span>
           </div>
         </div>
-        <div className="flex-1 bg-background rounded-xl flex gap-2 md:gap-4 lg:gap-6 p-2 sm:p-3 md:p-4 lg:p-5 ">
+        {/* <div className="flex-1 bg-background rounded-xl flex gap-2 md:gap-4 lg:gap-6 p-2 sm:p-3 md:p-4 lg:p-5 ">
           <div className="rounded-xl bg-purple-100 aspect-square h-full flex items-center justify-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -96,28 +106,18 @@ export default async function Home() {
               175
             </span>
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="w-full h-12 flex gap-4">
-        <form className="flex-1 h-full rounded-xl bg-background  flex gap-3 items-center px-3 focus-within:border-primary focus-within:border-2 border-2 border-transparent">
-          <Search className="text-accent-foreground/70" size={18} />
-          <input
-            type="text"
-            name="search"
-            className={
-              "h-full shadow-none border-none w-full rounded-xl outline-none focus:border-none "
-            }
-            placeholder="Search Test..."
-          />
-        </form>
-        <div className=" h-full rounded-xl bg-background py-2 md:py-3">
-          filter
-        </div>
+        <SearchInput />
+        <FilterInput/>
       </div>
       {files.length === 0 ? (
-        <div className="w-full px-4 py-12 text-center text-foreground/70 font-lg rounded-xl bg-background overflow-hidden">No Available Tests Right Now</div>
+        <div className="w-full px-4 py-12 text-center text-foreground/70 font-lg rounded-xl bg-background overflow-hidden">
+          No Available Tests Right Now
+        </div>
       ) : (
-        <RecentTests files={files} />
+        <RecentTests files={files} query={query} filter={filter}/>
       )}
     </section>
   );

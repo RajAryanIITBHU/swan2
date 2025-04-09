@@ -1,6 +1,6 @@
 export function calculateResults(questionData, userAnswers) {
-  const responseObj = JSON.parse(localStorage.getItem("data"))?.test;
-  const result = {};
+  const result = {totalResult: {}};
+  let totalMarks = 0; 
 
   for (const subject of ["physics", "mathematics", "chemistry"]) {
     const subjectSections = questionData[subject] || [];
@@ -28,7 +28,7 @@ export function calculateResults(questionData, userAnswers) {
           userAnswer === undefined ||
           userAnswer === ""
         ) {
-          continue; // not attempted
+          continue;
         }
 
         attempted++;
@@ -42,9 +42,7 @@ export function calculateResults(questionData, userAnswers) {
 
           const correctSet = new Set(correctIds);
 
-          if (!Array.isArray(userAnswer) || userAnswer.length === 0) {
-            continue; // unanswered
-          }
+          if (!Array.isArray(userAnswer) || userAnswer.length === 0) continue;
 
           const userSet = new Set(userAnswer);
           const hasWrong = [...userSet].some((ans) => !correctSet.has(ans));
@@ -119,7 +117,6 @@ export function calculateResults(questionData, userAnswers) {
           const correctValue = parseFloat(q.correctAnswer).toFixed(2);
           const userValue = parseFloat(userAnswer).toFixed(2);
 
-          // Accept '18' as '18.00', but not '18' for '18.06'
           const correctRaw = parseFloat(q.correctAnswer);
           const userRaw = parseFloat(userAnswer);
 
@@ -137,15 +134,39 @@ export function calculateResults(questionData, userAnswers) {
         }
       }
 
+      sectionMarks = parseFloat(sectionMarks.toFixed(2));
+      totalMarks += sectionMarks;
+
       result[subject][sectionName] = {
         total: sectionTotal,
         attempted,
         correct,
         incorrect,
-        marks: parseFloat(sectionMarks.toFixed(2)),
+        marks: sectionMarks,
+        totalMarks: parseInt(marks) * questions.length
       };
     }
   }
+
+  const totalResult = {
+    total: 0,
+    attempted: 0,
+    correct: 0,
+    incorrect: 0,
+    marks: 0,
+  };
+
+  for (const subj in result){
+    for (const sec in result[subj]){
+      totalResult.total+=result[subj][sec].total
+      totalResult.attempted+=result[subj][sec].attempted
+      totalResult.correct+=result[subj][sec].correct
+      totalResult.incorrect+=result[subj][sec].incorrect
+      totalResult.marks+=result[subj][sec].marks
+    }
+  }
+
+  result.totalResult = totalResult
 
   return result;
 }

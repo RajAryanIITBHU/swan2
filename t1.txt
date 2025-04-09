@@ -1,8 +1,9 @@
- {
+{
     "batchName": "B0003",
     "testName": "Real Test",
     "startDate": "2025-04-09T15:30",
     "endDate": "2025-04-09T19:45",
+    "attempts": "2",
     "syllabus": {
         "isSyllabus": true,
         "mathematics": [
@@ -528,7 +529,7 @@
                             "id": "q-1744035776017-zqvdwyh2t_4"
                         }
                     ],
-                    "correctAnswer": "18.75",
+                    "correctAnswer": "18",
                     "id": "q-1744035776017-zqvdwyh2t"
                 },
                 {
@@ -606,7 +607,7 @@
                             "id": "q-1744035809686-8h6x2y6i0_4"
                         }
                     ],
-                    "correctAnswer": "0.06",
+                    "correctAnswer": "0.00",
                     "id": "q-1744035809686-8h6x2y6i0"
                 },
                 {
