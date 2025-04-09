@@ -305,20 +305,18 @@ const ResultPage = async () => {
 
   const formatted = formatResultsByBatchAndTest(testData);
 
-const sortedTestData = testData.map((test) => ({
-  ...test,
-  results: [...test.results].sort(
-    (a, b) => new Date(b.timestamp) - new Date(a.timestamp)
-  ),
-}));
 
+  const sortedTestData = testData.map((test) => ({
+    ...test,
+    results: test.results.sort((a, b) => b.timestamp - a.timestamp),
+  }));
   
 
   return (
     <div className="p-6 space-y-6 min-h-[calc(100%-4rem)] max-w-6xl mx-auto">
       <h2 className="text-2xl font-semibold">Test Results</h2>
       <Separator />
-      {sortedTestData.map((test) => (
+      {sortedTestData.length > 0 ? sortedTestData.map((test) => (
         <div
           key={test.id}
           className="p-6 rounded-xl border shadow-md space-y-6 bg-card hover:shadow-lg transition-shadow duration-300"
@@ -387,7 +385,7 @@ const sortedTestData = testData.map((test) => ({
             ))}
           </div>
         </div>
-      ))}
+      )): <div>No result</div>}
     </div>
   );
 };

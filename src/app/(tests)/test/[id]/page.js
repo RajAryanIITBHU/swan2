@@ -392,12 +392,12 @@ export default function TestPage() {
           testId,
           batch,
           testName: qData.testName,
-          attempts: `${attemptCount}`,
+          attempts: attemptCount,
           paperTotal: paperTotal,
           userAnswers: [
             ...previousUserAnswers,
             {
-              attempt: `${attemptCount}`,
+              attempt: attemptCount,
               data: responseObj,
               timestamp: new Date().toISOString(),
             },
@@ -405,7 +405,7 @@ export default function TestPage() {
           results: [
             ...previousResults,
             {
-              attempt: `${attemptCount}`,
+              attempt: attemptCount,
               data: computed,
               timestamp: new Date().toISOString(),
             },
