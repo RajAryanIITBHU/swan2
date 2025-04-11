@@ -54,7 +54,7 @@ export default async function TestDetailsPage({ params }) {
   const session = await auth()
   console.log(data)
 
-  const userGivenNoOfTests = session?.user?.tests?.[id] ? session?.user?.tests?.[id].length : 0
+  const userGivenNoOfTests = session?.user?.tests?.[id] ? session?.user?.tests?.[id] : 0
 
 
   if (!data) return (
@@ -75,7 +75,7 @@ export default async function TestDetailsPage({ params }) {
     </section>
   );
 
-  if (!session?.user?.batches.includes(data.batch)){
+  if (!session?.user?.batches.includes(data.batch) && data.batch !=="FREE"){
     return (
       <section className="w-full bg-accent relative min-h-[calc(100dvh-4rem)] flex justify-center items-center">
         <Card className="p-6 rounded-xl bg-background gap-4 min-w-sm -mt-10">
@@ -299,14 +299,17 @@ export default async function TestDetailsPage({ params }) {
               start={data.startDate}
               end={data.endDate}
             />
-            <AlertDialog>
+            <OpenBankingWindow
+              url={`/test/${id}`}
+              isDisabled={data?.raw?.attempts <= userGivenNoOfTests}
+              isUserAutherised={data?.raw?.attempts > userGivenNoOfTests}
+            />
+
+            {/* <Link href={`/test/${id}`}>Continue</Link> */}
+
+            {/* <AlertDialog>
               <AlertDialogTrigger asChild>
-                <Button
-                  disabled={
-                    data?.raw?.attempts <= userGivenNoOfTests
-                  }
-                  className={"text-white cursor-pointer"}
-                >
+                <Button className={"text-white cursor-pointer"}>
                   Start Test
                 </Button>
               </AlertDialogTrigger>
@@ -320,21 +323,10 @@ export default async function TestDetailsPage({ params }) {
                 </AlertDialogHeader>
                 <AlertDialogFooter>
                   <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction asChild>
-
-                    
-                      <OpenBankingWindow
-                        url={`/test/${id}`}
-                        isUserAutherised={
-                          data?.raw?.attempts >
-                          userGivenNoOfTests
-                        }
-                      />
-                   
-                  </AlertDialogAction>
+                  <AlertDialogAction asChild></AlertDialogAction>
                 </AlertDialogFooter>
               </AlertDialogContent>
-            </AlertDialog>
+            </AlertDialog> */}
           </div>
         </div>
       </div>

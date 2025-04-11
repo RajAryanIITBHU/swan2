@@ -14,6 +14,7 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import ScoreSummary from "@/components/ScoreSummary";
+import { capitalize } from "@/utils/localStorageHelper";
 
 
 
@@ -268,7 +269,7 @@ export default async function ResultDetailPage({ params }) {
                     <div key={section.name + idx} className="space-y-2">
                       <div className="flex items-center justify-between">
                         <h4 className="font-semibold text-sm text-muted-foreground">
-                          {section.name}
+                          Section {idx + 1}
                         </h4>
                         <span className="text-xs text-muted-foreground">
                           {section.questions.length} Questions
@@ -280,7 +281,7 @@ export default async function ResultDetailPage({ params }) {
                           {section.questions.map((q, i) => (
                             <Badge
                               key={q.id}
-                              title={`Question ID: ${q.id}`}
+                              title={`${capitalize(q.status)}`}
                               className={`w-10 h-10 flex items-center justify-center text-base font-medium rounded-md transition-colors cursor-default select-none ${
                                 q.status === "correct"
                                   ? "bg-green-100 text-green-800"

@@ -12,13 +12,14 @@ import { getUpcomingTestCount } from "@/utils/getUpcomingTestCount";
 
 export default async function Home({ searchParams }) {
  const session = await auth();
- const query = searchParams.q?.toLowerCase() || "";
- const filter = searchParams.filter?.toLowerCase() || "";
+ const query = await searchParams.q?.toLowerCase() || "";
+ const filter = await searchParams.filter?.toLowerCase() || "";
 
  const files = getFilesFromSelectedFolders(
    [...session?.user?.batches, "FREE"] || []
  );
 
+console.log(session)
   const upcomingTestCount = await getUpcomingTestCount(files);
 
   return (

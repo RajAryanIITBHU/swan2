@@ -2,7 +2,10 @@ import { auth } from "@/auth";
 import { Separator } from "@/components/ui/separator";
 import { getUserTests } from "@/lib/fetch-user-tests";
 import { getOverallStats } from "@/utils/getOverAllStats";
+import { CircleCheck, CircleX, NotebookText, Pencil, Target } from "lucide-react";
 import Link from "next/link";
+export const dynamic = "force-dynamic";
+export const revalidate = 300 // cache for 5 minutes
 
 function formatResultsByBatchAndTest(data) {
   const result = {};
@@ -331,58 +334,70 @@ const ResultPage = async () => {
 
           {/* Attempts List */}
           <div className="space-y-4">
-            {test.results.map((attempt, index) => (
-              <Link
-                href={`/results/${test.id}-${attempt.attempt}`}
-                key={attempt.timestamp}
-                className="block p-4 border rounded-lg bg-muted hover:bg-muted/80 transition-colors duration-200"
-              >
-                {/* Attempt Info */}
-                <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0">
-                  <div className="font-medium text-base text-primary">
-                    Attempt #{index + 1}
+            {test.results.map((attempt, index) => {
+              const stats = getOverallStats(attempt.data);
+              return (
+                <Link
+                  href={`/results/${test.id}-${attempt.attempt}`}
+                  key={attempt.timestamp}
+                  className="block p-4 border rounded-lg bg-muted hover:bg-muted/80 transition-colors duration-200"
+                >
+                  {/* Attempt Info */}
+                  <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0 mb-1">
+                    <div className="font-medium text-base text-primary">
+                      Attempt #{index + 1}
+                    </div>
+                    <div className="text-sm text-muted-foreground">
+                      🕒{" "}
+                      {new Date(attempt.timestamp).toLocaleString("en-IN", {
+                        timeZone: "Asia/Kolkata",
+                        hour12: true,
+                        year: "numeric",
+                        month: "short",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                      })}
+                    </div>
                   </div>
-                  <div className="text-sm text-muted-foreground">
-                    🕒 {new Date(attempt.timestamp).toLocaleString()}
-                  </div>
-                </div>
 
-                {/* Stats Grid */}
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-3 text-sm">
-                  <div className="flex items-center gap-2">
-                    🎯 <span>Total Marks:</span>{" "}
-                    <span className="font-semibold text-primary">
-                      {getOverallStats(attempt.data).totalMarks} /{" "}
-                      {test.paperTotal}
-                    </span>
+                  {/* Stats Grid */}
+                  <div className="flex gap-8 justify-between">
+                    <div className="grid grid-cols-2 md:grid-cols-4  gap-4 md:gap-2 md:pt-1 mt-3 text-sm flex-1">
+                      <div className="flex items-center gap-2">
+                        <CircleCheck size={16} /> <span>Correct:</span>{" "}
+                        <span className="font-semibold text-green-600">
+                          {stats.totalCorrect}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CircleX size={16} /> <span>Wrong:</span>{" "}
+                        <span className="font-semibold text-red-600">
+                          {stats.totalIncorrect}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Pencil size={16} /> <span>Attempted:</span>{" "}
+                        <span className="font-semibold text-blue-500">
+                          {stats.totalAttempted}
+                        </span>
+                      </div>
+                      <div className="flex items-center gap-2 col-span-full md:col-span-1">
+                        <NotebookText size={16} /> <span>Total Questions:</span>{" "}
+                        <span className="font-semibold text-muted-foreground">
+                          {stats.totalQuestions}
+                        </span>
+                      </div>
+                    </div>
+                    <div className="flex items-center md:items-end gap-2">
+                      <Target size={16} className="md:mb-1"/> <span>Total Marks:</span>{" "}
+                      <span className="font-semibold text-primary text-xl">
+                        {stats.totalMarks} / {test.paperTotal}
+                      </span>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-2">
-                    ✅ <span>Correct:</span>{" "}
-                    <span className="font-semibold text-green-600">
-                      {getOverallStats(attempt.data).totalCorrect}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    ❌ <span>Wrong:</span>{" "}
-                    <span className="font-semibold text-red-600">
-                      {getOverallStats(attempt.data).totalIncorrect}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    ✏️ <span>Attempted:</span>{" "}
-                    <span className="font-semibold text-blue-500">
-                      {getOverallStats(attempt.data).totalAttempted}
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 col-span-full md:col-span-1">
-                    📋 <span>Total Questions:</span>{" "}
-                    <span className="font-semibold text-muted-foreground">
-                      {getOverallStats(attempt.data).totalQuestions} 
-                    </span>
-                  </div>
-                </div>
-              </Link>
-            ))}
+                </Link>
+              );})}
           </div>
         </div>
       )): <div>No result</div>}

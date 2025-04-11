@@ -1,0 +1,801 @@
+{
+  "batchName": "FREE",
+  "testName": "Free Test 1",
+  "startDate": "2025-04-10T10:00",
+  "endDate": "2025-04-12T10:00",
+  "attempts": "3",
+  "syllabus": {
+    "isSyllabus": true,
+    "mathematics": [
+      "abc"
+    ],
+    "physics": [
+      "xyz"
+    ],
+    "chemistry": [
+      "pqr"
+    ]
+  },
+  "mathematics": [
+    {
+      "id": "1744282665797-a8ax2b0kb",
+      "name": "Section 1",
+      "subject": "mathematics",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "The number of arbitrary constants in the solution of a differential equation of degree 2 and order 3 is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "2",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282212482-5x03inuhv_1"
+            },
+            {
+              "text": "3",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282212482-5x03inuhv_2"
+            },
+            {
+              "text": "23",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282212482-5x03inuhv_3"
+            },
+            {
+              "text": "1",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282212482-5x03inuhv_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744282212482-5x03inuhv"
+        },
+        {
+          "added": true,
+          "content": "If y = y(x) is the solution of the differential equation ey  such that y(0) = 0, then y(1) is equal to:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " loge 2",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282236981-z20hvjn48_1"
+            },
+            {
+              "text": " 2e",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282236981-z20hvjn48_2"
+            },
+            {
+              "text": "2 + loge2",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282236981-z20hvjn48_3"
+            },
+            {
+              "text": " 1 + loge2",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282236981-z20hvjn48_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744282236981-z20hvjn48"
+        },
+        {
+          "added": true,
+          "content": "",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/260528b23503.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " x2 - y2 - x = 0",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282275248-b7u09duui_1"
+            },
+            {
+              "text": "a circle",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282275248-b7u09duui_2"
+            },
+            {
+              "text": "a hyperbola",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282275248-b7u09duui_3"
+            },
+            {
+              "text": " an ellipse",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282275248-b7u09duui_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744282275248-b7u09duui"
+        },
+        {
+          "added": true,
+          "content": "The solution of the equation (y log y) dx +(x - logy) dy = 0, is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/26053017c567.png",
+              "imageUpload": null,
+              "id": "q-1744282300493-cg4snj33h_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/260531437bcd.png",
+              "imageUpload": null,
+              "id": "q-1744282300493-cg4snj33h_2"
+            },
+            {
+              "text": "(x + 1) log y = c",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282300493-cg4snj33h_3"
+            },
+            {
+              "text": " None of these",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282300493-cg4snj33h_4"
+            }
+          ],
+          "correctAnswer": "3",
+          "id": "q-1744282300493-cg4snj33h"
+        },
+        {
+          "added": true,
+          "content": "The integrating factor of dy/dx - 3y/x = x3 sin x is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "1/x2",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282318290-tbjfqa4gk_1"
+            },
+            {
+              "text": " 1/x3",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282318290-tbjfqa4gk_2"
+            },
+            {
+              "text": "x",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282318290-tbjfqa4gk_3"
+            },
+            {
+              "text": "x2",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282318290-tbjfqa4gk_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744282318290-tbjfqa4gk"
+        }
+      ]
+    },
+    {
+      "id": "1744282665797-3dbyzwvmt",
+      "name": "Section 2",
+      "subject": "mathematics",
+      "type": "integer",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "If three of the six vertices of a regular hexagon are chosen at random, then the probability that the triangle formed with these chosen vertices is equilateral is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282348450-cebkgmahi_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282348450-cebkgmahi_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282348450-cebkgmahi_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282348450-cebkgmahi_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744282348450-cebkgmahi"
+        },
+        {
+          "added": true,
+          "content": "Out of 11 consecutive natural numbers, if three numbers are selected at random (without repetition), then the probability that they are in A.P. with positive common difference, is:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282360429-f00hs48xs_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282360429-f00hs48xs_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282360429-f00hs48xs_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282360429-f00hs48xs_4"
+            }
+          ],
+          "correctAnswer": "5",
+          "id": "q-1744282360429-f00hs48xs"
+        }
+      ]
+    }
+  ],
+  "physics": [
+    {
+      "id": "1744282665797-1tol9y35p",
+      "name": "Section 1",
+      "subject": "physics",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "Let \\( f(x) \\) be a continuously differentiable function on the interval \\( (0, \\infty) \\) such that \\( f(1) = 2 \\) and \\(\\lim_{t \\to x} \\frac{t^{10} f(x) - x^{10} f(t)}{t^9 - x^9} = 1\\) for each \\( x > 0 \\). Then, for all \\( x > 0 \\), \\( f(x) \\) is equal to:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "\\( \\frac{31}{11x} - \\frac{9}{11} x^{10} \\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282380887-dal9qz16n_1"
+            },
+            {
+              "text": "\\( \\frac{9}{11x} + \\frac{13}{11} x^{10} \\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282380887-dal9qz16n_2"
+            },
+            {
+              "text": "\\( -\\frac{9}{11x} + \\frac{31}{11} x^{10} \\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282380887-dal9qz16n_3"
+            },
+            {
+              "text": "\\( \\frac{13}{11x} + \\frac{9}{11} x^{10} \\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282380887-dal9qz16n_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744282380887-dal9qz16n"
+        },
+        {
+          "added": true,
+          "content": "Let nr and nb be respectively the number of photons emitted by a red bulb and a blue bulb of equal power in a given time.",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "nr = nb",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282405681-w68kvpoyi_1"
+            },
+            {
+              "text": "nr < nb",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282405681-w68kvpoyi_2"
+            },
+            {
+              "text": " nr > nb",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282405681-w68kvpoyi_3"
+            },
+            {
+              "text": "data insufficient",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282405681-w68kvpoyi_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744282405681-w68kvpoyi"
+        },
+        {
+          "added": true,
+          "content": "The maximum kinetic energy of photoelectrons emitted from a surface when photons of energy 6 eV fall on it is 4eV. The stopping potential is Volts is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "2",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282421694-s4qgw5spb_1"
+            },
+            {
+              "text": "4",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282421694-s4qgw5spb_2"
+            },
+            {
+              "text": "5",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282421694-s4qgw5spb_3"
+            },
+            {
+              "text": "7",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282421694-s4qgw5spb_4"
+            }
+          ],
+          "correctAnswer": "3",
+          "id": "q-1744282421694-s4qgw5spb"
+        },
+        {
+          "added": true,
+          "content": "If the frequency of light in a photoelectric experiment is doubled, the stopping potential will",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "be doubled",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282448367-hf37zywdx_1"
+            },
+            {
+              "text": " halved",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282448367-hf37zywdx_2"
+            },
+            {
+              "text": "become more than doubled",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282448367-hf37zywdx_3"
+            },
+            {
+              "text": "become less than double",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282448367-hf37zywdx_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744282448367-hf37zywdx"
+        },
+        {
+          "added": true,
+          "content": "The stopping potential for the photo electrons emitted from a metal surface of work function 1.7eV is 10.4 V. Identify the energy levels corresponding to the transitions in hydrogen atom which will result in emission of wavelength equal to that of incident radiation for the above photoelectric effect",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " n = 3 to 2",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282465764-5ukyhas2s_1"
+            },
+            {
+              "text": "n = 3 to 1",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282465764-5ukyhas2s_2"
+            },
+            {
+              "text": "n = 2 to 1",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282465764-5ukyhas2s_3"
+            },
+            {
+              "text": "n = 4 to 1",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282465764-5ukyhas2s_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744282465764-5ukyhas2s"
+        }
+      ]
+    },
+    {
+      "id": "1744282665797-7mu4de3mz",
+      "name": "Section 2",
+      "subject": "physics",
+      "type": "integer",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "Radiation of two photon energies twice and five times  \\( \\sum_{i=1}^{n} i = \\frac{n(n+1)}{2} \\) the work function of metal are incident sucessively on the metal surface. The ratio of the maximum velocity of photoelectrons emitted is the two cases will be",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282491449-lmc87o65g_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282491449-lmc87o65g_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282491449-lmc87o65g_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282491449-lmc87o65g_4"
+            }
+          ],
+          "correctAnswer": "5",
+          "id": "q-1744282491449-lmc87o65g"
+        },
+        {
+          "added": true,
+          "content": "A point source causes photoelectric effect from a small metal plate. Which of the following curves may represent the saturation photocurrent as a function of the distance between the source and the metal?",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282499595-4whq212ly_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282499595-4whq212ly_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282499595-4whq212ly_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282499595-4whq212ly_4"
+            }
+          ],
+          "correctAnswer": "7",
+          "id": "q-1744282499595-4whq212ly"
+        }
+      ]
+    }
+  ],
+  "chemistry": [
+    {
+      "id": "1744282665797-yq4kwm95d",
+      "name": "Section 1",
+      "subject": "chemistry",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "When a photon of light collides with a metal surface, number of electrons, (if any) coming out is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "only one",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282528193-038rlz88q_1"
+            },
+            {
+              "text": "only two",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282528193-038rlz88q_2"
+            },
+            {
+              "text": "infinite",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282528193-038rlz88q_3"
+            },
+            {
+              "text": "depends upon factors",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282528193-038rlz88q_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744282528193-038rlz88q"
+        },
+        {
+          "added": true,
+          "content": "Cut off potentials for a metal in photoelectric effect for light of wavelength l1, l2 and l3 is found to be V1, V2 and V3 volts if V1, V2 and V3 are in Arithmetic Progression and l1, l2 and l3 will be",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " Arithmetic Progression",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282551803-thokf26cp_1"
+            },
+            {
+              "text": "Geometric Progression",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282551803-thokf26cp_2"
+            },
+            {
+              "text": "Harmonic Progression",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282551803-thokf26cp_3"
+            },
+            {
+              "text": "None",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282551803-thokf26cp_4"
+            }
+          ],
+          "correctAnswer": "3",
+          "id": "q-1744282551803-thokf26cp"
+        },
+        {
+          "added": true,
+          "content": "The energy released by the fission of one uranium atom is 200 MeV. The number of fissions required per second to produce 3.2 W of power is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "107",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282570782-l4h6h4r42_1"
+            },
+            {
+              "text": "1010",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282570782-l4h6h4r42_2"
+            },
+            {
+              "text": "1015",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282570782-l4h6h4r42_3"
+            },
+            {
+              "text": "1011",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282570782-l4h6h4r42_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744282570782-l4h6h4r42"
+        },
+        {
+          "added": true,
+          "content": "If in a nuclear fission, a piece of uranium of mass 0.5 g is lost, then the energy obtained in kWh is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " 1.25 × 107",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282593961-rgk3x21zu_1"
+            },
+            {
+              "text": "2.25 × 107",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282593961-rgk3x21zu_2"
+            },
+            {
+              "text": "3.25 × 107",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282593961-rgk3x21zu_3"
+            },
+            {
+              "text": "0.25 × 107",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282593961-rgk3x21zu_4"
+            }
+          ],
+          "correctAnswer": "3",
+          "id": "q-1744282593961-rgk3x21zu"
+        },
+        {
+          "added": true,
+          "content": "What is the rest mass energy of an electron?",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "1 eV",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282612262-j5jlm7l3v_1"
+            },
+            {
+              "text": "0.51 MeV",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282612262-j5jlm7l3v_2"
+            },
+            {
+              "text": "931 MeV",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282612262-j5jlm7l3v_3"
+            },
+            {
+              "text": " None of these",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282612262-j5jlm7l3v_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744282612262-j5jlm7l3v"
+        }
+      ]
+    },
+    {
+      "id": "1744282665797-299r5q7o1",
+      "name": "Section 2",
+      "subject": "chemistry",
+      "type": "integer",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "What is the name of the above reaction?",
+          "imageUrl": "https://topcoaching.in/ckeditor/plugins/imageuploader/uploads/2605109d71da.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282637334-zdfa6x2m2_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282637334-zdfa6x2m2_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282637334-zdfa6x2m2_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282637334-zdfa6x2m2_4"
+            }
+          ],
+          "correctAnswer": "6",
+          "id": "q-1744282637334-zdfa6x2m2"
+        },
+        {
+          "added": true,
+          "content": "Acetic acid is obtained when which of the given reaction takes place?",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282645717-4at9uofm6_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282645717-4at9uofm6_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282645717-4at9uofm6_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744282645717-4at9uofm6_4"
+            }
+          ],
+          "correctAnswer": "4",
+          "id": "q-1744282645717-4at9uofm6"
+        }
+      ]
+    }
+  ],
+  "id": "test-1744282665797-ernrb2xh8",
+  "createdAt": "Thu Apr 10 2025 16:27:45 GMT+0530 (India Standard Time)"
+}

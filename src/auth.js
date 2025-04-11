@@ -86,7 +86,7 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           const data = doc.data();
           if (data.testId && data.batch && Array.isArray(data.userAnswers)) {
             const key = `${data.batch}-${data.testId}`;
-            tests[key] = data.userAnswers;
+            tests[key] = data.attempts;
           }
         });
 

@@ -32,12 +32,14 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Switch } from "@/components/ui/switch";
+import LatexText from "@/components/LatexText";
 
 let initialData = {
   batchName: "",
   testName: "",
   startDate: "",
   endDate: "",
+  attempts: 0,
   syllabus: {
     isSyllabus: false,
     mathematics: [""],
@@ -573,563 +575,534 @@ export default function NewTestPage() {
   };
 
   return (
-    <div className="container mx-auto p-6 max-w-[860px]">
-      <h1 className="text-3xl font-bold mb-6">Create New Test Batch</h1>
+    <section className="relative">
+      <div className="container p-6 max-w-[860px] mx-auto">
+        <h1 className="text-3xl font-bold mb-6">Create New Test Batch</h1>
 
-      <div className="grid gap-6">
-        {/* BASIC INFO */}
-        <Card className="p-6">
-          <div className="grid gap-4">
-            <div className="flex gap-6">
-              <div className="flex-1 flex gap-2">
-                <Label htmlFor="batchName">Batch Name: </Label>
-                <Input
-                  className={"flex-1"}
-                  id="batchName"
-                  placeholder="Enter batch name"
-                  value={data.batchName}
-                  onChange={(e) =>
-                    setData((prev) => ({ ...prev, batchName: e.target.value }))
-                  }
-                />
+        <div className="grid gap-6">
+          {/* BASIC INFO */}
+          <Card className="p-6">
+            <div className="grid gap-4">
+              <div className="flex gap-6">
+                <div className="flex-1 flex gap-2">
+                  <Label htmlFor="batchName">Batch Name: </Label>
+                  <Input
+                    className={"flex-1"}
+                    id="batchName"
+                    placeholder="Enter batch name"
+                    value={data.batchName}
+                    onChange={(e) =>
+                      setData((prev) => ({
+                        ...prev,
+                        batchName: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
+                <div className="flex-1 flex gap-2">
+                  <Label htmlFor="testName">Test Name: </Label>
+                  <Input
+                    className={"flex-1"}
+                    id="testName"
+                    placeholder="Enter test name"
+                    value={data.testName}
+                    onChange={(e) =>
+                      setData((prev) => ({ ...prev, testName: e.target.value }))
+                    }
+                  />
+                </div>
               </div>
-              <div className="flex-1 flex gap-2">
-                <Label htmlFor="testName">Test Name: </Label>
-                <Input
-                  className={"flex-1"}
-                  id="testName"
-                  placeholder="Enter test name"
-                  value={data.testName}
-                  onChange={(e) =>
-                    setData((prev) => ({ ...prev, testName: e.target.value }))
-                  }
-                />
+              <div className="grid grid-cols-2 gap-6">
+                <div className="flex justify-between gap-2">
+                  <Label htmlFor="startDate">Start Date</Label>
+                  <Input
+                    className={" w-fit"}
+                    id="startDate"
+                    type="datetime-local"
+                    value={data.startDate}
+                    onChange={(e) =>
+                      setData((prev) => ({
+                        ...prev,
+                        startDate: e.target.value,
+                      }))
+                    }
+                  />
+                </div>
+                <div className="flex justify-between gap-2">
+                  <Label htmlFor="endDate">End Date</Label>
+                  <Input
+                    className={" w-fit"}
+                    id="endDate"
+                    type="datetime-local"
+                    value={data.endDate}
+                    onChange={(e) =>
+                      setData((prev) => ({ ...prev, endDate: e.target.value }))
+                    }
+                  />
+                </div>
+                <div className="flex justify-between gap-2">
+                  <Label htmlFor="attempts">Max Attempts: </Label>
+                  <Input
+                    className={" w-fit"}
+                    id="attempts"
+                    type="number"
+                    value={data.attempts}
+                    onChange={(e) =>
+                      setData((prev) => ({ ...prev, attempts: e.target.value }))
+                    }
+                    placeholder="Max Attempts"
+                  />
+                </div>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-6">
-              <div className="flex justify-between gap-2">
-                <Label htmlFor="startDate">Start Date</Label>
-                <Input
-                  className={" w-fit"}
-                  id="startDate"
-                  type="datetime-local"
-                  value={data.startDate}
-                  onChange={(e) =>
-                    setData((prev) => ({ ...prev, startDate: e.target.value }))
-                  }
-                />
-              </div>
-              <div className="flex justify-between gap-2">
-                <Label htmlFor="endDate">End Date</Label>
-                <Input
-                  className={" w-fit"}
-                  id="endDate"
-                  type="datetime-local"
-                  value={data.endDate}
-                  onChange={(e) =>
-                    setData((prev) => ({ ...prev, endDate: e.target.value }))
-                  }
-                />
-              </div>
-            </div>
-          </div>
-        </Card>
-        {/* SYLLABUS */}
-        <Card className={"p-6"}>
-          <div className="grid gap-4">
-            <div className="w-full flex justify-between">
-              <h1>Syllabus</h1>
-              <Switch
-                onCheckedChange={(e) => {
-                  const elem = document.getElementById("SYLLABUS_ACCORDIAN");
-                  if (e) {
-                    elem.classList.remove("hidden");
-                    setData((prev) => ({
-                      ...prev,
-                      syllabus: { ...prev.syllabus, isSyllabus: true },
-                    }));
-                  } else {
-                    elem.classList.add("hidden");
-                    setData((prev) => ({
-                      ...prev,
-                      syllabus: {
-                        isSyllabus: false,
-                        mathematics: [""],
-                        physics: [""],
-                        chemistry: [""],
-                      },
-                    }));
-                  }
-                }}
-              />
-            </div>
-            <Accordion
-              type="multiple"
-              collapsible="true"
-              className={`hidden`}
-              id="SYLLABUS_ACCORDIAN"
-            >
-              <AccordionItem value="mathematics">
-                <AccordionTrigger>Mathematics</AccordionTrigger>
-
-                <AccordionContent className={"space-y-3"}>
-                  {data.syllabus.mathematics.map((topic, index) => (
-                    <div
-                      className="flex gap-2 items-center"
-                      key={`mathematics_${index}`}
-                    >
-                      <span className="w-4">{index + 1}.</span>
-
-                      <Input
-                        className="text-sm"
-                        value={topic}
-                        placeholder="New Topic"
-                        onChange={(e) => {
-                          const newTopics = [...data.syllabus.mathematics];
-                          newTopics[index] = e.target.value;
-                          setData((prev) => ({
-                            ...prev,
-                            syllabus: {
-                              ...prev.syllabus,
-                              mathematics: newTopics,
-                            },
-                          }));
-                        }}
-                      />
-
-                      <Button
-                        variant="outline"
-                        className={
-                          data.syllabus.mathematics.length > 1 ? "" : "hidden"
-                        }
-                        onClick={() => {
-                          setData((prev) => ({
-                            ...prev,
-                            syllabus: {
-                              ...prev.syllabus,
-                              mathematics: prev.syllabus.mathematics.filter(
-                                (_, idx) => idx !== index
-                              ),
-                            },
-                          }));
-                        }}
-                      >
-                        <Trash2 size={14} />
-                      </Button>
-                    </div>
-                  ))}
-
-                  <Button
-                    className={"ml-6 px-10"}
-                    variant={"outline"}
-                    size="sm"
-                    onClick={() => {
+          </Card>
+          {/* SYLLABUS */}
+          <Card className={"p-6"}>
+            <div className="grid gap-4">
+              <div className="w-full flex justify-between">
+                <h1>Syllabus</h1>
+                <Switch
+                  onCheckedChange={(e) => {
+                    const elem = document.getElementById("SYLLABUS_ACCORDIAN");
+                    if (e) {
+                      elem.classList.remove("hidden");
+                      setData((prev) => ({
+                        ...prev,
+                        syllabus: { ...prev.syllabus, isSyllabus: true },
+                      }));
+                    } else {
+                      elem.classList.add("hidden");
                       setData((prev) => ({
                         ...prev,
                         syllabus: {
-                          ...prev.syllabus,
-                          mathematics: [...prev.syllabus.mathematics, ""],
+                          isSyllabus: false,
+                          mathematics: [""],
+                          physics: [""],
+                          chemistry: [""],
                         },
                       }));
-                    }}
-                  >
-                    Add Topic
-                  </Button>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="physics">
-                <AccordionTrigger>Physics</AccordionTrigger>
-                <AccordionContent className={"space-y-3"}>
-                  {data.syllabus.physics.map((topic, index) => (
-                    <div
-                      className="flex gap-2 items-center"
-                      key={`physics_${index}`}
-                    >
-                      <span className="w-4">{index + 1}.</span>
+                    }
+                  }}
+                />
+              </div>
+              <Accordion
+                type="multiple"
+                collapsible="true"
+                className={`hidden`}
+                id="SYLLABUS_ACCORDIAN"
+              >
+                <AccordionItem value="mathematics">
+                  <AccordionTrigger>Mathematics</AccordionTrigger>
 
-                      <Input
-                        className="text-sm"
-                        value={topic}
-                        placeholder="New Topic"
-                        onChange={(e) => {
-                          const newTopics = [...data.syllabus.physics];
-                          newTopics[index] = e.target.value;
-                          setData((prev) => ({
-                            ...prev,
-                            syllabus: {
-                              ...prev.syllabus,
-                              physics: newTopics,
-                            },
-                          }));
-                        }}
-                      />
-
-                      <Button
-                        className={
-                          data.syllabus.physics.length > 1 ? "" : "hidden"
-                        }
-                        variant="outline"
-                        onClick={() => {
-                          setData((prev) => ({
-                            ...prev,
-                            syllabus: {
-                              ...prev.syllabus,
-                              physics: prev.syllabus.physics.filter(
-                                (_, idx) => idx !== index
-                              ),
-                            },
-                          }));
-                        }}
+                  <AccordionContent className={"space-y-3"}>
+                    {data.syllabus.mathematics.map((topic, index) => (
+                      <div
+                        className="flex gap-2 items-center"
+                        key={`mathematics_${index}`}
                       >
-                        <Trash2 size={14} />
-                      </Button>
-                    </div>
-                  ))}
+                        <span className="w-4">{index + 1}.</span>
 
-                  <Button
-                    className={"ml-6 px-10"}
-                    variant={"outline"}
-                    size="sm"
-                    onClick={() => {
-                      setData((prev) => ({
-                        ...prev,
-                        syllabus: {
-                          ...prev.syllabus,
-                          physics: [...prev.syllabus.physics, ""],
-                        },
-                      }));
-                    }}
-                  >
-                    Add Topic
-                  </Button>
-                </AccordionContent>
-              </AccordionItem>
-              <AccordionItem value="chemistry">
-                <AccordionTrigger>Chemistry</AccordionTrigger>
-                <AccordionContent className={"space-y-3"}>
-                  {data.syllabus.chemistry.map((topic, index) => (
-                    <div
-                      className="flex gap-2 items-center"
-                      key={`chemistry_${index}`}
+                        <Input
+                          className="text-sm"
+                          value={topic}
+                          placeholder="New Topic"
+                          onChange={(e) => {
+                            const newTopics = [...data.syllabus.mathematics];
+                            newTopics[index] = e.target.value;
+                            setData((prev) => ({
+                              ...prev,
+                              syllabus: {
+                                ...prev.syllabus,
+                                mathematics: newTopics,
+                              },
+                            }));
+                          }}
+                        />
+
+                        <Button
+                          variant="outline"
+                          className={
+                            data.syllabus.mathematics.length > 1 ? "" : "hidden"
+                          }
+                          onClick={() => {
+                            setData((prev) => ({
+                              ...prev,
+                              syllabus: {
+                                ...prev.syllabus,
+                                mathematics: prev.syllabus.mathematics.filter(
+                                  (_, idx) => idx !== index
+                                ),
+                              },
+                            }));
+                          }}
+                        >
+                          <Trash2 size={14} />
+                        </Button>
+                      </div>
+                    ))}
+
+                    <Button
+                      className={"ml-6 px-10"}
+                      variant={"outline"}
+                      size="sm"
+                      onClick={() => {
+                        setData((prev) => ({
+                          ...prev,
+                          syllabus: {
+                            ...prev.syllabus,
+                            mathematics: [...prev.syllabus.mathematics, ""],
+                          },
+                        }));
+                      }}
                     >
-                      <span className="w-4">{index + 1}.</span>
-
-                      <Input
-                        className="text-sm"
-                        value={topic}
-                        placeholder="New Topic"
-                        onChange={(e) => {
-                          const newTopics = [...data.syllabus.chemistry];
-                          newTopics[index] = e.target.value;
-                          setData((prev) => ({
-                            ...prev,
-                            syllabus: {
-                              ...prev.syllabus,
-                              chemistry: newTopics,
-                            },
-                          }));
-                        }}
-                      />
-
-                      <Button
-                        className={
-                          data.syllabus.chemistry.length > 1 ? "" : "hidden"
-                        }
-                        variant="outline"
-                        onClick={() => {
-                          setData((prev) => ({
-                            ...prev,
-                            syllabus: {
-                              ...prev.syllabus,
-                              chemistry: prev.syllabus.chemistry.filter(
-                                (_, idx) => idx !== index
-                              ),
-                            },
-                          }));
-                        }}
+                      Add Topic
+                    </Button>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="physics">
+                  <AccordionTrigger>Physics</AccordionTrigger>
+                  <AccordionContent className={"space-y-3"}>
+                    {data.syllabus.physics.map((topic, index) => (
+                      <div
+                        className="flex gap-2 items-center"
+                        key={`physics_${index}`}
                       >
-                        <Trash2 size={14} />
-                      </Button>
-                    </div>
-                  ))}
+                        <span className="w-4">{index + 1}.</span>
 
-                  <Button
-                    className={"ml-6 px-10"}
-                    variant={"outline"}
-                    size="sm"
-                    onClick={() => {
-                      setData((prev) => ({
-                        ...prev,
-                        syllabus: {
-                          ...prev.syllabus,
-                          chemistry: [...prev.syllabus.chemistry, ""],
-                        },
-                      }));
-                    }}
-                  >
-                    Add Topic
-                  </Button>
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          </div>
-        </Card>
+                        <Input
+                          className="text-sm"
+                          value={topic}
+                          placeholder="New Topic"
+                          onChange={(e) => {
+                            const newTopics = [...data.syllabus.physics];
+                            newTopics[index] = e.target.value;
+                            setData((prev) => ({
+                              ...prev,
+                              syllabus: {
+                                ...prev.syllabus,
+                                physics: newTopics,
+                              },
+                            }));
+                          }}
+                        />
 
-        <Tabs defaultValue="mathematics">
-          <TabsList className="grid w-full grid-cols-3">
-            <TabsTrigger value="mathematics">Mathematics</TabsTrigger>
-            <TabsTrigger value="physics">Physics</TabsTrigger>
-            <TabsTrigger value="chemistry">Chemistry</TabsTrigger>
-          </TabsList>
+                        <Button
+                          className={
+                            data.syllabus.physics.length > 1 ? "" : "hidden"
+                          }
+                          variant="outline"
+                          onClick={() => {
+                            setData((prev) => ({
+                              ...prev,
+                              syllabus: {
+                                ...prev.syllabus,
+                                physics: prev.syllabus.physics.filter(
+                                  (_, idx) => idx !== index
+                                ),
+                              },
+                            }));
+                          }}
+                        >
+                          <Trash2 size={14} />
+                        </Button>
+                      </div>
+                    ))}
 
-          {["mathematics", "physics", "chemistry"].map((subject) => (
-            <TabsContent key={subject} value={subject}>
-              <Card className="px-4 pt-4 pb-0">
-                <Tabs defaultValue="Section 1">
-                  <div className="flex flex-col gap-4 mb-4 ">
-                    <div className="flex justify-between items-center gap-6">
-                      <h2 className="text-xl font-bold capitalize ">
-                        {subject}
-                      </h2>
-                      {/* <Button onClick={() => addSection(subject)}>
+                    <Button
+                      className={"ml-6 px-10"}
+                      variant={"outline"}
+                      size="sm"
+                      onClick={() => {
+                        setData((prev) => ({
+                          ...prev,
+                          syllabus: {
+                            ...prev.syllabus,
+                            physics: [...prev.syllabus.physics, ""],
+                          },
+                        }));
+                      }}
+                    >
+                      Add Topic
+                    </Button>
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="chemistry">
+                  <AccordionTrigger>Chemistry</AccordionTrigger>
+                  <AccordionContent className={"space-y-3"}>
+                    {data.syllabus.chemistry.map((topic, index) => (
+                      <div
+                        className="flex gap-2 items-center"
+                        key={`chemistry_${index}`}
+                      >
+                        <span className="w-4">{index + 1}.</span>
+
+                        <Input
+                          className="text-sm"
+                          value={topic}
+                          placeholder="New Topic"
+                          onChange={(e) => {
+                            const newTopics = [...data.syllabus.chemistry];
+                            newTopics[index] = e.target.value;
+                            setData((prev) => ({
+                              ...prev,
+                              syllabus: {
+                                ...prev.syllabus,
+                                chemistry: newTopics,
+                              },
+                            }));
+                          }}
+                        />
+
+                        <Button
+                          className={
+                            data.syllabus.chemistry.length > 1 ? "" : "hidden"
+                          }
+                          variant="outline"
+                          onClick={() => {
+                            setData((prev) => ({
+                              ...prev,
+                              syllabus: {
+                                ...prev.syllabus,
+                                chemistry: prev.syllabus.chemistry.filter(
+                                  (_, idx) => idx !== index
+                                ),
+                              },
+                            }));
+                          }}
+                        >
+                          <Trash2 size={14} />
+                        </Button>
+                      </div>
+                    ))}
+
+                    <Button
+                      className={"ml-6 px-10"}
+                      variant={"outline"}
+                      size="sm"
+                      onClick={() => {
+                        setData((prev) => ({
+                          ...prev,
+                          syllabus: {
+                            ...prev.syllabus,
+                            chemistry: [...prev.syllabus.chemistry, ""],
+                          },
+                        }));
+                      }}
+                    >
+                      Add Topic
+                    </Button>
+                  </AccordionContent>
+                </AccordionItem>
+              </Accordion>
+            </div>
+          </Card>
+
+          <Tabs defaultValue="mathematics">
+            <TabsList className="grid w-full grid-cols-3">
+              <TabsTrigger value="mathematics">Mathematics</TabsTrigger>
+              <TabsTrigger value="physics">Physics</TabsTrigger>
+              <TabsTrigger value="chemistry">Chemistry</TabsTrigger>
+            </TabsList>
+
+            {["mathematics", "physics", "chemistry"].map((subject) => (
+              <TabsContent key={subject} value={subject}>
+                <Card className="px-4 pt-4 pb-0">
+                  <Tabs defaultValue="Section 1">
+                    <div className="flex flex-col gap-4 mb-4 ">
+                      <div className="flex justify-between items-center gap-6">
+                        <h2 className="text-xl font-bold capitalize ">
+                          {subject}
+                        </h2>
+                        {/* <Button onClick={() => addSection(subject)}>
                     <Plus className="mr-2 h-4 w-4" />
                     Add Section
                   </Button> */}
-                      <TabsList className="grid w-fit grid-cols-4 gap-2">
-                        {data[subject]?.map((section, index) => (
-                          <TabsTrigger
-                            className={"px-4 "}
-                            value={section.name}
-                            key={subject + "_" + section + "_" + index}
-                          >
+                        <TabsList className="grid w-fit grid-cols-4 gap-2">
+                          {data[subject]?.map((section, index) => (
+                            <TabsTrigger
+                              className={"px-4 "}
+                              value={section.name}
+                              key={subject + "_" + section + "_" + index}
+                            >
+                              {section.name}
+                            </TabsTrigger>
+                          ))}
+                        </TabsList>
+                      </div>
+                      {data[subject]?.map((section, index) => (
+                        <TabsContent
+                          key={
+                            subject + "_" + section + "_" + index + "_Content"
+                          }
+                          value={section.name}
+                        >
+                          <h1 className="font-semibold text-lg mb-4 mt-2">
                             {section.name}
-                          </TabsTrigger>
-                        ))}
-                      </TabsList>
-                    </div>
-                    {data[subject]?.map((section, index) => (
-                      <TabsContent
-                        key={subject + "_" + section + "_" + index + "_Content"}
-                        value={section.name}
-                      >
-                        <h1 className="font-semibold text-lg mb-4 mt-2">
-                          {section.name}
-                        </h1>
-                        <div className="grid gap-4">
+                          </h1>
                           <div className="grid gap-4">
-                            <div className="flex gap-2">
-                              <Label>Section Type</Label>
-                              <Select
-                                value={section.type}
-                                onValueChange={(value) =>
-                                  setData((prev) => ({
-                                    ...prev,
-                                    [subject]: prev[subject].map((s, i) =>
-                                      i === index ? { ...s, type: value } : s
-                                    ),
-                                  }))
-                                }
-                              >
-                                <SelectTrigger>
-                                  <SelectValue placeholder="Select question type" />
-                                </SelectTrigger>
-                                <SelectContent>
-                                  <SelectItem value="single-mcq">
-                                    Single Correct MCQ
-                                  </SelectItem>
-                                  <SelectItem value="multi-mcq">
-                                    Multiple Correct MCQ
-                                  </SelectItem>
-                                  <SelectItem value="integer">
-                                    Integer Type
-                                  </SelectItem>
-                                  <SelectItem value="decimal">
-                                    Decimal Type
-                                  </SelectItem>
-                                </SelectContent>
-                              </Select>
-                            </div>
-
-                            <div className="space-y-2">
-                              <Label>Question Content</Label>
-                              <Textarea
-                                value={
-                                  section.questions.filter(
-                                    (q, i) => !q.added
-                                  )[0].content
-                                }
-                                onChange={(e) =>
-                                  setData((prev) => ({
-                                    ...prev,
-                                    [subject]: prev[subject].map((s, i) =>
-                                      i === index
-                                        ? {
-                                            ...s,
-                                            questions: s.questions.map(
-                                              (q, qIndex) =>
-                                                !q.added
-                                                  ? {
-                                                      ...q,
-                                                      content: e.target.value,
-                                                    }
-                                                  : q
-                                            ),
-                                          }
-                                        : s
-                                    ),
-                                  }))
-                                }
-                                placeholder="Type your question here..."
-                                className="min-h-[100px]"
-                              />
-                            </div>
-
-                            <div className="flex  gap-4">
-                              <div className="col-span-2 flex gap-2 items-center flex-1">
-                                <Label>Question Image URL</Label>
-                                <div className="flex gap-2 flex-1">
-                                  <Input
-                                    value={
-                                      section.questions.filter(
-                                        (q, i) => !q.added
-                                      )[0].imageUrl
-                                    }
-                                    onChange={(e) =>
-                                      setData((prev) => ({
-                                        ...prev,
-                                        [subject]: prev[subject].map((s, i) =>
-                                          i === index
-                                            ? {
-                                                ...s,
-                                                questions: s.questions.map(
-                                                  (q, qIndex) =>
-                                                    !q.added
-                                                      ? {
-                                                          ...q,
-                                                          imageUrl:
-                                                            e.target.value,
-                                                        }
-                                                      : q
-                                                ),
-                                              }
-                                            : s
-                                        ),
-                                      }))
-                                    }
-                                    className={"w-full"}
-                                    placeholder="Enter image URL"
-                                  />
-                                </div>
+                            <div className="grid gap-4">
+                              <div className="flex gap-2">
+                                <Label>Section Type</Label>
+                                <Select
+                                  value={section.type}
+                                  onValueChange={(value) =>
+                                    setData((prev) => ({
+                                      ...prev,
+                                      [subject]: prev[subject].map((s, i) =>
+                                        i === index ? { ...s, type: value } : s
+                                      ),
+                                    }))
+                                  }
+                                >
+                                  <SelectTrigger>
+                                    <SelectValue placeholder="Select question type" />
+                                  </SelectTrigger>
+                                  <SelectContent>
+                                    <SelectItem value="single-mcq">
+                                      Single Correct MCQ
+                                    </SelectItem>
+                                    <SelectItem value="multi-mcq">
+                                      Multiple Correct MCQ
+                                    </SelectItem>
+                                    <SelectItem value="integer">
+                                      Integer Type
+                                    </SelectItem>
+                                    <SelectItem value="decimal">
+                                      Decimal Type
+                                    </SelectItem>
+                                  </SelectContent>
+                                </Select>
                               </div>
-                              <Separator orientation="vertical" />
-                              <div className=" space-y-2">
-                                <div className="flex gap-2">
-                                  <Input
-                                    type="file"
-                                    accept="image/*"
-                                    onChange={(e) =>
-                                      handleImageUpload(e, subject, index)
-                                    }
-                                    className="hidden"
-                                    id={`${subject}_${section}_imageupload`}
-                                  />
-                                  <Button
-                                    variant="outline"
-                                    className="w-full"
-                                    onClick={() =>
-                                      document
-                                        .getElementById(
-                                          `${subject}_${section}_imageupload`
-                                        )
-                                        .click()
-                                    }
-                                  >
-                                    <ImagePlus className="mr-2 h-4 w-4" />
-                                    Choose Image
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
-                            {section.questions.filter((q, i) => !q.added)[0]
-                              .imageUrl && (
-                              <img
-                                src={
-                                  section.questions.filter(
-                                    (q, i) => !q.added
-                                  )[0].imageUrl
-                                }
-                                alt={`Question`}
-                                className="mt-2 max-w-[180px] rounded"
-                              />
-                            )}
-                            <Separator />
-                            {section.type.includes("mcq") && (
-                              <div className="grid gap-4">
-                                <Label>Options</Label>
-                                {section.questions
-                                  .filter((q) => !q.added)[0]
-                                  .options.map((option, optionIndex) => (
-                                    <div
-                                      key={optionIndex}
-                                      className="grid gap-4 p-4 border rounded-lg"
-                                    >
-                                      {/* Option Text Input */}
-                                      <div className="flex gap-2">
-                                        <Input
-                                          value={option.text}
-                                          onChange={(e) => {
-                                            setData((prev) => ({
-                                              ...prev,
-                                              [subject]: prev[subject].map(
-                                                (s, i) =>
-                                                  i === index
+
+                              <div className="space-y-2">
+                                <Label>Question Content</Label>
+                                <Textarea
+                                  value={
+                                    section.questions.filter(
+                                      (q, i) => !q.added
+                                    )[0].content
+                                  }
+                                  onChange={(e) =>
+                                    setData((prev) => ({
+                                      ...prev,
+                                      [subject]: prev[subject].map((s, i) =>
+                                        i === index
+                                          ? {
+                                              ...s,
+                                              questions: s.questions.map(
+                                                (q, qIndex) =>
+                                                  !q.added
                                                     ? {
-                                                        ...s,
-                                                        questions:
-                                                          s.questions.map(
-                                                            (q, qIndex) =>
-                                                              !q.added
-                                                                ? {
-                                                                    ...q,
-                                                                    options:
-                                                                      q.options.map(
-                                                                        (
-                                                                          opt,
-                                                                          optIndex
-                                                                        ) =>
-                                                                          optIndex ===
-                                                                          optionIndex
-                                                                            ? {
-                                                                                ...opt,
-                                                                                text: e
-                                                                                  .target
-                                                                                  .value,
-                                                                              }
-                                                                            : opt
-                                                                      ),
-                                                                  }
-                                                                : q
-                                                          ),
+                                                        ...q,
+                                                        content: e.target.value,
                                                       }
-                                                    : s
+                                                    : q
                                               ),
-                                            }));
-                                          }}
-                                          placeholder={`Option ${
-                                            optionIndex + 1
-                                          }`}
-                                        />
-                                        {/* Delete Option Button */}
+                                            }
+                                          : s
+                                      ),
+                                    }))
+                                  }
+                                  placeholder="Type your question here..."
+                                  className="min-h-[100px]"
+                                />
+                                
+                              </div>
 
-                                        <Button
-                                          variant="outline"
-                                          size="icon"
-                                          onClick={() => {
-                                            if (
-                                              section.questions.filter(
-                                                (q) => !q.added
-                                              )[0].options.length > 4
-                                            ) {
+                              <div className="flex  gap-4">
+                                <div className="col-span-2 flex gap-2 items-center flex-1">
+                                  <Label>Question Image URL</Label>
+                                  <div className="flex gap-2 flex-1">
+                                    <Input
+                                      value={
+                                        section.questions.filter(
+                                          (q, i) => !q.added
+                                        )[0].imageUrl
+                                      }
+                                      onChange={(e) =>
+                                        setData((prev) => ({
+                                          ...prev,
+                                          [subject]: prev[subject].map((s, i) =>
+                                            i === index
+                                              ? {
+                                                  ...s,
+                                                  questions: s.questions.map(
+                                                    (q, qIndex) =>
+                                                      !q.added
+                                                        ? {
+                                                            ...q,
+                                                            imageUrl:
+                                                              e.target.value,
+                                                          }
+                                                        : q
+                                                  ),
+                                                }
+                                              : s
+                                          ),
+                                        }))
+                                      }
+                                      className={"w-full"}
+                                      placeholder="Enter image URL"
+                                    />
+                                  </div>
+                                </div>
+                                <Separator orientation="vertical" />
+                                <div className=" space-y-2">
+                                  <div className="flex gap-2">
+                                    <Input
+                                      type="file"
+                                      accept="image/*"
+                                      onChange={(e) =>
+                                        handleImageUpload(e, subject, index)
+                                      }
+                                      className="hidden"
+                                      id={`${subject}_${section}_imageupload`}
+                                    />
+                                    <Button
+                                      variant="outline"
+                                      className="w-full"
+                                      onClick={() =>
+                                        document
+                                          .getElementById(
+                                            `${subject}_${section}_imageupload`
+                                          )
+                                          .click()
+                                      }
+                                    >
+                                      <ImagePlus className="mr-2 h-4 w-4" />
+                                      Choose Image
+                                    </Button>
+                                  </div>
+                                </div>
+                              </div>
+                              {section.questions.filter((q, i) => !q.added)[0]
+                                .imageUrl && (
+                                <img
+                                  src={
+                                    section.questions.filter(
+                                      (q, i) => !q.added
+                                    )[0].imageUrl
+                                  }
+                                  alt={`Question`}
+                                  className="mt-2 max-w-[180px] rounded"
+                                />
+                              )}
+                              <Separator />
+                              {section.type.includes("mcq") && (
+                                <div className="grid gap-4">
+                                  <Label>Options</Label>
+                                  {section.questions
+                                    .filter((q) => !q.added)[0]
+                                    .options.map((option, optionIndex) => (
+                                      <div
+                                        key={optionIndex}
+                                        className="grid gap-4 p-4 border rounded-lg"
+                                      >
+                                        {/* Option Text Input */}
+                                        <div className="flex gap-2">
+                                          <Input
+                                            value={option.text}
+                                            onChange={(e) => {
                                               setData((prev) => ({
                                                 ...prev,
                                                 [subject]: prev[subject].map(
@@ -1144,13 +1117,20 @@ export default function NewTestPage() {
                                                                   ? {
                                                                       ...q,
                                                                       options:
-                                                                        q.options.filter(
+                                                                        q.options.map(
                                                                           (
-                                                                            _,
+                                                                            opt,
                                                                             optIndex
                                                                           ) =>
-                                                                            optIndex !==
+                                                                            optIndex ===
                                                                             optionIndex
+                                                                              ? {
+                                                                                  ...opt,
+                                                                                  text: e
+                                                                                    .target
+                                                                                    .value,
+                                                                                }
+                                                                              : opt
                                                                         ),
                                                                     }
                                                                   : q
@@ -1159,30 +1139,76 @@ export default function NewTestPage() {
                                                       : s
                                                 ),
                                               }));
-                                            } else {
-                                              toast.error(
-                                                "Can't Delete more options."
-                                              );
-                                            }
-                                          }}
-                                        >
-                                          <Trash2 className="h-4 w-4" />
-                                        </Button>
-                                      </div>
+                                            }}
+                                            placeholder={`Option ${
+                                              optionIndex + 1
+                                            }`}
+                                          />
+                                          {/* Delete Option Button */}
 
-                                      {/* Image URL Input */}
-                                      <div className="flex gap-4">
-                                        <div className="flex flex-1 gap-2 flex-row">
-                                          <Label>Option Image URL</Label>
-                                          <div className="flex gap-2 flex-1">
-                                            <Input
-                                              className={"w-full"}
-                                              value={option.imageUrl}
-                                              onChange={(e) => {
+                                          <Button
+                                            variant="outline"
+                                            size="icon"
+                                            onClick={() => {
+                                              if (
+                                                section.questions.filter(
+                                                  (q) => !q.added
+                                                )[0].options.length > 4
+                                              ) {
                                                 setData((prev) => ({
                                                   ...prev,
                                                   [subject]: prev[subject].map(
                                                     (s, i) =>
+                                                      i === index
+                                                        ? {
+                                                            ...s,
+                                                            questions:
+                                                              s.questions.map(
+                                                                (q, qIndex) =>
+                                                                  !q.added
+                                                                    ? {
+                                                                        ...q,
+                                                                        options:
+                                                                          q.options.filter(
+                                                                            (
+                                                                              _,
+                                                                              optIndex
+                                                                            ) =>
+                                                                              optIndex !==
+                                                                              optionIndex
+                                                                          ),
+                                                                      }
+                                                                    : q
+                                                              ),
+                                                          }
+                                                        : s
+                                                  ),
+                                                }));
+                                              } else {
+                                                toast.error(
+                                                  "Can't Delete more options."
+                                                );
+                                              }
+                                            }}
+                                          >
+                                            <Trash2 className="h-4 w-4" />
+                                          </Button>
+                                        </div>
+
+                                        {/* Image URL Input */}
+                                        <div className="flex gap-4">
+                                          <div className="flex flex-1 gap-2 flex-row">
+                                            <Label>Option Image URL</Label>
+                                            <div className="flex gap-2 flex-1">
+                                              <Input
+                                                className={"w-full"}
+                                                value={option.imageUrl}
+                                                onChange={(e) => {
+                                                  setData((prev) => ({
+                                                    ...prev,
+                                                    [subject]: prev[
+                                                      subject
+                                                    ].map((s, i) =>
                                                       i === index
                                                         ? {
                                                             ...s,
@@ -1214,65 +1240,118 @@ export default function NewTestPage() {
                                                               ),
                                                           }
                                                         : s
-                                                  ),
-                                                }));
-                                              }}
-                                              placeholder="Enter image URL"
-                                            />
+                                                    ),
+                                                  }));
+                                                }}
+                                                placeholder="Enter image URL"
+                                              />
+                                            </div>
                                           </div>
-                                        </div>
-                                        <Separator orientation="vertical" />
+                                          <Separator orientation="vertical" />
 
-                                        {/* Image Upload Button */}
-                                        <div className="">
-                                          <div className="flex gap-2">
-                                            <Input
-                                              type="file"
-                                              accept="image/*"
-                                              onChange={(e) =>
-                                                handleOptionImageUpload(
-                                                  e,
-                                                  subject,
-                                                  index,
-                                                  optionIndex
-                                                )
-                                              }
-                                              className="hidden"
-                                              id={`optionImageUpload${optionIndex}`}
-                                            />
-                                            <Button
-                                              variant="outline"
-                                              className="w-full"
-                                              onClick={() =>
-                                                document
-                                                  .getElementById(
-                                                    `optionImageUpload${optionIndex}`
+                                          {/* Image Upload Button */}
+                                          <div className="">
+                                            <div className="flex gap-2">
+                                              <Input
+                                                type="file"
+                                                accept="image/*"
+                                                onChange={(e) =>
+                                                  handleOptionImageUpload(
+                                                    e,
+                                                    subject,
+                                                    index,
+                                                    optionIndex
                                                   )
-                                                  .click()
-                                              }
-                                            >
-                                              <ImagePlus className="mr-2 h-4 w-4" />
-                                              Choose Image
-                                            </Button>
+                                                }
+                                                className="hidden"
+                                                id={`optionImageUpload${optionIndex}`}
+                                              />
+                                              <Button
+                                                variant="outline"
+                                                className="w-full"
+                                                onClick={() =>
+                                                  document
+                                                    .getElementById(
+                                                      `optionImageUpload${optionIndex}`
+                                                    )
+                                                    .click()
+                                                }
+                                              >
+                                                <ImagePlus className="mr-2 h-4 w-4" />
+                                                Choose Image
+                                              </Button>
+                                            </div>
                                           </div>
                                         </div>
+
+                                        {option.imageUrl && (
+                                          <img
+                                            src={option.imageUrl}
+                                            alt={`Option ${optionIndex + 1}`}
+                                            className="mt-2 max-w-[180px] rounded"
+                                          />
+                                        )}
                                       </div>
+                                    ))}
 
-                                      {option.imageUrl && (
-                                        <img
-                                          src={option.imageUrl}
-                                          alt={`Option ${optionIndex + 1}`}
-                                          className="mt-2 max-w-[180px] rounded"
-                                        />
-                                      )}
-                                    </div>
-                                  ))}
+                                  {section.questions.filter((q) => !q.added)[0]
+                                    .options.length < 6 && (
+                                    <Button
+                                      variant="outline"
+                                      onClick={() => {
+                                        setData((prev) => ({
+                                          ...prev,
+                                          [subject]: prev[subject].map((s, i) =>
+                                            i === index
+                                              ? {
+                                                  ...s,
+                                                  questions: s.questions.map(
+                                                    (q, qIndex) =>
+                                                      !q.added
+                                                        ? {
+                                                            ...q,
+                                                            options: [
+                                                              ...q.options,
+                                                              {
+                                                                text: "",
+                                                                imageUrl: "",
+                                                                imageUpload:
+                                                                  null,
+                                                              },
+                                                            ],
+                                                          }
+                                                        : q
+                                                  ),
+                                                }
+                                              : s
+                                          ),
+                                        }));
+                                      }}
+                                    >
+                                      <Plus className="mr-2 h-4 w-4" />
+                                      Add Option
+                                    </Button>
+                                  )}
+                                </div>
+                              )}
 
-                                {section.questions.filter((q) => !q.added)[0]
-                                  .options.length < 6 && (
-                                  <Button
-                                    variant="outline"
-                                    onClick={() => {
+                              <Separator />
+
+                              <div className="flex gap-4">
+                                <Label>
+                                  {section.type.includes("mcq")
+                                    ? "Correct Option(s)"
+                                    : "Correct Answer"}
+                                </Label>
+
+                                {section.type === "single-mcq" ? (
+                                  <Select
+                                    value={
+                                      section.questions.filter(
+                                        (q) => !q.added
+                                      )[0]?.correctAnswer || ""
+                                    }
+                                    onValueChange={(value) => {
                                       setData((prev) => ({
                                         ...prev,
                                         [subject]: prev[subject].map((s, i) =>
@@ -1284,15 +1363,8 @@ export default function NewTestPage() {
                                                     !q.added
                                                       ? {
                                                           ...q,
-                                                          options: [
-                                                            ...q.options,
-                                                            {
-                                                              text: "",
-                                                              imageUrl: "",
-                                                              imageUpload: null,
-                                                            },
-                                                          ],
-                                                        }
+                                                          correctAnswer: value,
+                                                        } // ✅ Update correctAnswer
                                                       : q
                                                 ),
                                               }
@@ -1301,398 +1373,369 @@ export default function NewTestPage() {
                                       }));
                                     }}
                                   >
-                                    <Plus className="mr-2 h-4 w-4" />
-                                    Add Option
-                                  </Button>
+                                    <SelectTrigger>
+                                      <SelectValue placeholder="Select correct option" />
+                                    </SelectTrigger>
+                                    <SelectContent>
+                                      {section.questions
+                                        .filter((q) => !q.added)[0]
+                                        ?.options.map((option, index) => (
+                                          <SelectItem
+                                            key={index}
+                                            value={String(index)}
+                                          >
+                                            Option {index + 1}
+                                          </SelectItem>
+                                        ))}
+                                    </SelectContent>
+                                  </Select>
+                                ) : (
+                                  <Input
+                                    value={
+                                      section.questions.filter(
+                                        (q) => !q.added
+                                      )[0]?.correctAnswer || ""
+                                    }
+                                    onChange={(e) => {
+                                      setData((prev) => ({
+                                        ...prev,
+                                        [subject]: prev[subject].map((s, i) =>
+                                          i === index
+                                            ? {
+                                                ...s,
+                                                questions: s.questions.map(
+                                                  (q, qIndex) =>
+                                                    !q.added
+                                                      ? {
+                                                          ...q,
+                                                          correctAnswer:
+                                                            e.target.value,
+                                                        } // ✅ Update correctAnswer for non-MCQ
+                                                      : q
+                                                ),
+                                              }
+                                            : s
+                                        ),
+                                      }));
+                                    }}
+                                    className={"flex-1"}
+                                    placeholder={
+                                      section.type === "multi-mcq"
+                                        ? "Enter comma-separated option numbers"
+                                        : "Enter the correct answer"
+                                    }
+                                  />
                                 )}
                               </div>
-                            )}
 
-                            <Separator />
-
-                            <div className="flex gap-4">
-                              <Label>
-                                {section.type.includes("mcq")
-                                  ? "Correct Option(s)"
-                                  : "Correct Answer"}
-                              </Label>
-
-                              {section.type === "single-mcq" ? (
-                                <Select
-                                  value={
-                                    section.questions.filter((q) => !q.added)[0]
-                                      ?.correctAnswer || ""
-                                  }
-                                  onValueChange={(value) => {
-                                    setData((prev) => ({
-                                      ...prev,
-                                      [subject]: prev[subject].map((s, i) =>
-                                        i === index
-                                          ? {
-                                              ...s,
-                                              questions: s.questions.map(
-                                                (q, qIndex) =>
-                                                  !q.added
-                                                    ? {
-                                                        ...q,
-                                                        correctAnswer: value,
-                                                      } // ✅ Update correctAnswer
-                                                    : q
-                                              ),
-                                            }
-                                          : s
-                                      ),
-                                    }));
-                                  }}
-                                >
-                                  <SelectTrigger>
-                                    <SelectValue placeholder="Select correct option" />
-                                  </SelectTrigger>
-                                  <SelectContent>
-                                    {section.questions
-                                      .filter((q) => !q.added)[0]
-                                      ?.options.map((option, index) => (
-                                        <SelectItem
-                                          key={index}
-                                          value={String(index)}
-                                        >
-                                          Option {index + 1}
-                                        </SelectItem>
-                                      ))}
-                                  </SelectContent>
-                                </Select>
-                              ) : (
-                                <Input
-                                  value={
-                                    section.questions.filter((q) => !q.added)[0]
-                                      ?.correctAnswer || ""
-                                  }
-                                  onChange={(e) => {
-                                    setData((prev) => ({
-                                      ...prev,
-                                      [subject]: prev[subject].map((s, i) =>
-                                        i === index
-                                          ? {
-                                              ...s,
-                                              questions: s.questions.map(
-                                                (q, qIndex) =>
-                                                  !q.added
-                                                    ? {
-                                                        ...q,
-                                                        correctAnswer:
-                                                          e.target.value,
-                                                      } // ✅ Update correctAnswer for non-MCQ
-                                                    : q
-                                              ),
-                                            }
-                                          : s
-                                      ),
-                                    }));
-                                  }}
-                                  className={"flex-1"}
-                                  placeholder={
-                                    section.type === "multi-mcq"
-                                      ? "Enter comma-separated option numbers"
-                                      : "Enter the correct answer"
-                                  }
-                                />
-                              )}
-                            </div>
-
-                            <div className="flex gap-6">
-                              <div className="flex gap-4">
-                                <Label>Marks</Label>
-                                <Input
-                                  type="number"
-                                  value={section.marks}
-                                  onChange={(e) =>
-                                    setData((prev) => ({
-                                      ...prev,
-                                      [subject]: prev[subject].map((s, i) =>
-                                        i === index
-                                          ? {
-                                              ...s,
-                                              marks: e.target.value,
-                                            }
-                                          : s
-                                      ),
-                                    }))
-                                  }
-                                  className={"w-fit"}
-                                  min="1"
-                                />
-                              </div>
-                              <div className="flex gap-4">
-                                <Label>Negative</Label>
-                                <Input
-                                  type="number"
-                                  value={section.negative}
-                                  onChange={(e) =>
-                                    setData((prev) => ({
-                                      ...prev,
-                                      [subject]: prev[subject].map((s, i) =>
-                                        i === index
-                                          ? {
-                                              ...s,
-                                              negative: e.target.value,
-                                            }
-                                          : s
-                                      ),
-                                    }))
-                                  }
-                                  className={"w-fit"}
-                                  min="0"
-                                />
+                              <div className="flex gap-6">
+                                <div className="flex gap-4">
+                                  <Label>Marks</Label>
+                                  <Input
+                                    type="number"
+                                    value={section.marks}
+                                    onChange={(e) =>
+                                      setData((prev) => ({
+                                        ...prev,
+                                        [subject]: prev[subject].map((s, i) =>
+                                          i === index
+                                            ? {
+                                                ...s,
+                                                marks: e.target.value,
+                                              }
+                                            : s
+                                        ),
+                                      }))
+                                    }
+                                    className={"w-fit"}
+                                    min="1"
+                                  />
+                                </div>
+                                <div className="flex gap-4">
+                                  <Label>Negative</Label>
+                                  <Input
+                                    type="number"
+                                    value={section.negative}
+                                    onChange={(e) =>
+                                      setData((prev) => ({
+                                        ...prev,
+                                        [subject]: prev[subject].map((s, i) =>
+                                          i === index
+                                            ? {
+                                                ...s,
+                                                negative: e.target.value,
+                                              }
+                                            : s
+                                        ),
+                                      }))
+                                    }
+                                    className={"w-fit"}
+                                    min="0"
+                                  />
+                                </div>
                               </div>
                             </div>
+
+                            <Button
+                              onClick={(e) =>
+                                addQuestion(e, subject, index, section)
+                              }
+                              className="mt-4"
+                            >
+                              Add Question
+                            </Button>
                           </div>
 
-                          <Button
-                            onClick={(e) =>
-                              addQuestion(e, subject, index, section)
-                            }
-                            className="mt-4"
-                          >
-                            Add Question
-                          </Button>
-                        </div>
-
-                        {section.questions.filter((q) => q.added).length >
-                          0 && (
-                          <Accordion type="multiple" collapsible="true">
-                            <AccordionItem value="question" className={"py-0"}>
-                              <AccordionTrigger className={"px-4 mt-4"}>
-                                Added Questions {" ( "}Total:{" "}
-                                {
-                                  section.questions.filter((q) => q.added)
-                                    .length
-                                }
-                                {" )"}
-                              </AccordionTrigger>
-                              <AccordionContent className={"px-4"}>
-                                <Accordion
-                                  type="multiple"
-                                  collapsible="true"
-                                  className=""
-                                >
-                                  {section.questions
-                                    .filter((q) => q.added)
-                                    .map((question, qindex) => (
-                                      <AccordionItem
-                                        value={`${question.content}_${qindex}`}
-                                        key={
-                                          subject +
-                                          "_" +
-                                          section.name +
-                                          "_" +
-                                          question.content +
-                                          "_" +
-                                          qindex
-                                        }
-                                        className="mt-4 p-4 border rounded-lg relative"
-                                      >
-                                        <AccordionTrigger className={"py-0"}>
-                                          <h4 className="font-medium">
-                                            Question {qindex + 1} ( +
-                                            {section.marks} /{" "}
-                                            {section.negative !== "0"
-                                              ? "-" + section.negative
-                                              : section.negative}{" "}
-                                            )
-                                          </h4>
-                                        </AccordionTrigger>
-                                        <AccordionContent
-                                          className={"relative"}
+                          {section.questions.filter((q) => q.added).length >
+                            0 && (
+                            <Accordion type="multiple" collapsible="true">
+                              <AccordionItem
+                                value="question"
+                                className={"py-0"}
+                              >
+                                <AccordionTrigger className={"px-4 mt-4"}>
+                                  Added Questions {" ( "}Total:{" "}
+                                  {
+                                    section.questions.filter((q) => q.added)
+                                      .length
+                                  }
+                                  {" )"}
+                                </AccordionTrigger>
+                                <AccordionContent className={"px-4"}>
+                                  <Accordion
+                                    type="multiple"
+                                    collapsible="true"
+                                    className=""
+                                  >
+                                    {section.questions
+                                      .filter((q) => q.added)
+                                      .map((question, qindex) => (
+                                        <AccordionItem
+                                          value={`${question.content}_${qindex}`}
+                                          key={
+                                            subject +
+                                            "_" +
+                                            section.name +
+                                            "_" +
+                                            question.content +
+                                            "_" +
+                                            qindex
+                                          }
+                                          className="mt-4 p-4 border rounded-lg relative"
                                         >
-                                          <div className="flex gap-2">
-                                            <div className="flex gap-2 flex-col flex-1">
-                                              <p className="mt-2 flex-1">
-                                                {question.content}
-                                              </p>
-                                              {question.imageUrl && (
-                                                <div className="relative max-h-[180px] overflow-hidden max-w-[240px]">
-                                                  <img
-                                                    src={question.imageUrl}
-                                                    alt="Question"
-                                                    className="mt-2 rounded"
-                                                  />
-                                                </div>
-                                              )}
-                                              {section.type.includes("mcq") ? (
-                                                <div className="mt-4 grid gap-1 relative">
-                                                  {question.options.map(
-                                                    (option, optIndex) => (
-                                                      <div
-                                                        key={optIndex}
-                                                        className={`flex items-start gap-4 px-3 py-1.5 rounded-xl ${
-                                                          question.correctAnswer
-                                                            .split(",")
-                                                            .includes(
-                                                              `${optIndex + 1}`
-                                                            )
-                                                            ? "bg-green-100"
-                                                            : ""
-                                                        }`}
-                                                      >
-                                                        <span>
-                                                          {String.fromCharCode(
-                                                            65 + optIndex
-                                                          )}
-                                                          .
-                                                        </span>
-                                                        <div>
-                                                          <p className={``}>
-                                                            {option.text}
-                                                          </p>
-                                                          {option.imageUrl && (
-                                                            <img
-                                                              src={
-                                                                option.imageUrl
-                                                              }
-                                                              alt={`Option ${
-                                                                optIndex + 1
-                                                              }`}
-                                                              className="mt-2 max-w-[180px] rounded"
-                                                            />
-                                                          )}
+                                          <AccordionTrigger className={"py-0"}>
+                                            <h4 className="font-medium">
+                                              Question {qindex + 1} ( +
+                                              {section.marks} /{" "}
+                                              {section.negative !== "0"
+                                                ? "-" + section.negative
+                                                : section.negative}{" "}
+                                              )
+                                            </h4>
+                                          </AccordionTrigger>
+                                          <AccordionContent
+                                            className={"relative"}
+                                          >
+                                            <div className="flex gap-2">
+                                              <div className="flex gap-2 flex-col flex-1">
+                                                <p className="mt-2 flex-1">
+                                                  {question.content}
+                                                </p>
+                                                {question.imageUrl && (
+                                                  <div className="relative max-h-[180px] overflow-hidden max-w-[240px]">
+                                                    <img
+                                                      src={question.imageUrl}
+                                                      alt="Question"
+                                                      className="mt-2 rounded"
+                                                    />
+                                                  </div>
+                                                )}
+                                                {section.type.includes(
+                                                  "mcq"
+                                                ) ? (
+                                                  <div className="mt-4 grid gap-1 relative">
+                                                    {question.options.map(
+                                                      (option, optIndex) => (
+                                                        <div
+                                                          key={optIndex}
+                                                          className={`flex items-start gap-4 px-3 py-1.5 rounded-xl ${
+                                                            question.correctAnswer
+                                                              .split(",")
+                                                              .includes(
+                                                                `${
+                                                                  optIndex + 1
+                                                                }`
+                                                              )
+                                                              ? "bg-green-100"
+                                                              : ""
+                                                          }`}
+                                                        >
+                                                          <span>
+                                                            {String.fromCharCode(
+                                                              65 + optIndex
+                                                            )}
+                                                            .
+                                                          </span>
+                                                          <div>
+                                                            <p className={``}>
+                                                              {option.text}
+                                                            </p>
+                                                            {option.imageUrl && (
+                                                              <img
+                                                                src={
+                                                                  option.imageUrl
+                                                                }
+                                                                alt={`Option ${
+                                                                  optIndex + 1
+                                                                }`}
+                                                                className="mt-2 max-w-[180px] rounded"
+                                                              />
+                                                            )}
+                                                          </div>
                                                         </div>
-                                                      </div>
-                                                    )
-                                                  )}
-                                                </div>
-                                              ) : (
-                                                <div className="w-[calc(100%-1.75rem)] mr-4 bg-green-100 px-3 py-1 rounded-xl font-semibold">
-                                                  Correct Answer:{" "}
-                                                  {question.correctAnswer}
-                                                </div>
-                                              )}{" "}
-                                            </div>
+                                                      )
+                                                    )}
+                                                  </div>
+                                                ) : (
+                                                  <div className="w-[calc(100%-1.75rem)] mr-4 bg-green-100 px-3 py-1 rounded-xl font-semibold">
+                                                    Correct Answer:{" "}
+                                                    {question.correctAnswer}
+                                                  </div>
+                                                )}{" "}
+                                              </div>
 
-                                            <div className="flex flex-col pt-4 gap-4">
-                                              <Pencil
-                                                size={16}
-                                                className="hover:text-blue-700 cursor-pointer opacity-70"
-                                                onClick={() => {
-                                                  setData((prev) => {
-                                                    const updatedSections =
-                                                      prev[subject].map(
-                                                        (s, i) => {
-                                                          if (i === index) {
-                                                            // Step 1: Remove the temporary 'added: false' question
-                                                            const filteredQuestions =
-                                                              s.questions.filter(
-                                                                (q) => q.added
-                                                              );
-
-                                                            // Step 2: Pull the target question to edit (from previous list)
-                                                            const questionToEdit =
-                                                              {
-                                                                ...filteredQuestions[
-                                                                  qindex
-                                                                ],
-                                                                added: false,
-                                                              };
-
-                                                            // Step 3: Remove the original version of that question (it was at qindex before filtering)
-                                                            const updatedQuestions =
-                                                              filteredQuestions.filter(
-                                                                (_, i) =>
-                                                                  i !== qindex
-                                                              );
-
-                                                            // Step 4: Return updated section
-                                                            return {
-                                                              ...s,
-                                                              questions: [
-                                                                ...updatedQuestions,
-                                                                questionToEdit,
-                                                              ], // Add editable question at the end
-                                                            };
-                                                          }
-
-                                                          return s;
-                                                        }
-                                                      );
-
-                                                    return {
-                                                      ...prev,
-                                                      [subject]:
-                                                        updatedSections,
-                                                    };
-                                                  });
-                                                }}
-                                              />
-
-                                              <Trash2
-                                                onClick={() => {
-                                                  setData((prev) => {
-                                                    const updatedSections =
-                                                      prev[subject].map(
-                                                        (s, i) => {
-                                                          if (i === index) {
-                                                            const updatedAdded =
-                                                              s.questions
-                                                                .filter(
+                                              <div className="flex flex-col pt-4 gap-4">
+                                                <Pencil
+                                                  size={16}
+                                                  className="hover:text-blue-700 cursor-pointer opacity-70"
+                                                  onClick={() => {
+                                                    setData((prev) => {
+                                                      const updatedSections =
+                                                        prev[subject].map(
+                                                          (s, i) => {
+                                                            if (i === index) {
+                                                              // Step 1: Remove the temporary 'added: false' question
+                                                              const filteredQuestions =
+                                                                s.questions.filter(
                                                                   (q) => q.added
-                                                                )
-                                                                .filter(
+                                                                );
+
+                                                              // Step 2: Pull the target question to edit (from previous list)
+                                                              const questionToEdit =
+                                                                {
+                                                                  ...filteredQuestions[
+                                                                    qindex
+                                                                  ],
+                                                                  added: false,
+                                                                };
+
+                                                              // Step 3: Remove the original version of that question (it was at qindex before filtering)
+                                                              const updatedQuestions =
+                                                                filteredQuestions.filter(
                                                                   (_, i) =>
                                                                     i !== qindex
-                                                                ); // remove the clicked added question
+                                                                );
 
-                                                            const updatedNonAdded =
-                                                              s.questions.filter(
-                                                                (q) => !q.added
-                                                              );
+                                                              // Step 4: Return updated section
+                                                              return {
+                                                                ...s,
+                                                                questions: [
+                                                                  ...updatedQuestions,
+                                                                  questionToEdit,
+                                                                ], // Add editable question at the end
+                                                              };
+                                                            }
 
-                                                            return {
-                                                              ...s,
-                                                              questions: [
-                                                                ...updatedAdded,
-                                                                ...updatedNonAdded,
-                                                              ],
-                                                            };
+                                                            return s;
                                                           }
-                                                          return s;
-                                                        }
-                                                      );
+                                                        );
 
-                                                    return {
-                                                      ...prev,
-                                                      [subject]:
-                                                        updatedSections,
-                                                    };
-                                                  });
-                                                }}
-                                                size={16}
-                                                className="hover:text-red-700 cursor-pointer opacity-70"
-                                              />
+                                                      return {
+                                                        ...prev,
+                                                        [subject]:
+                                                          updatedSections,
+                                                      };
+                                                    });
+                                                  }}
+                                                />
+
+                                                <Trash2
+                                                  onClick={() => {
+                                                    setData((prev) => {
+                                                      const updatedSections =
+                                                        prev[subject].map(
+                                                          (s, i) => {
+                                                            if (i === index) {
+                                                              const updatedAdded =
+                                                                s.questions
+                                                                  .filter(
+                                                                    (q) =>
+                                                                      q.added
+                                                                  )
+                                                                  .filter(
+                                                                    (_, i) =>
+                                                                      i !==
+                                                                      qindex
+                                                                  ); // remove the clicked added question
+
+                                                              const updatedNonAdded =
+                                                                s.questions.filter(
+                                                                  (q) =>
+                                                                    !q.added
+                                                                );
+
+                                                              return {
+                                                                ...s,
+                                                                questions: [
+                                                                  ...updatedAdded,
+                                                                  ...updatedNonAdded,
+                                                                ],
+                                                              };
+                                                            }
+                                                            return s;
+                                                          }
+                                                        );
+
+                                                      return {
+                                                        ...prev,
+                                                        [subject]:
+                                                          updatedSections,
+                                                      };
+                                                    });
+                                                  }}
+                                                  size={16}
+                                                  className="hover:text-red-700 cursor-pointer opacity-70"
+                                                />
+                                              </div>
                                             </div>
-                                          </div>
-                                        </AccordionContent>
-                                      </AccordionItem>
-                                    ))}
-                                </Accordion>
-                              </AccordionContent>
-                            </AccordionItem>
-                          </Accordion>
-                        )}
-                      </TabsContent>
-                    ))}
-                  </div>
-                </Tabs>
-              </Card>
-            </TabsContent>
-          ))}
-        </Tabs>
+                                          </AccordionContent>
+                                        </AccordionItem>
+                                      ))}
+                                  </Accordion>
+                                </AccordionContent>
+                              </AccordionItem>
+                            </Accordion>
+                          )}
+                        </TabsContent>
+                      ))}
+                    </div>
+                  </Tabs>
+                </Card>
+              </TabsContent>
+            ))}
+          </Tabs>
 
-        <Card className="p-6">
-          <Button className="w-full" onClick={handleSave}>
-            Save Test Batch
-          </Button>
-        </Card>
+          <Card className="p-6">
+            <Button className="w-full" onClick={handleSave}>
+              Save Test Batch
+            </Button>
+          </Card>
+        </div>
       </div>
-    </div>
+      <div className="flex-1">
+        
+      </div>
+    </section>
   );
 }
 ``;

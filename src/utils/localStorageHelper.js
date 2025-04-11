@@ -337,7 +337,7 @@ export const calculateScoreFromLocalStorage = (qData) => {
   return scoreTemplate;
 };
 
-function capitalize(word) {
+export function capitalize(word) {
   return word.charAt(0).toUpperCase() + word.slice(1);
 }
 

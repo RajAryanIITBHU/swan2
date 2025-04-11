@@ -1,7 +1,10 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Input } from "./ui/input";
-import { updateAnswerInLocalStorage } from "@/utils/localStorageHelper"; 
+import { updateAnswerInLocalStorage } from "@/utils/localStorageHelper";
+import DOMPurify from "dompurify";
+import { MathText } from "./MathsText";
+import LatexText from "./LatexText";
 
 export const Question = ({
   question,
@@ -10,26 +13,35 @@ export const Question = ({
   selectedAnswer,
   subject,
 }) => {
-  useEffect(() => {
-    if (window.MathJax) {
-      window.MathJax.typesetPromise?.();
-    }
-  }, [question]);
+  const containerRef = useRef(null);
+  const [renderReady, setRenderReady] = useState(false);
+
+useEffect(() => {
+  setRenderReady(false); // reset before re-render
+  const timeout = setTimeout(() => {
+    setRenderReady(true); // allow typesetting after content mounts
+  }, 0); // defer to next tick
+
+  return () => clearTimeout(timeout);
+}, [question?.content, question?.options]);
+
+useEffect(() => {
+  if (renderReady && window.MathJax && containerRef.current) {
+    window.MathJax.typesetPromise?.([containerRef.current]);
+  }
+}, [renderReady]);
 
   const isMultipleChoice = type === "multi-mcq";
 
   const handleOptionChange = (optionId, checked) => {
-    if (isMultipleChoice) {
-      const current = selectedAnswer || [];
-      const updated = checked
-        ? [...current, optionId]
-        : current.filter((id) => id !== optionId);
-      updateAnswerInLocalStorage(subject, question.id, updated);
-      onAnswer(updated);
-    } else {
-      updateAnswerInLocalStorage(subject, question.id, optionId);
-      onAnswer(optionId);
-    }
+    const updated = isMultipleChoice
+      ? checked
+        ? [...(selectedAnswer || []), optionId]
+        : (selectedAnswer || []).filter((id) => id !== optionId)
+      : optionId;
+
+    updateAnswerInLocalStorage(subject, question.id, updated);
+    onAnswer(updated);
   };
 
   const renderOption = (option) => {
@@ -50,12 +62,7 @@ export const Question = ({
           name={isMultipleChoice ? undefined : `question-${question.id}`}
         />
         <div className="flex-1">
-          {option.text && (
-            <div
-              className="text-gray-700"
-              dangerouslySetInnerHTML={{ __html: option.text }}
-            />
-          )}
+          {option.text && <LatexText text={option.text || ""} />}
           {option.imageUrl && (
             <div className="mt-2">
               <img
@@ -70,33 +77,23 @@ export const Question = ({
     );
   };
 
+  // For integer or decimal type questions
   if (type === "integer" || type === "decimal") {
-    const handleInputChange = (e) => {
-      const val =
-        type === "integer" ? parseInt(e.target.value, 10) : e.target.value;
-
-      updateAnswerInLocalStorage(subject, question.id, val);
-      onAnswer(val);
-    };
-
     return (
-      <div className="space-y-4">
+      <div className="space-y-4" ref={containerRef}>
         {question?.imageUrl && (
           <div className="flex mb-6">
             <img
-              src={question?.imageUrl}
+              src={question.imageUrl}
               alt="Question illustration"
               className="max-w-[400px] rounded-lg shadow-md"
             />
           </div>
         )}
-        <p
-          className="text-lg font-medium"
-          dangerouslySetInnerHTML={{ __html: question?.content }}
-        />
+        <LatexText text={question?.content || ""} />
         {type === "decimal" && (
           <p className="text-lg pl-2 font-semibold opacity-75">
-            {"("}Answer up to decimal places{")"}
+            (Answer up to decimal places)
           </p>
         )}
         <Input
@@ -104,7 +101,7 @@ export const Question = ({
           value={selectedAnswer || ""}
           onChange={(e) => {
             const val = e.target.value;
-            onAnswer(val); // Always update answer as raw string
+            onAnswer(val);
             updateAnswerInLocalStorage(subject, question.id, val);
           }}
           className="w-full p-2 border rounded-md outline-none"
@@ -114,16 +111,14 @@ export const Question = ({
     );
   }
 
+  // For MCQ type questions
   return (
-    <div className="space-y-4">
-      <p
-        className="text-lg font-medium"
-        dangerouslySetInnerHTML={{ __html: question?.content }}
-      />
+    <div className="space-y-4" ref={containerRef}>
+      <LatexText text={question?.content || ""} />
       {question?.imageUrl && (
         <div className="flex mb-6">
           <img
-            src={question?.imageUrl}
+            src={question.imageUrl}
             alt="Question illustration"
             className="max-w-[600px] rounded-lg shadow-md"
           />
@@ -135,4 +130,5 @@ export const Question = ({
       <div className="space-y-2">{question?.options?.map(renderOption)}</div>
     </div>
   );
+
 };

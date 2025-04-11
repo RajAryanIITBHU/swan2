@@ -42,9 +42,9 @@ const INITIAL_TIME = 10800;
 const MAX_WARNINGS = 3;
 
 export default function TestPage() {
-  const { data: session, status,update } = useSession();
+  const { data: session, status, update } = useSession();
   const params = useParams();
-  const router = useRouter()
+  const router = useRouter();
 
   const [result, setResult] = useState(null);
   const [state, setState] = useState({
@@ -81,9 +81,38 @@ export default function TestPage() {
   });
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    console.log(name, value);
-    setUserData((prev) => ({ ...prev, [name]: value }));
+const { name, value } = e.target;
+
+    if (name === "password"){
+      const digits = value.replace(/\D/g, "");
+
+      let formatted = "";
+
+      if (digits.length <= 2) {
+        formatted = digits;
+      } else if (digits.length <= 4) {
+        formatted = `${digits.slice(0, 2)}/${digits.slice(2)}`;
+      } else {
+        formatted = `${digits.slice(0, 2)}/${digits.slice(2, 4)}/${digits.slice(
+          4,
+          8
+        )}`;
+      }
+
+      if (digits.length === 2 || digits.length === 4) {
+        formatted += "/";
+      }
+
+      setUserData((prev) => ({
+        ...prev,
+        [name]: formatted,
+      }));
+    }else{
+      setUserData((prev) => ({
+        ...prev,
+        [name]: value,
+      }));
+    }
   };
 
   const handleContinue = async () => {
@@ -112,7 +141,11 @@ export default function TestPage() {
 
   const handleTestStart = () => {
     setIsIntruction({ next: true, previous: true });
-    setState((p) => ({ ...p, isTestStarted: true }));
+    setState((p) => ({
+      ...p,
+      isTestStarted: true,
+      timeRemaining: new Date(qData?.endDate) - new Date(),
+    }));
   };
 
   const currentSectionQuestions = questions.filter(
@@ -132,7 +165,8 @@ export default function TestPage() {
       const res = await fetch(`/api/read/${batch}/${testName}`);
       const data = await res.json();
       setQDtata(data);
-      console.log(data);
+
+      
 
       initializeLocalStorageWithQuestionsBySections({
         physics: data?.physics,
@@ -224,50 +258,49 @@ export default function TestPage() {
   useEffect(() => {
     if (!isInstruction.next || !isInstruction.previous) return;
 
-     let isWarningHandled = false;
-     let warningTimeout;
+    let isWarningHandled = false;
+    let warningTimeout;
 
-     const handleVisibilityChange = () => {
-       if (document.hidden && !isWarningHandled) {
-         isWarningHandled = true;
-         handleWarning();
-         warningTimeout = setTimeout(() => {
-           isWarningHandled = false;
-         }, 1000);
-       }
-     };
+    const handleVisibilityChange = () => {
+      if (document.hidden && !isWarningHandled) {
+        isWarningHandled = true;
+        handleWarning();
+        warningTimeout = setTimeout(() => {
+          isWarningHandled = false;
+        }, 1000);
+      }
+    };
 
-     const handleBlur = () => {
-       if (!isWarningHandled) {
-         isWarningHandled = true;
-         handleWarning();
-         warningTimeout = setTimeout(() => {
-           isWarningHandled = false;
-         }, 1000);
-       }
-     };
+    const handleBlur = () => {
+      if (!isWarningHandled) {
+        isWarningHandled = true;
+        handleWarning();
+        warningTimeout = setTimeout(() => {
+          isWarningHandled = false;
+        }, 1000);
+      }
+    };
 
-     const handleFullscreenChange = () => {
-       if (!document.fullscreenElement && !isWarningHandled) {
-         isWarningHandled = true;
-         handleWarning();
-         warningTimeout = setTimeout(() => {
-           isWarningHandled = false;
-         }, 1000);
-       }
-     };
+    const handleFullscreenChange = () => {
+      if (!document.fullscreenElement && !isWarningHandled) {
+        isWarningHandled = true;
+        handleWarning();
+        warningTimeout = setTimeout(() => {
+          isWarningHandled = false;
+        }, 1000);
+      }
+    };
 
-     document.addEventListener("visibilitychange", handleVisibilityChange);
-     window.addEventListener("blur", handleBlur);
-     document.addEventListener("fullscreenchange", handleFullscreenChange);
+    document.addEventListener("visibilitychange", handleVisibilityChange);
+    window.addEventListener("blur", handleBlur);
+    document.addEventListener("fullscreenchange", handleFullscreenChange);
 
-     return () => {
-       document.removeEventListener("visibilitychange", handleVisibilityChange);
-       window.removeEventListener("blur", handleBlur);
-       document.removeEventListener("fullscreenchange", handleFullscreenChange);
-       clearTimeout(warningTimeout);
-     };
-
+    return () => {
+      document.removeEventListener("visibilitychange", handleVisibilityChange);
+      window.removeEventListener("blur", handleBlur);
+      document.removeEventListener("fullscreenchange", handleFullscreenChange);
+      clearTimeout(warningTimeout);
+    };
   }, [isInstruction, handleWarning]);
 
   const handleAnswer = (qid, answer) => {
@@ -339,12 +372,12 @@ export default function TestPage() {
   };
 
   const handleEndTest = useCallback(() => {
-    if (!state.isTestEnded) {
-      const confirmEnd = window.confirm(
-        "Are you sure you want to submit the test?"
-      );
-      if (!confirmEnd) return;
-    }
+    // if (!state.isTestEnded) {
+    //   const confirmEnd = window.confirm(
+    //     "Are you sure you want to submit the test?"
+    //   );
+    //   if (!confirmEnd) return;
+    // }
     setState((prev) => ({ ...prev, isTestEnded: true }));
     if (document.fullscreenElement) {
       document.exitFullscreen();
@@ -366,7 +399,7 @@ export default function TestPage() {
       const batch = qData.batchName;
       const docId = `${batch}-${testId}`;
       const testDocRef = doc(db, "users", session.user.id, "tests", docId);
-      let at = 1
+      let at = 1;
 
       try {
         const testSnap = await getDoc(testDocRef);
@@ -375,7 +408,7 @@ export default function TestPage() {
         const previousUserAnswers = existingData.userAnswers || [];
         const previousResults = existingData.results || [];
         const attemptCount = (existingData.attempts || 0) + 1;
-        at = attemptCount
+        at = attemptCount;
 
         const paperTotal =
           qData.physics
@@ -414,13 +447,10 @@ export default function TestPage() {
 
         await setDoc(testDocRef, testData);
 
-       
-
         console.log(
           "✅ Test result and attempts saved under test doc (array-based)"
         );
 
-        // Session Update
         // const updatedAnswers = [
         //   ...(session?.user?.tests?.[docId] || []),
         //   {
@@ -429,18 +459,29 @@ export default function TestPage() {
         //   },
         // ];
 
-        // update({
-        //   tests: {
-        //     ...(session?.user?.tests || {}),
-        //     [docId]: updatedAnswers,
-        //   },
-        // })
-        //   .then((res) => console.log("✅ Session updated:", res))
-        //   .catch((err) => console.error("❌ Update failed:", err));
+        if (docId in session?.user?.tests) {
+          update({
+            tests: {
+              ...(session?.user?.tests || {}),
+              [docId]: session.user.tests[docId] + 1,
+            },
+          })
+            .then((res) => console.log("✅ Session updated:", res))
+            .catch((err) => console.error("❌ Update failed:", err));
+        } else {
+          update({
+            tests: {
+              ...(session?.user?.tests || {}),
+              [docId]: 1,
+            },
+          })
+            .then((res) => console.log("✅ Session initialized:", res))
+            .catch((err) => console.error("❌ Init failed:", err));
+        }
 
         localStorage.removeItem("data");
-         router.push(`/results/${docId}-${at}`);
 
+        router.push(`/results/${docId}-${at}`);
       } catch (error) {
         console.error("❌ Error saving result to Firestore:", error);
       }
@@ -454,35 +495,37 @@ export default function TestPage() {
     }
   }, []);
 
-  useEffect(() => {
-    
-      const blockContextMenu = (e) => e.preventDefault();
-      const blockKeyDown = (e) => {
-        if (
-          e.ctrlKey ||
-          e.key === "F12" ||
-          (e.metaKey && e.shiftKey) ||
-          (e.ctrlKey && e.shiftKey)
-        ) {
-          e.preventDefault();
-        }
-      };
+  // useEffect(() => {
 
-      document.addEventListener("contextmenu", blockContextMenu);
-      document.addEventListener("keydown", blockKeyDown);
+  //     const blockContextMenu = (e) => e.preventDefault();
+  //     const blockKeyDown = (e) => {
+  //       if (
+  //         e.ctrlKey ||
+  //         e.key === "F12" ||
+  //         (e.metaKey && e.shiftKey) ||
+  //         (e.ctrlKey && e.shiftKey)
+  //       ) {
+  //         e.preventDefault();
+  //       }
+  //     };
 
-      document.documentElement.requestFullscreen?.().catch(console.warn);
+  //     document.addEventListener("contextmenu", blockContextMenu);
+  //     document.addEventListener("keydown", blockKeyDown);
 
-      return () => {
-        document.removeEventListener("contextmenu", blockContextMenu);
-        document.removeEventListener("keydown", blockKeyDown);
-      };
-    
-  }, []);
+  //     document.documentElement.requestFullscreen?.().catch(console.warn);
+
+  //     return () => {
+  //       document.removeEventListener("contextmenu", blockContextMenu);
+  //       document.removeEventListener("keydown", blockKeyDown);
+  //     };
+
+  // }, []);
 
   useEffect(() => {
     fetchData();
   }, []);
+
+  
 
   const handleSaveAndNext = () => {
     const currentSubject = state.currentMainSection.toLowerCase();
@@ -495,7 +538,15 @@ export default function TestPage() {
 
     const currentSection = currentSections[currentSectionIndex];
     const currentQuestions = currentSection.questions || [];
-    const nextQuestionIndex = state.currentQuestionIndex + 1;
+
+    // The issue is likely here - we need to use the actual current index from state
+    // state.currentQuestionIndex might not be accurate if we're directly clicking on questions
+    // Let's find the index of the current question in the current section
+    const currentQIndex = currentQuestions.findIndex(
+      (q) => q.id === state.currentQuestion.id
+    );
+
+    const nextQuestionIndex = currentQIndex + 1;
 
     // If next question exists in the current section
     if (nextQuestionIndex < currentQuestions.length) {
@@ -531,7 +582,6 @@ export default function TestPage() {
       return;
     }
 
-
     const subjectOrder = ["physics", "chemistry", "mathematics"];
     const currentSubjectIndex = subjectOrder.indexOf(currentSubject);
 
@@ -544,7 +594,7 @@ export default function TestPage() {
         setState((prev) => ({
           ...prev,
           currentMainSection:
-            nextSubject[0].toUpperCase() + nextSubject.slice(1),
+            nextSubject.charAt(0).toUpperCase() + nextSubject.slice(1),
           currentSubSection: nextSection.name,
           currentSubSectionType: nextSection.type,
           currentQuestionIndex: 0,
@@ -561,6 +611,100 @@ export default function TestPage() {
     toast.info("🎉 You've reached the end of the test!");
   };
 
+ const handlePrevious = () => {
+   const currentSubject = state.currentMainSection.toLowerCase();
+   const currentSections = qData?.[currentSubject] || [];
+   const currentSectionIndex = currentSections.findIndex(
+     (section) => section.name === state.currentSubSection
+   );
+
+   if (currentSectionIndex === -1) return;
+
+   const currentSection = currentSections[currentSectionIndex];
+   const currentQuestions = currentSection.questions || [];
+
+   // Find the index of the current question in the current section
+   const currentQIndex = currentQuestions.findIndex(
+     (q) => q.id === state.currentQuestion.id
+   );
+
+   const prevQuestionIndex = currentQIndex - 1;
+
+   // If previous question exists in the current section
+   if (prevQuestionIndex >= 0) {
+     const prevQuestion = currentQuestions[prevQuestionIndex];
+
+     setState((prev) => ({
+       ...prev,
+       currentQuestionIndex: prevQuestionIndex,
+       currentQuestion: prevQuestion,
+       currAnswer: state.currAnswers[prevQuestion.id] || null,
+     }));
+
+     markQuestionVisitedInLocalStorage(currentSubject, prevQuestion.id);
+     return;
+   }
+
+   // If we're at the first question of the current section,
+   // move to the last question of the previous section
+   if (prevQuestionIndex < 0) {
+     const prevSectionIndex = currentSectionIndex - 1;
+
+     // If there's a previous section in the same subject
+     if (prevSectionIndex >= 0) {
+       const prevSection = currentSections[prevSectionIndex];
+       const lastQuestionIndex = prevSection.questions.length - 1;
+       const prevQuestion = prevSection.questions[lastQuestionIndex];
+
+       setState((prev) => ({
+         ...prev,
+         currentSubSection: prevSection.name,
+         currentSubSectionType: prevSection.type,
+         currentQuestionIndex: lastQuestionIndex,
+         currentQuestion: prevQuestion,
+         currAnswer: state.currAnswers[prevQuestion.id] || null,
+       }));
+
+       markQuestionVisitedInLocalStorage(currentSubject, prevQuestion.id);
+       return;
+     }
+
+     // If we're at the first section of the subject, go to the previous subject
+     const subjectOrder = ["physics", "chemistry", "mathematics"];
+     const currentSubjectIndex = subjectOrder.indexOf(currentSubject);
+
+     // Look for the previous available subject
+     for (let i = currentSubjectIndex - 1; i >= 0; i--) {
+       const prevSubject = subjectOrder[i];
+       if ((qData?.[prevSubject] || []).length > 0) {
+         const prevSections = qData[prevSubject];
+         const lastSectionIndex = prevSections.length - 1;
+         const lastSection = prevSections[lastSectionIndex];
+         const lastQuestionIndex = lastSection.questions.length - 1;
+         const lastQuestion = lastSection.questions[lastQuestionIndex];
+
+         setState((prev) => ({
+           ...prev,
+           currentMainSection:
+             prevSubject.charAt(0).toUpperCase() + prevSubject.slice(1),
+           currentSubSection: lastSection.name,
+           currentSubSectionType: lastSection.type,
+           currentQuestionIndex: lastQuestionIndex,
+           currentQuestion: lastQuestion,
+           currAnswer: state.currAnswers[lastQuestion.id] || null,
+         }));
+
+         markQuestionVisitedInLocalStorage(prevSubject, lastQuestion.id);
+         return;
+       }
+     }
+   }
+
+   // If we've reached here, there's no previous question
+   toast.info("You're at the beginning of the test!");
+ };
+
+  // !isInstruction.next && !isInstruction.previous
   if (!isInstruction.next && !isInstruction.previous) {
     return (
       <div className="min-h-screen bg-white flex items-center  flex-col">
@@ -616,7 +760,7 @@ export default function TestPage() {
                   value={userData.password}
                   onChange={handleInputChange}
                   className={`w-full px-3 py-2 border rounded-md text-neutral-900 focus:border-none outline-none focus:outline-none border-none`}
-                  placeholder="Enter your DOB (DD-MM-YYYY)"
+                  placeholder="Enter your DOB (DD/MM/YYYY)"
                   maxLength={10}
                 />
                 <div className="text-neutral-700 px-3 border-l border-l-neutral-300 hover:bg-neutral-200 h-full py-1.5">
@@ -661,316 +805,295 @@ export default function TestPage() {
     );
   }
 
+  // !isInstruction.previous && isInstruction.next
   if (!isInstruction.previous && isInstruction.next) {
+    return (
+      <div className="w-full min-h-screen bg-gray-50 flex flex-col text-gray-900">
+        {/* Header */}
+        <div className="w-full px-6 bg-cyan-500 text-lg font-bold text-white py-2">
+          Instructions
+        </div>
+
+        {/* Main Content */}
+        <div className="w-full flex flex-col gap-6 px-6 py-8 text-sm max-w-4xl mx-auto flex-1 overflow-y-auto">
+          <h2 className="text-center font-semibold text-xl text-gray-800">
+            Read the Instructions Carefully
+          </h2>
+
+          {/* General Instructions */}
+          <section className="bg-white shadow-md rounded-lg p-6 border border-gray-300">
+            <h3 className="font-bold text-lg mb-4">General Instructions</h3>
+            <ol className="list-decimal pl-6 space-y-4">
+              <li>Total duration of the paper is 3 hours (180 minutes).</li>
+              <li>
+                The on-screen countdown timer will display the remaining time.
+                When the timer reaches zero, the paper will end automatically—no
+                input will be accepted after that.
+              </li>
+              <li>
+                The “Submit” button will remain deactivated during the paper and
+                will activate only after the timer reaches zero.
+              </li>
+              <li>
+                The Question Palette on the right side of the screen shows the
+                status of each question:
+                <table className="table-auto border-collapse border border-gray-400 mt-4">
+                  <thead>
+                    <tr>
+                      <th className="border border-gray-400 px-4 py-2">
+                        Symbol
+                      </th>
+                      <th className="border border-gray-400 px-4 py-2">
+                        Description
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td className="border border-gray-400 px-4 py-2">
+                        Not Visited
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2">
+                        You have not visited the question yet.
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="border border-gray-400 px-4 py-2">
+                        Not Answered
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2">
+                        You have not answered the question yet.
+                      </td>
+                    </tr>
+                    {/* Add other rows similarly */}
+                  </tbody>
+                </table>
+              </li>
+            </ol>
+          </section>
+
+          {/* Navigation Instructions */}
+          <section className="bg-white shadow-md rounded-lg p-6 border border-gray-300">
+            <h3 className="font-bold text-lg mb-4">
+              Navigating Through Parts/Sections
+            </h3>
+            <ol className="list-decimal pl-6 space-y-4">
+              <li>
+                Parts (Physics, Chemistry, Mathematics) are displayed at the
+                top.
+              </li>
+              <li>Click “Save & Next” to move to the next question.</li>
+              {/* Add other navigation instructions */}
+            </ol>
+          </section>
+
+          {/* Answering Instructions */}
+          <section className="bg-white shadow-md rounded-lg p-6 border border-gray-300">
+            <h3 className="font-bold text-lg mb-4">Answering a Question</h3>
+            <ul className="list-disc pl-6 space-y-4">
+              <li>
+                Follow instructions for answering specific types of questions.
+              </li>
+              <li>To change an answer, click “Clear Response” first.</li>
+              {/* Add other answering instructions */}
+            </ul>
+          </section>
+
+          {/* Footer */}
+          <div className="w-full bg-white border-t border-gray-300 px-6 pt-8 pb-20 sticky bottom-0">
+            <div className="max-w-4xl mx-auto flex justify-end">
+              <button
+                onClick={() => {
+                  window.scrollTo({ top: 0 });
+                  setIsIntruction({ next: false, previous: true });
+                }}
+                className="flex items-center gap-2 px-4 py-2 bg-cyan-500 text-white font-semibold rounded hover:bg-cyan-600"
+              >
+                Next
+                {/* Replace ChevronRight with an appropriate icon */}
+                <span>&gt;</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  // isInstruction.previous && !isInstruction.next
+  if (isInstruction.previous && !isInstruction.next) {
     return (
       <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
         <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">
-          Instruction
-        </div>
-        <div className="w-full flex flex-col gap-4 px-6 py-8 text-sm max-w-4xl mx-auto flex-1 overflow-y-auto">
-          <h2 className=" text-center font-semibold font-serif">
-            READ THE INSTRUCTIONS CAREFULLY
-          </h2>
-          <span className=" font-semibold font-serif">
-            GENERAL INSTRUCTIONS
-          </span>
-          <ol>
-            <li>Total duration of the paper is 3 hours (180 minutes).</li>
-            <li>
-              The on-screen computer countdown timer on the top right corner of
-              computer screen will display the remaining time (in minutes)
-              available to you for completing the paper. When the on-screen
-              countdown timer reaches zero, the paper will end by itself –{" "}
-              <strong>
-                No input from your side will be accepted after the timer reaches
-                zero
-              </strong>{" "}
-              and whatever answers have been saved by you will automatically be
-              submitted for evaluation.
-            </li>
-            <li>
-              The <strong>“</strong>
-              <strong>Submit</strong>” button present at the bottom right corner
-              of the screen will remain deactivated during the entire 180
-              minutes duration of the paper. Note that the <strong>“</strong>
-              <strong>Submit</strong>
-              <strong>”</strong> button will be activated only after the timer
-              has reached zero and the saved responses will be automatically
-              submitted. It is <strong>NOT</strong> required to click on{" "}
-              <strong>“</strong>
-              <strong>Submit</strong>
-              <strong>”</strong> after the timer has reached zero.
-            </li>
-            <li>
-              The Question Palette displayed on the right side of screen will
-              show the status of each question as per one of the following
-              symbols (<em>the question numbers appear inside the symbols</em>):{" "}
-              <table className="instruction_area" border="1">
-                <tbody>
-                  <tr>
-                    <td>
-                      <span className="not_visited" title="Not Visited">
-                        1
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Not Visited”</strong> - You have not visited the
-                      question yet.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span className="not_answered" title="Not Answered">
-                        2
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Not Answered”</strong> - You have not answered
-                      the question yet.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span className="answered" title="Answered">
-                        3
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Answered”</strong> - You have answered the
-                      question. All these questions will be evaluated.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span className="review" title="Marked for Review">
-                        4
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Marked for Review”</strong> - You have NOT
-                      answered the question but have ONLY marked the question
-                      for review.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span
-                        className="review_marked_considered"
-                        title="Answered &amp; Marked for Review"
-                      >
-                        5
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Answered and Marked for Review”</strong> - You
-                      have answered the question and have also marked it for
-                      review. All these questions will be evaluated.
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </li>{" "}
-            <br />
-            <li>
-              The <strong>“</strong>
-              <strong>Marked for Review</strong>
-              <strong>”</strong> status for a question indicates you would like
-              to look at that question again.
-            </li>
-            <li>
-              You can click on the &quot;&gt;&quot; arrow symbol, which appears
-              to the left of question palette, to collapse the question palette
-              thereby maximizing the question window. To view the question
-              palette again, you can click on &quot;&lt;&quot; symbol which
-              appears on the right side of question window.
-            </li>
-            <li>
-              Before you start the paper, select your default language (either
-              ENGLISH or HINDI) for viewing the questions by selecting your
-              preferred language from the drop down menu under{" "}
-              <strong>“</strong>
-              <strong>Choose your default language</strong>
-              <strong>”</strong> located below the <strong>“</strong>
-              <strong>Instructions to Candidates</strong>
-              <strong>”</strong> section.
-            </li>
-            <li>
-              Anytime during the paper, you can change the question viewing
-              language of the displayed question. To change the question viewing
-              language (either ENGLISH or HINDI) of the displayed question,
-              select the preferred language from the drop down menu under{" "}
-              <strong>“</strong>
-              <strong>View in</strong>
-              <strong>”</strong> located in the upper right side of the question
-              viewing window.
-            </li>
-            <li>
-              Anytime during the paper, you can change the default question
-              viewing language of the question paper. You can click on{" "}
-              <strong>Profile</strong> image on top right corner of computer
-              screen to change the default language (either ENGLISH or HINDI) of
-              the entire question paper during the exam. On clicking of Profile
-              image, you will get an option to change the default question
-              viewing language.
-            </li>
-            <li>
-              You can click on downward arrow symbol{" "}
-              <img
-                className="scrollBottom"
-                id="scrollBottom"
-                src="images/Down.png"
-                title="Scroll Down"
-              />{" "}
-              to navigate to the bottom and upward arrow{" "}
-              <img
-                className="scrollTop"
-                id="scrollTop"
-                src="images/Up.png"
-                title="Scroll Up"
-              />{" "}
-              to navigate to the top of the question area, without scrolling.
-            </li>
-            <li>
-              You can also use the computer mouse to scroll up/down the question
-              viewing area to view complete contents of the question viewing
-              area.
-            </li>
-            <li>
-              At the end of the <strong>“</strong>
-              <strong>Instructions to Candidates</strong>
-              <strong>”</strong> section, you must click on the checkbox beside
-              the <strong>“</strong>
-              <strong>
-                I have read all the instructions and shall abide by them
-              </strong>
-              <strong>”</strong> and then only you will be able to proceed to
-              view and answer the questions at the start of the paper. Your
-              on-screen clock will start at the designated time of the start of
-              the paper.
-            </li>
-            <li>
-              The full question paper can be viewed anytime during the paper by
-              clicking the <strong>“</strong>
-              <strong>Question Paper</strong>
-              <strong>”</strong> button on the top right corner of the computer
-              screen.
-            </li>
-            <li>
-              These instructions can be viewed anytime during the paper by
-              clicking <strong>“</strong>
-              <strong>Instructions</strong>
-              <strong>”</strong> button located at the top right corner of the
-              computer screen.
-            </li>
-          </ol>
-          <strong>NAVIGATING THROUGH PARTS</strong>/
-          <strong>SECTIONS OF QUESTION PAPER</strong>
-          <br />
-          <ol>
-            <li>
-              Parts (PHYSICS, CHEMISTRY and MATHEMATICS) and sections of the
-              parts thereof in the question paper are displayed on the top of
-              the screen. Questions within a section can be viewed by clicking
-              on the corresponding section name. The section which you will be
-              viewing will be highlighted.
-            </li>
-            <li>
-              After clicking the<strong> “Save &amp; Next”</strong> button on
-              the last question of a part/section, you will automatically be
-              taken to the first question of the next part/section.
-            </li>
-            <li>
-              You can navigate between parts/sections and questions within
-              parts/sections anytime during the paper as per your convenience.
-            </li>
-            <li>
-              You can view the corresponding section summary which will be
-              visible in every section above the question palette.
-            </li>
-          </ol>
-          <div className="MsoNormal">
-            <strong>NAVIGATING TO A QUESTION</strong>
-            <br /> <br /> To navigate between questions, you need to do the
-            following:
-          </div>
-          <ol type="a" start="1">
-            <li>
-              Click on the question number in the Question Palette at the right
-              of the screen to go to that numbered question directly.{" "}
-              <strong>
-                Note that using this option does NOT save the answer (if it is
-                answered) to the current question. To save the answer, you must
-                click on{" "}
-              </strong>
-              <strong>“</strong>
-              <strong>Save &amp; Next” </strong>button<strong>.</strong>
-            </li>
-            <li>
-              Click on <strong>“</strong>
-              <strong>Save &amp; Next</strong>
-              <strong>” </strong>button to save the answer for the current
-              question and then go to the next question.
-            </li>
-            <li>
-              Click on <strong>“</strong>
-              <strong>Mark for Review &amp; Next</strong>
-              <strong>”</strong> button to mark it for review (with or without
-              answering the question) and go to the next question.
-            </li>
-          </ol>
-          <strong>ANSWERING A QUESTION </strong>
-          <ul>
-            {" "}
-            <li>
-              Follow the procedure, given in <b>“Instructions to Candidates”</b>{" "}
-              section
-              <font
-                size="2"
-                face="Default Monospace,Courier New,Courier,monospace"
-              >
-                {" "}
-              </font>
-              (click on <b>&apos;Next&apos;</b> below), for answering a
-              particular type of question.
-            </li>{" "}
-            <li>
-              To change the answer of a question that has already been answered,
-              if required, first click on the <strong>“</strong>
-              <strong>Clear Response</strong>
-              <strong>”</strong> button to clear the saved answer and then
-              follow the procedure for answering that type of question.
-            </li>{" "}
-            <li>
-              To mark a question ONLY for review (i.e. without answering it),
-              click on the <strong>“</strong>
-              <strong>Mark for Review &amp; Next</strong>
-              <strong>”</strong> button.
-            </li>{" "}
-            <li>
-              To mark a question for review (after answering it), click on{" "}
-              <strong>“</strong>
-              <strong>Mark for Review &amp; Next</strong>
-              <strong>”</strong> button – the answered question which is also
-              marked for review will be evaluated.
-            </li>{" "}
-            <li>
-              To save the answer, click on the <strong>“</strong>
-              <strong>Save &amp; Next</strong>
-              <strong>” </strong>button - the answered question will be
-              evaluated.
-            </li>{" "}
-          </ul>
+          Exam Instructions
         </div>
 
-        <div className="w-full bg-white border-t border-t-neutral-500 px-6 pt-8 pb-20 sticky bottom-0">
+        <div className="w-full flex flex-col gap-6 px-6 py-8 text-sm max-w-4xl mx-auto flex-1 overflow-y-auto">
+          {/* SECTION 1 */}
+          <section className="bg-white shadow-md rounded-lg p-6 border border-gray-300">
+            <h3 className="font-bold text-lg mb-4">
+              SECTION 1 (Maximum Marks: 12)
+            </h3>
+            <ol className="list-decimal pl-6 space-y-4">
+              <li>This section contains FOUR (04) questions.</li>
+              <li>
+                Each question has FOUR options (A), (B), (C) and (D). ONLY ONE
+                correct answer.
+              </li>
+              <li>
+                Marking Scheme:
+                <table className="border-collapse border border-gray-400 mt-4 w-full">
+                  <tbody>
+                    <tr>
+                      <td className="border border-gray-400 px-4 py-2 font-semibold">
+                        Full Marks
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2">
+                        +3 for correct answer
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="border border-gray-400 px-4 py-2 font-semibold">
+                        Zero Marks
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2">
+                        0 if unanswered
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ol>
+          </section>
+
+          {/* SECTION 2 */}
+          <section className="bg-white shadow-md rounded-lg p-6 border border-gray-300">
+            <h3 className="font-bold text-lg mb-4">
+              SECTION 2 (Maximum Marks: 12)
+            </h3>
+            <ol className="list-decimal pl-6 space-y-4">
+              <li>This section contains THREE (03) questions.</li>
+              <li>
+                Each question has FOUR options. ONE OR MORE correct answers.
+              </li>
+              <li>
+                Marking Scheme:
+                <table className="border-collapse border border-gray-400 mt-4 w-full">
+                  <thead>
+                    <tr>
+                      <th className="border border-gray-400 px-4 py-2">
+                        Scenario
+                      </th>
+                      <th className="border border-gray-400 px-4 py-2">
+                        Marks
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>All correct options chosen</td>
+                      <td>+4</td>
+                    </tr>
+                    <tr>
+                      <td>3 correct out of 4 options</td>
+                      <td>+3</td>
+                    </tr>
+                    <tr>
+                      <td>2 correct options chosen</td>
+                      <td>+2</td>
+                    </tr>
+                    <tr>
+                      <td>1 correct option chosen</td>
+                      <td>+1</td>
+                    </tr>
+                    <tr>
+                      <td>Incorrect combination</td>
+                      <td>-2</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ol>
+          </section>
+
+          {/* SECTION 3 */}
+          <section className="bg-white shadow-md rounded-lg p-6 border border-gray-300">
+            <h3 className="font-bold text-lg mb-4">
+              SECTION 3 (Maximum Marks: 24)
+            </h3>
+            <ol className="list-decimal pl-6 space-y-4">
+              <li>This section contains SIX (06) questions.</li>
+              <li>Non-negative integer answers only.</li>
+              <li>
+                Marking Scheme:
+                <table className="border-collapse border border-gray-400 mt-4 w-full">
+                  <tbody>
+                    <tr>
+                      <td className="border border-gray-400 px-4 py-2 font-semibold">
+                        Full Marks
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2">
+                        +4 for correct integer
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ol>
+          </section>
+
+          {/* SECTION 4 */}
+          <section className="bg-white shadow-md rounded-lg p-6 border border-gray-300">
+            <h3 className="font-bold text-lg mb-4">
+              SECTION 4 (Maximum Marks: 12)
+            </h3>
+            <ol className="list-decimal pl-6 space-y-4">
+              <li>Contains FOUR (04) Matching List Sets.</li>
+              <li>
+                Matching Structure:
+                <table className="border-collapse border border-gray-400 mt-4 w-full">
+                  <thead>
+                    <tr>
+                      <th className="border border-gray-400 px-4 py-2">
+                        List-I
+                      </th>
+                      <th className="border border-gray-400 px-4 py-2">
+                        List-II
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>4 entries (P, Q, R, S)</td>
+                      <td>5 entries (1-5)</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+              <li>
+                Marking Scheme:
+                <table className="border-collapse border border-gray-400 mt-4 w-full">
+                  <tbody>
+                    <tr>
+                      <td className="border border-gray-400 px-4 py-2 font-semibold">
+                        Full Marks
+                      </td>
+                      <td className="border border-gray-400 px-4 py-2">
+                        +3 for correct combination
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </li>
+            </ol>
+          </section>
+        </div>
+
+        {/* Footer */}
+        <div className="w-full bg-white border-t border-neutral-500 px-6 pt-8 pb-20 sticky bottom-0">
           <div className="max-w-4xl mx-auto flex justify-end">
             <button
-              onClick={() => {
-                window.scrollTo({
-                  top: 0,
-                });
-                setIsIntruction({ next: false, previous: true });
-              }}
+              onClick={handleTestStart}
               className="flex items-center gap-2 px-4 py-2 border border-neutral-500 bg-neutral-100 hover:bg-neutral-200"
             >
               Next <ChevronRight size={24} />
@@ -981,426 +1104,84 @@ export default function TestPage() {
     );
   }
 
-  if (isInstruction.previous && !isInstruction.next) {
+  if (state.isTestEnded) {
     return (
-      <div className="w-full min-h-screen bg-white flex flex-col text-neutral-900">
-        <div className="w-full px-6 bg-cyan-200 text-lg font-bold text-neutral-600 tracking-wide py-1.5">
-          Instruction
-        </div>
-        <div className="w-full flex flex-col gap-4 px-6 py-8 text-sm max-w-4xl mx-auto flex-1 overflow-y-auto">
-          <h2 className=" text-center font-semibold font-serif">
-            READ THE INSTRUCTIONS CAREFULLY
-          </h2>
-          <span className=" font-semibold font-serif">
-            GENERAL INSTRUCTIONS
-          </span>
-          <ol>
-            <li>Total duration of the paper is 3 hours (180 minutes).</li>
-            <li>
-              The on-screen computer countdown timer on the top right corner of
-              computer screen will display the remaining time (in minutes)
-              available to you for completing the paper. When the on-screen
-              countdown timer reaches zero, the paper will end by itself –{" "}
-              <strong>
-                No input from your side will be accepted after the timer reaches
-                zero
-              </strong>{" "}
-              and whatever answers have been saved by you will automatically be
-              submitted for evaluation.
-            </li>
-            <li>
-              The <strong>“</strong>
-              <strong>Submit</strong>” button present at the bottom right corner
-              of the screen will remain deactivated during the entire 180
-              minutes duration of the paper. Note that the <strong>“</strong>
-              <strong>Submit</strong>
-              <strong>”</strong> button will be activated only after the timer
-              has reached zero and the saved responses will be automatically
-              submitted. It is <strong>NOT</strong> required to click on{" "}
-              <strong>“</strong>
-              <strong>Submit</strong>
-              <strong>”</strong> after the timer has reached zero.
-            </li>
-            <li>
-              The Question Palette displayed on the right side of screen will
-              show the status of each question as per one of the following
-              symbols (<em>the question numbers appear inside the symbols</em>
-              ):{" "}
-              <table className="instruction_area" border="1">
-                <tbody>
-                  <tr>
-                    <td>
-                      <span className="not_visited" title="Not Visited">
-                        1
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Not Visited”</strong> - You have not visited the
-                      question yet.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span className="not_answered" title="Not Answered">
-                        2
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Not Answered”</strong> - You have not answered
-                      the question yet.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span className="answered" title="Answered">
-                        3
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Answered”</strong> - You have answered the
-                      question. All these questions will be evaluated.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span className="review" title="Marked for Review">
-                        4
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Marked for Review”</strong> - You have NOT
-                      answered the question but have ONLY marked the question
-                      for review.
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <span
-                        className="review_marked_considered"
-                        title="Answered &amp; Marked for Review"
-                      >
-                        5
-                      </span>
-                    </td>
-                    <td>
-                      <strong>“Answered and Marked for Review”</strong> - You
-                      have answered the question and have also marked it for
-                      review. All these questions will be evaluated.
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </li>{" "}
-            <br />
-            <li>
-              The <strong>“</strong>
-              <strong>Marked for Review</strong>
-              <strong>”</strong> status for a question indicates you would like
-              to look at that question again.
-            </li>
-            <li>
-              You can click on the &quot;&gt;&quot; arrow symbol, which appears
-              to the left of question palette, to collapse the question palette
-              thereby maximizing the question window. To view the question
-              palette again, you can click on &quot;&lt;&quot; symbol which
-              appears on the right side of question window.
-            </li>
-            <li>
-              Before you start the paper, select your default language (either
-              ENGLISH or HINDI) for viewing the questions by selecting your
-              preferred language from the drop down menu under{" "}
-              <strong>“</strong>
-              <strong>Choose your default language</strong>
-              <strong>”</strong> located below the <strong>“</strong>
-              <strong>Instructions to Candidates</strong>
-              <strong>”</strong> section.
-            </li>
-            <li>
-              Anytime during the paper, you can change the question viewing
-              language of the displayed question. To change the question viewing
-              language (either ENGLISH or HINDI) of the displayed question,
-              select the preferred language from the drop down menu under{" "}
-              <strong>“</strong>
-              <strong>View in</strong>
-              <strong>”</strong> located in the upper right side of the question
-              viewing window.
-            </li>
-            <li>
-              Anytime during the paper, you can change the default question
-              viewing language of the question paper. You can click on{" "}
-              <strong>Profile</strong> image on top right corner of computer
-              screen to change the default language (either ENGLISH or HINDI) of
-              the entire question paper during the exam. On clicking of Profile
-              image, you will get an option to change the default question
-              viewing language.
-            </li>
-            <li>
-              You can click on downward arrow symbol{" "}
-              <img
-                className="scrollBottom"
-                id="scrollBottom"
-                src="images/Down.png"
-                title="Scroll Down"
-              />{" "}
-              to navigate to the bottom and upward arrow{" "}
-              <img
-                className="scrollTop"
-                id="scrollTop"
-                src="images/Up.png"
-                title="Scroll Up"
-              />{" "}
-              to navigate to the top of the question area, without scrolling.
-            </li>
-            <li>
-              You can also use the computer mouse to scroll up/down the question
-              viewing area to view complete contents of the question viewing
-              area.
-            </li>
-            <li>
-              At the end of the <strong>“</strong>
-              <strong>Instructions to Candidates</strong>
-              <strong>”</strong> section, you must click on the checkbox beside
-              the <strong>“</strong>
-              <strong>
-                I have read all the instructions and shall abide by them
-              </strong>
-              <strong>”</strong> and then only you will be able to proceed to
-              view and answer the questions at the start of the paper. Your
-              on-screen clock will start at the designated time of the start of
-              the paper.
-            </li>
-            <li>
-              The full question paper can be viewed anytime during the paper by
-              clicking the <strong>“</strong>
-              <strong>Question Paper</strong>
-              <strong>”</strong> button on the top right corner of the computer
-              screen.
-            </li>
-            <li>
-              These instructions can be viewed anytime during the paper by
-              clicking <strong>“</strong>
-              <strong>Instructions</strong>
-              <strong>”</strong> button located at the top right corner of the
-              computer screen.
-            </li>
-          </ol>
-          <strong>NAVIGATING THROUGH PARTS</strong>/
-          <strong>SECTIONS OF QUESTION PAPER</strong>
-          <br />
-          <ol>
-            <li>
-              Parts (PHYSICS, CHEMISTRY and MATHEMATICS) and sections of the
-              parts thereof in the question paper are displayed on the top of
-              the screen. Questions within a section can be viewed by clicking
-              on the corresponding section name. The section which you will be
-              viewing will be highlighted.
-            </li>
-            <li>
-              After clicking the<strong> “Save &amp; Next”</strong> button on
-              the last question of a part/section, you will automatically be
-              taken to the first question of the next part/section.
-            </li>
-            <li>
-              You can navigate between parts/sections and questions within
-              parts/sections anytime during the paper as per your convenience.
-            </li>
-            <li>
-              You can view the corresponding section summary which will be
-              visible in every section above the question palette.
-            </li>
-          </ol>
-          <div className="MsoNormal">
-            <strong>NAVIGATING TO A QUESTION</strong>
-            <br /> <br /> To navigate between questions, you need to do the
-            following:
-          </div>
-          <ol type="a" start="1">
-            <li>
-              Click on the question number in the Question Palette at the right
-              of the screen to go to that numbered question directly.{" "}
-              <strong>
-                Note that using this option does NOT save the answer (if it is
-                answered) to the current question. To save the answer, you must
-                click on{" "}
-              </strong>
-              <strong>“</strong>
-              <strong>Save &amp; Next” </strong>button<strong>.</strong>
-            </li>
-            <li>
-              Click on <strong>“</strong>
-              <strong>Save &amp; Next</strong>
-              <strong>” </strong>button to save the answer for the current
-              question and then go to the next question.
-            </li>
-            <li>
-              Click on <strong>“</strong>
-              <strong>Mark for Review &amp; Next</strong>
-              <strong>”</strong> button to mark it for review (with or without
-              answering the question) and go to the next question.
-            </li>
-          </ol>
-          <strong>ANSWERING A QUESTION </strong>
-          <ul>
-            {" "}
-            <li>
-              Follow the procedure, given in <b>“Instructions to Candidates”</b>{" "}
-              section
-              <font
-                size="2"
-                face="Default Monospace,Courier New,Courier,monospace"
-              >
-                {" "}
-              </font>
-              (click on <b>&apos;Next&apos;</b> below), for answering a
-              particular type of question.
-            </li>{" "}
-            <li>
-              To change the answer of a question that has already been answered,
-              if required, first click on the <strong>“</strong>
-              <strong>Clear Response</strong>
-              <strong>”</strong> button to clear the saved answer and then
-              follow the procedure for answering that type of question.
-            </li>{" "}
-            <li>
-              To mark a question ONLY for review (i.e. without answering it),
-              click on the <strong>“</strong>
-              <strong>Mark for Review &amp; Next</strong>
-              <strong>”</strong> button.
-            </li>{" "}
-            <li>
-              To mark a question for review (after answering it), click on{" "}
-              <strong>“</strong>
-              <strong>Mark for Review &amp; Next</strong>
-              <strong>”</strong> button – the answered question which is also
-              marked for review will be evaluated.
-            </li>{" "}
-            <li>
-              To save the answer, click on the <strong>“</strong>
-              <strong>Save &amp; Next</strong>
-              <strong>” </strong>button - the answered question will be
-              evaluated.
-            </li>{" "}
-          </ul>
-        </div>
-
-        <div className="w-full bg-white border-t border-t-neutral-500 px-6 pt-8 pb-20 sticky bottom-0">
-          <div className="max-w-4xl mx-auto flex justify-between">
-            <button
-              onClick={() => {
-                window.scrollTo({
-                  top: 0,
-                });
-
-                setIsIntruction({ next: true, previous: false });
-              }}
-              className="flex items-center gap-2 px-4 py-2 border border-neutral-500 bg-neutral-100 hover:bg-neutral-200"
-            >
-              <ChevronLeft size={24} />
-              Previous
-            </button>
-            <button
-              onClick={handleTestStart}
-              className="px-4 py-2 bg-blue-400 text-white rounded border border-blue-600"
-            >
-              I am Ready to Begin
-            </button>
-          </div>
-        </div>
+      <div className="w-full h-screen flex justify-center items-center">
+        <p className="text-xl font-medium">Loading Result ...</p>
       </div>
     );
   }
 
-  if (state.isTestEnded ) {
-    return <div className="w-full h-screen flex justify-center items-center">
-      <p className="text-xl font-medium">Loading Result ...</p>
-    </div>;
-  }
-
   return (
-    <div className="min-h-screen bg-gray-50 text-neutral-800">
+    <div className="min-h-screen relative bg-gray-50 text-neutral-800 flex flex-col">
       {/* Header */}
-      <div className="bg-gray-50 shadow-md">
+      <div className="bg-gray-50 shadow-md sticky top-0 z-10">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between mb-4">
-            <div className="flex gap-4 items-center">
+            {/* <div className="flex gap-4 items-center">
               <img
                 src="/logo/logo.png"
                 alt="JEE Advanced Logo"
                 className="h-12 w-auto"
               />
               <span className="text-lg font-semibold">CBT</span>
-            </div>
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center text-yellow-600">
-                <AlertTriangle className="w-5 h-5 mr-1" />
-                <span>
-                  Warnings: {state.warnings}/{MAX_WARNINGS}
-                </span>
-              </div>
-              <Timer
-                timeRemaining={state.timeRemaining}
-                onTimeEnd={handleEndTest}
-                isTestStarted={state.isTestStarted}
-              />
-            </div>
-          </div>
-
-          <div className="flex justify-between items-center">
-            <div className="flex w-full gap-2">
-              {qData &&
-                ["physics", "chemistry", "mathematics"].map(
-                  (subject, subIndex) => {
-                    if (qData[subject]?.length > 0) {
-                      return (
-                        <div
-                          key={subject}
-                          className="flex flex-col relative gap-2"
-                        >
-                          <h2 className="font-bold capitalize">{subject}</h2>
-                          <div className="flex flex-wrap">
-                            {qData[subject].map((section, secIndex) => (
-                              <div
-                                key={`${secIndex}_${subIndex}`}
-                                className={`px-4 w-fit py-2 border border-gray-400 cursor-pointer ${
-                                  state.currentMainSection ===
-                                    subject.charAt(0).toUpperCase() +
-                                      subject.slice(1).toLowerCase() &&
-                                  state.currentSubSection === section.name
-                                    ? "bg-blue-500 text-white"
-                                    : "bg-gray-200"
-                                }`}
-                                onClick={() => {
-                                  setState((p) => ({
-                                    ...p,
-                                    currentMainSection:
+            </div> */}
+            <div className="flex justify-between items-center">
+              <div className="flex w-full gap-2">
+                {qData &&
+                  ["physics", "chemistry", "mathematics"].map(
+                    (subject, subIndex) => {
+                      if (qData[subject]?.length > 0) {
+                        return (
+                          <div
+                            key={subject}
+                            className="flex flex-col relative gap-2"
+                          >
+                            <h2 className="font-bold capitalize">{subject}</h2>
+                            <div className="flex flex-wrap">
+                              {qData[subject].map((section, secIndex) => (
+                                <div
+                                  key={`${secIndex}_${subIndex}`}
+                                  className={`px-4 w-fit py-2 border border-gray-400 cursor-pointer ${
+                                    state.currentMainSection ===
                                       subject.charAt(0).toUpperCase() +
-                                      subject.slice(1).toLowerCase(),
-                                    currentSubSection: section.name,
-                                    currentQuestion: section.questions[0],
-                                    currentSubSectionType: section.type,
-                                  }));
+                                        subject.slice(1).toLowerCase() &&
+                                    state.currentSubSection === section.name
+                                      ? "bg-blue-500 text-white"
+                                      : "bg-gray-200"
+                                  }`}
+                                  onClick={() => {
+                                    setState((p) => ({
+                                      ...p,
+                                      currentMainSection:
+                                        subject.charAt(0).toUpperCase() +
+                                        subject.slice(1).toLowerCase(),
+                                      currentSubSection: section.name,
+                                      currentQuestion: section.questions[0],
+                                      currentSubSectionType: section.type,
+                                    }));
 
-                                  markQuestionVisitedInLocalStorage(
-                                    subject,
-                                    section.questions[0].id
-                                  );
-                                }}
-                              >
-                                <span className="font-semibold">
-                                  {section.name}
-                                </span>
-                              </div>
-                            ))}
+                                    markQuestionVisitedInLocalStorage(
+                                      subject,
+                                      section.questions[0].id
+                                    );
+                                  }}
+                                >
+                                  <span className="font-semibold">
+                                    Section {secIndex + 1}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
                           </div>
-                        </div>
-                      );
-                    } else {
-                      return null; // skip if no sections for this subject
+                        );
+                      } else {
+                        return null; // skip if no sections for this subject
+                      }
                     }
-                  }
-                )}
-            </div>
-            {/* <div className="flex flex-col space-y-2">
+                  )}
+              </div>
+              {/* <div className="flex flex-col space-y-2">
               {["Physics", "Chemistry", "Mathematics"].map((section) => (
                 <div key={section} className="flex space-x-2">
                   <button
@@ -1448,17 +1229,31 @@ export default function TestPage() {
                 </div>
               ))}
             </div> */}
+            </div>
+            <div className="flex items-center space-x-4">
+              <div className="flex items-center text-yellow-600">
+                <AlertTriangle className="w-5 h-5 mr-1" />
+                <span>
+                  Warnings: {state.warnings}/{MAX_WARNINGS}
+                </span>
+              </div>
+              <Timer
+                timeRemaining={state.timeRemaining}
+                onTimeEnd={handleEndTest}
+                isTestStarted={state.isTestStarted}
+              />
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-12 gap-8">
+      <div className="container mx-auto px-4 pt-8 pb-4 flex-1 flex flex-col">
+        <div className="flex gap-8 relative min-h-full flex-1">
           {/* Question Display */}
-          <div className="col-span-8 bg-gray-100 rounded-lg shadow-md p-6">
+          <div className="w-2/3  rounded-lg shadow-md p-6">
             {state.currentQuestion ? (
-              <>
+              <div className="flex flex-col gap-4">
                 <Question
                   question={state.currentQuestion}
                   selectedAnswer={
@@ -1469,44 +1264,7 @@ export default function TestPage() {
                     handleAnswer(state.currentQuestion.id, answer)
                   }
                 />
-                <div className="mt-6 flex justify-between">
-                  <button
-                    onClick={() =>
-                      setState((prev) => ({
-                        ...prev,
-                        currentQuestionIndex: Math.max(
-                          0,
-                          prev.currentQuestionIndex - 1
-                        ),
-                      }))
-                    }
-                    disabled={state.currentQuestionIndex === 0}
-                    className="px-4 py-2 bg-gray-100 rounded-lg disabled:opacity-50"
-                  >
-                    Previous
-                  </button>
-                  <div className="space-x-2">
-                    <button
-                      onClick={() => handleClear(state.currentQuestion.id)}
-                      className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200"
-                    >
-                      Clear Response
-                    </button>
-                    {/* <button
-                      onClick={handleMarkForReview}
-                      className="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200"
-                    >
-                      Mark for Review
-                    </button> */}
-                    <button
-                      onClick={handleSaveAndNext}
-                      className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
-                    >
-                      Save & Next
-                    </button>
-                  </div>
-                </div>
-              </>
+              </div>
             ) : (
               <div className="text-center py-8 text-gray-500">
                 No questions available for this section
@@ -1515,7 +1273,7 @@ export default function TestPage() {
           </div>
 
           {/* Question Grid */}
-          <div className="col-span-4 bg-gray-100 rounded-lg shadow-md relative flex flex-col">
+          <div className="w-1/3 rounded-lg min-h-full shadow-md relative flex flex-col">
             <h3 className="p-4 border-b font-semibold text-neutral-700">
               Question Navigation
             </h3>
@@ -1571,15 +1329,46 @@ export default function TestPage() {
                   );
                 })}
             </div>
-
-            <div className="p-4 border-t">
+          </div>
+        </div>
+        <div className="flex w-full sticky bottom-4 gap-8">
+          <div className="mt-6 flex w-2/3 justify-between rounded-xl bg-neutral-50 p-4 shadow-lg  border border-neutral-200">
+            <button
+              onClick={handlePrevious}
+              className="px-4 py-2 bg-gray-200 rounded-lg disabled:opacity-50"
+            >
+              Previous
+            </button>
+            <div className="space-x-2">
+              <button
+                onClick={() => handleClear(state.currentQuestion.id)}
+                className="px-4 py-2 bg-red-100 text-red-700 rounded-lg hover:bg-red-200"
+              >
+                Clear Response
+              </button>
+              {/* <button
+                      onClick={handleMarkForReview}
+                      className="px-4 py-2 bg-purple-100 text-purple-700 rounded-lg hover:bg-purple-200"
+                    >
+                      Mark for Review
+                    </button> */}
+              <button
+                onClick={handleSaveAndNext}
+                className="px-4 py-2 bg-green-500 text-white rounded-lg hover:bg-green-600"
+              >
+                Save & Next
+              </button>
+            </div>
+          </div>
+          <div className="mt-6 flex w-1/3 justify-end rounded-xl bg-neutral-50 p-4 shadow-lg  border border-neutral-200">
+            
               <button
                 onClick={handleEndTest}
-                className="w-full px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+                className="w-1/2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
               >
                 Submit Test
               </button>
-            </div>
+            
           </div>
         </div>
       </div>
