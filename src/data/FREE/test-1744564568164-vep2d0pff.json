@@ -1,0 +1,784 @@
+{
+  "batchName": "FREE",
+  "testName": "JEE Advanced Mock Test 1 (FREE) random phy 1 and proper phy 2",
+  "startDate": "2025-04-13T21:46",
+  "endDate": "2025-05-17T21:46",
+  "attempts": "2",
+  "syllabus": {
+    "isSyllabus": false,
+    "mathematics": [
+      ""
+    ],
+    "physics": [
+      ""
+    ],
+    "chemistry": [
+      ""
+    ]
+  },
+  "mathematics": [
+    {
+      "id": "1744564568165-zbfo3pxtf",
+      "name": "Section 1",
+      "subject": "mathematics",
+      "header": "",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "In the circuit shown, which of the following statement is/are CORRECT:",
+          "imageUrl": "https://i.ibb.co/JWLtCwyX/image.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Power factor of the circuit is \\\\(\\\\frac{1}{\\\\sqrt{2}}\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561533602-hu8ny7z8h_1"
+            },
+            {
+              "text": "Reactance of the circuit is equal to resistance of the circuit.",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561533602-hu8ny7z8h_2"
+            },
+            {
+              "text": "Circuit is in a state of resonance",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561533602-hu8ny7z8h_3"
+            },
+            {
+              "text": "Average power dissipated in the circuit is 100 W.",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561533602-hu8ny7z8h_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744561533602-hu8ny7z8h"
+        },
+        {
+          "added": true,
+          "content": "The potential energy function of a particle is given by \\\\( U(r) = \\\\frac{A}{2r^2} - \\\\frac{B}{3r}  \\\\), where A and B are constants and r is the radial distance from the centre of the force. Choose the correct option(s)",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "The equilibrium distance will be \\\\(r_0 = \\\\frac{2A}{B}  \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561632399-whlrgnm0g_1"
+            },
+            {
+              "text": "The equilibrium distance will be \\\\(r_0 = \\\\frac{3A}{B}  \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561632399-whlrgnm0g_2"
+            },
+            {
+              "text": "If the total energy of the particle is  \\\\(\\\\frac{B^2}{6A}  \\\\) then its radial velocity will vanish at \\\\(\\\\frac{r_0}{3}  \\\\) where \\\\(r_0  \\\\) is the equilibrium distance.",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561632399-whlrgnm0g_3"
+            },
+            {
+              "text": "If the total energy of the particle is  \\\\(\\\\frac{B^2}{6A}  \\\\) then its radial velocity will vanish at \\\\(\\\\frac{r_0}{2}  \\\\) where \\\\(r_0  \\\\) is the equilibrium distance.",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561632399-whlrgnm0g_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744561632399-whlrgnm0g"
+        },
+        {
+          "added": true,
+          "content": "A coil is wound on a hollow insulating cylinder, which contains in it a laminated iron core. The dependence of inductance L with the displacement x of the iron core is shown in the figure. In the initial state x=0 (the core is fully inserted into the coil), the current in the coil is 1.0 A.",
+          "imageUrl": "https://i.ibb.co/238B9bMQ/image.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "The current in the coil immediately after the core is quickly taken out of the coil is 5 amp.",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561743602-zqv73x7px_1"
+            },
+            {
+              "text": "The current in the coil immediately after the core is quickly taken out of the coil is 2.5 amp.",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561743602-zqv73x7px_2"
+            },
+            {
+              "text": "Magnetic flux associated with coil initially is 5 milli Tesla \\\\(\\\\text{m}^2\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561743602-zqv73x7px_3"
+            },
+            {
+              "text": "Magnetic flux associated with coil just after quick removal is 5 milli Tesla \\\\(\\\\text{m}^2\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744561743602-zqv73x7px_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744561743602-zqv73x7px"
+        }
+      ]
+    }
+  ],
+  "physics": [
+    {
+      "id": "1744564568165-yi6xpmcwr",
+      "name": "Section 1",
+      "subject": "physics",
+      "type": "single-mcq",
+      "header": "",
+      "marks": 4,
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "A particle strikes a horizontal frictionless floor with a speed \\\\( u \\\\) at an angle \\\\( \\\\theta \\\\) with the vertical and rebounds with a speed \\\\( v \\\\) at an angle \\\\( \\\\phi \\\\) with the vertical. The co-efficient of restitution between the particle and floor is \\\\( e \\\\). The angle \\\\( \\\\phi \\\\) is equal to:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "\\\\( \\\\theta \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562534134-g4hlv3dhf_1"
+            },
+            {
+              "text": "\\\\( \\\\tan^{-1}( e \\\\tan(\\\\theta)) \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562534134-g4hlv3dhf_2"
+            },
+            {
+              "text": "\\\\( \\\\tan^{-1} \\\\left( \\\\frac{1}{ e} \\\\tan(\\\\theta) \\\\right) \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562534134-g4hlv3dhf_3"
+            },
+            {
+              "text": "\\\\( (1 + e)\\\\theta \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562534134-g4hlv3dhf_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744562534134-g4hlv3dhf"
+        },
+        {
+          "added": true,
+          "content": "In the given situation, a disc and a ring (2 kg) are connected with a string. Both are placed on the rough surface. A force \\\\( F = 10 \\\\) N is applied on the centre of the disc horizontally. Assume initially both bodies were at rest. Then the frictional force acting on the ring will be:",
+          "imageUrl": "https://i.ibb.co/2000PyJX/image-removebg-preview-24.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "\\\\( \\\\frac{20}{3} \\\\) N ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562602941-61fqblsth_1"
+            },
+            {
+              "text": "\\\\( \\\\frac{10}{3} \\\\) N",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562602941-61fqblsth_2"
+            },
+            {
+              "text": "Zero",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562602941-61fqblsth_3"
+            },
+            {
+              "text": "None",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562602941-61fqblsth_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744562602941-61fqblsth"
+        },
+        {
+          "added": true,
+          "content": "In the circuit shown, \\\\( C_1 = 2C_2 \\\\). Switch S is closed at time \\\\( t = 0 \\\\). Let \\\\( i_1 \\\\) & \\\\( i_2 \\\\) be the current flowing through \\\\( C_1 \\\\) and \\\\( C_2 \\\\) at any time \\\\( t \\\\), then the ratio \\\\( \\\\frac{i_1}{i_2} \\\\) is:",
+          "imageUrl": "https://i.ibb.co/j9MY73d4/image-removebg-preview-25.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Constant",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562679201-7muc2j42v_1"
+            },
+            {
+              "text": "Increases with increase in time \\\\( t \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562679201-7muc2j42v_2"
+            },
+            {
+              "text": "Decreases with increase in time \\\\( t \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562679201-7muc2j42v_3"
+            },
+            {
+              "text": "First increases then decreases",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562679201-7muc2j42v_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744562679201-7muc2j42v"
+        },
+        {
+          "added": true,
+          "content": "The capacitor of an oscillatory circuit of frequency \\\\( 10^4 \\\\) Hz is enclosed in a container. When the container is evacuated, the frequency changes by 50 Hz, the dielectric constant of the gas is:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "1.1",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562736593-nqyb568vj_1"
+            },
+            {
+              "text": "1.01",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562736593-nqyb568vj_2"
+            },
+            {
+              "text": "1.001",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562736593-nqyb568vj_3"
+            },
+            {
+              "text": "1.0001",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562736593-nqyb568vj_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744562736593-nqyb568vj"
+        }
+      ]
+    },
+    {
+      "id": "1744564568165-rj2y94ff1",
+      "name": "Section 2",
+      "subject": "physics",
+      "type": "multi-mcq",
+      "marks": 4,
+      "header": "",
+      "negative": "2",
+      "questions": [
+        {
+          "added": true,
+          "content": "A charge \\\\( q \\\\) is placed at a distance \\\\( r \\\\) from center of conducting sphere as shown in figure. Now sphere is earthed then correct options are:",
+          "imageUrl": "https://i.ibb.co/nqMsHCw1/image-removebg-preview-18.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Induced charge on sphere is \\\\(\\\\frac{q}{r} \\\\left( R - \\\\frac{r}{R} \\\\right)\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562863509-pr2umrvv2_1"
+            },
+            {
+              "text": "Induced charge on sphere is \\\\( -q \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562863509-pr2umrvv2_2"
+            },
+            {
+              "text": "Force acting between sphere and external charge \\\\( q \\\\) is\\\\(\\\\frac{1}{4 \\\\pi \\\\epsilon_0} \\\\frac{q \\\\cdot R}{r^2 - R^2}\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562863509-pr2umrvv2_3"
+            },
+            {
+              "text": "Force between sphere and external charge \\\\( q \\\\) is \\\\( \\\\frac{q^2}{r} \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744562863509-pr2umrvv2_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744562863509-pr2umrvv2"
+        },
+        {
+          "added": true,
+          "content": "In given circuit diagram, point B is at zero potential then:",
+          "imageUrl": "https://i.ibb.co/qFWCPrFN/image-removebg-preview-19.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Potential of point P is \\\\( \\\\frac{480}{243} \\\\) V.",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563008989-u61xjavhn_1"
+            },
+            {
+              "text": "Potential of point Q is \\\\( \\\\frac{375}{243} \\\\) V",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563008989-u61xjavhn_2"
+            },
+            {
+              "text": "Current flowing through 5\\\\( \\\\Omega \\\\) resistor is 1.6A",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563008989-u61xjavhn_3"
+            },
+            {
+              "text": "Potential difference between point P & Q is \\\\( \\\\frac{270}{243} \\\\) V",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563008989-u61xjavhn_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744563008989-u61xjavhn"
+        },
+        {
+          "added": true,
+          "content": "A capacitor with charge \\\\( Q \\\\) on it is connected to an inductor \\\\( L \\\\) as shown in diagram at \\\\( t = 0 \\\\). When the switch is flipped from position 1 to 2, the current in the circuit is observed to be at half of its maximum value. Then:",
+          "imageUrl": "https://i.ibb.co/RGfKJptX/image-removebg-preview-20.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Charge on capacitor at the time was \\\\( \\\\frac{Q}{2} \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563063018-g9k5rlapw_1"
+            },
+            {
+              "text": "Charge on capacitor at that time was \\\\( \\\\frac{3}{2} Q \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563063018-g9k5rlapw_2"
+            },
+            {
+              "text": "Total energy lost is \\\\( \\\\frac{Q^2}{4C} \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563063018-g9k5rlapw_3"
+            },
+            {
+              "text": "Total energy lost is \\\\( \\\\frac{Q^2}{8C} \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563063018-g9k5rlapw_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744563063018-g9k5rlapw"
+        },
+        {
+          "added": true,
+          "content": "An electron at point A in the figure has a velocity \\\\( v_0 = 10^7 \\\\) m/s. Then (if \\\\( e = 1.6 \\\\times 10^{-19} \\\\) C, \\\\( AB = 10 \\\\) cm and \\\\( m = 9.1 \\\\times 10^{-31} \\\\) kg):",
+          "imageUrl": "https://i.ibb.co/mCXddJ30/image-removebg-preview-21.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Magnitude of magnetic induction that will cause the electron to follow the semi-circular path from A to B is 1.13 mT",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563228931-9d5xk048m_1"
+            },
+            {
+              "text": "Time taken to go from A to B is \\\\( 1.57 \\\\times 10^{-8} \\\\) s",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563228931-9d5xk048m_2"
+            },
+            {
+              "text": "Angular momentum of the electron about A when \\\\( t = 0.785 \\\\times 10^{-8} \\\\) s is \\\\( 4.5 \\\\times 10^{-25} \\\\) kg-m\\\\( ^2 \\\\)s\\\\(^{-1} \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563228931-9d5xk048m_3"
+            },
+            {
+              "text": "Angle made by the velocity vector with the x-axis at \\\\( t = \\\\frac{3}{8} T \\\\) is \\\\( \\\\frac{\\\\pi}{4} - \\\\) rad",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563228931-9d5xk048m_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744563228931-9d5xk048m"
+        },
+        {
+          "added": true,
+          "content": "A circus cab is revolving round in a vertical circular track kept at 5 m height, of radius 0.5 m at a constant speed of 3 m/s. When the cab is at point A, as shown in the Figure, a ball is just released from the cab.",
+          "imageUrl": "https://i.ibb.co/HfHVrVNL/image-removebg-preview-22.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "The acceleration of the ball, as measured by a man in the cab just after releasing, is about 16 m/s\\\\( ^2 \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563301311-5qz1e7x4u_1"
+            },
+            {
+              "text": "The ball hits the ground at about 1 s after releasing",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563301311-5qz1e7x4u_2"
+            },
+            {
+              "text": "Normal reaction of the track on the cab after releasing the ball will be increased",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563301311-5qz1e7x4u_3"
+            },
+            {
+              "text": "The coefficient of kinetic friction may remain the same after releasing the ball",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563301311-5qz1e7x4u_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744563301311-5qz1e7x4u"
+        },
+        {
+          "added": true,
+          "content": "An arrangement of masses and pulleys is shown in the figure. Strings connecting masses A and B with the pulleys are horizontal and all the pulleys and the strings are light. Friction coefficient between the surface and the block B is 0.2 and that between blocks A and B is 0.7. The system is released from rest. (use \\\\( g = 10 \\\\) m/s\\\\( ^2 \\\\))",
+          "imageUrl": "https://i.ibb.co/SDBhsttt/image-removebg-preview-23.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "The magnitude of acceleration of the system is 2 m/s\\\\( ^2 \\\\) and there is no slipping between block A and block B",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563757578-gh6b4cm21_1"
+            },
+            {
+              "text": "The magnitude of friction between block A and block B is 42 N",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563757578-gh6b4cm21_2"
+            },
+            {
+              "text": "Acceleration of block C is 1 m/s\\\\( ^2 \\\\) downwards",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563757578-gh6b4cm21_3"
+            },
+            {
+              "text": "Tension in the string connecting blocks B and D is 12 N",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563757578-gh6b4cm21_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744563757578-gh6b4cm21"
+        }
+      ]
+    },
+    {
+      "id": "1744564568165-bscyktd1g",
+      "name": "Section 3",
+      "subject": "physics",
+      "type": "integer",
+      "marks": "3",
+      "header": "",
+      "negative": "0",
+      "questions": [
+        {
+          "added": true,
+          "content": "In the arrangement shown in figure, pulley are light and frictionless, threads are inextensible and mass of blocks A, B and C are \\\\( m_1 = 5\\\\,\\\\text{kg} \\\\), \\\\( m_2 = 4\\\\,\\\\text{kg} \\\\) and \\\\( m_3 = 2.5\\\\,\\\\text{kg} \\\\) respectively and co-efficient of friction for both the planes is \\\\( \\\\mu = 0.50 \\\\). Calculate the acceleration of block A (in \\\\( \\\\text{m/sec}^2 \\\\)), when the system is released from rest. \\\\( g = 10\\\\,\\\\text{m/sec}^2 \\\\)",
+          "imageUrl": "https://i.ibb.co/HL4GL3F7/image-removebg-preview-13.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563969097-sxup2qhln_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563969097-sxup2qhln_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563969097-sxup2qhln_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744563969097-sxup2qhln_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744563969097-sxup2qhln"
+        },
+        {
+          "added": true,
+          "content": "In the circuit shown in figure, the switch has been in position '1' for long time. Now the switch is shifted to position 2 at \\\\( t = 0 \\\\). The charge on the capacitor at \\\\( t = \\\\frac{\\\\pi}{6} \\\\) (in C) is.",
+          "imageUrl": "https://i.ibb.co/YTqY7nZt/image-removebg-preview-14.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564008355-1gby1vwun_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564008355-1gby1vwun_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564008355-1gby1vwun_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564008355-1gby1vwun_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744564008355-1gby1vwun"
+        },
+        {
+          "added": true,
+          "content": "The region between two concentric spheres of radii \\\\( R_1 \\\\) and \\\\( R_2 \\\\), contains volume charge density \\\\( \\\\rho = \\\\alpha/ r \\\\), where \\\\( \\\\alpha \\\\) is a constant and \\\\( r \\\\) is the radial distance. A point charge \\\\( q = 2\\\\pi \\\\) coulomb is placed at the centre (\\\\( r = 0 \\\\)). Find the value of \\\\( \\\\alpha \\\\) for which the electric field in the region between spheres is constant. (Take \\\\( R_1 = 0.5 \\\\) m and \\\\( R_2 \\\\neq R_1 \\\\))",
+          "imageUrl": "https://i.ibb.co/gbcgy5ny/image-removebg-preview-15.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564091391-j8b39fnra_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564091391-j8b39fnra_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564091391-j8b39fnra_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564091391-j8b39fnra_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744564091391-j8b39fnra"
+        },
+        {
+          "added": true,
+          "content": "Let us assume that sun radiates like a blackbody with surface temperature at T0 = 6000 K and earth absorbs radiations coming from sun only. If both earth and sun are considered as perfect sphere with distance between center of earth and center of sun to be 200 times the radius of sun. The temperature (in kelvin) of surface of earth in steady state is x Kelvin then x/300 is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564402216-q4bqpjh4k_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564402216-q4bqpjh4k_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564402216-q4bqpjh4k_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564402216-q4bqpjh4k_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744564402216-q4bqpjh4k"
+        },
+        {
+          "added": true,
+          "content": "In the figure, if ray does not emerge from side \\\\( AC \\\\), then the maximum value of \\\\( \\\\theta \\\\) (in radians) is \\\\( \\\\frac{\\\\pi}{x} \\\\). Then \\\\( x \\\\) is",
+          "imageUrl": "https://i.ibb.co/v4LS4jcN/image-removebg-preview-16.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564412941-c8po18ala_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564412941-c8po18ala_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564412941-c8po18ala_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564412941-c8po18ala_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744564412941-c8po18ala"
+        },
+        {
+          "added": true,
+          "content": "The potential difference applied between the filament and target in a Coolidge tube is \\\\( 13.6\\\\,\\\\text{kV} \\\\). It is observed that the wavelength of \\\\( K_\\\\alpha \\\\) characteristic X-rays is three times the cut-off wavelength. The atomic number of the target element is \\\\( x \\\\), then \\\\( \\\\frac{x}{7} \\\\) is",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564454763-vngb0s7c7_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564454763-vngb0s7c7_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564454763-vngb0s7c7_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564454763-vngb0s7c7_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744564454763-vngb0s7c7"
+        },
+        {
+          "added": true,
+          "content": "A convex lens of focal length \\\\( 15\\\\,\\\\text{cm} \\\\) is split into two halves and the two halves are placed at a separation of \\\\( 120\\\\,\\\\text{cm} \\\\). Between the two halves of convex lens, a plane mirror is placed horizontally and at a distance of \\\\( 4\\\\,\\\\text{mm} \\\\) below the principal axis of the lens halves. An object \\\\( AB \\\\) of length \\\\( 2\\\\,\\\\text{mm} \\\\) is placed at a distance of \\\\( 20\\\\,\\\\text{cm} \\\\) from one half lens as shown in figure.\n\nThe final image of the point \\\\( A \\\\) is formed at a distance of \\\\( d \\\\) from the principal axis. Determine the value of \\\\( d \\\\) (in mm) to the nearest integer.\n",
+          "imageUrl": "https://i.ibb.co/JWcSpD3S/image-removebg-preview-17.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564494158-0mdhac7mm_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564494158-0mdhac7mm_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564494158-0mdhac7mm_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564494158-0mdhac7mm_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744564494158-0mdhac7mm"
+        },
+        {
+          "added": true,
+          "content": "A hollow sphere is released from rest on a rough inclined plane as shown. If the coefficient of friction is  = 0.2 and the incline is long enough. Find the velocity of point (in m/s) of contact after time t = 0.5 sec. (g = \\\\(10 m/s^2\\\\ ))",
+          "imageUrl": "\thttps://i.ibb.co/k2GFs1S6/image-removebg-preview-26.png",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564527700-0b19kewmm_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564527700-0b19kewmm_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564527700-0b19kewmm_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744564527700-0b19kewmm_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744564527700-0b19kewmm"
+        }
+      ]
+    }
+  ],
+  "chemistry": [],
+  "id": "test-1744564568164-vep2d0pff",
+  "createdAt": "Sun Apr 13 2025 22:46:08 GMT+0530 (India Standard Time)"
+}

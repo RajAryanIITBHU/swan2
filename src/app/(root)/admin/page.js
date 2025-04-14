@@ -33,6 +33,7 @@ import {
 } from "@/components/ui/accordion";
 import { Switch } from "@/components/ui/switch";
 import LatexText from "@/components/LatexText";
+import { AccordionHeader } from "@radix-ui/react-accordion";
 
 let initialData = {
   batchName: "",
@@ -51,6 +52,7 @@ let initialData = {
       id: null,
       name: "Section 1",
       subject: "mathematics",
+      header: [""],
       type: "single-mcq",
       marks: 4,
       negative: 1,
@@ -77,6 +79,7 @@ let initialData = {
       subject: "mathematics",
       type: "multi-mcq",
       marks: 4,
+      header: [""],
       negative: 1,
       questions: [
         {
@@ -100,6 +103,7 @@ let initialData = {
       subject: "mathematics",
       type: "integer",
       marks: 4,
+      header: [""],
       negative: 1,
       questions: [
         {
@@ -123,6 +127,7 @@ let initialData = {
       subject: "mathematics",
       type: "decimal",
       marks: 4,
+      header: [""],
       negative: 1,
       questions: [
         {
@@ -147,6 +152,7 @@ let initialData = {
       name: "Section 1",
       subject: "physics",
       type: "single-mcq",
+      header: [""],
       marks: 4,
       negative: 1,
       questions: [
@@ -171,6 +177,7 @@ let initialData = {
       subject: "physics",
       type: "multi-mcq",
       marks: 4,
+      header: [""],
       negative: 1,
       questions: [
         {
@@ -194,6 +201,7 @@ let initialData = {
       subject: "physics",
       type: "integer",
       marks: 4,
+      header: [""],
       negative: 1,
       questions: [
         {
@@ -217,6 +225,7 @@ let initialData = {
       subject: "physics",
       type: "decimal",
       marks: 4,
+      header: [""],
       negative: 1,
       questions: [
         {
@@ -243,6 +252,7 @@ let initialData = {
       type: "single-mcq",
       marks: 4,
       negative: 1,
+      header: [""],
       questions: [
         {
           added: false,
@@ -265,6 +275,7 @@ let initialData = {
       subject: "chemistry",
       type: "multi-mcq",
       marks: 4,
+      header: [""],
       negative: 1,
       questions: [
         {
@@ -289,6 +300,7 @@ let initialData = {
       subject: "chemistry",
       type: "integer",
       marks: 4,
+      header: [""],
       negative: 1,
       questions: [
         {
@@ -313,6 +325,7 @@ let initialData = {
       subject: "chemistry",
       type: "decimal",
       marks: 4,
+      header: [""],
       negative: 1,
       questions: [
         {
@@ -335,26 +348,6 @@ let initialData = {
 
 export default function NewTestPage() {
   const [data, setData] = useState(initialData);
-  const [batchName, setBatchName] = useState("");
-  const [testName, setTestName] = useState("");
-  const [startDate, setStartDate] = useState("");
-  const [endDate, setEndDate] = useState("");
-  const [sections, setSections] = useState([]);
-  const [currentSection, setCurrentSection] = useState(null);
-  const [questions, setQuestions] = useState([]);
-  const [currentQuestion, setCurrentQuestion] = useState({
-    type: "single-mcq",
-    content: "",
-    imageUrl: "",
-    imageUpload: null,
-    options: [
-      { text: "", imageUrl: "", imageUpload: null },
-      { text: "", imageUrl: "", imageUpload: null },
-      { text: "", imageUrl: "", imageUpload: null },
-      { text: "", imageUrl: "", imageUpload: null },
-    ],
-    correctAnswer: "",
-  });
 
   const generateUniqueId = () =>
     `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
@@ -367,7 +360,7 @@ export default function NewTestPage() {
 
         const updatedQuestions = section.questions.map((q) => {
           if (!q.added) {
-            const questionId = "q-"+generateUniqueId();
+            const questionId = "q-" + generateUniqueId();
 
             return {
               ...q,
@@ -542,16 +535,15 @@ export default function NewTestPage() {
           };
         })
         .filter(Boolean);
-        const testId = `test-${generateUniqueId()}`
+    const testId = `test-${generateUniqueId()}`;
     const testData = {
       ...data,
-      id:testId,
+      id: testId,
       createdAt: `${new Date()}`,
       mathematics: filterAndPrepareSections(data.mathematics),
       physics: filterAndPrepareSections(data.physics),
       chemistry: filterAndPrepareSections(data.chemistry),
     };
-
 
     try {
       const response = await fetch("/api/saveTest", {
@@ -559,7 +551,7 @@ export default function NewTestPage() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ batchName: data.batchName,testId, testData }),
+        body: JSON.stringify({ batchName: data.batchName, testId, testData }),
       });
 
       if (!response.ok) {
@@ -941,6 +933,98 @@ export default function NewTestPage() {
                           </h1>
                           <div className="grid gap-4">
                             <div className="grid gap-4">
+                              <Accordion type="multiple" collapsible="true" >
+                                <AccordionItem value={subject + section.name}>
+                                  <AccordionTrigger>
+                                    Section Header
+                                  </AccordionTrigger>
+
+                                  <AccordionContent className={"space-y-2"}>
+                                    {section.header.map((t, ti) => (
+                                      <div
+                                        className="flex gap-2 items-center"
+                                        key={`${subject}_${section.name}_${ti}`}
+                                      >
+                                        <span className="w-4">{ti + 1}.</span>
+
+                                        <Input
+                                          className="text-sm"
+                                          value={t}
+                                          placeholder="New Header"
+                                          onChange={(e) => {
+                                            const newTopics = [
+                                              ...section.header,
+                                            ];
+                                            newTopics[ti] = e.target.value;
+
+                                            setData((prev) => ({
+                                              ...prev,
+                                              [subject]: prev[subject].map(
+                                                (s, si) =>
+                                                  si === index
+                                                    ? {
+                                                        ...s,
+                                                        header: newTopics,
+                                                      }
+                                                    : s
+                                              ),
+                                            }));
+                                          }}
+                                        />
+
+                                        <Button
+                                          className={
+                                            section.header.length > 1
+                                              ? ""
+                                              : "hidden"
+                                          }
+                                          variant="outline"
+                                          onClick={() => {
+                                            setData((prev) => ({
+                                              ...prev,
+                                              [subject]: prev[subject].map(
+                                                (s, si) =>
+                                                  si === index
+                                                    ? {
+                                                        ...s,
+                                                        header: s.header.filter(
+                                                          (_, idx) => idx !== ti
+                                                        ),
+                                                      }
+                                                    : s
+                                              ),
+                                            }));
+                                          }}
+                                        >
+                                          <Trash2 size={14} />
+                                        </Button>
+                                      </div>
+                                    ))}
+
+                                    <Button
+                                      className="ml-6 px-10"
+                                      variant="outline"
+                                      size="sm"
+                                      onClick={() => {
+                                        setData((prev) => ({
+                                          ...prev,
+                                          [subject]: prev[subject].map(
+                                            (s, si) =>
+                                              si === index
+                                                ? {
+                                                    ...s,
+                                                    header: [...s.header, ""],
+                                                  }
+                                                : s
+                                          ),
+                                        }));
+                                      }}
+                                    >
+                                      Add Header
+                                    </Button>
+                                  </AccordionContent>
+                                </AccordionItem>
+                              </Accordion>
                               <div className="flex gap-2">
                                 <Label>Section Type</Label>
                                 <Select
@@ -1006,7 +1090,6 @@ export default function NewTestPage() {
                                   placeholder="Type your question here..."
                                   className="min-h-[100px]"
                                 />
-                                
                               </div>
 
                               <div className="flex  gap-4">
@@ -1538,9 +1621,12 @@ export default function NewTestPage() {
                                           >
                                             <div className="flex gap-2">
                                               <div className="flex gap-2 flex-col flex-1">
-                                                <p className="mt-2 flex-1">
-                                                  {question.content}
-                                                </p>
+                                                <LatexText
+                                                  text={question.content.replace(
+                                                    /\\\\/g,
+                                                    "\\"
+                                                  )}
+                                                />
                                                 {question.imageUrl && (
                                                   <div className="relative max-h-[180px] overflow-hidden max-w-[240px]">
                                                     <img
@@ -1562,11 +1648,9 @@ export default function NewTestPage() {
                                                             question.correctAnswer
                                                               .split(",")
                                                               .includes(
-                                                                `${
-                                                                  optIndex + 1
-                                                                }`
+                                                                `${optIndex}`
                                                               )
-                                                              ? "bg-green-100"
+                                                              ? "bg-green-100 text-background"
                                                               : ""
                                                           }`}
                                                         >
@@ -1577,9 +1661,16 @@ export default function NewTestPage() {
                                                             .
                                                           </span>
                                                           <div>
-                                                            <p className={``}>
-                                                              {option.text}
-                                                            </p>
+                                                            {option.text && (
+                                                              <LatexText
+                                                                text={
+                                                                  option.text.replace(
+                                                                    /\\\\/g,
+                                                                    "\\"
+                                                                  ) || ""
+                                                                }
+                                                              />
+                                                            )}
                                                             {option.imageUrl && (
                                                               <img
                                                                 src={
@@ -1597,7 +1688,7 @@ export default function NewTestPage() {
                                                     )}
                                                   </div>
                                                 ) : (
-                                                  <div className="w-[calc(100%-1.75rem)] mr-4 bg-green-100 px-3 py-1 rounded-xl font-semibold">
+                                                  <div className="w-[calc(100%-1.75rem)] mr-4 text-background bg-green-100 px-3 py-1 rounded-xl font-semibold">
                                                     Correct Answer:{" "}
                                                     {question.correctAnswer}
                                                   </div>
@@ -1732,9 +1823,7 @@ export default function NewTestPage() {
           </Card>
         </div>
       </div>
-      <div className="flex-1">
-        
-      </div>
+      <div className="flex-1"></div>
     </section>
   );
 }

@@ -13,24 +13,13 @@ import {
   AccordionTrigger,
   AccordionContent,
 } from "@/components/ui/accordion";
-import { Button } from "@/components/ui/button";
 import { getTestDataFromId } from "@/utils/getRawData";
 import { auth } from "@/auth";
 import { CircleAlert } from "lucide-react";
 import Link from "next/link";
 import UntilStartTimer from "@/components/UntilStartTimer";
-import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
 import OpenBankingWindow from "@/components/SecurePopUp";
+import StartTestBtn from "@/components/StartTestBtn";
 
 
 const questionTypes = {
@@ -52,10 +41,8 @@ export default async function TestDetailsPage({ params }) {
   const { id } =await params;
   const data = await getTestDataFromId(id);
   const session = await auth()
-  console.log(data)
 
   const userGivenNoOfTests = session?.user?.tests?.[id] ? session?.user?.tests?.[id] : 0
-
 
   if (!data) return (
     <section className="w-full bg-accent relative min-h-[calc(100dvh-4rem)] flex justify-center items-center">
@@ -87,7 +74,6 @@ export default async function TestDetailsPage({ params }) {
     )
   }
   
-
   const testDetails = {
     name: "JEE Advanced 2025",
     duration: "3 Hours per Paper",
@@ -293,41 +279,14 @@ export default async function TestDetailsPage({ params }) {
           <div className="">
             Attempts: {userGivenNoOfTests}/{data?.raw?.attempts}
           </div>
-          <div className="flex gap-4 items-center">
-            <UntilStartTimer
-              className={"test-xs px-2 py-1 font-medium rounded-lg"}
-              start={data.startDate}
-              end={data.endDate}
-            />
-            <OpenBankingWindow
-              url={`/test/${id}`}
-              isDisabled={data?.raw?.attempts <= userGivenNoOfTests}
-              isUserAutherised={data?.raw?.attempts > userGivenNoOfTests}
-            />
-
-            {/* <Link href={`/test/${id}`}>Continue</Link> */}
-
-            {/* <AlertDialog>
-              <AlertDialogTrigger asChild>
-                <Button className={"text-white cursor-pointer"}>
-                  Start Test
-                </Button>
-              </AlertDialogTrigger>
-              <AlertDialogContent>
-                <AlertDialogHeader>
-                  <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-                  <AlertDialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
-                  </AlertDialogDescription>
-                </AlertDialogHeader>
-                <AlertDialogFooter>
-                  <AlertDialogCancel>Cancel</AlertDialogCancel>
-                  <AlertDialogAction asChild></AlertDialogAction>
-                </AlertDialogFooter>
-              </AlertDialogContent>
-            </AlertDialog> */}
-          </div>
+          <StartTestBtn
+            id={id}
+            startDate={data.startDate}
+            endDate={data.endDate}
+            maxAttempts={data?.raw?.attempts}
+            userAttempts={userGivenNoOfTests}
+            rawStartDate={data.raw.startDate}
+          />
         </div>
       </div>
     </section>

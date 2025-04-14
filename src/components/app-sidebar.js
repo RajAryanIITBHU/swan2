@@ -50,7 +50,8 @@ export async function AppSidebar() {
         <SidebarHeader>
           <div className="flex px-2 pt-2">
             <Link href={"/"}>
-              <Image src={"/logo/logo-dark.png"} height={70} width={70} alt="logo" />
+              <Image className="hidden dark:block" src={"/logo/logo-dark.png"} height={70} width={70} alt="logo" />
+              <Image className="dark:hidden block" src={"/logo/logo.png"} height={70} width={70} alt="logo" />
             </Link>
           </div>
         </SidebarHeader>

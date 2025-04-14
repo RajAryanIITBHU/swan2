@@ -58,17 +58,19 @@ useEffect(() => {
           type={isMultipleChoice ? "checkbox" : "radio"}
           checked={isChecked}
           onChange={(e) => handleOptionChange(option.id, e.target.checked)}
-          className="mt-1"
+          className="mt-1 border border-neutral-400 shadow-md"
           name={isMultipleChoice ? undefined : `question-${question.id}`}
         />
         <div className="flex-1">
-          {option.text && <LatexText text={option.text || ""} />}
+          {option.text && (
+            <LatexText text={option.text.replace(/\\\\/g, "\\") || ""} />
+          )}
           {option.imageUrl && (
             <div className="mt-2">
               <img
                 src={option.imageUrl}
                 alt={option.text || "Option image"}
-                className="max-w-[200px] rounded-lg shadow-sm"
+                className="max-w-[500px] max-h-[300px] rounded-lg "
               />
             </div>
           )}
@@ -86,11 +88,11 @@ useEffect(() => {
             <img
               src={question.imageUrl}
               alt="Question illustration"
-              className="max-w-[400px] rounded-lg shadow-md"
+              className="max-h-[450px] rounded-lg "
             />
           </div>
         )}
-        <LatexText text={question?.content || ""} />
+        <LatexText text={question?.content.replace(/\\\\/g, "\\") || ""} />
         {type === "decimal" && (
           <p className="text-lg pl-2 font-semibold opacity-75">
             (Answer up to decimal places)
@@ -104,7 +106,7 @@ useEffect(() => {
             onAnswer(val);
             updateAnswerInLocalStorage(subject, question.id, val);
           }}
-          className="w-full p-2 border rounded-md outline-none"
+          className="w-full p-2 border rounded-md outline-none shadow border-neutral-200"
           placeholder="Enter your answer"
         />
       </div>
@@ -113,14 +115,14 @@ useEffect(() => {
 
   // For MCQ type questions
   return (
-    <div className="space-y-4" ref={containerRef}>
-      <LatexText text={question?.content || ""} />
+    <div className="space-y-4 relative text-wrap" ref={containerRef}>
+      <LatexText text={question?.content.replace(/\\\\/g, "\\") || ""} />
       {question?.imageUrl && (
         <div className="flex mb-6">
           <img
             src={question.imageUrl}
             alt="Question illustration"
-            className="max-w-[600px] rounded-lg shadow-md"
+            className="max-h-[450px] rounded-lg"
           />
         </div>
       )}

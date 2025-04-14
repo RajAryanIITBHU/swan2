@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
       <AppSidebar />
       <SidebarInset>
         <Navbar />
-        <div className="bg-accent h-screen">{children}</div>
+        <div className="bg-accent">{children}</div>
       </SidebarInset>
     </SidebarProvider>
     </>

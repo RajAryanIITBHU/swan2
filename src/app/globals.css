@@ -141,5 +141,8 @@
   @apply text-white float-left font-[bold] h-[38px] text-center w-[34px] leading-[42px] bg-[-6px_-81px];
  
 }
-
+  .katex {
+  white-space: normal !important;
+  word-break: break-word;
+}
 }

@@ -1,4 +1,5 @@
 import { auth } from "@/auth";
+import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { getUserTests } from "@/lib/fetch-user-tests";
 import { getOverallStats } from "@/utils/getOverAllStats";
@@ -344,8 +345,11 @@ const ResultPage = async () => {
                 >
                   {/* Attempt Info */}
                   <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center space-y-2 sm:space-y-0 mb-1">
-                    <div className="font-medium text-base text-primary">
-                      Attempt #{index + 1}
+                    <div className="font-medium text-base text-primary flex gap-4 items-center">
+                      <span>Attempt #{index + 1}</span>
+                      <Badge className={attempt.isRealAttempt ? "": "bg-neutral-300"}>
+                        {attempt.isRealAttempt ? "Real" : "Not Real"}
+                      </Badge>
                     </div>
                     <div className="text-sm text-muted-foreground">
                       🕒{" "}
@@ -390,7 +394,8 @@ const ResultPage = async () => {
                       </div>
                     </div>
                     <div className="flex items-center md:items-end gap-2">
-                      <Target size={16} className="md:mb-1"/> <span>Total Marks:</span>{" "}
+                      <Target size={16} className="md:mb-1" />{" "}
+                      <span>Total Marks:</span>{" "}
                       <span className="font-semibold text-primary text-xl">
                         {stats.totalMarks} / {test.paperTotal}
                       </span>

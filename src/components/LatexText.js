@@ -10,7 +10,7 @@ export default function LatexText({ text }) {
   const parts = text.split(regex);
 
   return (
-    <div className="whitespace-pre-wrap">
+    <div className="whitespace-pre-wrap relative">
       {parts.map((part, i) => {
         const isInlineMath = part.startsWith("\\(") && part.endsWith("\\)");
         const isBlockMath = part.startsWith("\\[") && part.endsWith("\\]");
@@ -25,14 +25,16 @@ export default function LatexText({ text }) {
           return (
             <span
               key={i}
-              className={isBlockMath ? "block my-4 text-center" : ""}
+              className={`${
+                isBlockMath ? "block my-4 text-center" : ""
+              } overflow-auto break-words`}
               dangerouslySetInnerHTML={{ __html: html }}
             />
           );
         }
 
         if (isChem) {
-          const chemContent = part.slice(6, -1); // remove [chem: and ]
+          const chemContent = part.slice(6, -1);
           const [smiles, size] = chemContent.split("|");
           const [width, height] = size?.split("x").map(Number) || [200, 150];
           return (

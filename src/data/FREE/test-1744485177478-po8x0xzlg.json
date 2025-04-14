@@ -1,0 +1,670 @@
+{
+  "batchName": "FREE",
+  "testName": "JEE Mock Test Free Chem",
+  "startDate": "2025-04-12T09:00",
+  "endDate": "2025-04-13T12:00",
+  "attempts": "2",
+  "syllabus": {
+    "isSyllabus": true,
+    "mathematics": [
+      "Complete JEE ADV Syllabus"
+    ],
+    "physics": [
+      "Complete JEE ADV Syllabus"
+    ],
+    "chemistry": [
+      "Complete JEE ADV Syllabus"
+    ]
+  },
+  "mathematics": [],
+  "physics": [],
+  "chemistry": [
+    {
+      "id": "1744485177478-4v4gefgbk",
+      "name": "Section 1",
+      "subject": "chemistry",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "header": "",
+      "questions": [
+        {
+          "added": true,
+          "content": "The vapour pressure of an aqueous solution is found to be 750 torr at a temperature T K & the same solution show an elevation in boiling point equal to 1.04 K. If T K is the boiling point of pure water, then the atmospheric pressure should be (Given:",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "760 torr",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483006893-x5grct9tt_1"
+            },
+            {
+              "text": "777 torr",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483006893-x5grct9tt_2"
+            },
+            {
+              "text": "746 torr",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483006893-x5grct9tt_3"
+            },
+            {
+              "text": "750 torr",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483006893-x5grct9tt_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744483006893-x5grct9tt"
+        },
+        {
+          "added": true,
+          "content": "A galvanic cell is set up from a zinc bar weighing 100 g and 1.0 L of 1.0 M copper sulphate solution. How long would the cell run if it is assumed to deliver a steady current of 1.0 A? ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "53.6 hr",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483079042-aa99rou2k_1"
+            },
+            {
+              "text": "26.8 hr",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483079042-aa99rou2k_2"
+            },
+            {
+              "text": "82.025 hr",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483079042-aa99rou2k_3"
+            },
+            {
+              "text": "41.0125 hr",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483079042-aa99rou2k_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744483079042-aa99rou2k"
+        },
+        {
+          "added": true,
+          "content": "Among \\\\( K_2[Ni(CN)_4], \\\\quad [Co(NH_3)_6]Cl_3, \\\\quad (NH_4)_2[FeCl_4], \\\\quad KO_2 \\\\text{ and } O_2 \\\\)paramagnetic species is: A) 5 B) 4 C) 3 D)2 ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "5",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483154023-ylzw5gydq_1"
+            },
+            {
+              "text": "4",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483154023-ylzw5gydq_2"
+            },
+            {
+              "text": "3",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483154023-ylzw5gydq_3"
+            },
+            {
+              "text": "2",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483154023-ylzw5gydq_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744483154023-ylzw5gydq"
+        },
+        {
+          "added": true,
+          "content": "Which of the following combination will liberate hydrogen gas? ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Pb metal and dil. \\\\(\\\\text{HNO}_3\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483191222-ahvouzijc_1"
+            },
+            {
+              "text": "Cu metal and dil. \\\\(\\\\text{H}_2\\\\text{SO}_4\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483191222-ahvouzijc_2"
+            },
+            {
+              "text": "Al metal and aq. \\\\(\\\\text{NaOH}\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483191222-ahvouzijc_3"
+            },
+            {
+              "text": "Zn metal and conc. \\\\(\\\\text{H}_2\\\\text{SO}_4\\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483191222-ahvouzijc_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744483191222-ahvouzijc"
+        },
+        {
+          "added": true,
+          "content": "For the aldotetroses I-IV, the combination of TRUE statements, among P-S, is: \nP = I and II are diastereomers and II and III are enantiomers. \nQ = I and IV are mesomers and are optically inactive. \nR = I and III can be interconverted by a base catalysed isomerisation. \nS = I and IV are \\\\(\\\\text{HIO}_4\\\\) cleavable. ",
+          "imageUrl": "https://i.ibb.co/JFgPgLYW/image-removebg-preview-1.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Q, R, S",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483314034-bvny6197q_1"
+            },
+            {
+              "text": "P, R, S ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483314034-bvny6197q_2"
+            },
+            {
+              "text": " P, Q, R ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483314034-bvny6197q_3"
+            },
+            {
+              "text": "P, Q, S ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483314034-bvny6197q_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744483314034-bvny6197q"
+        },
+        {
+          "added": true,
+          "content": "Identify the incorrect intermediate carbocation which does NOT form during the reaction I & II? ",
+          "imageUrl": "https://i.ibb.co/MDZVNz1G/image-removebg-preview-2.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/5xwGRhcT/1.png ",
+              "imageUpload": null,
+              "id": "q-1744483370642-kxw2ybyw9_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/Z1XJVXFs/3.png ",
+              "imageUpload": null,
+              "id": "q-1744483370642-kxw2ybyw9_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/JjF3JJY4/2.png ",
+              "imageUpload": null,
+              "id": "q-1744483370642-kxw2ybyw9_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/p6sCVCk1/4.png ",
+              "imageUpload": null,
+              "id": "q-1744483370642-kxw2ybyw9_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744483370642-kxw2ybyw9"
+        }
+      ]
+    },
+    {
+      "id": "1744485177478-sl108f0xl",
+      "name": "Section 2",
+      "subject": "chemistry",
+      "type": "multi-mcq",
+      "marks": 4,
+      "header": "",
+      "negative": "2",
+      "questions": [
+        {
+          "added": true,
+          "content": "On addition of \\\\(text{Na}_2text{O}_2\\\\) (s) to aqueous \\\\(text{CrCl}_3\\\\) , a yellow coloured chromium compound (P) is formed. (P) on reaction with \\\\(text{H}_2text{O}_2\\\\) in presence of \\\\(\\\\text{H}_2\\\\text{SO}_4\\\\) forms a deep violet- blue chromium compound (Q) which is extracted in ether. Choose the correct option(s) for (P) and (Q): ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Formation of (Q) from (P) involves a redox change. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483673989-054mozw2c_1"
+            },
+            {
+              "text": "Oxidation state of chromium is same in both (P) and (Q). ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483673989-054mozw2c_2"
+            },
+            {
+              "text": "The number of oxygen atoms doubly bonded to chromium is same in both (P) and (Q). ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483673989-054mozw2c_3"
+            },
+            {
+              "text": "The geometry around chromium is different in (P) and (Q). ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483673989-054mozw2c_4"
+            }
+          ],
+          "correctAnswer": "2,4",
+          "id": "q-1744483673989-054mozw2c"
+        },
+        {
+          "added": true,
+          "content": ".Choose the correct statement(s) regarding Boron trifluoride: ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "It is stronger Lewis acid than \\\\(\\\\text{BCl}_3\\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483709729-cbxs7e44z_1"
+            },
+            {
+              "text": "It does not dimerise. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483709729-cbxs7e44z_2"
+            },
+            {
+              "text": "It forms \\\\(\\\\text{H}_3\\\\text{BO}_3\\\\) and HF on hydrolysis. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483709729-cbxs7e44z_3"
+            },
+            {
+              "text": "It forms \\\\(\\\\text{B}_2\\\\text{H}_6\\\\) on reacting with \\\\(\\\\text{LiAlH}_4\\\\) . ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483709729-cbxs7e44z_4"
+            }
+          ],
+          "correctAnswer": "2,4",
+          "id": "q-1744483709729-cbxs7e44z"
+        },
+        {
+          "added": true,
+          "content": "Assuming 2s-2p mixing is not operative; choose correct option(s) for gaseous diatomic boron \\\\(\\\\text{B}_2\\\\) molecule: ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "It is diamagnetic in nature. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483764815-1f0ca5aai_1"
+            },
+            {
+              "text": " It has bond order 1. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483764815-1f0ca5aai_2"
+            },
+            {
+              "text": " Its HOMO is \\\\( \\\\sigma_{2p} \\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483764815-1f0ca5aai_3"
+            },
+            {
+              "text": "Its LUMO is \\\\( \\\\pi_{2p} \\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483764815-1f0ca5aai_4"
+            }
+          ],
+          "correctAnswer": "1,2,3,4",
+          "id": "q-1744483764815-1f0ca5aai"
+        },
+        {
+          "added": true,
+          "content": "An excess of aqueous ammonia is added to three different flasks ( \\\\(\\\\text{F}_1\\\\)  , \\\\(\\\\text{F}_2\\\\) and \\\\(\\\\text{F}_3\\\\)) containing aqueous solutions of \\\\( \\\\text{CuSO}_4, \\\\text{Al}_2(\\\\text{SO}_4)_3 \\\\text{and} \\\\text{NiSO}_4 \\\\) respectively. Which of the following is (are)correct about this addition? ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "A precipitate will be formed in all three flasks. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483836616-2wr39i8rg_1"
+            },
+            {
+              "text": "Ammonia acts as a base as well as a ligand exchange reagent in  \\\\(\\\\text{F}_1\\\\) and \\\\(\\\\text{F}_3\\\\) . ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483836616-2wr39i8rg_2"
+            },
+            {
+              "text": "A soluble complex of \\\\(\\\\text{NH}_3\\\\)  and the metal ion is formed in \\\\(\\\\text{F}_1\\\\) and \\\\(\\\\text{F}_3\\\\)  . ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483836616-2wr39i8rg_3"
+            },
+            {
+              "text": "A precipitate will be formed only in \\\\(\\\\text{F}_2\\\\) .",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744483836616-2wr39i8rg_4"
+            }
+          ],
+          "correctAnswer": "2,3,4",
+          "id": "q-1744483836616-2wr39i8rg"
+        },
+        {
+          "added": true,
+          "content": "An interesting sequence is obtained by the reaction of dilute, aqueous ethonolic sodium hydroxide with series of halides as: ",
+          "imageUrl": "https://i.ibb.co/PsB3k2D6/ABCD-1.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "\\\\( For hydrolysis of Me}_2\\\\text{CHBr, rate of } S_N1 > \\\\text{rate of } S_N2. \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484197372-plul10h33_1"
+            },
+            {
+              "text": "\\\\(  For hydrolysis of Me}_2\\\\text{CHBr, rate of } S_N2 > \\\\text{rate of } S_N1.\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484197372-plul10h33_2"
+            },
+            {
+              "text": "\\\\( Br are undergoing ready hydrolysis, whereas the two intermediate members are more resistant comparatively.} \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484197372-plul10h33_3"
+            },
+            {
+              "text": "\\\\( P, Q, R and S respectively are:} \\\\\\\\\\\\text{CH}_3\\\\text{Br [P]}, \\\\quad \\\\text{MeCH}_2\\\\text{Br [Q]}, \\\\quad \\\\text{Me}_2\\\\text{CHBr [R]}, \\\\quad \\\\text{Me}_3\\\\text{CBr [S]}. \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484197372-plul10h33_4"
+            }
+          ],
+          "correctAnswer": "1,3,4",
+          "id": "q-1744484197372-plul10h33"
+        },
+        {
+          "added": true,
+          "content": "Compounds P and R upon ozonolysis produce Q and S, respectively. The molecular formula of Q and S is \\\\(\\\\text{C}_8\\\\text{H}_8\\\\text{O}\\\\) . Q undergoes Cannizzaro reaction but not haloform reaction, whereas S undergoes haloform reaction but not Cannizzaro reaction. \n\\\\( \\\\text{(i)} \\\\quad \\\\text{P} \\\\xrightarrow{\\\\begin{array}{c} \\\\text{i) O}_3/\\\\text{CH}_2\\\\text{Cl}_2 \\\\\\\\ \\\\text{ii) Zn/H}_2\\\\text{O} \\\\end{array}} \\\\text{Q} \\\\; (\\\\text{C}_8\\\\text{H}_8\\\\text{O}) \\\\\\\\\\\\text{(ii)} \\\\quad \\\\text{R} \\\\xrightarrow{\\\\begin{array}{c} \\\\text{i) O}_3/\\\\text{CH}_2\\\\text{Cl}_2 \\\\\\\\ \\\\text{ii) Zn/H}_2\\\\text{O} \\\\end{array}} \\\\text{S} \\\\; (\\\\text{C}_8\\\\text{H}_8\\\\text{O}) \\\\) \n\nThe option(s) with suitable combination of P and R, respectively, is(are)",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/fzzPVb3P/Screenshot-2025-04-12-at-11-44-49-GTA-5-pdf-removebg-preview.png ",
+              "imageUpload": null,
+              "id": "q-1744484402288-vhuk45e7g_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/mFY17jLN/Screenshot-2025-04-12-at-11-46-24-GTA-5-pdf-removebg-preview.png ",
+              "imageUpload": null,
+              "id": "q-1744484402288-vhuk45e7g_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/5H2QxXq/Screenshot-2025-04-12-at-11-47-22-GTA-5-pdf-removebg-preview.png ",
+              "imageUpload": null,
+              "id": "q-1744484402288-vhuk45e7g_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/chXVxm4L/Screenshot-2025-04-12-at-11-51-22-GTA-5-pdf-removebg-preview.png ",
+              "imageUpload": null,
+              "id": "q-1744484402288-vhuk45e7g_4"
+            }
+          ],
+          "correctAnswer": "1,2",
+          "id": "q-1744484402288-vhuk45e7g"
+        },
+        {
+          "added": true,
+          "content": "A system containing 2.50 mol of an ideal gas for which \\\\( C_{v,m} = 20.8\\\\,\\\\text{J mol}^{-1}\\\\text{K}^{-1} \\\\) is taken through the cycle in the following diagram in the direction indicated by the arrows. The curved path corresponds to PV = nRT where \\\\(\\\\text{T}\\\\) = \\\\(\\\\text{T}_1\\\\) = \\\\(\\\\text{T}_3\\\\). \n\n \n\nWhich of the following is(are) correct statement(s) for the given system? (Given: \n\nln5= 1.6 ,2.5x8.314= 20.785) ",
+          "imageUrl": "https://i.ibb.co/PvhM0YfR/Screenshot-2025-04-12-at-11-52-34-GTA-5-pdf-removebg-preview.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "\\\\( \\\\text{The temperature at 2 } (T_2) \\\\text{ is 25 times the temperature at 1 } (T_1). \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484635618-nfazv512e_1"
+            },
+            {
+              "text": "The internal energy change in \\\\( (2 \\\\to 3) \\\\) is -99.8",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484635618-nfazv512e_2"
+            },
+            {
+              "text": "\\\\( \\\\Delta H_{2 \\\\to 3} = -\\\\Delta H_{1 \\\\to 2}. \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484635618-nfazv512e_3"
+            },
+            {
+              "text": "The heat exchanged in the step \\\\( (1 \\\\to 3) \\\\text{ is } +5.32 \\\\text{ kJ.}\\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484635618-nfazv512e_4"
+            }
+          ],
+          "correctAnswer": "1,2,3,4",
+          "id": "q-1744484635618-nfazv512e"
+        },
+        {
+          "added": true,
+          "content": "In the given wave function, \\\\( \\\\psi = \\\\frac{1}{81} \\\\left( \\\\frac{2}{\\\\pi} \\\\right)^{\\\\frac{1}{2}} \\\\left ( \\\\frac{1}{a_0} \\\\right)^{\\\\frac{3}{2}} \\\\left ( 6\\\\frac{r}{a_0} - \\\\frac{r^2}{a_0^2} \\\\right ) e^{-\\\\frac{r}{3a_0}} \\\\cos\\\\theta \\\\) \nIdentify the correct choice(s). ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "The given orbital is \\\\( 3p_z\\\\).",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484724346-2wg8yf7yg_1"
+            },
+            {
+              "text": "The given orbital is \\\\(3d_{z^2}\\\\).",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484724346-2wg8yf7yg_2"
+            },
+            {
+              "text": "The nodal surface is at a radical distance of \\\\( 6a_0\\\\) from the nucleus. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484724346-2wg8yf7yg_3"
+            },
+            {
+              "text": "The number of angular nodes in the given orbital are 2. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484724346-2wg8yf7yg_4"
+            }
+          ],
+          "correctAnswer": "1,3",
+          "id": "q-1744484724346-2wg8yf7yg"
+        }
+      ]
+    },
+    {
+      "id": "1744485177478-hdqvsaryf",
+      "name": "Section 3",
+      "subject": "chemistry",
+      "type": "single-mcq",
+      "marks": 4,
+      "header": "",
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "Identify the suitable reactant(s) for pathway [P] and [Q]",
+          "imageUrl": " https://i.ibb.co/SwVYvD86/ABCD.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "\\\\( \\\\text{CH}_3\\\\text{CO}_2\\\\text{C}_2\\\\text{H}_5[P], \\\\quad \\\\text{Me}_3\\\\text{C.CO}_2\\\\text{CH}_3[Q] \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484871123-flfvmd5v8_1"
+            },
+            {
+              "text": "\\\\( \\\\text{CH}_3\\\\text{CO}_2\\\\text{CMe}_3[P], \\\\quad \\\\text{CH}_3\\\\text{CO}_2\\\\text{C}_2\\\\text{H}_5[Q] \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484871123-flfvmd5v8_2"
+            },
+            {
+              "text": "\\\\( \\\\text{CH}_3\\\\text{CO}_2\\\\text{C}_2\\\\text{H}_5[P], \\\\quad \\\\text{CH}_3\\\\text{CO}_2\\\\text{CMe}_3[Q]  \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484871123-flfvmd5v8_3"
+            },
+            {
+              "text": "\\\\(  \\\\text{Me}_3\\\\text{C.CO}_2\\\\text{CH}_3[P], \\\\quad \\\\text{CH}_3\\\\text{CO}_2\\\\text{CMe}_3[Q] \\\\)",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744484871123-flfvmd5v8_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744484871123-flfvmd5v8"
+        },
+        {
+          "added": true,
+          "content": "Identify the suitable reactant(s) for pathway[R] and [S] : ",
+          "imageUrl": "https://i.ibb.co/SwVYvD86/ABCD.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/QvX1dTp6/Screenshot-2025-04-12-at-02-44-32-GTA-5-pdf-removebg-preview.png ",
+              "imageUpload": null,
+              "id": "q-1744484948541-6mhxkux88_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/LzNSxC4h/Screenshot-2025-04-12-at-02-46-00-GTA-5-pdf-removebg-preview.png ",
+              "imageUpload": null,
+              "id": "q-1744484948541-6mhxkux88_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/fcjXrWB/Screenshot-2025-04-12-at-02-46-51-GTA-5-pdf-removebg-preview.png ",
+              "imageUpload": null,
+              "id": "q-1744484948541-6mhxkux88_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/BVjr2NCq/Screenshot-2025-04-12-at-02-49-09-GTA-5-pdf-removebg-preview-1.png ",
+              "imageUpload": null,
+              "id": "q-1744484948541-6mhxkux88_4"
+            }
+          ],
+          "correctAnswer": "3",
+          "id": "q-1744484948541-6mhxkux88"
+        },
+        {
+          "added": true,
+          "content": " The equilibrium constant \\\\(K-c\\\\) for the gas-phase thermal decomposition of cyclopropane to propene is \\\\(1.0 x 10_5\\\\) at 500 K. \nWhat is the equilibrium partial pressure of cyclopropane at 500 K when the partial pressure of propene is 5.0 atm?",
+          "imageUrl": "https://i.ibb.co/qY8C7T43/Screenshot-2025-04-12-at-03-02-20-GTA-5-pdf-removebg-preview.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "5.0 atm",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744485111475-v8u2rz43j_1"
+            },
+            {
+              "text": "2.5 atm",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744485111475-v8u2rz43j_2"
+            },
+            {
+              "text": "\\\\( 10^{-5} \\\\) atm",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744485111475-v8u2rz43j_3"
+            },
+            {
+              "text": "\\\\(5*10^{-5}\\\\) atm",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744485111475-v8u2rz43j_4"
+            }
+          ],
+          "correctAnswer": "3",
+          "id": "q-1744485111475-v8u2rz43j"
+        },
+        {
+          "added": true,
+          "content": "Why is cyclopropane so reactive as compared to propene? ",
+          "imageUrl": "https://i.ibb.co/qY8C7T43/Screenshot-2025-04-12-at-03-02-20-GTA-5-pdf-removebg-preview.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "because cyclopropane has \\\\(sp^3\\\\) hybridised carbon while propene has \\\\(sp^2\\\\) hybridised carbon. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744485161620-35i6ytfiu_1"
+            },
+            {
+              "text": "because cyclic molecules are always more reactive than their open chain counterparts. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744485161620-35i6ytfiu_2"
+            },
+            {
+              "text": " because cyclopropane has bent-shaped banana bonds, which are poorly overlapped. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744485161620-35i6ytfiu_3"
+            },
+            {
+              "text": "because cyclopropane has hydrogen's which are more acidic than that of propene.",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744485161620-35i6ytfiu_4"
+            }
+          ],
+          "correctAnswer": "2",
+          "id": "q-1744485161620-35i6ytfiu"
+        }
+      ]
+    }
+  ],
+  "id": "test-1744485177478-po8x0xzlg",
+  "createdAt": "Sun Apr 13 2025 00:42:57 GMT+0530 (India Standard Time)"
+}

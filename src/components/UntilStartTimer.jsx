@@ -1,8 +1,17 @@
 "use client";
 import { useEffect, useState } from "react";
 
-export default function UntilStartTimer({ className, start, end }) {
-  const [status, setStatus] = useState(null); // Start with null
+export default function UntilStartTimer({
+  className,
+  start,
+  end,
+  textClassName,
+  onThresholdReached, 
+  setReached,
+  tSec // optional state setter to return boolean
+}) {
+  const [status, setStatus] = useState(null);
+  const [thresholdReached, setThresholdReached] = useState(false);
 
   useEffect(() => {
     const updateStatus = () => {
@@ -12,11 +21,13 @@ export default function UntilStartTimer({ className, start, end }) {
 
       if (now >= endDate) {
         setStatus("Ended");
+        setReached?.(true);
         return;
       }
 
       if (now >= startDate) {
         setStatus("Ongoing");
+        setReached?.(true);
         return;
       }
 
@@ -27,26 +38,20 @@ export default function UntilStartTimer({ className, start, end }) {
       const seconds = totalSeconds % 60;
 
       setStatus(`Starts in: ${hours}h ${minutes}m ${seconds}s`);
+
+      if (totalSeconds <= tSec ) {
+        setReached?.(true);
+      }
     };
 
-    updateStatus(); // Immediately run on mount
+    updateStatus();
     const interval = setInterval(updateStatus, 1000);
-
     return () => clearInterval(interval);
-  }, [start, end]);
+  }, [start, end, onThresholdReached, setReached, thresholdReached]);
 
   if (status === null)
     return (
-      <div
-        className={`${className}flex gap-1 text-xs border ${
-          status === "Ongoing"
-            ? "text-green-500 bg-green-200 border-green-300"
-            : status === "Ended"
-            ? "bg-red-50 text-red-500 border-red-300"
-            : ""
-        }`}
-      >
-       
+      <div className={`${className} flex gap-1 text-xs border`}>
         <span>{""}</span>
       </div>
     );
@@ -66,11 +71,11 @@ export default function UntilStartTimer({ className, start, end }) {
           status === "Ongoing"
             ? "bg-green-500"
             : status === "Ended"
-            ? "bg-red-500 "
+            ? "bg-red-500"
             : "bg-secondary-foreground"
         }`}
       ></div>
-      <span>{status}</span>
+      <span className={textClassName}>{status}</span>
     </div>
   );
 }

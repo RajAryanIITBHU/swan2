@@ -10,7 +10,9 @@ import {
   AlertTriangle,
   ChevronLeft,
   ChevronRight,
+  CircleAlert,
   Keyboard,
+  LoaderCircle,
   LockKeyhole,
   Mail,
   Phone,
@@ -37,6 +39,22 @@ import { calculateResults } from "@/utils/calculateResult";
 import { doc, setDoc, getDoc, updateDoc, increment } from "firebase/firestore";
 import { db } from "@/firebase";
 import { updateSessionTestResults } from "@/utils/updateSessionResult";
+import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { useCountdown } from "@/hooks/useCountHook";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog";
+import UntilStartTimer from "@/components/UntilStartTimer";
 
 const INITIAL_TIME = 10800;
 const MAX_WARNINGS = 3;
@@ -46,7 +64,8 @@ export default function TestPage() {
   const params = useParams();
   const router = useRouter();
 
-  const [result, setResult] = useState(null);
+  const [noTestAvailable, setNoTestAvalaible] = useState(false);
+  const [acceptTnC, setAcceptTnC] = useState(false);
   const [state, setState] = useState({
     currentMainSection: "Physics",
     currentSubSection: "Section 1",
@@ -60,10 +79,17 @@ export default function TestPage() {
     currentQuestion: null,
     questions: {},
     currAnswers: {},
+    isRealAttempt: false,
   });
   const [qData, setQDtata] = useState(null);
 
   const [score, setScore] = useState(null);
+  const [result, setResult] = useState(null);
+
+  const [beforeTime, setBeforeTime] = useState({
+    time: 5 * 60 * 1000,
+    isRunning: true,
+  });
 
   const [isInstruction, setIsIntruction] = useState({
     next: false,
@@ -81,9 +107,9 @@ export default function TestPage() {
   });
 
   const handleInputChange = (e) => {
-const { name, value } = e.target;
+    const { name, value } = e.target;
 
-    if (name === "password"){
+    if (name === "password") {
       const digits = value.replace(/\D/g, "");
 
       let formatted = "";
@@ -107,7 +133,7 @@ const { name, value } = e.target;
         ...prev,
         [name]: formatted,
       }));
-    }else{
+    } else {
       setUserData((prev) => ({
         ...prev,
         [name]: value,
@@ -144,7 +170,13 @@ const { name, value } = e.target;
     setState((p) => ({
       ...p,
       isTestStarted: true,
-      timeRemaining: new Date(qData?.endDate) - new Date(),
+      isRealAttempt: new Date(qData?.endDate) - new Date() > 0,
+      timeRemaining:
+        new Date(qData?.endDate) - new Date() <= 0
+          ? parseInt(
+              (new Date(qData?.endDate) - new Date(qData.startDate)) / 1000
+            )
+          : parseInt((new Date(qData?.endDate) - new Date()) / 1000),
     }));
   };
 
@@ -165,8 +197,6 @@ const { name, value } = e.target;
       const res = await fetch(`/api/read/${batch}/${testName}`);
       const data = await res.json();
       setQDtata(data);
-
-      
 
       initializeLocalStorageWithQuestionsBySections({
         physics: data?.physics,
@@ -216,6 +246,7 @@ const { name, value } = e.target;
       }
     } catch (err) {
       console.error("Failed to load JSON", err);
+      setNoTestAvalaible(true);
       toast.error("Error while fetching the Questions");
     }
   };
@@ -257,6 +288,8 @@ const { name, value } = e.target;
 
   useEffect(() => {
     if (!isInstruction.next || !isInstruction.previous) return;
+
+    if(session?.user?.role === "admin") return
 
     let isWarningHandled = false;
     let warningTimeout;
@@ -301,7 +334,7 @@ const { name, value } = e.target;
       document.removeEventListener("fullscreenchange", handleFullscreenChange);
       clearTimeout(warningTimeout);
     };
-  }, [isInstruction, handleWarning]);
+  }, [isInstruction, handleWarning,session]);
 
   const handleAnswer = (qid, answer) => {
     let ans = Array.isArray(answer) && answer.length == 0 ? null : answer;
@@ -433,6 +466,7 @@ const { name, value } = e.target;
               attempt: attemptCount,
               data: responseObj,
               timestamp: new Date().toISOString(),
+              isRealAttempt: state.isRealAttempt,
             },
           ],
           results: [
@@ -441,6 +475,7 @@ const { name, value } = e.target;
               attempt: attemptCount,
               data: computed,
               timestamp: new Date().toISOString(),
+              isRealAttempt: state.isRealAttempt,
             },
           ],
         };
@@ -525,7 +560,20 @@ const { name, value } = e.target;
     fetchData();
   }, []);
 
-  
+  const { time, isRunning } = useCountdown(new Date() + 5 * 60 * 1000);
+
+  useEffect(() => {
+    console.log(time, isRunning);
+  }, [time, isRunning]);
+
+  useEffect(() => {
+    if (status === "authenticated" && session?.user?.rollNo) {
+      setUserData((prev) => ({
+        ...prev,
+        rollNo: `${session.user.rollNo}`,
+      }));
+    }
+  }, [status, session?.user?.rollNo]);
 
   const handleSaveAndNext = () => {
     const currentSubject = state.currentMainSection.toLowerCase();
@@ -611,101 +659,159 @@ const { name, value } = e.target;
     toast.info("🎉 You've reached the end of the test!");
   };
 
- const handlePrevious = () => {
-   const currentSubject = state.currentMainSection.toLowerCase();
-   const currentSections = qData?.[currentSubject] || [];
-   const currentSectionIndex = currentSections.findIndex(
-     (section) => section.name === state.currentSubSection
-   );
+  const handlePrevious = () => {
+    const currentSubject = state.currentMainSection.toLowerCase();
+    const currentSections = qData?.[currentSubject] || [];
+    const currentSectionIndex = currentSections.findIndex(
+      (section) => section.name === state.currentSubSection
+    );
 
-   if (currentSectionIndex === -1) return;
+    if (currentSectionIndex === -1) return;
 
-   const currentSection = currentSections[currentSectionIndex];
-   const currentQuestions = currentSection.questions || [];
+    const currentSection = currentSections[currentSectionIndex];
+    const currentQuestions = currentSection.questions || [];
 
-   // Find the index of the current question in the current section
-   const currentQIndex = currentQuestions.findIndex(
-     (q) => q.id === state.currentQuestion.id
-   );
+    // Find the index of the current question in the current section
+    const currentQIndex = currentQuestions.findIndex(
+      (q) => q.id === state.currentQuestion.id
+    );
 
-   const prevQuestionIndex = currentQIndex - 1;
+    const prevQuestionIndex = currentQIndex - 1;
 
-   // If previous question exists in the current section
-   if (prevQuestionIndex >= 0) {
-     const prevQuestion = currentQuestions[prevQuestionIndex];
+    // If previous question exists in the current section
+    if (prevQuestionIndex >= 0) {
+      const prevQuestion = currentQuestions[prevQuestionIndex];
 
-     setState((prev) => ({
-       ...prev,
-       currentQuestionIndex: prevQuestionIndex,
-       currentQuestion: prevQuestion,
-       currAnswer: state.currAnswers[prevQuestion.id] || null,
-     }));
+      setState((prev) => ({
+        ...prev,
+        currentQuestionIndex: prevQuestionIndex,
+        currentQuestion: prevQuestion,
+        currAnswer: state.currAnswers[prevQuestion.id] || null,
+      }));
 
-     markQuestionVisitedInLocalStorage(currentSubject, prevQuestion.id);
-     return;
-   }
+      markQuestionVisitedInLocalStorage(currentSubject, prevQuestion.id);
+      return;
+    }
 
-   // If we're at the first question of the current section,
-   // move to the last question of the previous section
-   if (prevQuestionIndex < 0) {
-     const prevSectionIndex = currentSectionIndex - 1;
+    // If we're at the first question of the current section,
+    // move to the last question of the previous section
+    if (prevQuestionIndex < 0) {
+      const prevSectionIndex = currentSectionIndex - 1;
 
-     // If there's a previous section in the same subject
-     if (prevSectionIndex >= 0) {
-       const prevSection = currentSections[prevSectionIndex];
-       const lastQuestionIndex = prevSection.questions.length - 1;
-       const prevQuestion = prevSection.questions[lastQuestionIndex];
+      // If there's a previous section in the same subject
+      if (prevSectionIndex >= 0) {
+        const prevSection = currentSections[prevSectionIndex];
+        const lastQuestionIndex = prevSection.questions.length - 1;
+        const prevQuestion = prevSection.questions[lastQuestionIndex];
 
-       setState((prev) => ({
-         ...prev,
-         currentSubSection: prevSection.name,
-         currentSubSectionType: prevSection.type,
-         currentQuestionIndex: lastQuestionIndex,
-         currentQuestion: prevQuestion,
-         currAnswer: state.currAnswers[prevQuestion.id] || null,
-       }));
+        setState((prev) => ({
+          ...prev,
+          currentSubSection: prevSection.name,
+          currentSubSectionType: prevSection.type,
+          currentQuestionIndex: lastQuestionIndex,
+          currentQuestion: prevQuestion,
+          currAnswer: state.currAnswers[prevQuestion.id] || null,
+        }));
 
-       markQuestionVisitedInLocalStorage(currentSubject, prevQuestion.id);
-       return;
-     }
+        markQuestionVisitedInLocalStorage(currentSubject, prevQuestion.id);
+        return;
+      }
 
-     // If we're at the first section of the subject, go to the previous subject
-     const subjectOrder = ["physics", "chemistry", "mathematics"];
-     const currentSubjectIndex = subjectOrder.indexOf(currentSubject);
+      // If we're at the first section of the subject, go to the previous subject
+      const subjectOrder = ["physics", "chemistry", "mathematics"];
+      const currentSubjectIndex = subjectOrder.indexOf(currentSubject);
 
-     // Look for the previous available subject
-     for (let i = currentSubjectIndex - 1; i >= 0; i--) {
-       const prevSubject = subjectOrder[i];
-       if ((qData?.[prevSubject] || []).length > 0) {
-         const prevSections = qData[prevSubject];
-         const lastSectionIndex = prevSections.length - 1;
-         const lastSection = prevSections[lastSectionIndex];
-         const lastQuestionIndex = lastSection.questions.length - 1;
-         const lastQuestion = lastSection.questions[lastQuestionIndex];
+      // Look for the previous available subject
+      for (let i = currentSubjectIndex - 1; i >= 0; i--) {
+        const prevSubject = subjectOrder[i];
+        if ((qData?.[prevSubject] || []).length > 0) {
+          const prevSections = qData[prevSubject];
+          const lastSectionIndex = prevSections.length - 1;
+          const lastSection = prevSections[lastSectionIndex];
+          const lastQuestionIndex = lastSection.questions.length - 1;
+          const lastQuestion = lastSection.questions[lastQuestionIndex];
 
-         setState((prev) => ({
-           ...prev,
-           currentMainSection:
-             prevSubject.charAt(0).toUpperCase() + prevSubject.slice(1),
-           currentSubSection: lastSection.name,
-           currentSubSectionType: lastSection.type,
-           currentQuestionIndex: lastQuestionIndex,
-           currentQuestion: lastQuestion,
-           currAnswer: state.currAnswers[lastQuestion.id] || null,
-         }));
+          setState((prev) => ({
+            ...prev,
+            currentMainSection:
+              prevSubject.charAt(0).toUpperCase() + prevSubject.slice(1),
+            currentSubSection: lastSection.name,
+            currentSubSectionType: lastSection.type,
+            currentQuestionIndex: lastQuestionIndex,
+            currentQuestion: lastQuestion,
+            currAnswer: state.currAnswers[lastQuestion.id] || null,
+          }));
 
-         markQuestionVisitedInLocalStorage(prevSubject, lastQuestion.id);
-         return;
-       }
-     }
-   }
+          markQuestionVisitedInLocalStorage(prevSubject, lastQuestion.id);
+          return;
+        }
+      }
+    }
 
-   // If we've reached here, there's no previous question
-   toast.info("You're at the beginning of the test!");
- };
+    // If we've reached here, there's no previous question
+    toast.info("You're at the beginning of the test!");
+  };
+
+  if (
+    !session?.user?.batches.includes(params.id.split("-")[0]) &&
+    params.id.split("-")[0] !== "FREE"
+  ) {
+    return (
+      <section className="w-full bg-accent relative min-h-[calc(100dvh-4rem)] flex justify-center items-center">
+        <Card className="p-6 rounded-xl bg-background gap-4 min-w-sm -mt-10">
+          <span className="flex gap-3 items-center text-lg font-medium">
+            <CircleAlert size={22} />
+            Unautherised User
+          </span>
+          <p>You are not allowed to give this test.</p>
+          <Link
+            href={"/"}
+            className="text-primary-foreground hover:text-primary-foreground/80 underline underline-offset-4"
+          >
+            Home
+          </Link>
+        </Card>
+      </section>
+    );
+  }
+
+  
 
   // !isInstruction.next && !isInstruction.previous
   if (!isInstruction.next && !isInstruction.previous) {
+    if (status === "loading" || !qData || !session) {
+      return (
+        <div className="flex w-full h-screen items-center justify-center">
+          <span>
+            <LoaderCircle className="animate-spin" size={40} />
+          </span>
+        </div>
+      );
+    }
+    const testId = qData.id;
+    const batch = qData.batchName;
+    const docId = `${batch}-${testId}`;
+    
+    if (parseInt(qData?.attempts) === session?.user?.tests[docId]) {
+      return (
+        <section className="w-full bg-accent relative min-h-[calc(100dvh-4rem)] flex justify-center items-center">
+          <Card className="p-6 rounded-xl bg-background gap-4 min-w-sm -mt-10">
+            <span className="flex gap-3 items-center text-lg font-medium">
+              <CircleAlert size={22} />
+              Max Attempts Reached
+            </span>
+            <p>You have reached your maximum attempts for this test.</p>
+            <Link
+              href={"/"}
+              className="text-primary-foreground hover:text-primary-foreground/80 underline underline-offset-4"
+            >
+              Home
+            </Link>
+          </Card>
+        </section>
+      );
+    }
+     
     return (
       <div className="min-h-screen bg-white flex items-center  flex-col">
         <div className="w-full p-1 flex justify-between bg-gray-600 ">
@@ -716,7 +822,9 @@ const { name, value } = e.target;
           <div className="flex">
             <div className="flex flex-col pt-4 items-end pr-4">
               <div className="">Candidate Name:</div>
-              <div className="text-4xl mt-2">{session?.user?.name}</div>
+              <div className="text-4xl mt-2">
+                {session !== undefined ? session?.user?.name : ""}
+              </div>
             </div>
             <div className="relative w-32 aspect-[15/16] bg-white"></div>
           </div>
@@ -743,9 +851,9 @@ const { name, value } = e.target;
                   className={`w-full px-3 py-2 border rounded-md  text-neutral-900 focus:border-none outline-none focus:outline-none border-none`}
                   placeholder="Enter your roll no"
                 />
-                <div className="text-neutral-700 px-3 border-l border-l-neutral-300 hover:bg-neutral-200 h-full py-1.5">
+                {/* <div className="text-neutral-700 px-3 border-l border-l-neutral-300 hover:bg-neutral-200 h-full py-1.5">
                   <Keyboard size={28} />
-                </div>
+                </div> */}
               </div>
 
               <div className="flex gap-2 items-center border border-neutral-300">
@@ -763,20 +871,20 @@ const { name, value } = e.target;
                   placeholder="Enter your DOB (DD/MM/YYYY)"
                   maxLength={10}
                 />
-                <div className="text-neutral-700 px-3 border-l border-l-neutral-300 hover:bg-neutral-200 h-full py-1.5">
+                {/* <div className="text-neutral-700 px-3 border-l border-l-neutral-300 hover:bg-neutral-200 h-full py-1.5">
                   <Keyboard size={28} />
-                </div>
+                </div> */}
               </div>
             </div>
 
             {errors.password !== "" && (
               <p className="border rounded border-red-500 bg-red-50 w-[calc(100%-3rem)] text-sm text-red-900 px-6 py-1.5 mx-6">
-                Error: {errors.password}
+                Error: {errors?.password}
               </p>
             )}
             {errors.rollNo !== "" && (
               <p className="border rounded border-red-500 bg-red-50 w-[calc(100%-3rem)] text-sm text-red-900 px-6 py-1.5 mx-6">
-                Error: {errors.rollNo}
+                Error: {errors?.rollNo}
               </p>
             )}
 
@@ -802,6 +910,26 @@ const { name, value } = e.target;
           </div>
         </div>
       </div>
+    );
+  }
+
+  if (noTestAvailable) {
+    return (
+      <section className="w-full bg-accent relative min-h-[calc(100dvh-4rem)] flex justify-center items-center">
+        <Card className="p-6 rounded-xl bg-background gap-4 min-w-sm -mt-10">
+          <span className="flex gap-3 items-center text-lg font-medium">
+            <CircleAlert size={22} />
+            No Test Available
+          </span>
+          <p>The Test does not exist or has been removed by the admin.</p>
+          <Link
+            href={"/"}
+            className="text-primary-foreground hover:text-primary-foreground/80 underline underline-offset-4"
+          >
+            Home
+          </Link>
+        </Card>
+      </section>
     );
   }
 
@@ -1089,15 +1217,256 @@ const { name, value } = e.target;
           </section>
         </div>
 
-        {/* Footer */}
-        <div className="w-full bg-white border-t border-neutral-500 px-6 pt-8 pb-20 sticky bottom-0">
-          <div className="max-w-4xl mx-auto flex justify-end">
+        <div className="w-full bg-white border-t border-gray-300 px-6 pt-8 pb-20 sticky bottom-0 flex flex-col gap-4">
+          <div className="w-full max-w-4xl px-2 mx-auto flex gap-2 items-center">
+            <Checkbox
+              checked={acceptTnC}
+              onCheckedChange={(value) => {
+                setAcceptTnC(!!value);
+              }}
+              id="TnC_ACCEPT"
+              className={"border border-blue-500 cursor-pointer"}
+            />
+            <span className="mt-0.5">
+              I hereby accept the{" "}
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <Button variant={"link"} className={"text-blue-600 !px-1"}>
+                    Terms & Condition
+                  </Button>
+                </AlertDialogTrigger>
+                <AlertDialogContent className={"bg-gray-100 w-4xl"}>
+                  <AlertDialogHeader>
+                    <AlertDialogTitle>Terms and Conditions</AlertDialogTitle>
+                    <AlertDialogDescription asChild>
+                      <div className="space-y-4 text-sm text-neutral-800 leading-relaxed max-h-72 overflow-y-scroll">
+                        <div>
+                          <strong>
+                            Amplify JEE CBT System – Terms & Conditions
+                          </strong>
+                        </div>
+
+                        <div>
+                          <strong>1. Access & Usage</strong>
+                        </div>
+                        <div>
+                          Access to the CBT platform is granted upon successful
+                          registration.
+                        </div>
+                        <div>
+                          Each user is provided with a unique set of login
+                          credentials.
+                        </div>
+                        <div>
+                          Sharing of login credentials is strictly prohibited.
+                        </div>
+                        <div>
+                          If any user is found sharing credentials or accessing
+                          another’s account, their account may be permanently
+                          suspended without refund.
+                        </div>
+                        <div>
+                          Amplify JEE reserves the right to monitor usage and
+                          take appropriate action in case of misuse.
+                        </div>
+
+                        <div>---</div>
+
+                        <div>
+                          <strong>2. Free CBTs</strong>
+                        </div>
+                        <div>
+                          Amplify JEE offers a limited number of free CBTs for
+                          demo, trial, or promotional purposes.
+                        </div>
+                        <div>
+                          These tests are provided “as-is,” with no guarantee of
+                          continued availability or access.
+                        </div>
+                        <div>
+                          Users may need to sign up with basic details to access
+                          these tests.
+                        </div>
+                        <div>
+                          Amplify JEE reserves the right to revoke, restrict, or
+                          modify free test access at any time.
+                        </div>
+
+                        <div>---</div>
+
+                        <div>
+                          <strong>3. Paid CBTs & Content</strong>
+                        </div>
+                        <div>
+                          Paid test packages include access to advanced test
+                          sets, handpicked questions, solutions, and detailed
+                          analysis.
+                        </div>
+                        <div>
+                          All content—test papers, solutions, mock questions—is
+                          the intellectual property of Amplify JEE.
+                        </div>
+                        <div>
+                          Users are not allowed to copy, redistribute, or
+                          reproduce any content without written permission.
+                        </div>
+
+                        <div>---</div>
+
+                        <div>
+                          <strong>4. Technical Requirements</strong>
+                        </div>
+                        <div>
+                          The platform is optimized for modern browsers like
+                          Chrome and requires a stable internet connection.
+                        </div>
+                        <div>
+                          Amplify JEE is not responsible for technical issues
+                          arising from device incompatibility, outdated
+                          browsers, or poor connectivity.
+                        </div>
+
+                        <div>---</div>
+
+                        <div>
+                          <strong>5. Fair Usage & Conduct</strong>
+                        </div>
+                        <div>
+                          All users must maintain integrity during tests. Use of
+                          unfair means is strictly prohibited.
+                        </div>
+                        <div>
+                          Any suspicious activity during live or monitored tests
+                          may result in disqualification or permanent ban from
+                          the platform.
+                        </div>
+
+                        <div>---</div>
+
+                        <div>
+                          <strong>6. Payment & Refund</strong>
+                        </div>
+                        <div>
+                          All payments are non-refundable, unless a verified
+                          technical failure occurs (subject to internal review).
+                        </div>
+                        <div>
+                          Access to paid content may be revoked in case of
+                          payment disputes, chargebacks, or violation of terms.
+                        </div>
+
+                        <div>---</div>
+
+                        <div>
+                          <strong>7. Data & Privacy</strong>
+                        </div>
+                        <div>
+                          Personal data like name, contact details, and test
+                          performance is collected for educational and platform
+                          improvement purposes.
+                        </div>
+                        <div>
+                          Amplify JEE does not sell or share personal data with
+                          third parties without explicit user consent.
+                        </div>
+
+                        <div>---</div>
+
+                        <div>
+                          <strong>
+                            8. School/Institute Access (if applicable)
+                          </strong>
+                        </div>
+                        <div>
+                          In case of CBTs provided through schools/coaching
+                          institutes, student performance and usage data may be
+                          shared with the institution’s faculty or admin for
+                          academic tracking.
+                        </div>
+
+                        <div>---</div>
+
+                        <div>
+                          <strong>9. Platform Updates</strong>
+                        </div>
+                        <div>
+                          Amplify JEE reserves the right to update test formats,
+                          features, or schedules as needed to improve the
+                          platform.
+                        </div>
+                        <div>
+                          Users will be notified in advance of any major updates
+                          or changes.
+                        </div>
+
+                        <div>---</div>
+
+                        <div>
+                          <strong>10. Limitation of Liability</strong>
+                        </div>
+                        <div>
+                          Amplify JEE is a learning platform and does not
+                          guarantee any rank, admission, or academic result.
+                        </div>
+                        <div>
+                          We aim to assist in exam preparation, but success
+                          depends on the user’s effort and consistency.
+                        </div>
+                      </div>
+                    </AlertDialogDescription>
+                  </AlertDialogHeader>
+                  <AlertDialogFooter>
+                    <AlertDialogCancel
+                      className={"text-neutral-800 hover:text-neutral-700"}
+                    >
+                      Cancel
+                    </AlertDialogCancel>
+                    <AlertDialogAction
+                      onClick={() => {
+                        setAcceptTnC(true);
+                      }}
+                    >
+                      Accept
+                    </AlertDialogAction>
+                  </AlertDialogFooter>
+                </AlertDialogContent>
+              </AlertDialog>
+            </span>
+          </div>
+          <div className="max-w-4xl w-full mx-auto flex justify-between">
             <button
-              onClick={handleTestStart}
-              className="flex items-center gap-2 px-4 py-2 border border-neutral-500 bg-neutral-100 hover:bg-neutral-200"
+              onClick={() => {
+                window.scroll({ top: 0 });
+                setIsIntruction({ next: true, previous: false });
+              }}
+              className="flex items-center gap-2 px-4 py-2 bg-gray-100 text-neutral-800 font-semibold rounded hover:bg-gray-200"
             >
-              Next <ChevronRight size={24} />
+              <ChevronLeft size={24} />
+              Previous
             </button>
+
+            <div className="">
+              {qData &&
+              beforeTime.isRunning &&
+              new Date(qData.startDate) - new Date() > 0 ? (
+                <UntilStartTimer
+                  className={"!test-lg px-4 py-2 font-medium rounded bg-gray-100"}
+                  start={qData.startDate}
+                  end={qData.endDate}
+                  textClassName={""}
+                  tSec={0}
+                  setReached={(e)=>setBeforeTime((t)=>({...t, isRunning:false}))}
+                />
+              ) : (
+                <Button
+                  onClick={handleTestStart}
+                  disabled={!acceptTnC}
+                  className="flex items-center gap-2 px-4 py-2 bg-cyan-500 text-white font-semibold rounded hover:bg-cyan-600"
+                >
+                  I am Ready to begin
+                </Button>
+              )}
+            </div>
           </div>
         </div>
       </div>
@@ -1361,14 +1730,12 @@ const { name, value } = e.target;
             </div>
           </div>
           <div className="mt-6 flex w-1/3 justify-end rounded-xl bg-neutral-50 p-4 shadow-lg  border border-neutral-200">
-            
-              <button
-                onClick={handleEndTest}
-                className="w-1/2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
-              >
-                Submit Test
-              </button>
-            
+            <button
+              onClick={handleEndTest}
+              className="w-1/2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600"
+            >
+              Submit Test
+            </button>
           </div>
         </div>
       </div>

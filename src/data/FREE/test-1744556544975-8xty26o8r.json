@@ -1,0 +1,681 @@
+{
+  "batchName": "FREE",
+  "testName": "JEE Advanced Mock Test 1 (FREE)",
+  "startDate": "2025-04-14T12:14",
+  "endDate": "2025-05-17T20:32",
+  "attempts": "2",
+  "syllabus": {
+    "isSyllabus": false,
+    "mathematics": [
+      ""
+    ],
+    "physics": [
+      ""
+    ],
+    "chemistry": [
+      ""
+    ]
+  },
+  "mathematics": [],
+  "physics": [],
+  "chemistry": [
+    {
+      "id": "1744556544976-vz9cs2pam",
+      "name": "Section 1",
+      "subject": "chemistry",
+      "type": "single-mcq",
+      "marks": 4,
+      "negative": 1,
+      "header": "",
+      "questions": [
+        {
+          "added": true,
+          "content": "\\\\( \\\\text{Find the structure of the major product of bromination of the following compounds using } \\\\frac{Br_2}{FeBr_3}:  \\\\) ",
+          "imageUrl": "   https://i.ibb.co/3yb2MH8d/image-removebg-preview-4.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "   https://i.ibb.co/Z6ZLxrQv/image-removebg-preview-5.png ",
+              "imageUpload": null,
+              "id": "q-1744553807097-1mdzzke2q_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/PvYf4wnQ/image-removebg-preview-6.png",
+              "imageUpload": null,
+              "id": "q-1744553807097-1mdzzke2q_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "   https://i.ibb.co/S4msw4RJ/image-removebg-preview-7.png ",
+              "imageUpload": null,
+              "id": "q-1744553807097-1mdzzke2q_3"
+            },
+            {
+              "text": "",
+              "imageUrl": " https://i.ibb.co/jsSLTFY/image-removebg-preview-9.png ",
+              "imageUpload": null,
+              "id": "q-1744553807097-1mdzzke2q_4"
+            }
+          ],
+          "correctAnswer": "3",
+          "id": "q-1744553807097-1mdzzke2q"
+        },
+        {
+          "added": true,
+          "content": "",
+          "imageUrl": "https://i.ibb.co/tMsNqMkv/image-removebg-preview-10.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "   https://i.ibb.co/Q7BMNdtP/image-removebg-preview-11.png ",
+              "imageUpload": null,
+              "id": "q-1744553928450-mkum8q99e_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/RTNq3TQ4/image-removebg-preview-12.png ",
+              "imageUpload": null,
+              "id": "q-1744553928450-mkum8q99e_2"
+            },
+            {
+              "text": "",
+              "imageUrl": " https://i.ibb.co/5xKDdRtQ/image-removebg-preview-13.png ",
+              "imageUpload": null,
+              "id": "q-1744553928450-mkum8q99e_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/hJM72cVg/image-removebg-preview-14.png ",
+              "imageUpload": null,
+              "id": "q-1744553928450-mkum8q99e_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744553928450-mkum8q99e"
+        },
+        {
+          "added": true,
+          "content": "Which of the following reactions is/are correct regarding the formation of major \n\nproduct (Alkene)? ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "   https://i.ibb.co/mr7MFF45/image-removebg-preview-15.png ",
+              "imageUpload": null,
+              "id": "q-1744553985418-4rcrw5im2_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "   https://i.ibb.co/GfmV2X0g/image-removebg-preview-16.png ",
+              "imageUpload": null,
+              "id": "q-1744553985418-4rcrw5im2_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "   https://i.ibb.co/WpxWXkNt/image-removebg-preview-17.png ",
+              "imageUpload": null,
+              "id": "q-1744553985418-4rcrw5im2_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "https://i.ibb.co/fY332NV4/image-removebg-preview-18.png ",
+              "imageUpload": null,
+              "id": "q-1744553985418-4rcrw5im2_4"
+            }
+          ],
+          "correctAnswer": "1",
+          "id": "q-1744553985418-4rcrw5im2"
+        },
+        {
+          "added": true,
+          "content": "\\\\( \n\n\\\\text{Consider the following unbalanced reactions:} \\\\\\\\\\\\ \n\n\\\\text{Cu + conc. HNO}_3 \\\\to P + Q + R \\\\\\\\\\\\ \n\nP + \\\\text{H}_2\\\\text{S} + \\\\text{NH}_4\\\\text{OH} \\\\to S \\\\; (\\\\text{a precipitate}) + R + T \\\\\\\\\\\\ \n\nQ + R \\\\xrightarrow{\\\\text{boil}} \\\\text{HNO}_3 + U \\\\\\\\\\\\ \n\n\\\\text{Choose the correct statement(s):}  \n\n\\\\) ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "S is black in colour ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554111908-scyvripqg_1"
+            },
+            {
+              "text": "Oxidation state of Cu in S is + 1 ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554111908-scyvripqg_2"
+            },
+            {
+              "text": "R is a V-shaped molecule ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554111908-scyvripqg_3"
+            },
+            {
+              "text": "Bond order of U in ground state is 2.5",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554111908-scyvripqg_4"
+            }
+          ],
+          "correctAnswer": "3",
+          "id": "q-1744554111908-scyvripqg"
+        }
+      ]
+    },
+    {
+      "id": "1744556544976-tof3cn68y",
+      "name": "Section 2",
+      "subject": "chemistry",
+      "type": "multi-mcq",
+      "marks": 4,
+      "header": "",
+      "negative": "2",
+      "questions": [
+        {
+          "added": true,
+          "content": "\\\\( \\\\text{Choose the correct statement(s) regarding the following oxides of chlorine:} \\\\\\\\\\\\ (I) \\\\; \\\\text{Cl}_2\\\\text{O}, \\\\quad  (II) \\\\; \\\\text{ClO}_2, \\\\quad  (III) \\\\; \\\\text{Cl}_2\\\\text{O}_6, \\\\quad  (IV) \\\\; \\\\text{Cl}_2\\\\text{O}_7. \\\\\\\\\\\\ \\\\) ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Only (II) is paramagnetic. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554448538-nx0whe4tx_1"
+            },
+            {
+              "text": "Only (II) and (III) are mixed anhydrides.",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554448538-nx0whe4tx_2"
+            },
+            {
+              "text": "Total number of lone pairs of electrons on Cl atoms in (I) is 6. ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554448538-nx0whe4tx_3"
+            },
+            {
+              "text": "(IV) is most acidic among (I) to (IV).",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554448538-nx0whe4tx_4"
+            }
+          ],
+          "correctAnswer": "2,3,4",
+          "id": "q-1744554448538-nx0whe4tx"
+        },
+        {
+          "added": true,
+          "content": "The correct statement(s) about \\\\( Cr^{2+}\\\\) and \\\\( Mn^{3+}\\\\) is (are): \n\n(Atomic numberCr - 24 and Mn - 25) ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "\\\\( Cr^{2+}\\\\)  is a reducing agent ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554456587-9xod9a0nl_1"
+            },
+            {
+              "text": "\\\\( Mn^{3+} \\\\) is an oxidising agent ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554456587-9xod9a0nl_2"
+            },
+            {
+              "text": "Both \\\\( Cr^{2+}\\\\) and \\\\( Mn^{3+}\\\\) exhibit \\\\(d^4\\\\) electronic configuration ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554456587-9xod9a0nl_3"
+            },
+            {
+              "text": "When \\\\( Mn^{3+}\\\\)  acts as oxidizing agent, the manganese ion attain \\\\( d^5\\\\) electronic configuration",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554456587-9xod9a0nl_4"
+            }
+          ],
+          "correctAnswer": "1,2,4",
+          "id": "q-1744554456587-9xod9a0nl"
+        },
+        {
+          "added": true,
+          "content": "\\\\( \\\\text{Ionic conductance at infinite dilution of } \\\\text{Al}^{3+} \\\\; \\\\text{and } \\\\text{SO}_4^{2-} \\\\; \\\\text{ions are } 0 \\\\, \\\\Omega^{-1} \\\\, \\\\text{cm}^2 \\\\, \\\\text{eq}^{-1}  \\\\; \\\\text{and } 80 \\\\, \\\\Omega^{-1} \\\\, \\\\text{cm}^2 \\\\, \\\\text{eq}^{-1}, \\\\; \\\\text{respectively.} \\\\\\\\\\\\ \\\\text{The correct details regarding aluminium sulphate are/is:} \\\\) ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "\\\\(   \\\\text{The molar conductance of solution is } 140 \\\\, \\\\Omega^{-1} \\\\, \\\\text{cm}^2 \\\\, \\\\text{eq}^{-1}.   \\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554554966-7hohwppuq_1"
+            },
+            {
+              "text": "\\\\(   \\\\text{The equivalent conductance of solution is } 140 \\\\, \\\\Omega^{-1} \\\\, \\\\text{cm}^2 \\\\, \\\\text{eq}^{-1}.   \\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554554966-7hohwppuq_2"
+            },
+            {
+              "text": "\\\\(   \\\\text{The molar conductance of solution is } 840 \\\\, \\\\Omega^{-1} \\\\, \\\\text{cm}^2 \\\\, \\\\text{mol}^{-1}.   \\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554554966-7hohwppuq_3"
+            },
+            {
+              "text": "\\\\(   \\\\textbf{(D)} \\\\quad    \\\\text{The molar conductance of solution is } 23.33 \\\\, \\\\Omega^{-1} \\\\, \\\\text{cm}^2 \\\\, \\\\text{mol}^{-1}.   \\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554554966-7hohwppuq_4"
+            }
+          ],
+          "correctAnswer": "1,2,4",
+          "id": "q-1744554554966-7hohwppuq"
+        },
+        {
+          "added": true,
+          "content": "The correct statement is/are:",
+          "imageUrl": "https://i.ibb.co/qM9XXj5B/image-removebg-preview-19.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "The pressure at B is 2 bar  ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554668563-3hd99oz85_1"
+            },
+            {
+              "text": "The temperature at D is 450K ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554668563-3hd99oz85_2"
+            },
+            {
+              "text": "\\\\( \\\\triangle H_{CD} = 1000R \\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554668563-3hd99oz85_3"
+            },
+            {
+              "text": "\\\\( \\\\triangle U_{BC} = 375R \\\\) ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744554668563-3hd99oz85_4"
+            }
+          ],
+          "correctAnswer": "1,2,3",
+          "id": "q-1744554668563-3hd99oz85"
+        }
+      ]
+    },
+    {
+      "id": "1744556544976-vhsa9v0s5",
+      "name": "Section 3",
+      "subject": "chemistry",
+      "type": "integer",
+      "marks": "3",
+      "header": "",
+      "negative": "0",
+      "questions": [
+        {
+          "added": true,
+          "content": "\\(O_2\\) gas molecules were adsorbed on solid surface causing its partial pressure to decrease from 1 atm to 0.5atm. Given:  \\(N_A = 6 \\times 10^{23}, \\) volume of vessel = 2.24L, Temperature  = 273K, Total area of solid surface = 100 \\(\\text{cm}^2 \\\\ \\) No. of active sites per unit area = \\( 10^{24} \\text{m}^{-2}\\). Find the number of \\( O_2 \\) molecules adsorbed per active site.",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555034628-ihou3xf6r_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555034628-ihou3xf6r_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555034628-ihou3xf6r_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555034628-ihou3xf6r_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744555034628-ihou3xf6r"
+        },
+        {
+          "added": true,
+          "content": "\\\\( \\\\text{A mixture of equimolar quantities of ethyl alcohol and acetic acid is prepared.} \\\\\\\\\\\\ \\\\text{Immediately after mixing, } 10 \\\\, \\\\text{ml of mixture was neutralised by } 10 \\\\, \\\\text{ml of } 1N NaOH. \\\\\\\\\\\\ \\\\text{When the mixture reaches equilibrium, } 10 \\\\, \\\\text{ml requires } 5 \\\\, \\\\text{ml of } 1N \\\\ NaOH \\\\text{ for neutralisation.} \\\\\\\\\\\\ \\\\text{What is the equilibrium constant for the formation of ester?} \\\\) ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555095782-78aavjkyc_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555095782-78aavjkyc_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555095782-78aavjkyc_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555095782-78aavjkyc_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744555095782-78aavjkyc"
+        },
+        {
+          "added": true,
+          "content": "\\\\( \\\\text{The sum of unpaired electrons in the complexes:} \\\\\\\\\\\\ [\\\\text{Ti(H}_2\\\\text{O)}_6]^{3+}, [\\\\text{Cr(CN)}_6]^{3-}, [\\\\text{Cr(CO)}_6], [\\\\text{Mn(CN)}_6]^{4-}, [\\\\text{Fe(CN)}_6]^{3-} \\\\\\\\\\\\ \\\\text{is:} \\\\\\\\\\\\ (\\\\text{Given atomic numbers: Ti = 22, Cr = 24, Mn = 25, Fe = 26}) \\\\) ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555127115-xxzrlyf9y_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555127115-xxzrlyf9y_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555127115-xxzrlyf9y_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555127115-xxzrlyf9y_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744555127115-xxzrlyf9y"
+        },
+        {
+          "added": true,
+          "content": "\\\\(\\\\text{According to molecular orbital theory (MOT), the number of paramagnetic species from the following list is:} \\\\\\\\\\\\ He^+_2, B_2, C_2, N_2, N_2^+,N_2^{2-}, O_2, O_2^{2-}. \\\\) ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555161959-cosqdh6fm_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555161959-cosqdh6fm_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555161959-cosqdh6fm_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555161959-cosqdh6fm_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744555161959-cosqdh6fm"
+        },
+        {
+          "added": true,
+          "content": "\\\\(\\\\text{The amount of water produced (in g) in the oxidation of 1 mole of white phosphorous } (P_4) \\\\\\\\\\\\ \\\\text{ with conc. HNO}_3 \\\\text{ to a compound with the highest oxidation state of phosphorous is:} \\\\\\\\\\\\ \\\\text{(Given molar mass of water = 18 g mol}^{-1}\\\\text{)} \\\\) ",
+          "imageUrl": "",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555197575-betpgwtiw_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555197575-betpgwtiw_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555197575-betpgwtiw_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555197575-betpgwtiw_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744555197575-betpgwtiw"
+        },
+        {
+          "added": true,
+          "content": "\\\\( \\\\text{Find the total number of cyclic halides of molecular formula } C_6H_{11}\\\\text{Br},\\\\\\\\\\\\ \\\\text{ which on heating with ethanolic KOH give product [R] by } E_2 \\\\text{ reaction (Anti-elimination):} \\\\) ",
+          "imageUrl": "https://i.ibb.co/HDktDF2r/image-removebg-preview-22.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555240978-n944i6cwp_1"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555240978-n944i6cwp_2"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555240978-n944i6cwp_3"
+            },
+            {
+              "text": "",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555240978-n944i6cwp_4"
+            }
+          ],
+          "correctAnswer": "a",
+          "id": "q-1744555240978-n944i6cwp"
+        }
+      ]
+    },
+    {
+      "id": "1744556544976-p8s2c6q2v",
+      "name": "Section 4",
+      "subject": "chemistry",
+      "type": "single-mcq",
+      "marks": 4,
+      "header": "",
+      "negative": 1,
+      "questions": [
+        {
+          "added": true,
+          "content": "Answer Q.15 and Q.16 by appropriately matching the lists based on the information given in the paragraph. \nMatch Column I with Column II for the reaction: A--> product, with initial concentration of ‘A’ equal to ‘a’ M. \n\n\n\nWhich of the following options has the correct combination considering List-I and List-II ",
+          "imageUrl": "   https://i.ibb.co/1JPNVDR3/image.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "A->P",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555970123-oag8hyc9d_1"
+            },
+            {
+              "text": "A->R",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555970123-oag8hyc9d_2"
+            },
+            {
+              "text": "B->P",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555970123-oag8hyc9d_3"
+            },
+            {
+              "text": "B->S",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744555970123-oag8hyc9d_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744555970123-oag8hyc9d"
+        },
+        {
+          "added": true,
+          "content": " Answer Q.15 and Q.16 by appropriately matching the lists based on the information given in the paragraph. \nMatch Column I with Column II for the reaction: A--> product, with initial concentration of ‘A’ equal to ‘a’ M. \n\n\nWhich of the following has the incorrect combination considering List-I and List-II ? ",
+          "imageUrl": "   https://i.ibb.co/1JPNVDR3/image.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "A->Q",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556066865-ikws832mt_1"
+            },
+            {
+              "text": "D->T",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556066865-ikws832mt_2"
+            },
+            {
+              "text": "B->P,R",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556066865-ikws832mt_3"
+            },
+            {
+              "text": "C->P,S",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556066865-ikws832mt_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744556066865-ikws832mt"
+        },
+        {
+          "added": true,
+          "content": "\\\\( \\\\textbf{Answer Q.17 and Q.18 by appropriately matching the lists based on the information given in the paragraph. } \\\\) \nEther is highly stable except under acidic condition. Different possible mechanism for hydrolysis of ether are shown below. \n\n\nQ. Which combination is \"correct\"? ",
+          "imageUrl": "https://i.ibb.co/vxnb9NBN/Screenshot-2025-04-13-at-01-28-24-GTA-3-pdf-1-removebg-preview.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": " P -II-i ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556371527-4mju4aqzu_1"
+            },
+            {
+              "text": "Q-III-i",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556371527-4mju4aqzu_2"
+            },
+            {
+              "text": "R-III-iii ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556371527-4mju4aqzu_3"
+            },
+            {
+              "text": "S-III-iv ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556371527-4mju4aqzu_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744556371527-4mju4aqzu"
+        },
+        {
+          "added": true,
+          "content": "\\\\( \\\\textbf{Answer Q.17 and Q.18 by appropriately matching the lists based on the information given in the paragraph. } \\\\) \nEther is highly stable except under acidic condition. Different possible mechanism for hydrolysis of ether are shown below. \n\n\nQ. Which combination is \"in-correct\"? ",
+          "imageUrl": "https://i.ibb.co/vxnb9NBN/Screenshot-2025-04-13-at-01-28-24-GTA-3-pdf-1-removebg-preview.png ",
+          "imageUpload": null,
+          "options": [
+            {
+              "text": "Q-I-ii ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556443399-0uaf4fayh_1"
+            },
+            {
+              "text": "Q-III-i ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556443399-0uaf4fayh_2"
+            },
+            {
+              "text": " R-III-iii ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556443399-0uaf4fayh_3"
+            },
+            {
+              "text": "S-III-iv ",
+              "imageUrl": "",
+              "imageUpload": null,
+              "id": "q-1744556443399-0uaf4fayh_4"
+            }
+          ],
+          "correctAnswer": "0",
+          "id": "q-1744556443399-0uaf4fayh"
+        }
+      ]
+    }
+  ],
+  "id": "test-1744556544975-8xty26o8r",
+  "createdAt": "Sun Apr 13 2025 20:32:24 GMT+0530 (India Standard Time)"
+}

@@ -21,9 +21,9 @@ const Page = () => {
           rows={5}
           placeholder="Type math or chemical markup here..."
         />
-
-        {/* Convert double backslashes from textarea into single ones for KaTeX */}
         <LatexText text={value.replace(/\\\\/g, "\\")} />
+
+        
       </div>
     </div>
   );
