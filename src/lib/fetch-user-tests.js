@@ -1,18 +1,20 @@
-// lib/fetch-user-tests.ts
 "use server";
 
 import { cache } from "react";
-import { collection, getDocs } from "firebase/firestore";
-import { db } from "@/firebase";
+import { supabase } from './supabase';
 
 export const getUserTests = cache(async (userId) => {
-  console.log(`⏳ Fetching test data from Firestore for user: ${userId}`); // 👈 Log here
+  console.log(`⏳ Fetching test data from Supabase for user: ${userId}`);
 
-  const testDocRef = collection(db, "users", userId, "tests");
-  const testsSnapshot = await getDocs(testDocRef);
+  const { data: tests, error } = await supabase
+    .from('user_tests')
+    .select('*')
+    .eq('user_id', userId);
 
-  return testsSnapshot.docs.map((doc) => ({
-    id: doc.id,
-    ...doc.data(),
-  }));
+  if (error) {
+    console.error('Error fetching tests:', error);
+    return [];
+  }
+
+  return tests;
 });

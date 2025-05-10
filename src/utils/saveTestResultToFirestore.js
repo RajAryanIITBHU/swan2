@@ -1,8 +1,6 @@
-import { collection, doc, getDoc, getDocs, query, setDoc, where } from "firebase/firestore";
-import { db } from "@/firebase";
+import { supabase } from '@/lib/supabase';
 
-
-export async function saveTestResultToFirestore({
+export async function saveTestResultToSupabase({
   email,
   testId,
   batch,
@@ -10,59 +8,73 @@ export async function saveTestResultToFirestore({
   resultSummary,
   questionData,
 }) {
+  console.log("Saving result with params:", {
+    email,
+    testId,
+    batch,
+    userAnswers,
+    resultSummary,
+    questionData,
+  });
 
-    console.log("Saving result with params:", {
-      email,
-      testId,
-      batch,
-      userAnswers,
-      resultSummary,
-      questionData,
-    });
   if (!email || !testId || !batch) {
-    console.error("Missing required parameters (email, testId, or batch).");
+    console.error("Missing required parameters (email, testId, or batch)");
     return;
   }
 
   try {
-    // 🔍 Find user document by email
-    const q = query(collection(db, "users"), where("email", "==", email));
-    const snap = await getDocs(q);
+    // Get user by email
+    const { data: users, error: userError } = await supabase
+      .from('users')
+      .select('id')
+      .eq('email', email)
+      .single();
 
-    if (snap.empty) {
-      console.error("❌ No user found with email:", email);
+    if (userError || !users) {
+      console.error('❌ No user found with email:', email);
       return;
     }
 
-    const userDoc = snap.docs[0];
-    const userRef = userDoc.ref;
-
-    // 📄 Document ID: [BatchName]-[TestId]
+    const userId = users.id;
     const testDocId = `${batch}-${testId}`;
-    const testRef = doc(userRef, "tests", testDocId);
 
-    const existingTest = await getDoc(testRef);
-    const attempts = existingTest.exists() ? (existingTest.data()?.attemptsCount || 0) : 0;
+    // Get existing test attempts
+    const { data: existingTest } = await supabase
+      .from('user_tests')
+      .select('attempts_count')
+      .eq('user_id', userId)
+      .eq('test_id', testDocId)
+      .single();
+
+    const attempts = (existingTest?.attempts_count || 0) + 1;
 
     const resultPayload = {
-      testId,
+      user_id: userId,
+      test_id: testDocId,
       batch,
       timestamp: new Date().toISOString(),
-      attemptsCount: attempts + 1,
-      userAnswers,
-      resultSummary,
-      questionStructure: questionData,
+      attempts_count: attempts,
+      user_answers: userAnswers,
+      result_summary: resultSummary,
+      question_structure: questionData,
     };
 
-    // ✅ Save result to Firestore
-    await setDoc(testRef, resultPayload);
-    console.log("✅ Result saved to Firestore at:", testDocId);
+    // Save result to Supabase
+    const { error: saveError } = await supabase
+      .from('user_tests')
+      .upsert(resultPayload);
 
-    // ✅ Store in localStorage
+    if (saveError) {
+      throw saveError;
+    }
+
+    console.log("✅ Result saved to Supabase at:", testDocId);
+
+    // Store in localStorage
     localStorage.setItem("result", JSON.stringify(resultPayload));
     console.log("✅ Result saved in localStorage");
 
   } catch (error) {
-    console.error("❌ Error saving result to Firestore:", error);
+    console.error("❌ Error saving result to Supabase:", error);
   }
 }
